@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inferencemodule
+  namespace: {{gitops.namespace}}
+  labels:
+    app.kubernetes.io/name: inferencemodule
+    app.kubernetes.io/managed-by: kubectl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inferencemodule
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: inferencemodule
+      annotations:
+        gitops.version: v-{{gitops.version}}
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      initContainers:
+        - name: wait-for-rtsp
+          image: busybox
+          command: ["sh", "-c", "until nslookup rtspsim.voe.svc.cluster.local > /dev/null; do echo Waiting for rtspsim module; sleep 2; done;"]
+        - name: wait-for-cvcapture
+          image: curlimages/curl
+          command: ["/bin/sh", "-c", 'until [ $(curl --max-time 5 -kw  "%{http_code}" "http://cvcapturemodule:9000/healthz" -o /dev/null) -ne 200 ]; do sleep 2; echo "Health check failed . Waiting for the service..."; done']
+        - name: wait-for-upload
+          image: curlimages/curl
+          command: ["/bin/sh", "-c", 'until [ $(curl --max-time 5 -kw "%{http_code}" "http://uploadmodule:7000/healthz" -o /dev/null) -ne 200 ]; do sleep 2; echo "Health check failed . Waiting for the service..."; done']
+        - name: wait-for-predict
+          image: curlimages/curl
+          command: ["/bin/sh", "-c", 'until [ $(curl --max-time 5 -kw "%{http_code}" "http://predictmodule:7777/healthz" -o /dev/null) -ne 200 ]; do sleep 2; echo "Health check failed . Waiting for the service..."; done']
+      containers:
+      - name: inferencemodule
+        image: ghcr.io/cse-labs/pib-voe-inference:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 60
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 60
+          failureThreshold: 3
+        resources:
+          requests:
+            cpu: 2000m
+            memory: 400Mi
+          limits:
+            cpu: 3000m
+            memory: 1500Mi
+        env:
+          - name: IOTHUB_CONNECTION_STRING
+            valueFrom:
+              secretKeyRef:
+                name: azure-env
+                key: IOTHUB_CONNECTION_STRING
+          - name: IOTEDGE_DEVICE_CONNECTION_STRING
+            valueFrom:
+              secretKeyRef:
+                name: azure-env
+                key: IOTEDGE_DEVICE_CONNECTION_STRING
+          - name: IS_OPENCV
+            value: "true"
+          - name: IS_K8S
+            value: "true"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inferencemodule
+  namespace: {{gitops.namespace}}
+  labels:
+    app.kubernetes.io/name: inferencemodule
+    app.kubernetes.io/managed-by: kubectl
+spec:
+  ports:
+  - port: 5000
+  selector:
+    app: inferencemodule

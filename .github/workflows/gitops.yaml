@@ -1,0 +1,41 @@
+name: Secure-Build
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  gitops:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git Config
+      run: |
+        git config --global user.email "pib-gitops@outlook.com"
+        git config --global user.name "pib-gitops"
+
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+
+    - name: Docker Pull
+      # todo: update goa version after stable release
+      run: docker pull ghcr.io/cse-labs/pib-gitops-automation:latest
+
+    - name: GitOps Automation
+      # todo: update goa version after stable release
+      run: |
+        docker run --rm \
+          -v $PWD:/goa/fleet \
+          -v $PWD:/goa/control \
+          ghcr.io/cse-labs/pib-gitops-automation:latest \
+          --github-token ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Commit GitOps changes
+      run: |
+        if [ -n "$(git status --porcelain)" ]; then
+          git pull
+          git add .
+          git commit -m "GitOps Secure Build"
+          git push
+        else
+          echo "No changes found"
+        fi

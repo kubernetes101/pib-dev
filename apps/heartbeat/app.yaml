@@ -1,0 +1,15 @@
+app: heartbeat
+containerArgs: [ ]
+environment: dev
+image: ghcr.io/cse-labs/heartbeat:latest
+namespace: heartbeat
+port: 8080
+targets: [ all ]
+template: pib-service
+cpuLimit: 100m
+cpuRequest: 100m
+ingressPrefix: /heartbeat
+livenessProbe: /healthz
+memoryLimit: 64Mi
+memoryRequest: 64Mi
+readinessProbe: /readyz

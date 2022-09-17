@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ "$PIB_SSL" = "" ]; then
+    res=$(curl -s http://localhost/heartbeat/17)
+else
+    res=$(curl -s https://"$PIB_FQDN/heartbeat/17")
+fi
+
+if [ "$res" = "0123456789ABCDEF0" ]; then
+    echo "success"
+else
+    echo "$res"
+fi

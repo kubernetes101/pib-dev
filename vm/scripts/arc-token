@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+if [ "$PIB_ARC_ENABLED" != "true" ]; then
+    echo "cluster is not Arc enabled"
+    exit
+fi
+
+SECRET_NAME=$(kubectl get serviceaccount admin-user -o jsonpath='{$.secrets[0].name}')
+
+SECRET=$(kubectl get secret "${SECRET_NAME}" -o jsonpath='{$.data.token}' | base64 -d | sed $'s/$/\\\n/g')
+
+echo -e "$SECRET\n"

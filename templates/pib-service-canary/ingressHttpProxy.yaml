@@ -1,0 +1,11 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: {{gitops.app}}-ingress
+  namespace: {{gitops.namespace}}
+spec:
+  virtualhost:
+    fqdn: {{gitops.cluster.domain}}
+  includes:
+    - name: {{gitops.app}}
+      namespace: {{gitops.namespace}}

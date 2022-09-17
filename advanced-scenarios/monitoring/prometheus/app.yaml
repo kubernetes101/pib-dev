@@ -1,0 +1,8 @@
+template: .gitops
+app: prometheus
+environment: dev
+image: prom/prometheus:latest
+namespace: metrics
+prometheusURL: https://yourprometheusinstance.grafana.net/api/prom/push
+prometheusUser: yourPrometheusUser
+targets: []

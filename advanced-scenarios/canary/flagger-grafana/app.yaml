@@ -1,0 +1,7 @@
+app: flagger-grafana
+environment: dev
+namespace: projectcontour
+targets: []
+template: .gitops
+ingressPrefix: /grafana
+port: 8080

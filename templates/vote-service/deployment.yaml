@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{gitops.app}}
+  namespace: {{gitops.namespace}}
+  labels:
+    app.kubernetes.io/name: {{gitops.app}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{gitops.app}}
+  template:
+    metadata:
+      labels:
+        app: {{gitops.app}}
+    spec:
+      containers:
+      - name: {{gitops.app}}
+        image: {{gitops.image}}
+        imagePullPolicy: Always
+        env:
+        - name: TITLE
+          value: {{gitops.title}}
+        - name: KEY1
+          value: {{gitops.key1}}
+        - name: KEY2
+          value: {{gitops.key2}}
+        ports:
+        - containerPort: {{gitops.port}}
+        livenessProbe:
+            httpGet:
+              path: {{gitops.livenessProbe}}
+              port: http
+            initialDelaySeconds: 10
+            failureThreshold: 10
+            periodSeconds: 60
+        readinessProbe:
+          httpGet:
+            path: {{gitops.readinessProbe}}
+            port: {{gitops.port}}
+          initialDelaySeconds: 10
+          failureThreshold: 10
+          periodSeconds: 60
+        resources:
+          limits:
+            cpu: {{gitops.cpuLimit}}
+            memory: {{gitops.memoryLimit}}
+          requests:
+            cpu: {{gitops.cpuRequest}}
+            memory: {{gitops.memoryRequest}}

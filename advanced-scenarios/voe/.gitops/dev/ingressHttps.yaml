@@ -1,0 +1,41 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{gitops.app}}
+  namespace: {{gitops.namespace}}
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    kubernetes.io/ingress.class: contour
+    kubernetes.io/tls-acme: "true"
+
+spec:
+  tls:
+  - secretName: {{gitops.app}}
+    hosts:
+    - {{gitops.cluster.domain}}
+  rules:
+  - host: {{gitops.cluster.domain}}
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: webmodule
+            port:
+              number: 8000
+      - pathType: Prefix
+        path: /video_feed
+        backend:
+          service:
+            name: inferencemodule
+            port:
+              number: 5000
+      - pathType: Prefix
+        path: /cancel_upload
+        backend:
+          service:
+            name: uploadmodule
+            port:
+              number: 7000

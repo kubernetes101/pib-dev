@@ -1,0 +1,6 @@
+app: voe
+environment: dev
+namespace: voe
+port: 8000
+targets: []
+template: .gitops

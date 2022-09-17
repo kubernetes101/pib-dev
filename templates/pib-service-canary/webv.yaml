@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webv-{{gitops.app}}
+  namespace: {{gitops.namespace}}
+  labels:
+    app.kubernetes.io/name: webv-{{gitops.app}}
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+       maxSurge: 1
+       maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: webv-{{gitops.app}}
+  template:
+    metadata:
+      labels:
+        app: webv-{{gitops.app}}
+    spec:
+      containers:
+        - name: app
+          image: ghcr.io/cse-labs/pib-webv:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 5
+            failureThreshold: 10
+            periodSeconds: 60
+          startupProbe:
+            httpGet:
+              path: /readyz
+              port: http
+            initialDelaySeconds: 5
+            failureThreshold: 60
+            periodSeconds: 2
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+          args:
+          - --sleep
+          - "1000"
+          - --prometheus
+          - --run-loop
+          - --verbose
+          - --server
+          - https://{{gitops.cluster.domain}}
+          - --files
+          - imdb-load.json
+          - --zone
+          - dev
+          - --region
+          - dev
+          - --log-format
+          - Json
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webv-{{gitops.app}}
+  namespace: {{gitops.namespace}}
+  labels:
+    app: webv-{{gitops.app}}
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: webv-{{gitops.app}}

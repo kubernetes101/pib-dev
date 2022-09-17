@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: predictmodule
+  namespace: {{gitops.namespace}}
+  labels:
+    app.kubernetes.io/name: predictmodule
+    app.kubernetes.io/managed-by: kubectl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: predictmodule
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: predictmodule
+      annotations:
+        gitops.version: v-{{gitops.version}}
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: predictmodule
+        image: ghcr.io/cse-labs/pib-voe-predict:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 7777
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 7777
+          initialDelaySeconds: 10
+          periodSeconds: 60
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 7777
+          initialDelaySeconds: 10
+          periodSeconds: 60
+          failureThreshold: 3
+        resources:
+          requests:
+            cpu: 2000m
+            memory: 1000Mi
+          limits:
+            cpu: 4000m
+            memory: 3000Mi
+        env:
+          - name: IOTHUB_CONNECTION_STRING
+            valueFrom:
+              secretKeyRef:
+                name: azure-env
+                key: IOTHUB_CONNECTION_STRING
+          - name: IS_K8S
+            value: "true"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: predictmodule
+  namespace: {{gitops.namespace}}
+  labels:
+    app.kubernetes.io/name: predictmodule
+    app.kubernetes.io/managed-by: kubectl
+spec:
+  ports:
+  - port: 7777
+  selector:
+    app: predictmodule

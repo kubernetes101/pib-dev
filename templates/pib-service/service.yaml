@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{gitops.app}}
+  namespace: {{gitops.namespace}}
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{gitops.port}}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: {{gitops.app}}

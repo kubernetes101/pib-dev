@@ -1,0 +1,51 @@
+apiVersion: flagger.app/v1beta1
+kind: Canary
+metadata:
+  name: {{gitops.app}}
+  namespace: {{gitops.namespace}}
+spec:
+  # deployment reference
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{gitops.app}}
+  # the maximum time in seconds for the canary deployment
+  # to make progress before it is rollback (default 600s)
+  progressDeadlineSeconds: 60
+  service:
+    # service port number
+    port: {{gitops.port}}
+    # container port number or name (optional)
+    targetPort: {{gitops.port}}
+    # Contour request timeout
+    timeout: 15s
+    # Contour retry policy
+    retries:
+      attempts: 3
+      perTryTimeout: 5s
+      # supported values for retryOn - https://projectcontour.io/docs/main/config/api/#projectcontour.io/v1.RetryOn
+      retryOn: "5xx"
+  analysis:
+    # schedule interval (default 60s)
+    interval: 20s
+    # max number of failed metric checks before rollback
+    threshold: 5
+    # max traffic percentage routed to canary
+    # percentage (0-100)
+    maxWeight: 60
+    # canary increment step
+    # percentage (0-100)
+    stepWeight: 20
+    metrics:
+    - name: request-success-rate
+      # minimum req success rate (non 5xx responses)
+      # percentage (0-100)
+      thresholdRange:
+        min: 99
+      interval: 1m
+    - name: request-duration
+      # maximum req duration P99
+      # milliseconds
+      thresholdRange:
+        max: 500
+      interval: 30s

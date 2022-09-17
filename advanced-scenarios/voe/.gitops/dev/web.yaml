@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webmodule
+  namespace: {{gitops.namespace}}
+  labels:
+    app.kubernetes.io/name: webmodule
+    app.kubernetes.io/managed-by: kubectl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webmodule
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: webmodule
+      annotations:
+        gitops.version: v-{{gitops.version}}
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: webmodule
+        image: ghcr.io/cse-labs/pib-voe-web:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 60
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 60
+          failureThreshold: 3
+        resources:
+          requests:
+            cpu: 200m
+            memory: 256Mi
+          limits:
+            cpu: 1000m
+            memory: 3000Mi
+        env:
+          - name: IOTHUB_CONNECTION_STRING
+            valueFrom:
+              secretKeyRef:
+                name: azure-env
+                key: IOTHUB_CONNECTION_STRING
+          - name: TRAINING_KEY
+            valueFrom:
+              secretKeyRef:
+                name: azure-env
+                key: TRAINING_KEY
+          - name: ENDPOINT
+            valueFrom:
+              secretKeyRef:
+                name: azure-env
+                key: ENDPOINT
+          - name: DB_NAME
+            value: "vision_on_edge"
+          - name: DB_HOST
+            value: "172.18.0.1"
+          - name: DB_USER
+            value: "vision_on_edge"
+          - name: DB_PASS
+            value: "vision_on_edge"
+          - name: DF_PD_VIDEO_SOURCE
+            value: "opencv"
+          - name: IS_K8S
+            value: "true"
+        volumeMounts:
+          - name: upload
+            mountPath: /workspace
+      volumes:
+      - name: upload
+        persistentVolumeClaim:
+          claimName: pvc-upload
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webmodule
+  namespace: {{gitops.namespace}}
+  labels:
+    app.kubernetes.io/name: webmodule
+    app.kubernetes.io/managed-by: kubectl
+spec:
+  type: ClusterIP
+  ports:
+  - port: {{gitops.port}}
+  selector:
+    app: webmodule

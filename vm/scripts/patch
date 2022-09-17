@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "$(date +'%Y-%m-%d %H:%M:%S')  patched" >> /home/pib/status
+
+docker pull ghcr.io/cse-labs/pib-webv:latest
+docker pull ghcr.io/cse-labs/pib-webv:beta
+
+echo "$(hostname) patched"

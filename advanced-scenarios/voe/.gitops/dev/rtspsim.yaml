@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rtspsim
+  namespace: {{gitops.namespace}}
+  labels:
+    app.kubernetes.io/name: rtspsimmodule
+    app.kubernetes.io/managed-by: kubectl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rtspsim
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: rtspsim
+      annotations:
+        gitops.version: v-{{gitops.version}}
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: rtspsim
+        image: ghcr.io/cse-labs/pib-voe-rtspsim:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 554
+        resources:
+          requests:
+            cpu: 50m
+            memory: 100Mi
+          limits:
+            cpu: 500m
+            memory: 700Mi
+        volumeMounts:
+        - name: upload
+          mountPath: /app/upload
+      volumes:
+      - name: upload
+        persistentVolumeClaim:
+          claimName: pvc-upload
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rtspsim
+  namespace: {{gitops.namespace}}
+  labels:
+    app.kubernetes.io/name: rtspsimmodule
+    app.kubernetes.io/managed-by: kubectl
+spec:
+  ports:
+  - port: 554
+  selector:
+    app: rtspsim

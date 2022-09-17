@@ -1,0 +1,10 @@
+#!/bin/bash
+
+hdrsort()
+{
+    read -r
+    printf "%s\\n" "$REPLY"
+    sort
+}
+
+echo -e "\n$(hostname)\n$(kic check flux | hdrsort)"

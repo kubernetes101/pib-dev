@@ -1,0 +1,9 @@
+template: .gitops
+app: fluent-bit
+environment: dev
+image: fluent/fluent-bit:1.9
+jobSuffix: yourFleetName
+lokiHost: logs-yourprod.grafana.net
+lokiUser: yourLokiUser
+namespace: logging
+targets: []

@@ -1,0 +1,3 @@
+#!/bin/bash
+# pull the latest git updates
+git -C "$HOME/gitops" pull

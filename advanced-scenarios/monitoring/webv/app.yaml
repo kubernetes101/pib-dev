@@ -1,0 +1,7 @@
+template: .gitops
+app: webv
+environment: dev
+image: ghcr.io/cse-labs/pib-webv:latest
+namespace: monitoring
+port: 8080
+targets: []

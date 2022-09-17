@@ -1,0 +1,38 @@
+apiVersion: k3d.io/v1alpha4
+kind: Simple
+kubeAPI:
+  hostIP: 0.0.0.0
+  hostPort: "6443"
+metadata: {}
+network: k3d
+options:
+  k3d:
+    disableImageVolume: false
+    disableLoadbalancer: false
+    disableRollback: false
+    loadbalancer: {}
+    timeout: "60s"
+    wait: true
+  k3s:
+    extraArgs:
+    - arg: --tls-san=127.0.0.1
+      nodeFilters:
+      - server:*
+  kubeconfig:
+    switchCurrentContext: true
+    updateDefaultKubeconfig: true
+  runtime:
+    HostPidMode: false
+ports:
+- nodeFilters:
+  - server:0
+  port: 443:443
+- nodeFilters:
+  - server:0
+  port: 80:80
+registries: {}
+servers: 1
+volumes:
+- nodeFilters:
+  - server:0
+  volume: /prometheus:/prometheus

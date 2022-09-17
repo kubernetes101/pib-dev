@@ -1,0 +1,5 @@
+app: flux-system
+environment: dev
+namespace: flux-system
+targets: [ all ]
+template: .gitops
