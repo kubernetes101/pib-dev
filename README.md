@@ -54,7 +54,7 @@ GitHub Codespaces is also available in beta on a limited basis for GitHub Pro us
   ```
 
 - Your prompt should look like this
-  - /workspaces/user-testing (mybranch) $
+  - /workspaces/pib-dev (mybranch) $
 
 ## inner-loop
 

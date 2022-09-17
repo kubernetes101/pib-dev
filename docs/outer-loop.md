@@ -45,11 +45,17 @@ flt list
 
     ```bash
 
+    # verify your account
+    az account show
+
     # list your Azure accounts
     az account list -o table
 
     # set your Azure subscrition
     az account set -s mySubNameOrId
+
+    # verify your account
+    az account show
 
     ```
 
@@ -69,7 +75,7 @@ flt create cluster -c $MY_CLUSTER
 ## Update Git Repo
 
 - `flt create` generates GitOps files for the cluster
-- [CI-CD](https://github.com/kubernetes101/user-testing/actions) generates the deployment manifests
+- [CI-CD](https://github.com/kubernetes101/pib-dev/actions) generates the deployment manifests
   - Wait for CI-CD to complete (usually about 30 seconds)
 
 ```bash
@@ -177,7 +183,7 @@ flt targets deploy
 
 ## Wait for ci-cd to finish
 
-- Check [ci-cd status](https://github.com/kubernetes101/user-testing/actions)
+- Check [ci-cd status](https://github.com/kubernetes101/pib-dev/actions)
 
 ## Update Cluster
 
@@ -229,22 +235,14 @@ flt check app imdb
 
   ```bash
 
-  http https://$MY_CLUSTER.$PIB_SSL/version
+  # export MY_IP
+  export MY_IP=$(cat ips | cut -f2)
 
-  http https://$MY_CLUSTER.$PIB_SSL/api/genres
+  http http://$MY_IP/version
+
+  http http://$MY_IP/api/genres
 
   ```
-
-- Get the FQDN of your cluster
-- Copy and paste the FQDN into your browser
-  - You should get the Swagger API page
-
-    ```bash
-
-    # display the FQDN
-    echo $MY_CLUSTER.$PIB_SSL
-
-    ```
 
 ## Delete Your Cluster
 
