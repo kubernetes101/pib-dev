@@ -105,7 +105,7 @@ kic sync
         - This lets "your app" break "my app"
       - We generally create a kustomization per namespace for production
         - Our GitOps Automation (outer-loop) automatically creates a kustomization per namespace
-- View the flux setup script by running `flt clusters flux-setup --show`
+- View the flux setup script by running `kic cluster flux-install --show`
   - Do NOT run this fence!
 
     ```bash
