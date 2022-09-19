@@ -51,7 +51,7 @@ flt list
     # list your Azure accounts
     az account list -o table
 
-    # set your Azure subscrition
+    # set your Azure subscription
     az account set -s mySubNameOrId
 
     # verify your account

@@ -228,7 +228,7 @@ for i in {1..10}; kic test integration;
 - From the `PORTS` tab, open `Grafana (32000)`
   - Username: admin
   - Password: cse-labs
-- Click on "General / Home" at the top of the screen and select "Applicaton Dashboard"
+- Click on "General / Home" at the top of the screen and select "Application Dashboard"
 
 ## Observability: Prometheus
 

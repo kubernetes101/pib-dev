@@ -92,8 +92,8 @@ GitHub Codespaces is also available in beta on a limited basis for GitHub Pro us
 - Canary Deployment [Lab](advanced-scenarios/canary/README.md)
 - Vision on Edge (VoE) [Lab](advanced-scenarios/voe/README.md)
 - Centralized Observability [Lab](advanced-scenarios/monitoring/README.md)
-- outer-loop to Physical Devices [Lab](docs/outer-loop-physical-devices.md)
-- outer-loop to AKS [Lab](docs/outer-loop-aks-azure.md)
+- outer-loop with Physical Devices [Lab](docs/outer-loop-physical-devices.md)
+- outer-loop with AKS [Lab](docs/outer-loop-aks-azure.md)
 
 ## Cleanup
 
