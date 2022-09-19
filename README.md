@@ -9,35 +9,35 @@
 
 - For pre-release access
   - Reach out to the SolDevEx team
-  - We can provide Codespaces and Azure access during pre-release
+  - We can provide Codespaces access during pre-release
 
 ## GitHub Codespaces
 
-> Create a codespace to start developing in a secure, configurable, and dedicated development environment in the cloud that works how and where you want it to.
+> Codespaces allows you to develop in a secure, configurable, and dedicated development environment in the cloud that works how and where you want it to
 
 - [GitHub Codespaces Overview](https://docs.github.com/en/codespaces)
   - GitHub Codespaces is available for organizations using GitHub Team or GitHub Enterprise Cloud. GitHub Codespaces is also available as a limited beta release for individual users on GitHub Pro plans.
   - For more information, see ["GitHub's products"](https://docs.github.com/en/get-started/learning-about-github/githubs-products)
 
-We use GitHub Codespaces for our `inner-loop` and `outer-loop` Developer experience. While other DevX are available, currently, Pilot-in-a-Box onlys supports GitHub Codespaces.
+We use GitHub Codespaces for our `inner-loop` and `outer-loop` Developer Experiences. While other DevX are available, currently, we only support GitHub Codespaces.
 
-The easiest way to get GitHub Codespaces access is to setup a [GitHub Team](https://docs.github.com/en/codespaces).
+The easiest way to get GitHub Codespaces access is to setup a [GitHub Team](https://docs.github.com/en/codespaces)
 
 GitHub Codespaces is also available in beta on a limited basis for GitHub Pro users. The waiting list is normally > 3 months.
 
-> As you engage with customers, ensure that they have Codespaces and Azure subscriptions with proper permissions.
+> Best Practice: as you begin projects, ensure that you have Codespaces and Azure subscriptions with proper permissions
 
 ## Create a Codespace
 
 - From this repo
   - Click the `<> Code` button
-  - Make sure the Codespaces tab is active
+    - Make sure the Codespaces tab is active
   - Click `Create Codespace on main`
-- After about 1 minute, you will have a GitHub Codespace running!
+- After about 1 minute, you will have a GitHub Codespace running with a complete Kubernetes Developer Experience!
 
 ## Create a working branch
 
-- Because we are sharing a repo for pre-release, you need to create a working branch
+- Because we are sharing a repo, you need to create a working branch
 
   ```bash
 
@@ -60,9 +60,10 @@ GitHub Codespaces is also available in beta on a limited basis for GitHub Pro us
 
 - `inner-loop` refers to the tasks that developers do every day as part of their development process
   - Generally, `inner-loop` happens on the individual developer workstation
-  - For PiB, the inner-loop and developer workstation is Codespaces
-  - When a developer creates a Codespace, that is their "personal development workstation in the cloud"
+    - For PiB, the inner-loop and developer workstation is Codespaces
+    - When a developer creates a Codespace, that is their "personal development workstation in the cloud"
 - As part of PiB, we have automated the creation of the developer workstation using a repeatable, consistent, Infrastructure as Code approach
+  - We have an advanced workshop planned for customizing the Codespaces experience for your project
 - With the power of Codespaces, a developer can create a consistent workstation with a few clicks in less than a minute
 
 ## inner-loop Labs
@@ -80,6 +81,19 @@ GitHub Codespaces is also available in beta on a limited basis for GitHub Pro us
 ### outer-loop Labs
 
 - outer-loop [Lab 1](docs/outer-loop.md)
+- Multi-cluster [Lab 2](docs/outer-loop-multi-cluster.md)
+- Ring Based Deployment [Lab 3](docs/outer-loop-ring-deployment.md)
+- Setting up Azure subscription and Codespaces [Lab 4](docs/azure-codespaces-setup.md)
+  - This is a prerequisite for the Advanced Labs
+
+### Advanced Labs
+
+- Arc enabled Gitops [Lab](docs/outer-loop-arc-gitops.md)
+- Canary Deployment [Lab](advanced-scenarios/canary/README.md)
+- Vision on Edge (VoE) [Lab](advanced-scenarios/voe/README.md)
+- Centralized Observability [Lab](advanced-scenarios/monitoring/README.md)
+- outer-loop to Physical Devices [Lab](docs/outer-loop-physical-devices.md)
+- outer-loop to AKS [Lab](docs/outer-loop-aks-azure.md)
 
 ## Cleanup
 
