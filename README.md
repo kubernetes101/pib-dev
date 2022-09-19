@@ -81,7 +81,7 @@ GitHub Codespaces is also available in beta on a limited basis for GitHub Pro us
 ## outer-loop Labs
 
 - outer-loop [Lab 1](docs/outer-loop.md)
-- Multi-cluster [Lab 2](docs/outer-loop-multi-cluster.md)
+- Multi-cluster outer-loop [Lab 2](docs/outer-loop-multi-cluster.md)
 - Ring Based Deployment [Lab 3](docs/outer-loop-ring-deployment.md)
 - Setting up Azure subscription and Codespaces [Lab 4](docs/azure-codespaces-setup.md)
   - This is a prerequisite for the Advanced Labs
