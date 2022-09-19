@@ -27,6 +27,23 @@ GitHub Codespaces is also available in beta on a limited basis for GitHub Pro us
 
 > Best Practice: as you begin projects, ensure that you have Codespaces and Azure subscriptions with proper permissions
 
+## inner-loop
+
+- `inner-loop` refers to the tasks that developers do every day as part of their development process
+  - Generally, `inner-loop` happens on the individual developer workstation
+    - For PiB, the inner-loop and developer workstation is Codespaces
+    - When a developer creates a Codespace, that is their "personal development workstation in the cloud"
+- As part of PiB, we have automated the creation of the developer workstation using a repeatable, consistent, Infrastructure as Code approach
+  - We have an advanced workshop planned for customizing the Codespaces experience for your project
+- With the power of Codespaces, a developer can create a consistent workstation with a few clicks in less than a minute
+
+## outer-loop
+
+- `outer-loop` refers to the tasks that developers and DevOps do as they move from dev to test to pre-prod to production
+  - Generally `outer-loop` happens on shared compute outside of the developer workstation
+  - For PiB, outer-loop uses a combination of Codespaces and `dev/test clusters` in Azure
+- As part of PiB, we have automated the creation of dev/test clusters using a repeatable, consistent, Infrastructure as Code approach
+
 ## Create a Codespace
 
 - From this repo
@@ -56,29 +73,12 @@ GitHub Codespaces is also available in beta on a limited basis for GitHub Pro us
 - Your prompt should look like this
   - /workspaces/pib-dev (mybranch) $
 
-## inner-loop
-
-- `inner-loop` refers to the tasks that developers do every day as part of their development process
-  - Generally, `inner-loop` happens on the individual developer workstation
-    - For PiB, the inner-loop and developer workstation is Codespaces
-    - When a developer creates a Codespace, that is their "personal development workstation in the cloud"
-- As part of PiB, we have automated the creation of the developer workstation using a repeatable, consistent, Infrastructure as Code approach
-  - We have an advanced workshop planned for customizing the Codespaces experience for your project
-- With the power of Codespaces, a developer can create a consistent workstation with a few clicks in less than a minute
-
 ## inner-loop Labs
 
 - inner-loop [Lab 1](docs/inner-loop.md)
 - inner-loop with GitOps [Lab 2](docs/inner-loop-flux.md)
 
-## outer-loop
-
-- `outer-loop` refers to the tasks that developers and DevOps do as they move from dev to test to pre-prod to production
-  - Generally `outer-loop` happens on shared compute outside of the developer workstation
-  - For PiB, outer-loop uses a combination of Codespaces and `dev/test clusters` in Azure
-- As part of PiB, we have automated the creation of dev/test clusters using a repeatable, consistent, Infrastructure as Code approach
-
-### outer-loop Labs
+## outer-loop Labs
 
 - outer-loop [Lab 1](docs/outer-loop.md)
 - Multi-cluster [Lab 2](docs/outer-loop-multi-cluster.md)
@@ -86,7 +86,7 @@ GitHub Codespaces is also available in beta on a limited basis for GitHub Pro us
 - Setting up Azure subscription and Codespaces [Lab 4](docs/azure-codespaces-setup.md)
   - This is a prerequisite for the Advanced Labs
 
-### Advanced Labs
+## Advanced Labs
 
 - Arc enabled Gitops [Lab](docs/outer-loop-arc-gitops.md)
 - Canary Deployment [Lab](advanced-scenarios/canary/README.md)
