@@ -115,7 +115,6 @@ kic sync
 
     # create the flux secrets from the GitHub PAT
     flux create secret git flux-system -n flux-system --url "$PIB_FULL_REPO" -u gitops -p "$PIB_PAT"
-    flux create secret git gitops -n flux-system --url "$PIB_FULL_REPO" -u gitops -p "$PIB_PAT"
 
     # deploy Flux
     kubectl apply -f controllers.yaml

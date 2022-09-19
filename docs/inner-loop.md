@@ -165,9 +165,6 @@ kic check grafana
     ```bash
 
     # run an integration test
-    kic test integration
-
-    # show all requests
     kic test integration --verbose
 
     ```
@@ -182,7 +179,7 @@ kic check grafana
 
 ```bash
 
-kic test load --duration 5
+kic test load --duration 5 --verbose
 
 ```
 
