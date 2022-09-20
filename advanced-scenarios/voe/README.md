@@ -3,7 +3,13 @@
 ## Introduction
 
 - VoE is an open-source tool that builds vision-based intelligent edge solutions using Machine Learning.  Visit this [repo](https://github.com/Azure-Samples/azure-intelligent-edge-patterns/tree/master/factory-ai-vision) for more information.
-- The VoE app is being deprecated. It is used for demonstrative purposes to show how to deploy a more complex app with PiB.
+- Deploying VoE is very similar process to deploying other applications in the outer-loop labs, but there are a few dependencies that must be configured first.
+
+> Note: The VoE app is being deprecated and will be replaced by a new version. It is used here for demonstrative purposes to show how to deploy a more complex app with PiB.
+
+## Lab Prerequisites
+
+- Complete the 4 [outer-loop labs](/README.md#outer-loop-labs) before this one.
 
 ## Fleet Configuration Prerequisites
 
@@ -35,6 +41,9 @@ export VOE_AZ_COG_SVC_NAME=voe-acs-$MY_BRANCH
 
 az login --use-device-code
 
+# option if your Codespace is configured with SP credentials
+flt az login
+
 ```
 
 #### Create Azure IoT Hub
@@ -59,8 +68,8 @@ az cognitiveservices account create --kind CognitiveServices --name $VOE_AZ_COG_
 
 ### Update fleet creation script
 
-- Add the following lines to vm/setup/pre-flux.sh and replace the values in [] with the names of the resources created.
-  - This will run on the fleet vm during setup and will create the voe namespace and required k8s secret.
+- Add the following lines to vm/setup/pre-flux.sh and replace the values in [] with the names of the resources created above.
+  - This will run on the fleet vm/s during setup and will create the voe namespace and required k8s secret.
   - The VM uses Managed Identity to retrieve the connection string values from the IoT Hub.
 
 - Do NOT run this fence!
@@ -97,11 +106,12 @@ git push
 ## Create a fleet
 
 - The VoE application requires at least 8 cores, this must be specified at fleet creation with the --cores flag.
+- Before creating the fleet, a Managed Identity (MI) must be configured. See [setup docs](/docs/azure-codespaces-setup.md) for instructions.
 
 ```bash
 
 # before creating the cluster, make sure PIB_MI is set
-# Managed Identity (MI) is required for the voe k8s secrets to be created properly
+# MI is required for the voe k8s secrets to be created properly
 flt env PIB_MI
 
 # set MY_CLUSTER
@@ -166,6 +176,12 @@ flt targets deploy
 
 ```bash
 
+# should see voe added
+git pull
+
+# force flux to reconcile
+flt sync
+
 # check the cluster for voe
 flt check app voe
 
@@ -190,7 +206,21 @@ flt curl /readyz
     # display the FQDN
     echo $MY_CLUSTER.$PIB_SSL
 
+    # if dns/ssl is not configured
+    # use the cluster IP
+    cat $PIB_BASE/clusters/$MY_CLUSTER.yaml | grep domain
+
     ```
+
+## VoE Application
+
+- As mentioned, the VoE application is a complex application and is made up of 6 services (CVCapture, Inference, Predict, RTSPSim, Upload, and Web).
+  - See the [source repo](https://github.com/Azure-Samples/azure-intelligent-edge-patterns/tree/master/factory-ai-vision) for more details.
+- Because of the complexity, there is additional ingress configuration required to ensure the different services can communicate as needed.
+  - See [ingress yaml](/advanced-scenarios/voe/.gitops/dev/ingressHttp.yaml)
+- The Inference service is dependent on 4 of the other services, we use initContainers to enforce the ordering.
+  - See [inference yaml](/advanced-scenarios/voe/.gitops/dev/inference.yaml)
+- The Web, Upload, and RTSPSim services require a persistent volume claim (pvc).
 
 ## Delete Your Cluster
 
