@@ -106,7 +106,7 @@ flt check app prometheus
 
     ```
 
-  - Validate pods and svc by ssh in to the cluster
+  - Validate primary and canary objects in the cluster:
 
     ```bash
 
@@ -149,7 +149,7 @@ flt check app prometheus
 
   ```bash
 
-  # start k9 for the cluster
+  # start k9s for the cluster
   flt ssh $MY_CLUSTER
   k9s <enter>
 
