@@ -80,7 +80,7 @@ flt check app prometheus
 
     ```
 
-  - Once the [github action](https://github.com/kubernetes101/pib-dev/actions) is completed and flux sync is performed, the reference app should be updated with Canary Deployment objects listed:
+  - Once the [github action](https://github.com/kubernetes101/pib-dev/actions) is completed, force flux to sync:
 
      ```bash
 
@@ -90,6 +90,8 @@ flt check app prometheus
     flt sync
 
     ```
+
+    The reference app should be updated with Canary Deployment objects listed:
 
     ```bash
 
