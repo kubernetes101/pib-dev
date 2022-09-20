@@ -3,7 +3,13 @@
 ## Introduction
 
 - VoE is an open-source tool that builds vision-based intelligent edge solutions using Machine Learning.  Visit this [repo](https://github.com/Azure-Samples/azure-intelligent-edge-patterns/tree/master/factory-ai-vision) for more information.
-- The VoE app is being deprecated. It is used for demonstrative purposes to show how to deploy a more complex app with PiB.
+- Deploying VoE is very similar process to deploying other applications in the outer-loop labs, but there are a few dependencies that must be configured first.
+
+> Note: The VoE app is being deprecated and will be replaced by a new version. It is used here for demonstrative purposes to show how to deploy a more complex app with PiB.
+
+## Lab Prerequisites
+
+- Complete the 4 outer-loop labs before this one.
 
 ## Fleet Configuration Prerequisites
 
@@ -34,6 +40,9 @@ export VOE_AZ_COG_SVC_NAME=voe-acs-$MY_BRANCH
 ```bash
 
 az login --use-device-code
+
+# if your Codespace secrets are configured with SP credentials
+flt az login
 
 ```
 
