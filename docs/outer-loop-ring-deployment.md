@@ -1,5 +1,11 @@
 # PiB outer-loop with Ring Based Deployment
 
+- PiB includes `GitOps Automation` that uses `cluster metadata` for targeted deployments
+- In this lab we will
+  - Create the GitOps structure for 15 clusters
+  - Add `ring` metadata to each cluster
+  - Add targets based on cluster metadata
+
 ## Create 15 Clusters
 
 > Note: we don't actually create the clusters, just the GitOps folders
@@ -29,6 +35,16 @@
         -c west-mt-bose-101
 
     ```
+
+## Cluster Metadata Files
+
+```bash
+
+ls -alF clusters/*.yaml
+
+cat clusters/central-tx-atx-101.yaml
+
+```
 
 ## Update Git Repo
 
@@ -104,5 +120,27 @@ flt targets deploy
 
 # wait for ci-cd to finish
 git pull
+
+```
+
+## Clean Up
+
+- Once you are finished with the workshop, you can delete your GitOps resources
+
+```bash
+
+# start in the base of the repo
+cd $PIB_BASE
+git pull
+
+rm -rf clusters
+mkdir -p clusters
+touch clusters/.gitkeep
+git add .
+
+cd apps/imdb
+flt targets clear
+flt targets deploy
+cd ../..
 
 ```
