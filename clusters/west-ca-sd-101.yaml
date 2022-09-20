@@ -8,3 +8,4 @@ domain: west-ca-sd-101.cseretail.com
 ingressType: Https
 gitopsRepo: kubernetes101/pib-dev
 gitopsBranch: outer-loop
+ring: 0

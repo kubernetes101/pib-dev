@@ -46,5 +46,37 @@ git pull
 ## Add Metadata to Clusters
 
 ```bash
+
+echo "ring: 0" >> clusters/central-tx-atx-101.yaml
+echo "ring: 1" >> clusters/central-tx-dal-101.yaml
+echo "ring: 2" >> clusters/central-tx-ftw-101.yaml
+echo "ring: 3" >> clusters/central-tx-hou-101.yaml
+echo "ring: 4" >> clusters/central-tx-san-101.yaml
+echo "ring: 0" >> clusters/east-al-bham-101.yaml
+echo "ring: 1" >> clusters/east-fl-mia-101.yaml
+echo "ring: 2" >> clusters/east-ga-atl-101.yaml
+echo "ring: 3" >> clusters/east-ms-bil-101.yaml
+echo "ring: 4" >> clusters/east-nc-clt-101.yaml
+echo "ring: 0" >> clusters/west-ca-sd-101.yaml
+echo "ring: 1" >> clusters/west-mt-bose-101.yaml
+echo "ring: 2" >> clusters/west-nv-lv-101.yaml
+echo "ring: 3" >> clusters/west-or-pdx-101.yaml
+echo "ring: 4" >> clusters/west-wa-sea-101.yaml
+
+git add clusters
+
 ```
 
+## Deploy IMDb to ring:0
+
+```bash
+
+cd $PIB_BASE/apps/imdb
+flt targets clear
+flt targets add ring:0
+flt targets deploy
+
+# wait on ci-cd to finish
+git pull
+
+```
