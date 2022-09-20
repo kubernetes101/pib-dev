@@ -42,6 +42,9 @@
 
     ```bash
 
+    # start in the base of the repo
+    cd $PIB_BASE
+
     flt create \
         -g $MY_BRANCH-fleet \
         -c central-tx-$MY_BRANCH-1001 \
@@ -59,9 +62,11 @@
 
 - By default, the IMDb app is only deployed to the central region cluster
 - Experiment with different deployments
-  - Make sure you're in the apps/imdb directory
 
   ```bash
+
+  # start in the apps/imdb directory
+  cd $PIB_BASE/apps/imdb
 
   # deploy to central and west regions
   flt targets add region:west
@@ -90,9 +95,10 @@
 ```bash
 
 # start in the apps/imdb directory
-flt targets clear
+cd $PIB_BASE/apps/imdb
 
 # deploy IMDb to the central region
+flt targets clear
 flt targets add region:central
 
 cd ../dogs-cats
@@ -106,5 +112,37 @@ flt targets deploy
 flt check app imdb
 flt check app dogs
 flt curl /version
+
+```
+
+## Clean Up
+
+- Once you are finished with the workshop, you can delete your Azure resources
+
+```bash
+
+# start in the base of the repo
+cd $PIB_BASE
+git pull
+
+# delete the Azure resources
+flt delete central-tx-$MY_BRANCH-1001
+flt delete east-ga-$MY_BRANCH-1001
+flt delete west-wa-$MY_BRANCH-1001
+flt delete $MY_BRANCH-fleet
+
+# remove ips file
+rm -f ips
+
+# reset the targets
+cd apps/imdb
+flt targets clear
+cd ../dogs-cats
+flt targets clear
+cd ../..
+
+# update the repo
+git commit -am "deleted fleet"
+git push
 
 ```
