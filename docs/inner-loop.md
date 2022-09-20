@@ -200,7 +200,7 @@ kic test integration --max-errors 5 --show
 
 ```bash
 
-code $PIB_BASE/apps/myapp/webv/
+code $PIB_BASE/apps/myapp/webv/integration.json
 
 ```
 
@@ -238,7 +238,7 @@ for i in {1..10}; kic test integration;
     - This will display the Swagger UI for MyApp in your local browser
     - NodePorts + Codespaces handles all the port forwarding automatically!
 
-> There are 5 unused Ports that are forwarded (30088, 31080, 31088, 32080, 32088). These are set up for the advanced scenario of running multiple apps simultaneously on the local cluster.
+> There are 5 unused Ports that are forwarded (30088, 31080, 31088, 32080, and 32088). These are set up for the advanced scenario of running multiple apps simultaneously on the local cluster.
 
 ## Observability: Grafana
 
