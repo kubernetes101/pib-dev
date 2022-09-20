@@ -245,9 +245,9 @@ flt check app imdb
 
   ```
 
-## Delete Your Cluster
+> NOTE: Skip the section below to continue advacned Canary Deployment [Lab](../advanced-scenarios/canary/README.md)
 
-> NOTE: Skip this step to continue using this fleet for advanced labs
+## Delete Your Cluster
 
 - Once you're finished with the workshop and experimenting, delete your cluster
 

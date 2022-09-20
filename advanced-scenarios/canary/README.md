@@ -72,41 +72,26 @@ flt check app prometheus
   - Update `apps/imdb/app.yaml` with template value </br>
       `template: pib-service-canary`
 
-  ```bash
+    ```bash
 
-  # deploy imdb with canary template
-  cd ../imdb
-  flt targets deploy
+    # deploy imdb with canary template
+    cd ../imdb
+    flt targets deploy
 
-  ```
+    ```
 
-  Once the [github action](https://github.com/kubernetes101/pib-dev/actions) is completed and flux sync is performed, the reference app should be updated with Canary Deployment objects listed:
+  - Once the [github action](https://github.com/kubernetes101/pib-dev/actions) is completed and flux sync is performed, the reference app should be updated with Canary Deployment objects listed:
 
-  ```bash
+     ```bash
 
-  # force flux to sync
-  # flux will sync on a schedule - this command forces it to sync now for debugging
-  git pull
-  flt sync
+    # force flux to sync
+    # flux will sync on a schedule - this command forces it to sync now for debugging
+    git pull
+    flt sync
 
-  ```
+    ```
 
-  > NOTE: We deploy `webv` to generate traffic to the reference app for the canary analysis and rollbacks
-
-  Validate pods and svc by ssh in to the cluster
-
-  ```bash
-
-      flt ssh $MY_CLUSTER
-      kic pods
-      kic svc
-      kubectl get canary -n imdb
-
-      # exit from cluster
-      exit
-  ```
-
-  ```bash
+    ```bash
 
       deployment.apps/imdb
       deployment.apps/imdb-primary
@@ -117,11 +102,25 @@ flt check app prometheus
       service/webv-imdb
       httpproxy.projectcontour.io/imdb
 
-  ```
+    ```
 
-## Update reference app version and monitor canary deployment
+  - Validate pods and svc by ssh in to the cluster
 
-- To upate IMDb reference app version:
+    ```bash
+
+    flt ssh $MY_CLUSTER
+    kic pods
+    kic svc
+    kubectl get canary -n imdb
+
+    # exit from cluster
+    exit
+
+    ```
+
+## Observe automated canary promotion
+
+- Trigger a canary deployment by updating the container image for IMDb:
   - Update `apps/imdb/app.yaml` with image tag from `latest` to `beta` </br>
       `image: ghcr.io/cse-labs/pib-imdb:beta`
 
@@ -133,7 +132,7 @@ flt check app prometheus
 
     ```
 
-    Once the [github action](https://github.com/kubernetes101/pib-dev/actions) is completed and flux sync is performed, the reference app should be updated with Canary Deployment objects listed:
+  - Once the [github action](https://github.com/kubernetes101/pib-dev/actions) is completed, force flux to sync:
 
     ```bash
 
@@ -146,19 +145,24 @@ flt check app prometheus
 
 - Observe canary deployment in k9s:
 
-   ```bash
+  ```bash
 
-      # start `k9s` for the cluster
-      flt ssh $MY_CLUSTER
-      k9s
+  # start k9 for the cluster
+  flt ssh $MY_CLUSTER
+  k9s <enter>
 
-   ```
+  ```
 
-  - Type `:` and `canaries` to view canary
-  - Observe `status` and `weight` for canary object
+  - Type `:canaries <enter>` to view canary object
+  - Observe `status` and `weight` for canary deployment progress
+
+    > - Flagger detects that the deployment version changed and starts a new rollout with 20% traffic progression
+    > - Once `status` is updated to `Succedded` canary promotion is completed and 100% of the traffic is routed to new version
+
   - Press `enter` again and scroll to bottom to see events
   - Press `escpe` to go back
-  - exit K9s - `:q <enter>`
+  - Exit K9s: `:q <enter>`
+  - Exit from cluster: `exit <enter>`
 
 ## Monitoring Canary deployments using Grafana
 
