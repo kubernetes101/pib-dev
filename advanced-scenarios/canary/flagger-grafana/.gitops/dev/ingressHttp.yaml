@@ -1,11 +1,20 @@
-apiVersion: projectcontour.io/v1
-kind: HTTPProxy
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: {{gitops.app}}-ingress
-  namespace: {{gitops.app}}
+  name: {{gitops.app}}
+  namespace: {{gitops.namespace}}
+  annotations:
+    ingress.kubernetes.io/force-ssl-redirect: "false"
+    kubernetes.io/ingress.class: contour
+
 spec:
-  virtualhost:
-    fqdn: {{gitops.cluster.domain}}{{gitops.ingressPrefix}}
-  includes:
-    - name: {{gitops.app}}
-      namespace: {{gitops.app}}
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: {{gitops.ingressPrefix}}
+        backend:
+          service:
+            name: {{gitops.app}}
+            port:
+              number: {{gitops.port}}

@@ -93,6 +93,19 @@ flt check app prometheus
 
   > NOTE: We deploy `webv` to generate traffic to the reference app for the canary analysis and rollbacks
 
+  Validate pods and svc by ssh in to the cluster
+
+  ```bash
+
+      flt ssh $MY_CLUSTER
+      kic pods
+      kic svc
+      kubectl get canary -n imdb
+
+      # exit from cluster
+      exit
+  ```
+
   ```bash
 
       deployment.apps/imdb
@@ -105,6 +118,21 @@ flt check app prometheus
       httpproxy.projectcontour.io/imdb
 
   ```
+
+## Update reference app version and monitor canary deployment
+
+- To upate IMDb reference app version:
+  - Update `apps/imdb/app.yaml` with image tag from `latest` to `beta` </br>
+      `image: ghcr.io/cse-labs/pib-imdb:beta`
+
+  ```bash
+
+  # deploy imdb with updated version
+  cd ../imdb
+  flt targets deploy
+
+  ```
+
 
 ## Monitoring Canary deployments using Grafana
 
