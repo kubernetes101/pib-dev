@@ -239,6 +239,7 @@ flt check app imdb
   ```bash
 
   # export MY_IP
+  cd $PIB_BASE
   export MY_IP=$(cat ips | cut -f2)
 
   http http://$MY_IP/version
@@ -251,17 +252,17 @@ flt check app imdb
 
 - Once you're finished with the workshop and experimenting, delete your cluster
 
-```bash
+  ```bash
 
-# start in the root of your repo
-cd $PIB_BASE
-git pull
-flt delete $MY_CLUSTER
-rm ips
-git commit -am "deleted cluster"
-git push
+  # start in the root of your repo
+  cd $PIB_BASE
+  git pull
+  flt delete $MY_CLUSTER
+  rm ips
+  git commit -am "deleted cluster"
+  git push
 
-```
+  ```
 
 - You can recreate your cluster at any time
   - Note that to reuse the same name, you have to wait for the Azure RG to delete
