@@ -68,7 +68,7 @@ flt check app prometheus
 
 ## Update reference app to use Canary deployment Strategy
 
-- To upate IMDb reference app to use canary deployment template:
+- To update IMDb reference app to use canary deployment template:
   - Update `apps/imdb/app.yaml` with template value </br>
       `template: pib-service-canary`
 
@@ -159,10 +159,10 @@ flt check app prometheus
   - Observe `status` and `weight` for canary promotion
 
     > - Flagger detects the deployment version change and starts a new rollout with 20% traffic progression
-    > - Once canary `status` is updated to `Succedded`, 100% of the traffic should be routed to new version
+    > - Once canary `status` is updated to `Succeeded`, 100% of the traffic should be routed to new version
 
   - Press `enter` again and scroll to bottom to see events
-  - Press `escpe` to go back
+  - Press `escape` to go back
   - Exit K9s: `:q <enter>`
   - Exit from cluster: `exit <enter>`
 
