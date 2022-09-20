@@ -1,0 +1,25 @@
+{
+  "requests":
+  [
+    {"path":"/version","perfTarget":{"category":"static"}},
+    {"path":"/index.html","perfTarget":{"category":"static"},"validation":{"contentType":"text/html","contains":["<title>Swagger UI</title>","<div id=\"swagger-ui\">"]}},
+    {"path":"/swagger.json","perfTarget":{"category":"static"},"validation":{"jsonObject":[{"field":"openapi"},{"field":"info"},{"field":"paths"},{"field":"components"}]}},
+    {"path":"/api/benchmark/1","perfTarget":{"category":"api"},"validation":{"contentType":"text/plain","exactMatch":"0"}},
+    {"path":"/api/benchmark/16","perfTarget":{"category":"api"},"validation":{"contentType":"text/plain","exactMatch":"0123456789ABCDEF"}},
+    {"path":"/api/benchmark/32","perfTarget":{"category":"api"},"validation":{"contentType":"text/plain","exactMatch":"0123456789ABCDEF0123456789ABCDEF"}},
+    {"path":"/api/benchmark/64","perfTarget":{"category":"api"},"validation":{"contentType":"text/plain","exactMatch":"0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF"}},
+    {"path":"/api/benchmark/1024","perfTarget":{"category":"api"},"validation":{"contentType":"text/plain","length":1024}},
+    {"path":"/api/benchmark/64000","perfTarget":{"category":"api"},"validation":{"contentType":"text/plain","length":64000}},
+    {"path":"/api/benchmark/1048576","perfTarget":{"category":"api"},"validation":{"contentType":"text/plain","length":1048576}},
+
+    {"path":"/readyz","perfTarget":{"category":"healthz"},"validation":{"contentType":"text/plain","exactMatch":"ready"}},
+    {"path":"/healthz","perfTarget":{"category":"healthz"},"validation":{"contentType":"text/plain","notContains":["fail"]}},
+    {"path":"/healthz/ietf","perfTarget":{"category":"healthz"},"validation":{"contentType":"application/health+json","jsonObject":[{"field":"status","validation":{"notContains":["fail"]}},{"field":"serviceId"},{"field":"description"},{"field":"instance"},{"field":"version"},{"field":"checks","validation":{"jsonObject":[{"field":"getBenchmark:responseTime","validation":{"jsonObject":[{"field":"time"},{"field":"observedValue"},{"field":"status","validation":{"notContains":["fail"]}},{"field":"componentType","value":"datastore"},{"field":"componentId","value":"getBenchmark"},{"field":"observedUnit","value":"ms"},{"field":"targetValue","value":200}]}}]}}]}},
+
+    {"path":"/api/benchmark/0","perfTarget":{"category":"error"},"validation":{"statusCode":400, "contentType":"application/problem+json","jsonObject":[{"field":"detail"},{"field":"instance"},{"field":"validationErrors"},{"field":"status","value":400},{"field":"title","value":"Parameter validation error"}]}},
+    {"path":"/api/benchmark/1048577","perfTarget":{"category":"error"},"validation":{"statusCode":400, "contentType":"application/problem+json","jsonObject":[{"field":"detail"},{"field":"instance"},{"field":"validationErrors"},{"field":"status","value":400},{"field":"title","value":"Parameter validation error"}]}},
+    {"path":"/api/foo","perfTarget":{"category":"error"},"validation":{"statusCode":404}},
+    {"path":"/robots.txt","perfTarget":{"category":"error"},"validation":{"statusCode":404}},
+    {"path":"/favicon.ico","perfTarget":{"category":"error"},"validation":{"statusCode":404}}
+  ]
+}
