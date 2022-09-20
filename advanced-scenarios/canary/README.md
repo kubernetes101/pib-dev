@@ -42,7 +42,7 @@ flt targets deploy
 
 ### Check that your GitHub Action is running
 
-- <https://github.com/yourOrg/yourRepo/actions>
+- <https://github.com/kubernetes101/pib-dev/actions>
   - your action should be queued or in-progress
 
 ### Check deployment
@@ -59,17 +59,17 @@ git pull
 flt sync
 
 # check that flagger is deployed to your cluster
+# NOTE: We also deploy prometheus to scrape metrics to monitor Canary deployment
 flt check app flagger
 flt check app prometheus
 
 ```
 
-> NOTE: We also deploy prometheus to scrape metrics to monitor Canary deployment.
 
 ## Update reference app to use Canary deployment Strategy
 
 - To upate IMDb reference app to use canary deployment template:
-  - Update `app.yaml` with template value </br>
+  - Update `apps/imdb/app.yaml` with template value </br>
       `template: pib-service-canary`
 
   ```bash
