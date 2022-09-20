@@ -2,11 +2,11 @@
 
 ## Create a unique cluster identifier
 
-    ```bash
+```bash
 
-    export MY_BRANCH=$(echo $GITHUB_USER | tr '[:upper:]' '[:lower:]')
+export MY_BRANCH=$(echo $GITHUB_USER | tr '[:upper:]' '[:lower:]')
 
-    ```
+```
 
 ## Login to Azure
 
