@@ -119,7 +119,7 @@ Flagger comes with a Grafana dashboard made for canary analysis. Install Grafana
   cp -R ./flagger-grafana ../../apps
 
   # add and commit the flagger-grafana app
-  cd ../..
+  cd $PIB_BASE
   git add .
   git commit -am "added flagger-grafana app"
   git push

@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{gitops.app}}
+  namespace: {{gitops.namespace}}
+  labels:
+    app: grafana
+    chart: grafana-1.7.0
+    release: flagger-grafana
+    heritage: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: {{gitops.app}}
+    release: flagger-grafana
