@@ -7,6 +7,7 @@ key2: Cats
 namespace: dogs-cats
 nodePort: 30080
 port: 8080
-targets: []
+targets:
+    - region:west
 template: vote-service
 title: Dogs Rule!
