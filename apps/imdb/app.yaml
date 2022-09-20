@@ -7,4 +7,5 @@ nodePort: 30080
 port: 8080
 targets:
     - ring:0
+    - ring:1
 template: pib-service

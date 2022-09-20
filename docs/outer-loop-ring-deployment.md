@@ -76,7 +76,20 @@ flt targets clear
 flt targets add ring:0
 flt targets deploy
 
-# wait on ci-cd to finish
+# wait for ci-cd to finish
+git pull
+
+```
+
+## Add ring:1
+
+```bash
+
+cd $PIB_BASE/apps/imdb
+flt targets add ring:1
+flt targets deploy
+
+# wait for ci-cd to finish
 git pull
 
 ```
