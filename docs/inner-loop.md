@@ -183,6 +183,27 @@ kic test load --duration 5 --verbose
 
 ```
 
+## `kic test` WebV Configuration
+
+- Run the `kic test` commands with --show to view the default paramaters passed to the custom webv image
+
+```bash
+
+kic test integration --show
+
+# the --max-errors value should be updated
+kic test integration --max-errors 5 --show
+
+```
+
+- See the list of requests in the custom test files in the `apps/myapp/webv` directory
+
+```bash
+
+code $PIB_BASE/apps/myapp/webv/integration.json
+
+```
+
 ## Generate Requests for Observability
 
 - PiB includes a full observability stack "in" the Codespace
@@ -216,6 +237,8 @@ for i in {1..10}; kic test integration;
     - Right click or click the `open in browser` icon
     - This will display the Swagger UI for MyApp in your local browser
     - NodePorts + Codespaces handles all the port forwarding automatically!
+
+> There are 5 unused Ports that are forwarded (30088, 31080, 31088, 32080, and 32088). These are set up for the advanced scenario of running multiple apps simultaneously on the local cluster.
 
 ## Observability: Grafana
 
