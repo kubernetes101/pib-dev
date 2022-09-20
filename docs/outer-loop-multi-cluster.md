@@ -55,7 +55,7 @@
 
 ## Verifying the Clusters
 
-- Follow the instructions in the [outer-loop lab](./outer-loop.md)
+- Follow the instructions in the [outer-loop lab](./outer-loop.md#update-git-repo)
 - Return here once the clusters are verified
 
 ## IMDb Deployment
