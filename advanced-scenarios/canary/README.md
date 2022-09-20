@@ -19,7 +19,7 @@ cd advanced-scenarios/canary
 cp -R ./flagger ../../apps
 
 # add and commit the flagger app
-cd ../..
+cd $PIB_BASE
 git add .
 git commit -am "added flagger app"
 git push

@@ -236,6 +236,7 @@ flt check app imdb
   ```bash
 
   # export MY_IP
+  cd $PIB_BASE
   export MY_IP=$(cat ips | cut -f2)
 
   http http://$MY_IP/version
@@ -245,6 +246,8 @@ flt check app imdb
   ```
 
 ## Delete Your Cluster
+
+> NOTE: Skip this step to continue using this fleet for advanced labs
 
 - Once you're finished with the workshop and experimenting, delete your cluster
 

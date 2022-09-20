@@ -1,0 +1,18 @@
+# source: https://github.com/fluxcd/flagger/tree/main/kustomize/contour
+namespace: {{gitops.namespace}}
+commonLabels:
+  app: {{gitops.app}}
+resources:
+  - account.yaml
+  - rbac.yaml
+  - crd.yaml
+  - deployment.yaml
+  - flagger-prometheus.yaml
+images:
+  - name: ghcr.io/fluxcd/flagger
+    newName: ghcr.io/fluxcd/flagger
+    newTag: 1.22.1
+configMapGenerator:
+  - name: {{gitops.app}}-prometheus
+    files:
+      - prometheus.yml
