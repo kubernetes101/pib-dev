@@ -185,7 +185,7 @@ kic test load --duration 5 --verbose
 
 ## `kic test` WebV Configuration
 
-- Run the `kic test` commands with --show to view the default paramaters passed to the custom webv image
+- Run the `kic test` commands with --show to view the default parameters passed to the custom webv image
 
 ```bash
 
