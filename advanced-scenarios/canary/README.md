@@ -125,13 +125,24 @@ flt check app prometheus
   - Update `apps/imdb/app.yaml` with image tag from `latest` to `beta` </br>
       `image: ghcr.io/cse-labs/pib-imdb:beta`
 
-  ```bash
+    ```bash
 
-  # deploy imdb with updated version
-  cd ../imdb
-  flt targets deploy
+    # deploy imdb with updated version
+    cd ../imdb
+    flt targets deploy
 
-  ```
+    ```
+
+    Once the [github action](https://github.com/kubernetes101/pib-dev/actions) is completed and flux sync is performed, the reference app should be updated with Canary Deployment objects listed:
+
+    ```bash
+
+    # force flux to sync
+    # flux will sync on a schedule - this command forces it to sync now for debugging
+    git pull
+    flt sync
+
+    ```
 
 
 ## Monitoring Canary deployments using Grafana
