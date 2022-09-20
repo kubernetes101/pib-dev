@@ -5,7 +5,7 @@ metadata:
   namespace: {{gitops.app}}
 spec:
   virtualhost:
-    fqdn: 20.150.157.24/{{gitops.ingressPrefix}}
+    fqdn: {{gitops.cluster.domain}}/{{gitops.ingressPrefix}}
   includes:
     - name: {{gitops.app}}
       namespace: {{gitops.app}}
