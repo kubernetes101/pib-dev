@@ -24,84 +24,10 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 15,
+    "id": 21,
     "links": [],
     "liveNow": false,
     "panels": [
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "grafanacloud-prom"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "links": [
-              {
-                "title": "",
-                "url": "https://%%GRAFANA_NAME%%.grafana.net/d/%%FLEET_NAME%%fleet/%%FLEET_NAME%%-fleet?orgId=1&var-apps=${apps}&var-regions=${__field.labels.server_region}&var-servers=All"
-              }
-            ],
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 7,
-          "w": 3,
-          "x": 0,
-          "y": 0
-        },
-        "id": 15,
-        "options": {
-          "colorMode": "background",
-          "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "horizontal",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {
-            "titleSize": 24,
-            "valueSize": 24
-          },
-          "textMode": "name"
-        },
-        "pluginVersion": "9.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "grafanacloud-prom"
-            },
-            "exemplar": true,
-            "expr": "count by (server_region)( label_replace(\r\ncount(\r\n(sum by (server)(rate(WebVDuration_count{origin_prometheus=\"monitoring-%%FLEET_NAME%%\",job=\"$apps\",status=\"OK\",server=~\".*$regions.*\"}[1m]) or WebVDuration_count{origin_prometheus=\"monitoring-%%FLEET_NAME%%\",job=\"$apps\",server=~\"$servers\"}*0 ) / sum by (server) (rate(WebVDuration_count{origin_prometheus=\"monitoring-%%FLEET_NAME%%\",job=\"$apps\"}[1m])) * 100)>90) by (server), \"server_region\", \"$1\", \"server\", \"^........([a-z]*)-[a-z]*-[a-z]*-.*.%%DOMAIN_NAME%%\")) ",
-            "interval": "",
-            "legendFormat": "{{server_region}}",
-            "refId": "A"
-          }
-        ],
-        "type": "stat"
-      },
       {
         "datasource": {
           "type": "prometheus",
@@ -122,7 +48,7 @@
               {
                 "targetBlank": true,
                 "title": "Check Version",
-                "url": "https://${__field.labels.server_name}.%%DOMAIN_NAME%%/version"
+                "url": "${__field.labels.server}/version"
               }
             ],
             "mappings": [],
@@ -154,8 +80,8 @@
         },
         "gridPos": {
           "h": 7,
-          "w": 9,
-          "x": 3,
+          "w": 12,
+          "x": 0,
           "y": 0
         },
         "id": 6,
@@ -177,30 +103,23 @@
           },
           "textMode": "name"
         },
-        "pluginVersion": "9.1.0",
+        "pluginVersion": "9.1.5-0100a6a",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "grafanacloud-prom"
             },
+            "editorMode": "code",
             "exemplar": false,
-            "expr": "label_replace(sum by (server) (rate(WebVDuration_count{origin_prometheus=\"monitoring-%%FLEET_NAME%%\",job=\"$apps\",status=\"OK\",server=~\"$servers\",server=~\".*$regions.*\"}[1m]) or WebVDuration_count{origin_prometheus=\"monitoring-%%FLEET_NAME%%\",job=\"$apps\",server=~\"$servers\"}*0) / sum(rate(WebVDuration_count{origin_prometheus=\"monitoring-%%FLEET_NAME%%\",job=\"$apps\",server=~\"$servers\",server=~\".*$regions.*\"}[1m])) by (server) * 100, \"server_name\", \"$1\", \"server\", \"^........([a-z]*-[a-z]*-[a-z]*-.*).%%DOMAIN_NAME%%\")",
+            "expr": "sum by (server) (rate(WebVDuration_count{origin_prometheus=\"monitoring-%%FLEET_NAME%%\",job=\"$apps\",status=\"OK\",server=~\"$servers\"}[1m]) or WebVDuration_count{origin_prometheus=\"monitoring-%%FLEET_NAME%%\",job=\"$apps\",server=~\"$servers\"}*0) / sum(rate(WebVDuration_count{origin_prometheus=\"monitoring-%%FLEET_NAME%%\",job=\"$apps\",server=~\"$servers\"}[1m])) by (server) * 100",
             "instant": true,
             "interval": "",
             "legendFormat": "{{server}}",
             "refId": "A"
           }
         ],
-        "transformations": [
-          {
-            "id": "renameByRegex",
-            "options": {
-              "regex": "^https:\\/\\/[a-z]*-[a-z]*-([a-z]*-\\d*).%%DOMAIN_NAME%%",
-              "renamePattern": "$1"
-            }
-          }
-        ],
+        "transformations": [],
         "type": "stat"
       },
       {
@@ -257,30 +176,24 @@
           },
           "textMode": "auto"
         },
-        "pluginVersion": "9.1.0",
+        "pluginVersion": "9.1.5-0100a6a",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "grafanacloud-prom"
             },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "WebVSummary{origin_prometheus=\"monitoring-%%FLEET_NAME%%\",job=\"$apps\",quantile=\"0.95\",status=\"OK\",server=~\"$servers\",server=~\".*$regions.*\"}",
+            "expr": "WebVSummary{origin_prometheus=\"monitoring-%%FLEET_NAME%%\",job=\"$apps\",quantile=\"0.95\",status=\"OK\",server=~\"$servers\"}",
             "interval": "",
             "legendFormat": "{{server}}",
+            "range": true,
             "refId": "A"
           }
         ],
         "title": "P95 Response Time",
-        "transformations": [
-          {
-            "id": "renameByRegex",
-            "options": {
-              "regex": "^https:\\/\\/[a-z]*-[a-z]*-([a-z]*-\\d*).%%DOMAIN_NAME%%",
-              "renamePattern": "$1"
-            }
-          }
-        ],
+        "transformations": [],
         "type": "stat"
       },
       {
@@ -419,23 +332,17 @@
               "type": "prometheus",
               "uid": "grafanacloud-prom"
             },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(rate(WebVSummary_count{origin_prometheus=\"monitoring-%%FLEET_NAME%%\",job=\"$apps\",status=\"OK\",server=~\"$servers\",server=~\".*$regions.*\"}[1m])) by (server)",
+            "expr": "sum(rate(WebVSummary_count{origin_prometheus=\"monitoring-%%FLEET_NAME%%\",job=\"$apps\",status=\"OK\",server=~\"$servers\"}[1m])) by (server)",
             "interval": "",
             "legendFormat": "{{server}}",
+            "range": true,
             "refId": "A"
           }
         ],
         "title": "Requests / sec",
-        "transformations": [
-          {
-            "id": "renameByRegex",
-            "options": {
-              "regex": "^https:\\/\\/[a-z]*-[a-z]*-([a-z]*-\\d*).%%DOMAIN_NAME%%",
-              "renamePattern": "$1"
-            }
-          }
-        ],
+        "transformations": [],
         "type": "timeseries"
       },
       {
@@ -530,21 +437,15 @@
               "type": "loki",
               "uid": "grafanacloud-logs"
             },
-            "expr": "sum(count_over_time({job=\"webv-%%FLEET_NAME%%\",StatusCode!=\"200\"}|~\"$apps\"|Server=~\".*($regions).*\"|Server=~\"$servers\"|Server!=\"\"[1m])) by (Server)",
+            "editorMode": "code",
+            "expr": "sum(count_over_time({job=\"webv-%%FLEET_NAME%%\",StatusCode!=\"200\"}|~\"$apps\"|Server=~\"$servers\"|Server!=\"\"[1m])) by (Server)",
             "legendFormat": "{{Server}}",
+            "queryType": "range",
             "refId": "A"
           }
         ],
         "title": "Errors / min",
-        "transformations": [
-          {
-            "id": "renameByRegex",
-            "options": {
-              "regex": "^https:\\/\\/[a-z]*-[a-z]*-([a-z]*-\\d*).%%DOMAIN_NAME%%",
-              "renamePattern": "$1"
-            }
-          }
-        ],
+        "transformations": [],
         "type": "timeseries"
       },
       {
@@ -636,23 +537,17 @@
               "type": "prometheus",
               "uid": "grafanacloud-prom"
             },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "WebVSummary{origin_prometheus=\"monitoring-%%FLEET_NAME%%\",job=\"$apps\",quantile=\"0.95\",status=\"OK\",server=~\"$servers\",server=~\".*$regions.*\"}",
+            "expr": "WebVSummary{origin_prometheus=\"monitoring-%%FLEET_NAME%%\",job=\"$apps\",quantile=\"0.95\",status=\"OK\",server=~\"$servers\"}",
             "interval": "",
             "legendFormat": "{{server}}",
+            "range": true,
             "refId": "A"
           }
         ],
         "title": "P95 Response Time",
-        "transformations": [
-          {
-            "id": "renameByRegex",
-            "options": {
-              "regex": "^https:\\/\\/[a-z]*-[a-z]*-([a-z]*-\\d*).%%DOMAIN_NAME%%",
-              "renamePattern": "$1"
-            }
-          }
-        ],
+        "transformations": [],
         "type": "timeseries"
       }
     ],
@@ -703,37 +598,6 @@
             "type": "prometheus",
             "uid": "grafanacloud-prom"
           },
-          "definition": "label_values(WebVSummary{origin_prometheus=\"monitoring-%%FLEET_NAME%%\",job=\"$apps\"}, server)",
-          "hide": 0,
-          "includeAll": true,
-          "label": "Regions",
-          "multi": true,
-          "name": "regions",
-          "options": [],
-          "query": {
-            "query": "label_values(WebVSummary{origin_prometheus=\"monitoring-%%FLEET_NAME%%\",job=\"$apps\"}, server)",
-            "refId": "StandardVariableQuery"
-          },
-          "refresh": 1,
-          "regex": "^........([a-z]*)-[a-z]*-[a-z]*-.*.%%DOMAIN_NAME%%",
-          "skipUrlSync": false,
-          "sort": 0,
-          "type": "query"
-        },
-        {
-          "current": {
-            "selected": true,
-            "text": [
-              "All"
-            ],
-            "value": [
-              "$__all"
-            ]
-          },
-          "datasource": {
-            "type": "prometheus",
-            "uid": "grafanacloud-prom"
-          },
           "definition": "label_values(WebVSummary{origin_prometheus=\"monitoring-%%FLEET_NAME%%\", job=\"$apps\"}, server)",
           "hide": 0,
           "includeAll": true,
@@ -761,6 +625,6 @@
     "timezone": "",
     "title": "%%FLEET_NAME%% Fleet",
     "uid": "%%FLEET_NAME%%fleet",
-    "version": 6,
+    "version": 3,
     "weekStart": ""
   }
