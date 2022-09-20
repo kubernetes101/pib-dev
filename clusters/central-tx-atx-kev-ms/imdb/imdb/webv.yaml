@@ -56,7 +56,7 @@ spec:
           - --run-loop
           - --verbose
           - --server
-          - https://20.150.157.24
+          - Http://20.150.157.24
           - --files
           - imdb-load.json
           - --zone
