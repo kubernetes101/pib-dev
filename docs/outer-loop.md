@@ -166,7 +166,7 @@ cd apps/imdb
 git pull
 
 # add all clusters as a target
-flt targets add all
+flt targets add region:central
 
 # other options
 # flt targets add region:central
@@ -175,6 +175,9 @@ flt targets add all
 
 # specify the cluster by name
 # flt targets add $MY_CLUSTER
+
+# deploy to all clusters
+# flt targets clear && flt targets add all
 
 # deploy the app via ci-cd and GitOps Automation
 flt targets deploy
@@ -192,7 +195,7 @@ flt targets deploy
 
 ```bash
 
-# should see myapp added
+# should see imdb added
 git pull
 
 # force flux to reconcile
