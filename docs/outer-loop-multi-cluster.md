@@ -53,6 +53,7 @@
 ## Verifying the Clusters
 
 - Follow the instructions in the [outer-loop lab](./outer-loop.md)
+- Return here once the clusters are verified
 
 ## IMDb Deployment
 
