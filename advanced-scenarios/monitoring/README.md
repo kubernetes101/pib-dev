@@ -65,7 +65,6 @@ flt create -g $FLT_NAME-fleet -c monitoring-$FLT_NAME
 
 - Add webv to the apps/ directory
 - By default, this provides you with two deployments of webv: webv-heartbeat and webv-imdb.
-- If you do not plan to deploy the imdb app to any stores in your fleet, it is recommended to not include the imdb.yaml. To remove, delete the `- imdb.yaml` line from the kustomization.yaml file.
 
 ```bash
 
@@ -127,7 +126,23 @@ flt targets add region:monitoring
 
 flt targets deploy
 
-# todo: validate deployment
+```
+
+### Verify WebV was Deployed
+
+```bash
+
+# should see webv added
+git pull
+
+# force flux to reconcile
+flt sync
+
+# should be found on the monitoring cluster
+flt check app webv
+
+# should see webv pods running
+flt exec kic pods -f monitoring
 
 ```
 
@@ -172,7 +187,23 @@ flt targets add region:monitoring
 
 flt targets deploy
 
-# todo: validate deployment
+```
+
+### Verify Fluent Bit was Deployed
+
+```bash
+
+# should see fluent-bit added
+git pull
+
+# force flux to reconcile
+flt sync
+
+# should be found on the monitoring cluster
+flt check app fluent-bit
+
+# should see fluent-bit pod running
+flt exec kic pods -f monitoring
 
 ```
 
@@ -217,7 +248,23 @@ flt targets add region:monitoring
 
 flt targets deploy
 
-# todo: validate deployment
+```
+
+### Verify Prometheus was Deployed
+
+```bash
+
+# should see prometheus added
+git pull
+
+# force flux to reconcile
+flt sync
+
+# should be found on the monitoring cluster
+flt check app prometheus
+
+# should see prometheus pod running
+flt exec kic pods -f monitoring
 
 ```
 
@@ -285,7 +332,40 @@ sed -i "s/%%GRAFANA_NAME%%/${GRAFANA_NAME}/g" dashboard.json
 
 ## "Break" an Application Deployment
 
+- To watch the dashboard and alerts "in action", we will temporarily take down an instance of imdb
+
+### Reduce imdb Targets
+
 ```bash
 
+cd $PIB_BASE/apps/imdb
+
+# show current targets
+flt targets list
+
+# clear targets
+flt targets clear
+
+# target only one region/cluster
+# update accordingly depending on the clusters in your fleet
+flt target add region:central
+
+flt targets deploy
 
 ```
+
+### Update Cluster
+
+```bash
+
+# should see imdb removed from some clusters
+git pull
+
+# force flux to reconcile
+flt sync
+
+```
+
+- Navigate to your dashboard in Grafana to see some clusters "turn red"
+  - You may need to hit refresh a few times
+  - The alert will take ~1 minute to show up
