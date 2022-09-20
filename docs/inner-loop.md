@@ -183,13 +183,24 @@ kic test load --duration 5 --verbose
 
 ```
 
-## WebV Configuration
+## `kic test` WebV Configuration
 
 - Run the `kic test` commands with --show to view the default paramaters passed to the custom webv image
 
 ```bash
 
 kic test integration --show
+
+# the --max-errors value should be updated
+kic test integration --max-errors 5 --show
+
+```
+
+- See the list of requests in the custom test files in the `apps/myapp/webv` directory
+
+```bash
+
+code $PIB_BASE/apps/myapp/webv/
 
 ```
 
