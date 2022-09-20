@@ -1,0 +1,10 @@
+name: east-fl-mia-101
+environment: dev
+region: east
+zone: east-fl
+district: east-fl-mia
+store: east-fl-mia-101
+domain: east-fl-mia-101.cseretail.com
+ingressType: Https
+gitopsRepo: kubernetes101/pib-dev
+gitopsBranch: outer-loop
