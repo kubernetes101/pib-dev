@@ -144,14 +144,21 @@ flt check app prometheus
 
     ```
 
-- Observe canary deployment:
+- Observe canary deployment in k9s:
 
-  ```bash
+   ```bash
 
-     flt ssh $MY_CLUSTER
-     k9s
+      # start `k9s` for the cluster
+      flt ssh $MY_CLUSTER
+      k9s
 
-  ```
+   ```
+
+  - Type `:` and `canaries` to view canary
+  - Observe `status` and `weight` for canary object
+  - Press `enter` again and scroll to bottom to see events
+  - Press `escpe` to go back
+  - exit K9s - `:q <enter>`
 
 ## Monitoring Canary deployments using Grafana
 
