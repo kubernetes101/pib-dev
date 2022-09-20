@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: flagger-grafana
+  namespace: projectcontour
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    kubernetes.io/ingress.class: contour
+    kubernetes.io/tls-acme: "true"
+
+spec:
+  tls:
+  - secretName: flagger-grafana
+    hosts:
+    - 20.150.157.24
+  rules:
+  - host: 20.150.157.24
+    http:
+      paths:
+      - pathType: Prefix
+        path: /grafana
+        backend:
+          service:
+            name: flagger-grafana
+            port:
+              number: 8080
