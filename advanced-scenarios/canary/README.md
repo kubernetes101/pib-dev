@@ -1,6 +1,12 @@
 # Automated Canary deployment using Flagger
 
+## Introduction
+
 [Flagger](https://flagger.app/) is a progressive delivery tool that automates the release process for applications running on Kubernetes. It takes a Kubernetes deployment and creates a series of objects (Kubernetes deployments, ClusterIP services and Contour HTTPProxy) for an application. These objects expose the application in the cluster and drive the canary analysis and promotion.
+
+## Lab Prerequisites
+
+- Complete outer-loop [Lab 1](../../docs/outer-loop.md) and skip [Delete Your Cluster](../../docs/outer-loop.md#delete-your-cluster) section
 
 ## Install Flagger
 
