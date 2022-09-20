@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dogs-cats
+  namespace: dogs-cats
+  labels:
+    app.kubernetes.io/name: dogs-cats
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dogs-cats
+  template:
+    metadata:
+      labels:
+        app: dogs-cats
+    spec:
+      containers:
+      - name: dogs-cats
+        image: ghcr.io/cse-labs/go-vote:latest
+        imagePullPolicy: Always
+        env:
+        - name: TITLE
+          value: Dogs Rule!
+        - name: KEY1
+          value: Dogs
+        - name: KEY2
+          value: Cats
+        ports:
+        - containerPort: 8080
+        livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 10
+            failureThreshold: 10
+            periodSeconds: 60
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8080
+          initialDelaySeconds: 10
+          failureThreshold: 10
+          periodSeconds: 60
+        resources:
+          limits:
+            cpu: 500m
+            memory: 128Mi
+          requests:
+            cpu: 250m
+            memory: 64Mi
