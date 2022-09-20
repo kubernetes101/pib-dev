@@ -1,0 +1,10 @@
+name: west-wa-bartr-1001
+environment: dev
+region: west
+zone: west-wa
+district: west-wa-bartr
+store: west-wa-bartr-1001
+domain: west-wa-bartr-1001.cseretail.com
+ingressType: Https
+gitopsRepo: kubernetes101/pib-dev
+gitopsBranch: outer-loop

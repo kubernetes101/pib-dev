@@ -31,13 +31,19 @@
 
 ## Create 3 Clusters
 
-- One in each region
+- Use one Azure Resource Group
+- Create a cluster in each region
   - You can use different names as long as they are unique
+  - Naming format
+    - region (central, east, west)
+    - state
+    - city
+    - store_number
 
     ```bash
 
     flt create \
-        -g $MY_BRANCH-fleet
+        -g $MY_BRANCH-fleet \
         -c central-tx-$MY_BRANCH-1001 \
         -c east-ga-$MY_BRANCH-1001 \
         -c west-wa-$MY_BRANCH-1001
