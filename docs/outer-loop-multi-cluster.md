@@ -60,7 +60,7 @@ export MY_BRANCH=$(echo $GITHUB_USER | tr '[:upper:]' '[:lower:]')
 
 ## IMDb Deployment
 
-- By default, the IMDb app is only deployed to the central region cluster
+- By default, the IMDb app is not deployed to any clusters
 - Experiment with different deployments
 
   ```bash
@@ -69,7 +69,7 @@ export MY_BRANCH=$(echo $GITHUB_USER | tr '[:upper:]' '[:lower:]')
   cd $PIB_BASE/apps/imdb
 
   # deploy to central and west regions
-  flt targets add region:west
+  flt targets add region:central region:west
   flt targets deploy
 
   # deploy to just the east region
