@@ -176,6 +176,12 @@ flt targets deploy
 
 ```bash
 
+# should see voe added
+git pull
+
+# force flux to reconcile
+flt sync
+
 # check the cluster for voe
 flt check app voe
 
