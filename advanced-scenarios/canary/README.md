@@ -80,7 +80,7 @@ flt check app prometheus
 
   ```
 
-  Once the github action is completed and flux sync is performed, the reference app should be updated with Canary Deployment objects listed:
+  Once the [github action](https://github.com/kubernetes101/pib-dev/actions) is completed and flux sync is performed, the reference app should be updated with Canary Deployment objects listed:
 
   ```bash
 
@@ -140,7 +140,7 @@ Flagger comes with a Grafana dashboard made for canary analysis. Install Grafana
 
   ```
 
-Once the github action is completed and flux sync is performed, navigate to grafana dashboard by appending `/grafana` to the host url in the browser tab.
+Once the [github action](https://github.com/kubernetes101/pib-dev/actions) is completed and flux sync is performed, navigate to grafana dashboard by appending `/grafana` to the host url in the browser tab.
 
 - Grafana login info
   - admin
