@@ -145,7 +145,7 @@ flt check app prometheus
 
     ```
 
-- Observe canary deployment in k9s:
+- Observe canary promotion in k9s:
 
   ```bash
 
@@ -156,10 +156,10 @@ flt check app prometheus
   ```
 
   - Type `:canaries <enter>` to view canary object
-  - Observe `status` and `weight` for canary deployment progress
+  - Observe `status` and `weight` for canary promotion
 
-    > - Flagger detects that the deployment version changed and starts a new rollout with 20% traffic progression
-    > - Once `status` is updated to `Succedded` canary promotion is completed and 100% of the traffic is routed to new version
+    > - Flagger detects the deployment version change and starts a new rollout with 20% traffic progression
+    > - Once canary `status` is updated to `Succedded`, 100% of the traffic should be routed to new version
 
   - Press `enter` again and scroll to bottom to see events
   - Press `escpe` to go back
