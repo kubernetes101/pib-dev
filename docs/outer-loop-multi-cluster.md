@@ -34,7 +34,7 @@
 - Use one Azure Resource Group
 - Create a cluster in each region
   - You can use different names as long as they are unique
-  - Naming format
+  - Standard Naming Format
     - region (central, east, west)
     - state
     - city
