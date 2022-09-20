@@ -144,6 +144,14 @@ flt check app prometheus
 
     ```
 
+- Observe canary deployment:
+
+  ```bash
+
+     flt ssh $MY_CLUSTER
+     k9s
+
+  ```
 
 ## Monitoring Canary deployments using Grafana
 
