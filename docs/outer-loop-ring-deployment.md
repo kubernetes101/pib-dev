@@ -93,3 +93,16 @@ flt targets deploy
 git pull
 
 ```
+
+## Add Central Region
+
+```bash
+
+cd $PIB_BASE/apps/imdb
+flt targets add region:central
+flt targets deploy
+
+# wait for ci-cd to finish
+git pull
+
+```
