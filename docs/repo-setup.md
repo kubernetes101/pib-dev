@@ -12,7 +12,7 @@ Currently, only Team and Enterprise plan have access to Codespaces. Since PiB us
 
 ## Step 2: Create your own repository
 
-[PiB-Dev](https://github.com/retaildevcrews/pib-dev) is the major repository in PiB. It contains all the detailed instructions, basic infrastructure for PiB. It depends on a bunch of internal GitHub repositories including pib-cli repo, pib-gitops to provide the full PiB experience for users.
+[PiB-Dev](https://github.com/microsoft/pilot-in-a-box) is the major repository in PiB. It contains all the detailed instructions, basic infrastructure for PiB. It depends on a bunch of internal GitHub repositories including pib-cli repo, pib-gitops to provide the full PiB experience for users.
 Use pib-dev repo as a template and create your own repo.
 
 ![setup-useTemplate](../docs/images/setup-useTemplate.png)
