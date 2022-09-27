@@ -79,7 +79,7 @@ az k8s-configuration flux create \
   --https-key "$PIB_PAT" \
   --kustomization \
       name=flux-system \
-      path=./clusters/"$PIB_CLUSTER"/flux-system/workspaces \
+      path=./clusters/"$PIB_CLUSTER"/flux-system/listeners \
       timeout=3m \
       sync_interval=1m \
       retry_interval=1m \

@@ -1,4 +1,12 @@
-# Pilot in a Box
+# Pilot-in-a-Box Overview
+
+Kubernetes is hard. Getting started and set up for the first time can take weeks to get right. Managing deployments on a fleet of Kubernetes clusters on the edge brings even more challenges.
+
+Pilot-in-a-Box (PiB) is a `game-changer` for the end-to-end Kubernetes app development cycle from a local cluster to deployments on the edge. It reduces the initial friction and empowers the developer to get started and deployed to a dev/test environment within *minutes*. The pre-configured Codespaces environment includes a `Kubernetes` cluster and custom CLI's (`kic` and `flt`) that help streamline the initial learning curve to Kubernetes development commands.
+
+This repo walks through the rich end-to-end developer experience in a series of labs. The labs start by walking you through creating, building, testing, and deploying an application on a local cluster ([inner-loop](./README.md#inner-loop)) with a complete CNCF observability stack. Then, the labs move on to the next step of deploying the application to a test cluster in the Cloud ([outer-loop](./README.md#outer-loop)). There are also several [advanced labs](./README.md#advanced-labs) that cover centralized monitoring, canary deployments, and targeting different devices.
+
+> Note: PiB is not intended as-is for production deployments. However, some concepts covered (GitOps and Observability) are production-ready.
 
 ## Prerequisites
 
@@ -74,34 +82,34 @@ GitHub Codespaces is also available in beta on a limited basis for GitHub Pro us
   ```
 
 - Your prompt should look like this
-  - /workspaces/pib-dev (mybranch) $
+  - /workspaces/Pilot-in-a-Box (mybranch) $
 
 ## inner-loop Labs
 
-- inner-loop [Lab 1](docs/inner-loop.md)
-- inner-loop with GitOps [Lab 2](docs/inner-loop-flux.md)
+- [Lab 1](./labs/inner-loop.md): Create, build, deploy, and test a new dotnet application and observability stack on your local cluster
+- [Lab 2](./labs/inner-loop-flux.md): Configure flux to automate the deployment process from Lab 1
 
 ## outer-loop Labs
 
-- outer-loop [Lab 1](docs/outer-loop.md)
-- Multi-cluster outer-loop [Lab 2](docs/outer-loop-multi-cluster.md)
-- Ring Based Deployment [Lab 3](docs/outer-loop-ring-deployment.md)
+- [Lab 1](./labs/outer-loop.md): Create a dev/test cluster and manage application deployments on the cluster
+- [Lab 2](./labs/outer-loop-multi-cluster.md): Manage application deployments on a fleet of multiple clusters
+- [Lab 3](./labs/outer-loop-ring-deployment.md): Configure ring based deployments
 
 > Work in Progress
 
-- Setting up Azure subscription and Codespaces [Lab 4](docs/azure-codespaces-setup.md)
+- [Lab 4](./labs/azure-codespaces-setup.md): Set up Azure subscription and Codespaces for advanced configuration
   - This is a prerequisite for the Advanced Labs
 
 ## Advanced Labs
 
 > Work in Progress
 
-- Arc enabled Gitops [Lab](docs/outer-loop-arc-gitops.md)
-- Canary Deployment [Lab](advanced-scenarios/canary/README.md)
-- Vision on Edge (VoE) [Lab](advanced-scenarios/voe/README.md)
-- Centralized Observability [Lab](advanced-scenarios/monitoring/README.md)
-- outer-loop with Physical Devices [Lab](docs/outer-loop-physical-devices.md)
-- outer-loop with AKS [Lab](docs/outer-loop-aks-azure.md)
+- [Arc enabled GitOps Lab](./labs/outer-loop-arc-gitops.md)
+- [Canary Deployment Lab](./labs/advanced-labs/canary/README.md): Use Flagger to experiment with canary deployments
+- [Vision on Edge (VoE) Lab](./labs/advanced-labs/voe/README.md): Deploy a more complex app (VoE) to a fleet
+- [Centralized Observability Lab](./labs/advanced-labs/monitoring/README.md): Deploy a centralized observability system with Fluent Bit, Prometheus, and Grafana to monitor fleet application deployments
+- [outer-loop with AKS-IoT](./labs/advanced-labs/aks-iot/README.md): Deploy to a AKS-IoT cluster running on an Azure VM with Arc enabled GitOps
+- [outer-loop with AKS Lab](./labs/outer-loop-aks-azure.md)
 
 ## Cleanup
 
@@ -130,10 +138,21 @@ This project uses GitHub Issues to track bugs and feature requests. Please searc
 
 ## Contributing
 
-This project welcomes contributions and suggestions and has adopted the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct.html).
+This project welcomes contributions and suggestions.  Most contributions require you to agree to a
+Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
+the rights to use your contribution. For details, visit <https://cla.opensource.microsoft.com>.
 
-For more information see [Contributing.md](./.github/CONTRIBUTING.md)
+When you submit a pull request, a CLA bot will automatically determine whether you need to provide
+a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
+provided by the bot. You will only need to do this once across all repos using our CLA.
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 ## Trademarks
 
-This project may contain trademarks or logos for projects, products, or services. Any use of third-party trademarks or logos are subject to those third-party's policies.
+This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft
+trademarks or logos is subject to and must follow [Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
+Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
+Any use of third-party trademarks or logos are subject to those third-party's policies.

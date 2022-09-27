@@ -1,4 +1,4 @@
-## Purpose of PR
+# Purpose of PR
 
 -
 
@@ -9,8 +9,4 @@
 - [ ] Test changes
 - [ ] CI-CD changes
 - [ ] GitHub Template changes
-
-## Issues Closed or Referenced
-
-- Closes #issue_number
-- References #issue_number
+- [ ] Codespaces changes

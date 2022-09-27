@@ -72,6 +72,7 @@ wget -q -O - https://raw.githubusercontent.com/rancher/k3d/main/install.sh | TAG
 echo "generating completions"
 kic completion zsh > "$HOME/.oh-my-zsh/completions/_kic"
 flt completion zsh > "$HOME/.oh-my-zsh/completions/_flt"
+gh completion -s zsh > ~/.oh-my-zsh/completions/_gh
 kubectl completion zsh > "$HOME/.oh-my-zsh/completions/_kubectl"
 k3d completion zsh > "$HOME/.oh-my-zsh/completions/_k3d"
 
