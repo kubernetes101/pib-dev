@@ -1,0 +1,12 @@
+gitopsRepo: microsoft/Pilot-in-a-Box
+gitopsBranch: my-branch
+name: central-tx-atx-101
+domain: central-tx-atx-101
+
+environment: dev
+region: central
+zone: central-tx
+district: central-tx-atx
+store: central-tx-atx-101
+ingressType: Http
+storageClassName: default
