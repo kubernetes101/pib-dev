@@ -1,4 +1,4 @@
-gitopsRepo: microsoft/Pilot-in-a-Box
+gitopsRepo: kubernetes101/pib-dev
 gitopsBranch: my-branch
 name: central-tx-atx-101
 domain: central-tx-atx-101
