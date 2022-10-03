@@ -11,6 +11,7 @@ export MY_BRANCH=$(echo $GITHUB_USER | tr '[:upper:]' '[:lower:]')
 ## Login to Azure
 
 - Login to Azure using `az login --use-device-code`
+  > Use `az login --use-device-code --tenant <tenant>` to specify a different tenant
   - If you have more than one Azure subscription, select the correct subscription
 
     ```bash
@@ -183,8 +184,6 @@ flt delete $MY_AKS_CLUSTER
 
 # reset the targets
 cd apps/imdb
-flt targets clear
-cd ../dogs-cats
 flt targets clear
 cd ../..
 
