@@ -11,6 +11,7 @@ export MY_BRANCH=$(echo $GITHUB_USER | tr '[:upper:]' '[:lower:]')
 ## Login to Azure
 
 - Login to Azure using `az login --use-device-code`
+  > Use `az login --use-device-code --tenant <tenant>` to specify a different tenant
   - If you have more than one Azure subscription, select the correct subscription
 
     ```bash
@@ -55,8 +56,41 @@ export MY_BRANCH=$(echo $GITHUB_USER | tr '[:upper:]' '[:lower:]')
 
 ## Verifying the Clusters
 
-- Follow the instructions in the [outer-loop lab](./outer-loop.md#update-git-repo)
-- Return here once the clusters are verified
+- Update Git Repo after [CI-CD](https://github.com/kubernetes101/pib-dev/actions) is complete (usually about 30 seconds)
+
+  ```bash
+
+  # update the git repo after ci-cd completes
+  git pull
+
+  # add ips to repo
+  git add ips
+  git commit -am "added ips"
+  git push
+
+  ```
+
+- Verify clusters setup
+
+  ```bash
+
+  # check the setup for "complete"
+  # rerun as necessary
+  flt check setup
+
+  ```
+
+- Check Heartbeat
+
+  ```bash
+
+  # check that heartbeat is running on your cluster
+  flt check heartbeat
+
+  # check heartbeat on clusters in specific region
+  flt check heartbeat --filter central
+
+  ```
 
 ## IMDb Deployment
 
@@ -72,15 +106,36 @@ export MY_BRANCH=$(echo $GITHUB_USER | tr '[:upper:]' '[:lower:]')
   flt targets add region:central region:west
   flt targets deploy
 
+  # wait for ci-cd to complete and update the cluster
+  git pull
+  flt sync
+
+  # check the cluster for imdb
+  flt check app imdb
+
   # deploy to just the east region
   flt targets clear
   flt targets add region:east
   flt targets deploy
 
+  # wait for ci-cd to complete and update the repo
+  git pull
+  flt sync
+
+  # check the cluster for imdb
+  flt check app imdb
+
   # deploy to all clusters
   flt targets clear
   flt targets add all
   flt targets deploy
+
+  # wait for ci-cd to complete and update the repo
+  git pull
+  flt sync
+
+  # check the cluster for imdb
+  flt check app imdb
 
   ```
 
@@ -108,7 +163,11 @@ flt targets clear
 flt targets add region:west
 flt targets deploy
 
-# wait for ci-cd to complete
+# wait for ci-cd to complete and update the repo
+git pull
+flt sync
+
+# check apps on cluster
 flt check app imdb
 flt check app dogs
 flt curl /version

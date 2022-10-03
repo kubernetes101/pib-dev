@@ -95,21 +95,17 @@ GitHub Codespaces is also available in beta on a limited basis for GitHub Pro us
 - [Lab 2](./labs/outer-loop-multi-cluster.md): Manage application deployments on a fleet of multiple clusters
 - [Lab 3](./labs/outer-loop-ring-deployment.md): Configure ring based deployments
 
-> Work in Progress
-
 - [Lab 4](./labs/azure-codespaces-setup.md): Set up Azure subscription and Codespaces for advanced configuration
   - This is a prerequisite for the Advanced Labs
 
 ## Advanced Labs
 
-> Work in Progress
-
-- [Arc enabled GitOps Lab](./labs/outer-loop-arc-gitops.md)
+- [Arc enabled GitOps Lab](./labs/outer-loop-arc-gitops.md): Deploy to dev cluster running on an Azure VM with Arc enabled GitOps
 - [Canary Deployment Lab](./labs/advanced-labs/canary/README.md): Use Flagger to experiment with canary deployments
 - [Vision on Edge (VoE) Lab](./labs/advanced-labs/voe/README.md): Deploy a more complex app (VoE) to a fleet
 - [Centralized Observability Lab](./labs/advanced-labs/monitoring/README.md): Deploy a centralized observability system with Fluent Bit, Prometheus, and Grafana to monitor fleet application deployments
-- [outer-loop with AKS-IoT](./labs/advanced-labs/aks-iot/README.md): Deploy to a AKS-IoT cluster running on an Azure VM with Arc enabled GitOps
-- [outer-loop with AKS Lab](./labs/outer-loop-aks-azure.md)
+- [outer-loop with AKS-IoT](./labs/advanced-labs/aks-iot/README.md): Deploy to an AKS-IoT cluster running on an Azure VM with Arc enabled GitOps
+- [outer-loop with AKS Lab](./labs/outer-loop-aks-azure.md): Deploy to an AKS cluster with Arc enabled GitOps
 
 ## Cleanup
 

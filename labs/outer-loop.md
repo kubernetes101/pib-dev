@@ -41,6 +41,7 @@ flt list
 ## Login to Azure
 
 - Login to Azure using `az login --use-device-code`
+  > Use `az login --use-device-code --tenant <tenant>` to specify a different tenant
   - If you have more than one Azure subscription, select the correct subscription
 
     ```bash
