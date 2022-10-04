@@ -42,7 +42,7 @@ flt targets deploy
 
 ### Check that your GitHub Action is running
 
-- <https://github.com/kubernetes101/pib-dev/actions>
+- <https://github.com/microsoft/Pilot-in-a-Box/actions>
   - your action should be queued or in-progress
 
 ### Check deployment
@@ -79,7 +79,7 @@ flt check app prometheus
 
     ```
 
-  - Once the [github action](https://github.com/kubernetes101/pib-dev/actions) is completed, force flux to sync:
+  - Once the [github action](https://github.com/microsoft/Pilot-in-a-Box/actions) is completed, force flux to sync:
 
      ```bash
 
@@ -133,7 +133,7 @@ flt check app prometheus
 
     ```
 
-  - Once the [github action](https://github.com/kubernetes101/pib-dev/actions) is completed, force flux to sync:
+  - Once the [github action](https://github.com/microsoft/Pilot-in-a-Box/actions) is completed, force flux to sync:
 
     ```bash
 
@@ -199,7 +199,7 @@ Flagger comes with a Grafana dashboard made for canary analysis. Install Grafana
 
   ```
 
-Once the [github action](https://github.com/kubernetes101/pib-dev/actions) is completed and flux sync is performed, navigate to grafana dashboard by appending `/grafana` to the host url in the browser tab.
+Once the [github action](https://github.com/microsoft/Pilot-in-a-Box/actions) is completed and flux sync is performed, navigate to grafana dashboard by appending `/grafana` to the host url in the browser tab.
 
 - Grafana login info
   - admin

@@ -49,7 +49,7 @@
 ## Update Git Repo
 
 - `flt create` generates GitOps files for the cluster
-- [CI-CD](https://github.com/kubernetes101/pib-dev/actions) generates the deployment manifests
+- [CI-CD](https://github.com/microsoft/Pilot-in-a-Box/actions) generates the deployment manifests
   - Wait for CI-CD to complete (usually about 30 seconds)
 
   ```bash
@@ -133,14 +133,21 @@ git pull
 cd $PIB_BASE
 git pull
 
-rm -rf clusters
-mkdir -p clusters
-touch clusters/.gitkeep
+# restore the clusters dir from main
+git restore -s main clusters
 git add .
 
+# clear imdb targets
 cd apps/imdb
 flt targets clear
+
+# clear dogs-cats targets
+cd ../dogs-cats
+flt targets clear
+
+# push changes
 flt targets deploy
+
 cd ../..
 
 ```

@@ -15,10 +15,6 @@ This repo walks through the rich end-to-end developer experience in a series of 
   - A [free Azure subscription](https://azure.microsoft.com/en-in/free/) will work for exploration
   - Some advanced scenarios also require AAD permissions
 
-- For pre-release access
-  - Reach out to the SolDevEx team
-  - We can provide Codespaces access during pre-release
-
 ## GitHub Codespaces
 
 > Codespaces allows you to develop in a secure, configurable, and dedicated development environment in the cloud that works how and where you want it to
@@ -82,7 +78,7 @@ GitHub Codespaces is also available in beta on a limited basis for GitHub Pro us
   ```
 
 - Your prompt should look like this
-  - /workspaces/pib-dev (mybranch) $
+  - /workspaces/Pilot-in-a-Box (mybranch) $
 
 ## inner-loop Labs
 
