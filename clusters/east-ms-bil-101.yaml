@@ -1,0 +1,10 @@
+name: east-ms-bil-101
+environment: dev
+region: east
+zone: east-ms
+district: east-ms-bil
+store: east-ms-bil-101
+domain: east-ms-bil-101
+ingressType: Http
+gitopsRepo: kubernetes101/pib-dev
+gitopsBranch: main

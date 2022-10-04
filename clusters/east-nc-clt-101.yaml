@@ -1,0 +1,10 @@
+name: east-nc-clt-101
+environment: dev
+region: east
+zone: east-nc
+district: east-nc-clt
+store: east-nc-clt-101
+domain: east-nc-clt-101
+ingressType: Http
+gitopsRepo: kubernetes101/pib-dev
+gitopsBranch: main

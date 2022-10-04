@@ -1,0 +1,10 @@
+name: central-tx-san-101
+environment: dev
+region: central
+zone: central-tx
+district: central-tx-san
+store: central-tx-san-101
+domain: central-tx-san-101
+ingressType: Http
+gitopsRepo: kubernetes101/pib-dev
+gitopsBranch: main
