@@ -56,7 +56,7 @@ export MY_BRANCH=$(echo $GITHUB_USER | tr '[:upper:]' '[:lower:]')
 
 ## Verifying the Clusters
 
-- Update Git Repo after [CI-CD](https://github.com/microsoft/Pilot-in-a-Box/actions) is complete (usually about 30 seconds)
+- Update Git Repo after [CI-CD](https://github.com/kubernetes101/pib-dev/actions) is complete (usually about 30 seconds)
 
   ```bash
 

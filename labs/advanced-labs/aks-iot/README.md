@@ -62,7 +62,7 @@
   # when prompted for git credentials, use your PAT to avoid 2FA setup / issues
 
   # start in the directory you copied the file share to
-  git clone https://github.com/microsoft/pilot-in-a-box
+  git clone https://github.com/kubernetes101/pib-dev
 
   # install the msi
   cd bin
