@@ -114,7 +114,7 @@ export MY_BRANCH=$(echo $GITHUB_USER | tr '[:upper:]' '[:lower:]')
     - Scope: `cluster`
   - Source:
     - Source kind: `Git Repository`
-    - Repository URL: `https://github.com/kubernetes101/pib-dev`
+    - Repository URL: `https://github.com/microsoft/Pilot-in-a-Box`
     - Reference type: `Branch`
     - Branch: value of MY_BRANCH
     - Repository Type:`Private`

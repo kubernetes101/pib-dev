@@ -76,7 +76,7 @@ flt create cluster -c $MY_CLUSTER
 ## Update Git Repo
 
 - `flt create` generates GitOps files for the cluster
-- [CI-CD](https://github.com/kubernetes101/pib-dev/actions) generates the deployment manifests
+- [CI-CD](https://github.com/microsoft/Pilot-in-a-Box/actions) generates the deployment manifests
   - Wait for CI-CD to complete (usually about 30 seconds)
 
 ```bash
@@ -187,7 +187,7 @@ flt targets deploy
 
 ## Wait for ci-cd to finish
 
-- Check [ci-cd status](https://github.com/kubernetes101/pib-dev/actions)
+- Check [ci-cd status](https://github.com/microsoft/Pilot-in-a-Box/actions)
 
 ## Update Cluster
 

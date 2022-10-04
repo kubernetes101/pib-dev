@@ -42,7 +42,7 @@ flt create cluster -c $MY_CLUSTER --arc
 
 ## Update Git Repo
 
-- [CI-CD](https://github.com/kubernetes101/pib-dev/actions) generates the deployment manifests
+- [CI-CD](https://github.com/microsoft/Pilot-in-a-Box/actions) generates the deployment manifests
   - Wait for CI-CD to complete (usually about 30 seconds)
 
 ```bash
@@ -86,7 +86,7 @@ watch flt check setup
 
   ```
 
-- Wait for [ci-cd](https://github.com/kubernetes101/pib-dev/actions) to finish
+- Wait for [ci-cd](https://github.com/microsoft/Pilot-in-a-Box/actions) to finish
 - Force cluster to sync
 
   ```bash

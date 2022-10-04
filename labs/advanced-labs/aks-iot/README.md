@@ -62,7 +62,7 @@
   # when prompted for git credentials, use your PAT to avoid 2FA setup / issues
 
   # start in the directory you copied the file share to
-  git clone https://github.com/kubernetes101/pib-dev
+  git clone https://github.com/microsoft/pilot-in-a-box
 
   # install the msi
   cd bin
@@ -75,7 +75,7 @@
 
   ```powershell
 
-  cd pib-dev
+  cd pilot-in-a-box
 
   cd
 
@@ -153,8 +153,8 @@ az connectedk8s connect --name $Env:PIB_CLUSTER --resource-group $Env:PIB_RESOUR
 ## Arc Enabled GitOps
 
 - Create GitOps config
-  - Copy `pib-dev/labs/advanced-labs/aks-iot/sample-cluster.txt`
-  - To `pib-dev/clusters/your-cluster.yaml`
+  - Copy `pilot-in-a-box/labs/advanced-labs/aks-iot/sample-cluster.txt`
+  - To `pilot-in-a-box/clusters/your-cluster.yaml`
   - Git add, commit, push
   - Wait for ci-cd to complete
 

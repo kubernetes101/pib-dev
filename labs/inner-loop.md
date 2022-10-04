@@ -132,6 +132,7 @@ kic deploy all
 kic pods
 
 # "watch" for the pods to get to Running
+# ctl-c to exit
 kic pods --watch
 
 ```
