@@ -1,0 +1,244 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "MyApp Web API",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/benchmark/{size}": {
+      "get": {
+        "tags": [ "Benchmark" ],
+        "summary": "Get benchmark data",
+        "description": "Returns a text/plain value of benchmark data",
+        "parameters": [
+          {
+            "name": "size",
+            "in": "path",
+            "description": "Size of Benchmark data.<br><br>`valid: 0 < size <= 1MB (1,048,576)`<br>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "16"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`string`",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "0123456789ABCDEF"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Size",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Invalid Size"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/secret/{key}": {
+      "get": {
+        "tags": [ "Secret" ],
+        "summary": "Get secret",
+        "description": "Returns a text/plain value of secret value",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "description": "Key name for secret (case sensitive)",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "Database"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`string`",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "myDatabaseName"
+              }
+            }
+          },
+          "404": {
+            "description": "Secret Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "secret not found"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/readyz": {
+      "get": {
+        "tags": [ "Readiness Check" ],
+        "summary": "Readiness Check",
+        "description": "Returns a text/plain Readiness status (ready, starting or fail)",
+        "responses": {
+          "200": {
+            "description": "`string` (ready, starting or fail)",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "ready"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/healthz": {
+      "get": {
+        "tags": [ "Health Check" ],
+        "summary": "Health Check (simple)",
+        "description": "Returns a text/plain health status (pass, warn or fail)",
+        "responses": {
+          "200": {
+            "description": "`string` (pass, warn or fail)",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "pass"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/healthz/ietf": {
+      "get": {
+        "tags": [ "Health Check" ],
+        "summary": "Health Check (IETF)",
+        "description": "Returns an `IetfHealthCheck` document from the Health Check",
+        "responses": {
+          "200": {
+            "description": "`IetfHealthCheck`",
+            "content": {
+              "application/health+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IetfHealthCheck"
+                },
+                "example": {
+                  "status": "pass",
+                  "serviceId": "MyApp",
+                  "description": "Test App Health Check",
+                  "instance": "0",
+                  "version": "1.0.0502.0026",
+                  "checks": {
+                    "getGenres:responseTime": {
+                      "status": "pass",
+                      "componentId": "getBenchmark",
+                      "componentType": "datastore",
+                      "observedUnit": "ms",
+                      "observedValue": 6.17,
+                      "targetValue": 400,
+                      "time": "2020-03-02T01:49:17Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "IetfHealthCheck": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "serviceId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "instance": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "checks": {
+            "type": "object",
+            "properties": {
+              "getBenchmark:responseTime": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string"
+                  },
+                  "componentId": {
+                    "type": "string"
+                  },
+                  "componentType": {
+                    "type": "string"
+                  },
+                  "observedUnit": {
+                    "type": "string"
+                  },
+                  "observedValue": {
+                    "type": "integer"
+                  },
+                  "targetValue": {
+                    "type": "integer"
+                  },
+                  "time": {
+                    "type": "string",
+                    "format": "datetime"
+                  },
+                  "message": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "affectedEndPoints": {
+                    "type": "array",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
