@@ -63,7 +63,7 @@ These values are located in the Grafana Cloud Portal.
       scrape_interval: 5s
       evaluation_interval: 5s
       external_labels:
-        origin_prometheus: {{gitops.cluster.store}}
+        origin_prometheus: {{gitops.cluster.name}}
 
 ```
 
