@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m0s
-  path: ./clusters/{{gitops.cluster.store}}/flux-system
+  path: ./clusters/{{gitops.cluster.name}}/flux-system
   prune: true
   sourceRef:
     kind: GitRepository

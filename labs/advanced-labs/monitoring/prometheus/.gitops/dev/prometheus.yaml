@@ -57,7 +57,7 @@ data:
       scrape_interval: 5s
       evaluation_interval: 5s
       external_labels:
-        origin_prometheus: {{gitops.cluster.store}}
+        origin_prometheus: {{gitops.cluster.name}}
     remote_write:
     - url: {{gitops.prometheusURL}}
       basic_auth:
