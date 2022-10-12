@@ -14,10 +14,10 @@ echo "installing cli"
 mkdir -p "$HOME/bin"
 
 # use latest release
-tag=$(curl -s https://api.github.com/repos/retaildevcrews/pib-dev/releases/latest | grep tag_name | cut -d '"' -f4)
+tag=$(curl -s https://api.github.com/repos/kubernetes101/pib-dev/releases/latest | grep tag_name | cut -d '"' -f4)
 
 cd "$HOME/bin" || exit
-wget -O vm-kic.tar.gz "https://github.com/retaildevcrews/pib-dev/releases/download/$tag/vm-kic-$tag-linux-amd64.tar.gz"
+wget -O vm-kic.tar.gz "https://github.com/kubernetes101/pib-dev/releases/download/$tag/vm-kic-$tag-linux-amd64.tar.gz"
 tar -xvzf vm-kic.tar.gz
 rm vm-kic.tar.gz
 cd "$OLDPWD" || exit
