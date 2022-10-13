@@ -106,29 +106,6 @@ kic sync
       - We generally create a kustomization per namespace for production
         - Our GitOps Automation (outer-loop) automatically creates a kustomization per namespace
 - View the flux setup script by running `kic cluster flux-install --show`
-  - Do NOT run this fence!
-
-    ```bash
-
-    # create the namespace
-    kubectl apply -f namespace.yaml
-
-    # create the flux secrets from the GitHub PAT
-    flux create secret git flux-system -n flux-system --url "$PIB_FULL_REPO" -u gitops -p "$PIB_PAT"
-
-    # deploy Flux
-    kubectl apply -f controllers.yaml
-
-    # create a "source" that points to this repo / branch
-    kubectl apply -f source.yaml
-
-    # create a "kustomization"
-    # this kustomization will synchronize all files in the flux directory
-    # including kustomization-app.yaml
-    #           kustomization-monitoring.yaml
-    kubectl apply -f kustomization-flux.yaml
-
-    ```
 
 ## Testing
 

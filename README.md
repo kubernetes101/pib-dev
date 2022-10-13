@@ -77,31 +77,31 @@ GitHub Codespaces is also available in beta on a limited basis for GitHub Pro us
 
   ```
 
-- Your prompt should look like this
+- Your prompt should end like this
   - /workspaces/Pilot-in-a-Box (mybranch) $
 
 ## inner-loop Labs
 
-- [Lab 1](./labs/inner-loop.md): Create, build, deploy, and test a new dotnet application and observability stack on your local cluster
-- [Lab 2](./labs/inner-loop-flux.md): Configure flux to automate the deployment process from Lab 1
+- [Lab 1](./labs/inner-loop.md#pib-inner-loop): Create, build, deploy, and test a new dotnet application and observability stack on your local cluster
+- [Lab 2](./labs/inner-loop-flux.md#create-a-new-cluster): Configure flux to automate the deployment process from Lab 1
 
 ## outer-loop Labs
 
-- [Lab 1](./labs/outer-loop.md): Create a dev/test cluster and manage application deployments on the cluster
-- [Lab 2](./labs/outer-loop-multi-cluster.md): Manage application deployments on a fleet of multiple clusters
-- [Lab 3](./labs/outer-loop-ring-deployment.md): Configure ring based deployments
+- [Lab 1](./labs/outer-loop.md#pib-outer-loop): Create a dev/test cluster and manage application deployments on the cluster
+- [Lab 2](./labs/outer-loop-multi-cluster.md#pib-outer-loop-multi-cluster): Manage application deployments on a fleet of multiple clusters
+- [Lab 3](./labs/outer-loop-ring-deployment.md#pib-outer-loop-with-ring-based-deployment): Configure ring based deployments
 
-- [Lab 4](./labs/azure-codespaces-setup.md): Set up Azure subscription and Codespaces for advanced configuration
+- [Lab 4](./labs/azure-codespaces-setup.md#azure-subscription-and-codespaces-setup): Set up Azure subscription and Codespaces for advanced configuration
   - This is a prerequisite for the Advanced Labs
 
 ## Advanced Labs
 
-- [Arc enabled GitOps Lab](./labs/outer-loop-arc-gitops.md): Deploy to dev cluster running on an Azure VM with Arc enabled GitOps
-- [Canary Deployment Lab](./labs/advanced-labs/canary/README.md): Use Flagger to experiment with canary deployments
-- [Vision on Edge (VoE) Lab](./labs/advanced-labs/voe/README.md): Deploy a more complex app (VoE) to a fleet
-- [Centralized Observability Lab](./labs/advanced-labs/monitoring/README.md): Deploy a centralized observability system with Fluent Bit, Prometheus, and Grafana to monitor fleet application deployments
-- [outer-loop with AKS-IoT](./labs/advanced-labs/aks-iot/README.md): Deploy to an AKS-IoT cluster running on an Azure VM with Arc enabled GitOps
-- [outer-loop with AKS Lab](./labs/outer-loop-aks-azure.md): Deploy to an AKS cluster with Arc enabled GitOps
+- [Arc enabled GitOps Lab](./labs/outer-loop-arc-gitops.md#pib-outer-loop-with-arc-enabled-gitops): Deploy to dev cluster running on an Azure VM with Arc enabled GitOps
+- [Canary Deployment Lab](./labs/advanced-labs/canary/README.md#pib-automated-canary-deployment-using-flagger): Use Flagger to experiment with canary deployments
+- [Vision on Edge (VoE) Lab](./labs/advanced-labs/voe/README.md#pib-outer-loop-vision-on-edge-voe): Deploy a more complex app (VoE) to a fleet
+- [Centralized Observability Lab](./labs/advanced-labs/monitoring/README.md#pib-centralized-monitoring): Deploy a centralized observability system with Fluent Bit, Prometheus, and Grafana to monitor fleet application deployments
+- [outer-loop with AKS-IoT](./labs/advanced-labs/aks-iot/README.md#pib-outer-loop-to-aks-iot): Deploy to an AKS-IoT cluster running on an Azure VM with Arc enabled GitOps
+- [outer-loop with AKS Lab](./labs/outer-loop-aks-azure.md#pib-outer-loop-to-aks-on-azure): Deploy to an AKS cluster with Arc enabled GitOps
 
 ## Cleanup
 
