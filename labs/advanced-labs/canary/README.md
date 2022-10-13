@@ -1,4 +1,4 @@
-# Automated Canary deployment using Flagger
+# PiB Automated Canary deployment using Flagger
 
 ## Introduction
 

@@ -11,6 +11,12 @@
 
 ![images](./images/inner-loop..drawio.png)
 
+## Verify Your Working Branch
+
+- Your prompt should end like this
+  - /workspaces/Pilot-in-a-Box (mybranch) $
+- If your prompt ends in `(main)` create a working branch per the instructions in the [readme](/README.md#create-a-working-branch)
+
 ## Verify k3d cluster
 
 > The K8s cluster is running `in` your Codespace - no need for an external cluster
@@ -177,10 +183,15 @@ kic check grafana
 
 - Run a 5 second load test
   - Default `--duration` is 30 sec
+- Note that `kic test load` does not display a summary as it's designed to run headless
+  - We will see the results in our `Grafana Dashboard` later in the workshop
 
 ```bash
 
 kic test load --duration 5 --verbose
+
+# you can also run load.json one time
+kic test integration -f load.json
 
 ```
 
@@ -285,6 +296,13 @@ for i in {1..10}; kic test integration;
 - Fluent Bit can be configured to forward to different services including Grafana Cloud or Azure Log Analytics
 
 - Start `k9s` from the Codespace terminal
+
+  ```bash
+
+  k9s
+
+  ```
+
 - Press `0` to show all `namespaces`
 - Select `fluentbit` pod and press `enter`
 - Press `enter` again to see the logs
