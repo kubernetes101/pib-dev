@@ -183,10 +183,15 @@ kic check grafana
 
 - Run a 5 second load test
   - Default `--duration` is 30 sec
+- Note that `kic test load` does not display a summary as it's designed to run headless
+  - We will see the results in our `Grafana Dashboard` later in the workshop
 
 ```bash
 
 kic test load --duration 5 --verbose
+
+# you can also run load.json one time
+kic test integration -f load.json
 
 ```
 
@@ -295,7 +300,7 @@ for i in {1..10}; kic test integration;
   ```bash
 
   k9s
-  
+
   ```
 
 - Press `0` to show all `namespaces`
