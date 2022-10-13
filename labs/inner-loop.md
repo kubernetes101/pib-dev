@@ -291,6 +291,13 @@ for i in {1..10}; kic test integration;
 - Fluent Bit can be configured to forward to different services including Grafana Cloud or Azure Log Analytics
 
 - Start `k9s` from the Codespace terminal
+
+  ```bash
+
+  k9s
+  
+  ```
+
 - Press `0` to show all `namespaces`
 - Select `fluentbit` pod and press `enter`
 - Press `enter` again to see the logs
