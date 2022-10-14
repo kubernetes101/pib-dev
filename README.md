@@ -58,6 +58,17 @@ GitHub Codespaces is also available in beta on a limited basis for GitHub Pro us
   - Click `Create Codespace on main`
 - After about 1 minute, you will have a GitHub Codespace running with a complete Kubernetes Developer Experience!
 
+## Note on environment variables
+
+- Many of these tutorials make use of environment variables, using the export functionality. If you wish, you can also edit the Z shell preferences file to persist exported environment variables across terminal sessions. Just add the same "export FOO=BAR" lines to your .zshrc file.
+
+```bash
+
+nano ~/.zshrc
+
+```
+
+
 ## Create a working branch
 
 - Because the main branch has a branch protection rule, you need to create a working branch
