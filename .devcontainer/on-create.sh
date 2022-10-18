@@ -44,6 +44,7 @@ mkdir -p "$HOME/.oh-my-zsh/completions"
     echo ""
 
     echo "export MY_BRANCH=\$(echo \$GITHUB_USER | tr '[:upper:]' '[:lower:]')"
+    echo ""
 
     echo "compinit"
 } >> "$HOME/.zshrc"

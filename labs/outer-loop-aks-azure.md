@@ -4,7 +4,10 @@
 
 ```bash
 
-export MY_BRANCH=$(echo $GITHUB_USER | tr '[:upper:]' '[:lower:]')
+# by default, MY_BRANCH is set to your lower case GitHub User Name
+# the variable is used to uniquely name your clusters
+# the value can be overwritten if needed
+echo $MY_BRANCH
 
 ```
 
