@@ -76,8 +76,8 @@ nano ~/.zshrc
 
   ```bash
 
-  # use lower case GitHub User Name as branch name
-  export MY_BRANCH=$(echo $GITHUB_USER | tr '[:upper:]' '[:lower:]')
+  # by default, MY_BRANCH is set to your lower case GitHub User Name
+  # the value can be overwritten if needed
   echo $MY_BRANCH
 
   # create a branch

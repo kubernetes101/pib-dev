@@ -43,6 +43,9 @@ mkdir -p "$HOME/.oh-my-zsh/completions"
     echo "export PAT=\$GITHUB_TOKEN"
     echo ""
 
+    echo "export MY_BRANCH=\$(echo \$GITHUB_USER | tr '[:upper:]' '[:lower:]')"
+    echo ""
+
     echo "compinit"
 } >> "$HOME/.zshrc"
 
