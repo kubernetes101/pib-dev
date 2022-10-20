@@ -8,3 +8,4 @@ domain: west-mt-bose-101
 ingressType: Http
 gitopsRepo: kubernetes101/pib-dev
 gitopsBranch: kev-ms
+ring: 1
