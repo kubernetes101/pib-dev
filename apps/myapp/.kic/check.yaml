@@ -1,0 +1,19 @@
+###
+# check commands
+###
+
+commands:
+- name: check
+  short: Check local apps
+  scriptCommands:
+    - name: myapp
+      short: Check MyApp
+      path: check/app
+
+    - name: webv
+      short: Check WebValidate
+      path: check/webv
+
+    - name: flux
+      short: Check Flux service
+      path: check/flux
