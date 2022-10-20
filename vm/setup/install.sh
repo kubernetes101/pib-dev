@@ -26,7 +26,7 @@ echo "$(date +'%Y-%m-%d %H:%M:%S')  installing libs" >> "$HOME/status"
 sudo apt-get install -y net-tools software-properties-common libssl-dev libffi-dev python-dev build-essential lsb-release gnupg-agent
 
 echo "$(date +'%Y-%m-%d %H:%M:%S')  installing utils" >> "$HOME/status"
-sudo apt-get install -y curl git wget nano jq zip unzip httpie
+sudo apt-get install -y zsh curl git wget nano jq zip unzip httpie
 sudo apt-get install -y dnsutils coreutils gnupg2 make bash-completion gettext iputils-ping
 
 # add Docker source
@@ -73,10 +73,7 @@ wget "https://github.com/derailed/k9s/releases/download/${VERSION}/k9s_Linux_x86
 sudo tar -zxvf k9s_Linux_x86_64.tar.gz -C /usr/local/bin
 rm -f k9s_Linux_x86_64.tar.gz
 
-# install zsh
-sudo snap install zsh
-git clone https://github.com/ohmyzsh/oh-my-zsh .oh-my-zsh
-
+mkdir -p "$HOME/.oh-my-zsh/completions"
 flux completion zsh > "$HOME/.oh-my-zsh/completions/_flux"
 k3d completion zsh > "$HOME/.oh-my-zsh/completions/_k3d"
 kic completion zsh > "$HOME/.oh-my-zsh/completions/_kic"
@@ -90,32 +87,22 @@ kubectl completion zsh > "$HOME/.oh-my-zsh/completions/_kubectl"
   echo ""
   echo "alias k='kubectl'"
   echo "alias kaf='kubectl apply -f'"
-  echo "alias kdelf='kubectl delete -f'"
-  echo "alias kj='kubectl exec -it jumpbox -- bash -l'"
-  echo "alias kje='kubectl exec -it jumpbox -- '"
-  echo ""
-  echo "source <(flux completion bash)"
-  echo "source <(k3d completion bash)"
-  echo "source <(kic completion bash)"
-  echo "source <(kubectl completion bash)"
-
-  echo ""
-  echo 'complete -F __start_kubectl k'
-} >> "$HOME/pib.bashrc"
-
-# update pib.bashrc
-{
-  echo "export PATH=\$PATH:\$HOME/bin"
-  echo ""
-  echo "shopt -s expand_aliases"
-  echo ""
-  echo "alias k='kubectl'"
-  echo "alias kaf='kubectl apply -f'"
+  echo "alias kak='kubectl apply -k'"
   echo "alias kdelf='kubectl delete -f'"
   echo "alias kj='kubectl exec -it jumpbox -- bash -l'"
   echo "alias kje='kubectl exec -it jumpbox -- '"
   echo ""
 } >> "$HOME/pib.zshrc"
+
+# configure git CLI
+git config --global user.name pib-gitops
+git config --global user.email pib-gitops@outlook.com
+git config --global core.whitespace blank-at-eol,blank-at-eof,space-before-tab
+git config --global pull.rebase false
+git config --global init.defaultbranch main
+git config --global fetch.prune true
+git config --global core.pager more
+git config --global credential.helper store
 
 # upgrade Ubuntu
 echo "$(date +'%Y-%m-%d %H:%M:%S')  upgrading" >> "$HOME/status"
