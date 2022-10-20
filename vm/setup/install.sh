@@ -19,14 +19,15 @@ cd "$HOME" || exit
 sudo sed -i "s|/bin/bash|/bin/zsh|g" /etc/passwd
 
 # install oh-my-zsh
-git clone https://github.com/ohmyzsh/oh-my-zsh .oh-my-zsh
-cp ".oh-my-zsh/templates/zshrc.zsh-template" .zshrc
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  git clone https://github.com/ohmyzsh/oh-my-zsh .oh-my-zsh
+  cp ".oh-my-zsh/templates/zshrc.zsh-template" .zshrc
 
-{
-  echo ""
-  echo "source \$HOME/pib.zshrc"
-} >> ".zshrc"
-
+  {
+    echo ""
+    echo "source \$HOME/pib.zshrc"
+  } >> ".zshrc"
+fi
 
 # use latest release
 tag=$(curl -s https://api.github.com/repos/kubernetes101/pib-dev/releases/latest | grep tag_name | cut -d '"' -f4)
