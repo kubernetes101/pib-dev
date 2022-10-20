@@ -105,11 +105,12 @@ rm -f k9s_Linux_x86_64.tar.gz
 mkdir -p "$HOME/.oh-my-zsh/completions"
 flux completion zsh > "$HOME/.oh-my-zsh/completions/_flux"
 k3d completion zsh > "$HOME/.oh-my-zsh/completions/_k3d"
-kic completion zsh > "$HOME/.oh-my-zsh/completions/_kic"
 kubectl completion zsh > "$HOME/.oh-my-zsh/completions/_kubectl"
 
+"$HOME/bin/kic" completion zsh > "$HOME/.oh-my-zsh/completions/_kic"
+
 if [ "$PIB_CLI" = "inner-loop" ]; then
-  flt completion zsh > "$HOME/.oh-my-zsh/completions/_flt"
+  "$HOME/bin/flt" completion zsh > "$HOME/.oh-my-zsh/completions/_flt"
 fi
 
 # update pib.zshrc
