@@ -13,6 +13,18 @@ echo "installing cli"
 
 mkdir -p "$HOME/bin"
 
+cd "$HOME" || exit
+
+# install oh-my-zsh
+git clone https://github.com/ohmyzsh/oh-my-zsh .oh-my-zsh
+cp ".oh-my-zsh/templates/zshrc.zsh-template" .zshrc
+
+{
+  echo ""
+  echo "source \$HOME/pib.zshrc"
+} >> ".zshrc"
+
+
 # use latest release
 tag=$(curl -s https://api.github.com/repos/kubernetes101/pib-dev/releases/latest | grep tag_name | cut -d '"' -f4)
 
@@ -84,8 +96,6 @@ kubectl completion zsh > "$HOME/.oh-my-zsh/completions/_kubectl"
   echo ""
   echo "export PATH=\$PATH:\$HOME/bin"
   echo ""
-  echo "shopt -s expand_aliases"
-  echo ""
   echo "alias k='kubectl'"
   echo "alias kaf='kubectl apply -f'"
   echo "alias kak='kubectl apply -k'"
@@ -93,6 +103,7 @@ kubectl completion zsh > "$HOME/.oh-my-zsh/completions/_kubectl"
   echo "alias kj='kubectl exec -it jumpbox -- bash -l'"
   echo "alias kje='kubectl exec -it jumpbox -- '"
   echo ""
+  echo "compinit"
 } >> "$HOME/pib.zshrc"
 
 # update pib.bashrc
@@ -100,14 +111,14 @@ kubectl completion zsh > "$HOME/.oh-my-zsh/completions/_kubectl"
   echo ""
   echo "export PATH=\$PATH:\$HOME/bin"
   echo ""
-  echo "shopt -s expand_aliases"
-  echo ""
   echo "alias k='kubectl'"
   echo "alias kaf='kubectl apply -f'"
   echo "alias kak='kubectl apply -k'"
   echo "alias kdelf='kubectl delete -f'"
   echo "alias kj='kubectl exec -it jumpbox -- bash -l'"
   echo "alias kje='kubectl exec -it jumpbox -- '"
+  echo ""
+  echo "shopt -s expand_aliases"
   echo ""
 } >> "$HOME/pib.bashrc"
 
