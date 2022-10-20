@@ -1,0 +1,10 @@
+name: bartr-devbox
+environment: dev
+region: bartr
+zone: bartr-devbox
+district: bartr-devbox
+store: bartr-devbox
+domain: bartr-devbox.cseretail.com
+ingressType: Https
+gitopsRepo: kubernetes101/pib-dev
+gitopsBranch: bartr-dev-box
