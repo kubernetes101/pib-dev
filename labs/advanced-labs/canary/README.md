@@ -157,11 +157,11 @@ flt check app prometheus
 
     ```
 
-- Observe canary promotion in k9s:
+- Observe canary promotion in K9s:
 
   ```bash
 
-  # start k9s for the cluster
+  # start K9s for the cluster
   flt ssh $MY_CLUSTER
   k9s <enter>
 

@@ -12,28 +12,33 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-- [Code of Conduct](#coc)
-- [Issues and Bugs](#issue)
-- [Feature Requests](#feature)
-- [Submission Guidelines](#submit)
+## Table of Contents
+
+- [Code of Conduct](#code-of-conduct)
+- [Issues and Bugs](#issue-and-bugs)
+- [Feature Requests](#feature-requests)
+- [Submission Guidelines](#submission-guidelines)
 
 ## Code of Conduct
 
 Help us keep this project open and inclusive. Please read and follow our [Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+Visit our [Code of Conduct](CODE_OF_CONDUCT.md) doc as well.
 
-## Found an Issue
+## Issue and Bugs
 
 If you find a bug in the source code or a mistake in the documentation, you can help us by
-[submitting an issue](#submit-issue) to the GitHub Repository. Even better, you can
-[submit a Pull Request](#submit-pr) with a fix.
+[submitting an issue](#submitting-an-issue) to the GitHub Repository. Even better, you can
+[submit a Pull Request](#submitting-a-pull-request-pr) with a fix.
 
-## Want a Feature
+## Feature Requests
 
-You can *request* a new feature by [submitting an issue](#submit-issue) to the GitHub
-Repository. If you would like to *implement* a new feature, please submit an issue with
+You can *request* a new feature by [submitting an issue](#submitting-an-issue) to the GitHub
+Repository.
+
+- **Bigger Features** - If you would like to *implement* a new feature, please submit an issue with
 a proposal for your work first, to be sure that we can use it.
 
-- **Small Features** can be crafted and directly [submitted as a Pull Request](#submit-pr).
+- **Small Features** can be crafted and directly [submitted as a Pull Request](#submitting-a-pull-request-pr).
 
 ## Submission Guidelines
 
@@ -63,12 +68,10 @@ Before you submit your Pull Request (PR) consider the following guidelines:
 
 - Search the repository `https://github.com/[organization-name]/[repository-name]/pulls` for an open or closed PR
   that relates to your submission. You don't want to duplicate effort.
-
-- Make your changes in a new git fork:
-
-- Commit your changes using a descriptive commit message
-- Push your fork to GitHub:
-- In GitHub, create a pull request
+- Make your changes in a new git fork.
+- Commit your changes using a descriptive commit message.
+- Push your fork to GitHub.
+- In GitHub, create a pull request against `main` from your fork.
 - If we suggest changes then:
   - Make the required updates.
   - Rebase your fork and force push to your GitHub repository (this will update your Pull Request):

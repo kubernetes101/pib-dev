@@ -69,7 +69,7 @@ az cognitiveservices account create --kind CognitiveServices --name $VOE_AZ_COG_
 ### Update fleet creation script
 
 - Add the following lines to vm/setup/pre-flux.sh and replace the values in [] with the names of the resources created above.
-  - This will run on the fleet vm/s during setup and will create the voe namespace and required k8s secret.
+  - This will run on the fleet vm/s during setup and will create the `voe` namespace and required K8s secret.
   - The VM uses Managed Identity to retrieve the connection string values from the IoT Hub.
 
 - Do NOT run this fence!
@@ -111,7 +111,7 @@ git push
 ```bash
 
 # before creating the cluster, make sure PIB_MI is set
-# MI is required for the voe k8s secrets to be created properly
+# MI is required for the voe K8s secrets to be created properly
 flt env PIB_MI
 
 # set MY_CLUSTER

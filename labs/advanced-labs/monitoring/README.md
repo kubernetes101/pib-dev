@@ -25,7 +25,7 @@
 ## Key Vault Secrets
 
 - A PAT is required to forward logs and metrics to Grafana Cloud.
-- The PAT is stored as a k8s secret on the fleet clusters.
+- The PAT is stored as a K8s secret on the fleet clusters.
 - Before creating the secrets, a Key Vault and MI (with access to the Key Vault) must be configured. See [setup docs](/labs/azure-codespaces-setup.md) for instructions.
 
 ### Fluent Bit Secret
