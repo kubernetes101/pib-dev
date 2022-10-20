@@ -43,8 +43,6 @@ if [ "$PIB_CLI" = "inner-loop" ]; then
   wget -O flt.tar.gz "https://github.com/kubernetes101/pib-dev/releases/download/$tag/flt-$tag-linux-amd64.tar.gz"
   tar -xvzf flt.tar.gz
   rm flt.tar.gz
-
-  flt completion zsh > "$HOME/.oh-my-zsh/completions/_flt"
 else
   wget -O vm-kic.tar.gz "https://github.com/kubernetes101/pib-dev/releases/download/$tag/vm-kic-$tag-linux-amd64.tar.gz"
   tar -xvzf vm-kic.tar.gz
@@ -109,6 +107,10 @@ flux completion zsh > "$HOME/.oh-my-zsh/completions/_flux"
 k3d completion zsh > "$HOME/.oh-my-zsh/completions/_k3d"
 kic completion zsh > "$HOME/.oh-my-zsh/completions/_kic"
 kubectl completion zsh > "$HOME/.oh-my-zsh/completions/_kubectl"
+
+if [ "$PIB_CLI" = "inner-loop" ]; then
+  flt completion zsh > "$HOME/.oh-my-zsh/completions/_flt"
+fi
 
 # update pib.zshrc
 {
