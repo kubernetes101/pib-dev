@@ -2,6 +2,11 @@
 
 echo "$(date +'%Y-%m-%d %H:%M:%S')  flux bootstrap start" >> "$HOME/status"
 
+# inner-loop
+if [ "$PIB_CLI" = "inner-loop" ]; then
+  exit 0
+fi
+
 # setup Arc enabled flux
 if [ "$PIB_ARC_ENABLED" = "true" ]
 then

@@ -32,9 +32,25 @@ cp ".oh-my-zsh/templates/zshrc.zsh-template" .zshrc
 tag=$(curl -s https://api.github.com/repos/kubernetes101/pib-dev/releases/latest | grep tag_name | cut -d '"' -f4)
 
 cd "$HOME/bin" || exit
-wget -O vm-kic.tar.gz "https://github.com/kubernetes101/pib-dev/releases/download/$tag/vm-kic-$tag-linux-amd64.tar.gz"
-tar -xvzf vm-kic.tar.gz
-rm vm-kic.tar.gz
+
+if [ "$PIB_CLI" = "inner-loop" ]; then
+  # install kic
+  wget -O kic.tar.gz "https://github.com/kubernetes101/pib-dev/releases/download/$tag/kic-$tag-linux-amd64.tar.gz"
+  tar -xvzf kic.tar.gz
+  rm kic.tar.gz
+
+  # install flt
+  wget -O flt.tar.gz "https://github.com/kubernetes101/pib-dev/releases/download/$tag/flt-$tag-linux-amd64.tar.gz"
+  tar -xvzf flt.tar.gz
+  rm flt.tar.gz
+
+  flt completion zsh > "$HOME/.oh-my-zsh/completions/_flt"
+else
+  wget -O vm-kic.tar.gz "https://github.com/kubernetes101/pib-dev/releases/download/$tag/vm-kic-$tag-linux-amd64.tar.gz"
+  tar -xvzf vm-kic.tar.gz
+  rm vm-kic.tar.gz
+fi
+
 cd "$OLDPWD" || exit
 
 echo "$(date +'%Y-%m-%d %H:%M:%S')  installing libs" >> "$HOME/status"
