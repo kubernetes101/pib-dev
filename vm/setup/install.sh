@@ -79,8 +79,9 @@ k3d completion zsh > "$HOME/.oh-my-zsh/completions/_k3d"
 kic completion zsh > "$HOME/.oh-my-zsh/completions/_kic"
 kubectl completion zsh > "$HOME/.oh-my-zsh/completions/_kubectl"
 
-# update pib.bashrc
+# update pib.zshrc
 {
+  echo ""
   echo "export PATH=\$PATH:\$HOME/bin"
   echo ""
   echo "shopt -s expand_aliases"
@@ -93,6 +94,22 @@ kubectl completion zsh > "$HOME/.oh-my-zsh/completions/_kubectl"
   echo "alias kje='kubectl exec -it jumpbox -- '"
   echo ""
 } >> "$HOME/pib.zshrc"
+
+# update pib.bashrc
+{
+  echo ""
+  echo "export PATH=\$PATH:\$HOME/bin"
+  echo ""
+  echo "shopt -s expand_aliases"
+  echo ""
+  echo "alias k='kubectl'"
+  echo "alias kaf='kubectl apply -f'"
+  echo "alias kak='kubectl apply -k'"
+  echo "alias kdelf='kubectl delete -f'"
+  echo "alias kj='kubectl exec -it jumpbox -- bash -l'"
+  echo "alias kje='kubectl exec -it jumpbox -- '"
+  echo ""
+} >> "$HOME/pib.bashrc"
 
 # configure git CLI
 git config --global user.name pib-gitops
