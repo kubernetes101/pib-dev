@@ -6,5 +6,6 @@ namespace: imdb
 nodePort: 30080
 port: 8080
 targets:
+    - region:central
     - ring:1
 template: pib-service
