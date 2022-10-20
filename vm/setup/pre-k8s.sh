@@ -7,7 +7,7 @@
 
 echo "$(date +'%Y-%m-%d %H:%M:%S')  pre-k3d start" >> "$HOME/status"
 
-if docker network ls | grep k3d; then
+if ! docker network ls | grep k3d; then
   echo "$(date +'%Y-%m-%d %H:%M:%S')  creating registry" >> "$HOME/status"
   # create local registry
   docker network create k3d
