@@ -47,7 +47,7 @@ mkdir -p "$HOME/.oh-my-zsh/completions"
     echo ""
 
     echo "compinit"
-} >> "$HOME/.zshrc"
+} >> "$HOME/pib.zshrc"
 
 {
     echo "defaultIPs: $PWD/ips"
