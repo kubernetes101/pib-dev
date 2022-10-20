@@ -1,0 +1,10 @@
+name: west-or-pdx-101
+environment: dev
+region: west
+zone: west-or
+district: west-or-pdx
+store: west-or-pdx-101
+domain: west-or-pdx-101
+ingressType: Http
+gitopsRepo: kubernetes101/pib-dev
+gitopsBranch: kev-ms

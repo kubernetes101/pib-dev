@@ -1,0 +1,10 @@
+name: east-ga-atl-101
+environment: dev
+region: east
+zone: east-ga
+district: east-ga-atl
+store: east-ga-atl-101
+domain: east-ga-atl-101
+ingressType: Http
+gitopsRepo: kubernetes101/pib-dev
+gitopsBranch: kev-ms

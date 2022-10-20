@@ -1,0 +1,10 @@
+name: west-ca-sd-101
+environment: dev
+region: west
+zone: west-ca
+district: west-ca-sd
+store: west-ca-sd-101
+domain: west-ca-sd-101
+ingressType: Http
+gitopsRepo: kubernetes101/pib-dev
+gitopsBranch: kev-ms
