@@ -50,6 +50,11 @@ mkdir -p "$HOME/.oh-my-zsh/completions"
 } >> "$HOME/pib.zshrc"
 
 {
+    echo ""
+    echo "source $HOME/pib.zshrc"
+} >> "$HOME/.zshrc"
+
+{
     echo "defaultIPs: $PWD/ips"
     echo "reservedClusterPrefixes:"
     echo "  - corp-monitoring"
