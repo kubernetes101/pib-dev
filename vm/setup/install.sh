@@ -73,6 +73,15 @@ wget "https://github.com/derailed/k9s/releases/download/${VERSION}/k9s_Linux_x86
 sudo tar -zxvf k9s_Linux_x86_64.tar.gz -C /usr/local/bin
 rm -f k9s_Linux_x86_64.tar.gz
 
+# install zsh
+sudo snap install zsh
+git clone https://github.com/ohmyzsh/oh-my-zsh .oh-my-zsh
+
+flux completion zsh > "$HOME/.oh-my-zsh/completions/_flux"
+k3d completion zsh > "$HOME/.oh-my-zsh/completions/_k3d"
+kic completion zsh > "$HOME/.oh-my-zsh/completions/_kic"
+kubectl completion zsh > "$HOME/.oh-my-zsh/completions/_kubectl"
+
 # update pib.bashrc
 {
   echo "export PATH=\$PATH:\$HOME/bin"
@@ -93,6 +102,20 @@ rm -f k9s_Linux_x86_64.tar.gz
   echo ""
   echo 'complete -F __start_kubectl k'
 } >> "$HOME/pib.bashrc"
+
+# update pib.bashrc
+{
+  echo "export PATH=\$PATH:\$HOME/bin"
+  echo ""
+  echo "shopt -s expand_aliases"
+  echo ""
+  echo "alias k='kubectl'"
+  echo "alias kaf='kubectl apply -f'"
+  echo "alias kdelf='kubectl delete -f'"
+  echo "alias kj='kubectl exec -it jumpbox -- bash -l'"
+  echo "alias kje='kubectl exec -it jumpbox -- '"
+  echo ""
+} >> "$HOME/pib.zshrc"
 
 # upgrade Ubuntu
 echo "$(date +'%Y-%m-%d %H:%M:%S')  upgrading" >> "$HOME/status"
