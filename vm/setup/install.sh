@@ -15,6 +15,9 @@ mkdir -p "$HOME/bin"
 
 cd "$HOME" || exit
 
+# set zsh as default shell
+sudo sed -i "s|/bin/bash|/bin/zsh|g" /etc/passwd
+
 # install oh-my-zsh
 git clone https://github.com/ohmyzsh/oh-my-zsh .oh-my-zsh
 cp ".oh-my-zsh/templates/zshrc.zsh-template" .zshrc
