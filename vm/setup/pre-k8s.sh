@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # this runs before k8s-setup.sh
 

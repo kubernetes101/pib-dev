@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # this script installs az cli and logs into Azure
 

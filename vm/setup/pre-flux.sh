@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # this runs before flux-setup.sh
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 if [ "$PIB_SSL" = "" ]
 then

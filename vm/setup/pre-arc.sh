@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # this runs before arc-setup.sh
 

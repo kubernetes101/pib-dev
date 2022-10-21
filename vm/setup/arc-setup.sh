@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/zsh
 
 # change to this directory
 cd "$(dirname "${BASH_SOURCE[0]}")" || exit

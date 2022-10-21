@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # this script installs most of the components
 
@@ -127,23 +127,11 @@ fi
   echo "alias kje='kubectl exec -it jumpbox -- '"
 } >> "$HOME/.zshenv"
 
-# update .bashenv
-{
-  echo ""
-  echo "export PATH=\$PATH:\$HOME/bin"
-  echo ""
-  echo "alias k='kubectl'"
-  echo "alias kaf='kubectl apply -f'"
-  echo "alias kak='kubectl apply -k'"
-  echo "alias kdelf='kubectl delete -f'"
-  echo "alias kj='kubectl exec -it jumpbox -- bash -l'"
-  echo "alias kje='kubectl exec -it jumpbox -- '"
-  echo ""
-} >> "$HOME/.bashenv"
-
 {
   echo ""
   echo "shopt -s expand_aliases"
+  echo ""
+  echo "source \$HOME/.zshenv"
 } > "$HOME/.bashrc"
 
 # configure git CLI

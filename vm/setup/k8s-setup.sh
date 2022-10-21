@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # change to this directory
 cd "$(dirname "${BASH_SOURCE[0]}")" || exit
@@ -7,7 +7,7 @@ echo "$(date +'%Y-%m-%d %H:%M:%S')  k3d-setup start" >> "$HOME/status"
 
 if [ "$PIB_CLI" = "inner-loop" ]; then
   "$HOME/bin/kic" cluster create
-  
+
   echo "$(date +'%Y-%m-%d %H:%M:%S')  k3d-setup complete" >> "$HOME/status"
 
   exit 0
