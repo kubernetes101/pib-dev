@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 if [ "$PIB_SSL" = "" ]; then
     res=$(curl -s http://localhost/heartbeat/17)

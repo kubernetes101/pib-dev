@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 #shellcheck disable=2028
 echo "\ncloud-init log\n$(sudo tail /var/log/cloud-init-output.log)\n\nstatus log\n$(tail status)"

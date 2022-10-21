@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/zsh
 
 if [ "$PIB_ARC_ENABLED" != "true" ]; then
     echo "cluster is not Arc enabled"
