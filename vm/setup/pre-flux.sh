@@ -2,6 +2,10 @@
 
 # this runs before flux-setup.sh
 
+if [ "$PIB_IS_INNER_LOOP" = "true" ]; then
+  exit 0
+fi
+
 echo "$(date +'%Y-%m-%d %H:%M:%S')  pre-flux start" >> "$HOME/status"
 
 # change to this directory

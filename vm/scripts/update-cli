@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 tag=$1
 
@@ -7,15 +7,31 @@ mkdir -p "$HOME/bin"
 cd "$HOME/bin" || exit
 
 # remove old CLI
-rm -rf kic .kic
+rm -rf kic .kic flt .flt
 
 if [ "$tag" = "" ]; then
     # use latest release
     tag=$(curl -s https://api.github.com/repos/kubernetes101/pib-dev/releases/latest | grep tag_name | cut -d '"' -f4)
 fi
 
-wget -O kic.tar.gz "https://github.com/kubernetes101/pib-dev/releases/download/$tag/kic-$tag-linux-amd64.tar.gz"
-tar -xvzf kic.tar.gz
-rm kic.tar.gz
+if [ "$PIB_IS_INNER_LOOP" = "true" ]; then
+    # install kic
+    wget -O kic.tar.gz "https://github.com/kubernetes101/pib-dev/releases/download/$tag/kic-$tag-linux-amd64.tar.gz"
+    tar -xvzf kic.tar.gz
+    rm kic.tar.gz
+
+    # install flt
+    wget -O flt.tar.gz "https://github.com/kubernetes101/pib-dev/releases/download/$tag/flt-$tag-linux-amd64.tar.gz"
+    tar -xvzf flt.tar.gz
+    rm flt.tar.gz
+
+    flt completion zsh > "$HOME/.oh-my-zsh/completions/_flt"
+else
+    wget -O kic.tar.gz "https://github.com/kubernetes101/pib-dev/releases/download/$tag/kic-$tag-linux-amd64.tar.gz"
+    tar -xvzf kic.tar.gz
+    rm kic.tar.gz
+fi
+
+kic completion zsh > "$HOME/.oh-my-zsh/completions/_kic"
 
 cd "$OLDPWD" || exit

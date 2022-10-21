@@ -2,7 +2,7 @@
 
 ### to run manually
 # cd $HOME
-# gitops/vm/setup/setup.sh
+# pib/vm/setup/setup.sh
 
 # this is the main VM setup script
 

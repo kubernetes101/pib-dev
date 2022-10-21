@@ -1,5 +1,21 @@
 # Pilot-in-a-Box Overview
 
+## Breaking Changes in 0.11.0
+
+- Version 0.11.0 has breaking changes from 0.10.0
+- The CLIs will automatically use the latest when you create a new Codespace
+- Using the 0.11.0 or higher CLIs on an 0.10.0 branch will break
+- To check the version of your CLI
+  - `kic -v`
+  - `flt -v`
+- If you have an existing branch with work you want to save and create a new Codespace you can downgrade the CLI in that CS
+  - Make sure you're in the root of your branch repo
+  - `.devcontainer/cli-update.sh 0.10.0`
+- To go back to the current CLI
+  - `.devcontainer/cli-update.sh`
+
+## Introduction
+
 Kubernetes is hard. Getting started and set up for the first time can take weeks to get right. Managing deployments on a fleet of Kubernetes clusters on the edge brings even more challenges.
 
 Pilot-in-a-Box (PiB) is a `game-changer` for the end-to-end Kubernetes app development cycle from a local cluster to deployments on the edge. It reduces the initial friction and empowers the developer to get started and deployed to a dev/test environment within *minutes*. The pre-configured Codespaces environment includes a `Kubernetes` cluster and custom CLI's (`kic` and `flt`) that help streamline the initial learning curve to Kubernetes development commands.
