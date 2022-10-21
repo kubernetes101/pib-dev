@@ -69,6 +69,9 @@ echo "$(date +'%Y-%m-%d %H:%M:%S')  adding kubernetes source" >> "$HOME/status"
 curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
+# set shell to zsh
+sudo sed -i "s|/bin/bash|/bin/zsh|g" /etc/passwd
+
 echo "$(date +'%Y-%m-%d %H:%M:%S')  updating sources" >> "$HOME/status"
 
 # this is failing on large fleets - add one retry
