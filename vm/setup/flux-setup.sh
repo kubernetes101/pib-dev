@@ -50,15 +50,15 @@ fi
 
 git pull
 
-kubectl apply -f "$HOME/gitops/clusters/$PIB_CLUSTER/flux-system/namespace.yaml"
+kubectl apply -f "$HOME/pib/clusters/$PIB_CLUSTER/flux-system/namespace.yaml"
 flux create secret git flux-system -n flux-system --url "$PIB_FULL_REPO" -u gitops -p "$PIB_PAT"
 flux create secret git gitops -n flux-system --url "$PIB_FULL_REPO" -u gitops -p "$PIB_PAT"
 
-kubectl apply -f "$HOME/gitops/clusters/$PIB_CLUSTER/flux-system/controllers.yaml"
+kubectl apply -f "$HOME/pib/clusters/$PIB_CLUSTER/flux-system/controllers.yaml"
 sleep 3
-kubectl apply -f "$HOME/gitops/clusters/$PIB_CLUSTER/flux-system/source.yaml"
+kubectl apply -f "$HOME/pib/clusters/$PIB_CLUSTER/flux-system/source.yaml"
 sleep 2
-kubectl apply -R -f "$HOME/gitops/clusters/$PIB_CLUSTER/flux-system"
+kubectl apply -R -f "$HOME/pib/clusters/$PIB_CLUSTER/flux-system"
 sleep 5
 
 # force flux to sync
