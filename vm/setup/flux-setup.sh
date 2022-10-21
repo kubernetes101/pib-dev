@@ -3,7 +3,7 @@
 echo "$(date +'%Y-%m-%d %H:%M:%S')  flux bootstrap start" >> "$HOME/status"
 
 # inner-loop
-if [ "$PIB_CLI" = "inner-loop" ]; then
+if [ "$PIB_IS_INNER_LOOP" = "true" ]; then
   exit 0
 fi
 

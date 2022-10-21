@@ -5,7 +5,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")" || exit
 
 echo "$(date +'%Y-%m-%d %H:%M:%S')  k3d-setup start" >> "$HOME/status"
 
-if [ "$PIB_CLI" = "inner-loop" ]; then
+if [ "$PIB_IS_INNER_LOOP" = "true" ]; then
   "$HOME/bin/kic" cluster create
 
   echo "$(date +'%Y-%m-%d %H:%M:%S')  k3d-setup complete" >> "$HOME/status"

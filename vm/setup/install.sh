@@ -34,7 +34,7 @@ tag=$(curl -s https://api.github.com/repos/kubernetes101/pib-dev/releases/latest
 
 cd "$HOME/bin" || exit
 
-if [ "$PIB_CLI" = "inner-loop" ]; then
+if [ "$PIB_IS_INNER_LOOP" = "true" ]; then
   # install kic
   wget -O kic.tar.gz "https://github.com/kubernetes101/pib-dev/releases/download/$tag/kic-$tag-linux-amd64.tar.gz"
   tar -xvzf kic.tar.gz
@@ -110,7 +110,7 @@ kubectl completion zsh > "$HOME/.oh-my-zsh/completions/_kubectl"
 
 "$HOME/bin/kic" completion zsh > "$HOME/.oh-my-zsh/completions/_kic"
 
-if [ "$PIB_CLI" = "inner-loop" ]; then
+if [ "$PIB_IS_INNER_LOOP" = "true" ]; then
   "$HOME/bin/flt" completion zsh > "$HOME/.oh-my-zsh/completions/_flt"
 fi
 

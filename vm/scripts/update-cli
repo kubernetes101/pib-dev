@@ -14,7 +14,7 @@ if [ "$tag" = "" ]; then
     tag=$(curl -s https://api.github.com/repos/kubernetes101/pib-dev/releases/latest | grep tag_name | cut -d '"' -f4)
 fi
 
-if [ "$PIB_CLI" = "inner-loop" ]; then
+if [ "$PIB_IS_INNER_LOOP" = "true" ]; then
     # install kic
     wget -O kic.tar.gz "https://github.com/kubernetes101/pib-dev/releases/download/$tag/kic-$tag-linux-amd64.tar.gz"
     tar -xvzf kic.tar.gz

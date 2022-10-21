@@ -2,7 +2,7 @@
 
 # this runs before flux-setup.sh
 
-if [ "$PIB_CLI" = "inner-loop" ]; then
+if [ "$PIB_IS_INNER_LOOP" = "true" ]; then
   exit 0
 fi
 
