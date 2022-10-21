@@ -47,11 +47,6 @@ mkdir -p "$HOME/.oh-my-zsh/completions"
     echo ""
 
     echo "compinit"
-} >> "$HOME/pib.zshrc"
-
-{
-    echo ""
-    echo "source $HOME/pib.zshrc"
 } >> "$HOME/.zshrc"
 
 {
