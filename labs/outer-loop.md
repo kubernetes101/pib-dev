@@ -76,11 +76,12 @@ git branch --show-current
     ```
 
 - Validate user role on subscription
+  > Make sure your RoleDefinitionName is Contributor or Owner to create resources in this lab succssfully
 
   ```bash
-  # make sure your RoleDefinitionName is Contributor or Owner to succssfully create resources in this lab
-  principal_name=$(az account show --query "user.name" --output tsv | sed -r 's/[@]+/_/g')
 
+  # get az user name and validate your role assignment
+  principal_name=$(az account show --query "user.name" --output tsv | sed -r 's/[@]+/_/g')
   az role assignment list --query "[].{principalName:principalName, roleDefinitionName:roleDefinitionName, scope:scope} | [? contains(principalName,'$principal_name')]" -o table
 
   ```
