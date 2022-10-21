@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 echo "$(date +'%Y-%m-%d %H:%M:%S')  flux bootstrap start" >> "$HOME/status"
 

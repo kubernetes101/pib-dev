@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 # this script installs most of the components
 
@@ -16,7 +16,7 @@ mkdir -p "$HOME/bin"
 cd "$HOME" || exit
 
 # set zsh as default shell
-sudo sed -i "s|/bin/bash|/bin/zsh|g" /etc/passwd
+sudo sed -i "s|/bin/bash|/bin/bash|g" /etc/passwd
 
 # install oh-my-zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then

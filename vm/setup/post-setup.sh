@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 ### runs as pib user
 
