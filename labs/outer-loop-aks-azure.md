@@ -38,7 +38,7 @@ git branch --show-current
     ```
 
 - Validate user role on subscription
-  > Make sure your RoleDefinitionName is Contributor or Owner to create resources in this lab succssfully
+  > Make sure your RoleDefinitionName is `Contributor` or `Owner` to create resources in this lab succssfully
 
   ```bash
 
