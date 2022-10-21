@@ -68,11 +68,12 @@ nano ~/.zshrc
 
 ```
 
-
 ## Create a working branch
 
 - Because the main branch has a branch protection rule, you need to create a working branch
   - You can use the same branch for any of the labs or create a new branch per lab (add 1, 2, 3 ... to the branch name)
+
+  > 🛑 Many commands will fail in following labs if `MY_BRANCH` is not set or branch is not pushed upstream
 
   ```bash
 

@@ -38,6 +38,21 @@ flt list
 
 ```
 
+## Validate cluster identifier and working branch
+
+```bash
+
+# by default, MY_BRANCH is set to your lower case GitHub User Name
+# the variable is used to uniquely name your clusters
+# the value can be overwritten if needed
+echo $MY_BRANCH
+
+# make sure your branch is set and pushed remotely
+# commands will fail if you are in main branch
+git branch --show-current
+
+```
+
 ## Login to Azure
 
 - Login to Azure using `az login --use-device-code`
@@ -59,6 +74,17 @@ flt list
     az account show
 
     ```
+
+- Validate user role on subscription
+  > Make sure your RoleDefinitionName is `Contributor` or `Owner` to create resources in this lab succssfully
+
+  ```bash
+
+  # get az user name and validate your role assignment
+  principal_name=$(az account show --query "user.name" --output tsv | sed -r 's/[@]+/_/g')
+  az role assignment list --query "[].{principalName:principalName, roleDefinitionName:roleDefinitionName, scope:scope} | [? contains(principalName,'$principal_name')]" -o table
+
+  ```
 
 ## Create a Dev Cluster
 

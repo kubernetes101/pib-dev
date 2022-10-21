@@ -41,6 +41,15 @@ Follow instructions [here](./prometheus/README.md#create-prometheus-secret) to c
 - The Key Vault secret values are retrieved (via MI) during fleet creation and stored as kubernetes secrets on each cluster in the fleet (in [azure.sh](/vm/setup/azure.sh#L36) and [pre-flux.sh](/vm/setup/pre-flux.sh#L29)).
 - The logging (fluent-bit) and metrics (prometheus) namespaces are bootstrapped on each of the clusters, prior to secret creation.
 
+## Validate working branch
+
+```bash
+
+# make sure your branch is set and pushed remotely
+# commands will fail if you are in main branch
+git branch --show-current
+
+```
 ## Deploy a Central Monitoring Cluster
 
 > This assumes you have an existing [multi-cluster fleet](/labs/outer-loop-multi-cluster.md).

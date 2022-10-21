@@ -1,6 +1,6 @@
 # PiB outer-loop to AKS on Azure
 
-## Create a unique cluster identifier
+## Validate cluster identifier and working branch
 
 ```bash
 
@@ -8,6 +8,10 @@
 # the variable is used to uniquely name your clusters
 # the value can be overwritten if needed
 echo $MY_BRANCH
+
+# make sure your branch is set and pushed remotely
+# commands will fail if you are in main branch
+git branch --show-current
 
 ```
 
@@ -32,6 +36,17 @@ echo $MY_BRANCH
     az account show
 
     ```
+
+- Validate user role on subscription
+  > Make sure your RoleDefinitionName is `Contributor` or `Owner` to create resources in this lab succssfully
+
+  ```bash
+
+  # get az user name and validate your role assignment
+  principal_name=$(az account show --query "user.name" --output tsv | sed -r 's/[@]+/_/g')
+  az role assignment list --query "[].{principalName:principalName, roleDefinitionName:roleDefinitionName, scope:scope} | [? contains(principalName,'$principal_name')]" -o table
+
+  ```
 
 ## Create Arc enabled AKS Cluster
 
