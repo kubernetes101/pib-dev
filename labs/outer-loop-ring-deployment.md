@@ -6,6 +6,21 @@
   - Add `ring` metadata to each cluster
   - Add targets based on cluster metadata
 
+## Validate cluster identifier and working branch
+
+```bash
+
+# by default, MY_BRANCH is set to your lower case GitHub User Name
+# the variable is used to uniquely name your clusters
+# the value can be overwritten if needed
+echo $MY_BRANCH
+
+# make sure your branch is set and pushed remotely
+# commands will fail if you are in main branch
+git branch --show-current
+
+```
+
 ## Create 15 Clusters
 
 > Note: we don't actually create the clusters, just the GitOps folders

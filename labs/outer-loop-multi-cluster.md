@@ -1,6 +1,6 @@
 # PiB Outer-Loop Multi-Cluster
 
-## Create a unique cluster identifier
+## Validate cluster identifier and working branch
 
 ```bash
 
@@ -8,6 +8,10 @@
 # the variable is used to uniquely name your clusters
 # the value can be overwritten if needed
 echo $MY_BRANCH
+
+# make sure your branch is set and pushed remotely
+# commands will fail if you are in main branch
+git branch --show-current
 
 ```
 

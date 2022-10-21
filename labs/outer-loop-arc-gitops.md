@@ -1,5 +1,20 @@
 # PiB outer-loop with Arc Enabled Gitops
 
+## Validate cluster identifier and working branch
+
+```bash
+
+# by default, MY_BRANCH is set to your lower case GitHub User Name
+# the variable is used to uniquely name your clusters
+# the value can be overwritten if needed
+echo $MY_BRANCH
+
+# make sure your branch is set and pushed remotely
+# commands will fail if you are in main branch
+git branch --show-current
+
+```
+
 ## Login to Azure
 
 - Login to Azure using `az login --use-device-code`
