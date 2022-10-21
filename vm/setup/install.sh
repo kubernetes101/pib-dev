@@ -25,7 +25,7 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
 
   {
     echo ""
-    echo "source \$HOME/pib.zshrc"
+    echo "compinit"
   } >> ".zshrc"
 fi
 
@@ -114,7 +114,7 @@ if [ "$PIB_CLI" = "inner-loop" ]; then
   "$HOME/bin/flt" completion zsh > "$HOME/.oh-my-zsh/completions/_flt"
 fi
 
-# update pib.zshrc
+# update .zshenv
 {
   echo ""
   echo "export PATH=\$PATH:\$HOME/bin"
@@ -125,11 +125,9 @@ fi
   echo "alias kdelf='kubectl delete -f'"
   echo "alias kj='kubectl exec -it jumpbox -- bash -l'"
   echo "alias kje='kubectl exec -it jumpbox -- '"
-  echo ""
-  echo "compinit"
-} >> "$HOME/pib.zshrc"
+} >> "$HOME/.zshenv"
 
-# update pib.bashrc
+# update .bashenv
 {
   echo ""
   echo "export PATH=\$PATH:\$HOME/bin"
@@ -140,10 +138,13 @@ fi
   echo "alias kdelf='kubectl delete -f'"
   echo "alias kj='kubectl exec -it jumpbox -- bash -l'"
   echo "alias kje='kubectl exec -it jumpbox -- '"
+  echo ""
+} >> "$HOME/.bashenv"
+
+{
   echo ""
   echo "shopt -s expand_aliases"
-  echo ""
-} >> "$HOME/pib.bashrc"
+} > "$HOME/.bashrc"
 
 # configure git CLI
 git config --global user.name pib-gitops
