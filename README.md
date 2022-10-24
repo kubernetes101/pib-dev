@@ -39,7 +39,7 @@ on to the next step of deploying the application to a test cluster in the Cloud 
 There are also several [advanced labs](./README.md#advanced-labs) that cover centralized monitoring,
 canary deployments, and targeting different devices.
 
-> Note: PiB is not intended as-is for production deployments. However, some concepts covered (GitOps
+> **NOTE**: PiB is not intended as-is for production deployments. However, some concepts covered (GitOps
 > and Observability) are production-ready.
 
 ## Prerequisites

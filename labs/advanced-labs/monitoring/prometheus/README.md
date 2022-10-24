@@ -2,7 +2,8 @@
 
 ## Grafana Cloud Configuration
 
-- The Prometheus deployment expects to retrieve the value for the Grafana Cloud API Key from a kubernetes secret.
+The Prometheus deployment expects to retrieve the value for the Grafana Cloud API Key from a kubernetes secret.
+
 - To acheive this, we store the value as a secret in Key Vault.
 - Each member of the fleet retrieves the value from Key Vault during setup and creates the needed secret on the cluster.
 

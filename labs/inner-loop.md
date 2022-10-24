@@ -156,7 +156,8 @@ kic check grafana
 ## Test MyApp
 
 A core part of the DevX is automated integration and load testing. We use a customized version of
-[WebValidate](https://github.com/microsoft/webvalidate). The custom test files and Dockerfile are in the `apps/myapp/webv` directory.
+[WebValidate](https://github.com/microsoft/webvalidate). The custom test files and Dockerfile are in
+the `apps/myapp/webv` directory.
 
 `kic build webv` builds a custom image: `k3d-registry.localhost:5500/webv-myapp:local`.
 
@@ -165,7 +166,7 @@ A core part of the DevX is automated integration and load testing. We use a cust
 The integration test checks valid and invalid URLs, so the 400 and 404 errors are part of the test
 design. By default, results < 400 are not logged.
 
-**Note**: Add `--verbose` to the integration test to see 2xx and 3xx results.
+> **NOTE**: Add `--verbose` to the integration test to see 2xx and 3xx results.
 
 ```bash
 # run an integration test

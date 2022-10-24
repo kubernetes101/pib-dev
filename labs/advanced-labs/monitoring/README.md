@@ -2,7 +2,8 @@
 
 ## Introduction
 
-- To monitor a multi-cluster fleet, we deploy a central monitoring cluster with Fluent Bit and Prometheus configured to send logs and metrics to Grafana Cloud.
+To monitor a multi-cluster fleet, we deploy a central monitoring cluster with Fluent Bit and Prometheus configured to send logs and metrics to Grafana Cloud.
+
 - The monitoring cluster runs WebValidate (WebV) to send requests to apps running on the other clusters in the fleet. - The current design has one deployment of WebV for each app.
   - The webv-heartbeat deployment sends requests to all of the heartbeat apps running on the fleet clusters.
 - Fluent Bit is configured to forward WebV logs to Grafana Loki
