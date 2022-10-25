@@ -69,7 +69,6 @@ gh secret set PIB_DNS_RG --body $rg
 
 # list secrets
 gh secret list
-
 ```
 
 ### Create Managed identity
@@ -107,7 +106,6 @@ gh secret set ID_RSA_PUB --body $(cat $HOME/.ssh/id_rsa.pub | base64 | tr -d '\n
 
 # list GitHub Secrets
 gh secret list
-
 ```
 
 ## Create Azure Key Vault
