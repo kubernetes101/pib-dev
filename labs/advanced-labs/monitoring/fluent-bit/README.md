@@ -45,7 +45,8 @@ in Loki queries. For example, if your fleet name is `atx-fleet`, jobSuffix shoul
 
 These values are located in the Grafana Cloud Portal, at a URL similar to `https://grafana.com/orgs/yourUserName`.
 Click `Details` in the `Loki` section, then under the Grafana Data Source Settings, set the values.
-Set `lokiHost` to the `URL` value (remove the leading "https://" protocol), and `lokiUser` to the `User` value
+Set `lokiHost` to the `URL` value (remove the leading "https://" protocol), and `lokiUser` to the `User`
+value.
 
 ## Fluent Bit Configuration
 
@@ -78,4 +79,5 @@ from `webv` to Grafana Loki. To forward logs from other apps, you will need to c
 block and update the Match, Labels, label-keys, and remove-keys to reflect the naming and log structure
 of the new app.
 
-Leverage the Fluent Bit output plugin [documentation](https://docs.fluentbit.io/manual/pipeline/outputs) to explore different output options.
+Leverage the Fluent Bit output plugin [documentation](https://docs.fluentbit.io/manual/pipeline/outputs)
+to explore different output options.
