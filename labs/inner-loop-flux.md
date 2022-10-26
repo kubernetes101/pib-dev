@@ -24,7 +24,7 @@ PiB includes templates for new applications that encapsulate K8s best practices.
 - You can use any app name that conforms to a dotnet namespace:
   - PascalCase
   - alpha only
-  - <= 20 chars
+  - <= 20 characters
 - Once created, you can browse the code in the Explorer window.
 
 ```bash
@@ -56,13 +56,14 @@ docker images
 
 Notice you don't have to create or edit K8s YAML files!
 
-- This deploys
-  - Flux
-  - MyApp
-  - Fluent Bit
-  - Grafana
-  - Prometheus
-  - WebValidate (more on this later)
+This deploys:
+
+- Flux
+- MyApp
+- Fluent Bit
+- Grafana
+- Prometheus
+- WebValidate (more on this later)
 
 ```bash
 # deploy flux to the cluster

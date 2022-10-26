@@ -5,16 +5,19 @@
 > **NOTE**: AKS-IoT is in preview so there's a chance these instructions will
 change over time!
 
-Reach out to the soldevx team for access to AKS-IoT preview. TODO: How?
+Reach out to the [soldevx](mailto:soldevx@microsoft.com) team for access to AKS-IoT preview.
+TODO: Is this how they would want to be contacted?
 
 ## PLEASE NOTE: This document is a work in progress
+
+The current instructions are run in PowerShell.
 
 ## AKS-IoT Setup
 
 - Create a new Azure VM with Windows 10
   - You can also use your local Windows 10 or Windows 11 computer
 - Run Windows Update
-- Install Hyper-V - Note: This requires a reboot!
+- Install Hyper-V - **NOTE**: This requires a reboot!
 - Install, if not already on your machine:
   - [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
   - [Github CLI](https://cli.github.com/manual/installation)
@@ -27,7 +30,9 @@ Reach out to the soldevx team for access to AKS-IoT preview. TODO: How?
 - Install Helm
   - `choco install kubernetes-helm`
 
-## Update bootstrap/aksiot-userconfig.json TODO: Does this exist?
+## Update `bootstrap/aksiot-userconfig.json`
+
+TODO: Does this file exist yet? or is it created in a different process?
 
 From the Azure portal, add these values to the file:
 

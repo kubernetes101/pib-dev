@@ -137,7 +137,7 @@ flt check app imdb
 
 The "Dogs and Cats" app is a simple "voting" app for demo purposes.
 
-> Note that dogs-cats and IMDb cannot be deployed to the same cluster due to ingress conflicts.
+> Note here that dogs-cats and IMDb cannot be deployed to the same cluster due to ingress conflicts.
 
 In a production environment, you would add ingress rules for host, url, or port-based routing.
 

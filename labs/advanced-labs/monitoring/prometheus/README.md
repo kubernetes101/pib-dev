@@ -5,7 +5,7 @@
 The Prometheus deployment expects to retrieve the value for the Grafana Cloud API Key from a kubernetes
 (k8s) secret.
 
-To acheive this, we store the value as a secret in Key Vault. Each member of the fleet retrieves the
+To achieve this, we store the value as a secret in Key Vault. Each member of the fleet retrieves the
 value from Key Vault during setup and creates the needed secret on the cluster.
 
 ### Create Prometheus Secret

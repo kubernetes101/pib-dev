@@ -8,7 +8,8 @@ The Fluent Bit deployment expects to retrieve the value for the Grafana Cloud AP
 (k8s) secret. In order to achieve this, we store the value as a secret in Key Vault. Each member of
 the fleet retrieves the value from Key Vault during setup and creates the needed secret on the cluster.
 
-To start you need to go to [grafana.com](https://grafana.com) and log in TODO: do you need to sign up first?
+To start you need to go to [grafana.com](https://grafana.com) and log in. Instructions on how to sign
+up are found [here](/labs/advanced-labs/monitoring/README.md#fleet-configuration-prerequisites).
 Once you login, go to the settings in `My Account`. You will get redirected to a URL with a similar
 format to `https://grafana.com/orgs/yourUserName`. In the left nav bar, click on `API Keys` (under
 Security), and click `+ Add API Key`.
@@ -24,7 +25,7 @@ variable.
 GC_PAT="<Paste your API Key value here>"
 ```
 
-You'll then save to keyvault using the AzCLI and the newly created PAT environment variable.
+You'll then save to Key Vault using the AzCLI and the newly created PAT environment variable.
 
 ```bash
 az keyvault secret set --vault-name $PIB_KEYVAULT --name fluent-bit-secret --value ${GC_PAT}
@@ -36,12 +37,12 @@ Before running Fluent Bit on your monitoring cluster, you need to update the val
 to match your fleet and Grafana Cloud instance. The following values need to be set: `jobSuffix`, `lokiUrl`,
 `lokiUser`.
 
-#### jobSuffix
+#### `jobSuffix`
 
 This value is the name of your fleet and will be used to uniquely identify the logs from this instance
 in Loki queries. For example, if your fleet name is `atx-fleet`, jobSuffix should be `atx`.
 
-#### lokiUser and lokiHost
+#### `lokiUser` and `lokiHost`
 
 These values are located in the Grafana Cloud Portal, at a URL similar to `https://grafana.com/orgs/yourUserName`.
 Click `Details` in the `Loki` section, then under the Grafana Data Source Settings, set the values.
@@ -65,7 +66,7 @@ This configuration uses built-in parsers (cri, docker) to parse the container lo
 ### Filters
 
 This configuration uses a few filters to enrich and control the logs. The kubernetes filter is used
-to add kubernetes metatdata to the logs. The nest filters apply the lift operation to the logs to lift
+to add kubernetes metadata to the logs. The nest filters apply the lift operation to the logs to lift
 nested labels up to simplify querying. The `type_converter` and `grep` filters are used to ensure only
 error logs are forwarded.
 

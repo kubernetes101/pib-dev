@@ -57,7 +57,7 @@ flt targets deploy
 
 ### Check Github Action Status
 
-Check that your GitHub Action is running, either queued or in-progress. Check the action here: <https://github.com/kubernetes101/pib-dev/actions> TODO: Is this for all builds or will it be for the presumably forked repo?
+Check that your GitHub Action is running, either queued or in-progress. Check the action here: <https://github.com/kubernetes101/pib-dev/actions> TODO: Is this URL for all builds or will it be for a presumably forked repo?
 
 ### Check Deployment
 
@@ -171,8 +171,8 @@ To go back:
 
 ## Monitoring Canary Deployments Using Grafana
 
-Flagger comes with a Grafana dashboard made for canary analysis. Install Grafana TODO: Is this handled
-in one of the apps?
+Flagger comes with a Grafana dashboard made for canary analysis. Install Grafana following the instructions
+below.
 
 ```bash
 # cd to canary directory
@@ -193,7 +193,7 @@ cd apps/flagger-grafana
 flt targets list
 
 # if not [], clear the targets
-#flt targets clear
+# flt targets clear
 
 # add all clusters as a target
 flt targets add all

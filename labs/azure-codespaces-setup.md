@@ -126,7 +126,7 @@ gh secret list
 
 ## Create DNS Zone
 
-> This is required for HTTPS!
+> **NOTE**: This is required for HTTPS!
 
 * Purchase a domain from the Azure Portal (or bring your own).
 * Create a DNS Zone using `PIB_DNS_RG` from above.

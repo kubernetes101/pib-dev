@@ -30,7 +30,7 @@ If your prompt ends in `(main)`, create a working branch per the instructions in
 
 ## Verify k3d cluster
 
-> **Note**: The K8s cluster is running "in" your Codespace - no need for an external cluster.
+> **NOTE**: The K8s cluster is running "in" your Codespace - no need for an external cluster.
 
 Use `kic` to verify the k3d cluster was created successfully:
 

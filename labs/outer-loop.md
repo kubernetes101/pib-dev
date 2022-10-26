@@ -10,7 +10,7 @@ Access to the dev/test fleet can be shared between Codespaces and users.
 
 We have an advanced workshop under development for fleet sharing! Keep your eyes out.
 
-![A diagram with a simplied fleet diagram. TODO: This diagram could be clearer.](./images/outer-loop.png)
+![A diagram with a simplified fleet diagram. TODO: This diagram could be clearer.](./images/outer-loop.png)
 
 ## `flt` CLI
 
@@ -79,16 +79,14 @@ az account set -s mySubNameOrId
 az account show
 ```
 
-- Validate user role on subscription
-  > Make sure your RoleDefinitionName is `Contributor` or `Owner` to create resources in this lab succssfully
+Validate the user role on the subscription, and make sure your RoleDefinitionName is `Contributor`
+or `Owner` to create resources in this lab successfully.
 
-  ```bash
-
-  # get az user name and validate your role assignment
-  principal_name=$(az account show --query "user.name" --output tsv | sed -r 's/[@]+/_/g')
-  az role assignment list --query "[].{principalName:principalName, roleDefinitionName:roleDefinitionName, scope:scope} | [? contains(principalName,'$principal_name')]" -o table
-
-  ```
+```bash
+# get az user name and validate your role assignment
+principal_name=$(az account show --query "user.name" --output tsv | sed -r 's/[@]+/_/g')
+az role assignment list --query "[].{principalName:principalName, roleDefinitionName:roleDefinitionName, scope:scope} | [? contains(principalName,'$principal_name')]" -o table
+```
 
 ## Create a Dev Cluster
 

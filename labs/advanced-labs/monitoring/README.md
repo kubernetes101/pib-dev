@@ -2,72 +2,57 @@
 
 ## Introduction
 
-To monitor a multi-cluster fleet, we deploy a central monitoring cluster with Fluent Bit and Prometheus
-configured to send logs and metrics to Grafana Cloud.
-
-The monitoring cluster runs WebValidate (WebV) to send requests to apps running on the other clusters
-in the fleet. The current design has one deployment of WebV for each app. The `webv-heartbeat` deployment
-sends requests to all of the heartbeat apps running on the fleet clusters.
-
-Fluent Bit is configured to forward WebV logs to Grafana Loki. Prometheus is configured to scrape WebV
-metrics. These logs and metrics are used to power a Grafana Cloud dashboard and provide insight into
-cluster and app availability and latency.
+- To monitor a multi-cluster fleet, we deploy a central monitoring cluster with Fluent Bit and Prometheus configured to send logs and metrics to Grafana Cloud.
+- The monitoring cluster runs WebValidate (WebV) to send requests to apps running on the other clusters in the fleet. - The current design has one deployment of WebV for each app.
+  - The webv-heartbeat deployment sends requests to all of the heartbeat apps running on the fleet clusters.
+- Fluent Bit is configured to forward WebV logs to Grafana Loki
+- Prometheus is configured to scrape WebV metrics.
+- These logs and metrics are used to power a Grafana Cloud dashboard and provide insight into cluster and app availability and latency.
 
 ## Lab Prerequisites
 
-Complete the 4 [outer-loop labs](/README.md#outer-loop-labs) before this one **BUT** do not follow
-the delete step. These subsequent sections rely on the environment variables to be set in this
-lab.
+- Complete the 4 [outer-loop labs](/README.md#outer-loop-labs) before this one.
 
 ## Fleet Configuration Prerequisites
 
-You should have set up:
-
 - Grafana Cloud Account
-  - a free trial Grafana Cloud Account is available [here](https://grafana.com/)
+  - You can set up a free trial Grafana Cloud Account [here](https://grafana.com/).
 - Azure subscription
 - Managed Identity (MI) for the fleet
-- Key Vault (KV)
+- Key Vault
   - Grant the MI access to the Key Vault
 
 ## Key Vault Secrets
 
-A personal access token (PAT) is required to forward logs and metrics to Grafana Cloud. The PAT is
-stored as a K8s secret on the fleet clusters, and later as a KV secret.
-
-Before creating the secrets, a Key Vault and MI (with access to the KV) must be configured.
-See the [setup docs](/labs/azure-codespaces-setup.md) for instructions.
+- A PAT is required to forward logs and metrics to Grafana Cloud.
+- The PAT is stored as a K8s secret on the fleet clusters.
+- Before creating the secrets, a Key Vault and MI (with access to the Key Vault) must be configured. See [setup docs](/labs/azure-codespaces-setup.md) for instructions.
 
 ### Fluent Bit Secret
 
-Follow instructions [here](./fluent-bit/README.md#create-fluent-bit-secret) to create the required
-Fluent Bit secret in the KV.
+Follow instructions [here](./fluent-bit/README.md#create-fluent-bit-secret) to create the required Fluent Bit secret in the Key Vault.
 
 ### Prometheus Secret
 
-Follow instructions [here](./prometheus/README.md#create-prometheus-secret) to create the required
-Prometheus secret in the KV.
+Follow instructions [here](./prometheus/README.md#create-prometheus-secret) to create the required Prometheus secret in the Key Vault.
 
 ### Execution
 
-The KV secret values are retrieved (via MI) during fleet creation and stored as kubernetes secrets on
-each cluster in the fleet (in [azure.sh](/vm/setup/azure.sh#L36) and [pre-flux.sh](/vm/setup/pre-flux.sh#L29)).
-The logging (`fluent-bit`) and metrics (`prometheus`) namespaces are bootstrapped on each of the clusters,
-prior to secret creation.
+- The Key Vault secret values are retrieved (via MI) during fleet creation and stored as kubernetes secrets on each cluster in the fleet (in [azure.sh](/vm/setup/azure.sh#L36) and [pre-flux.sh](/vm/setup/pre-flux.sh#L29)).
+- The logging (fluent-bit) and metrics (prometheus) namespaces are bootstrapped on each of the clusters, prior to secret creation.
 
 ## Validate working branch
 
 ```bash
-
 # make sure your branch is set and pushed remotely
 # commands will fail if you are in main branch
 git branch --show-current
-
 ```
+
 ## Deploy a Central Monitoring Cluster
 
-> **NOTE**: This assumes you have an existing [multi-cluster fleet](/labs/outer-loop-multi-cluster.md).
-> If you do not have MI and KV configured, see the setup [lab](/labs/azure-codespaces-setup.md).
+> This assumes you have an existing [multi-cluster fleet](/labs/outer-loop-multi-cluster.md).
+> If you do not have MI and Key Vault configured, see the setup [lab](/labs/azure-codespaces-setup.md).
 
 ```bash
 # set to the name of your fleet
@@ -83,10 +68,10 @@ flt create -g $FLT_NAME-fleet -c monitoring-$FLT_NAME
 
 ## WebV
 
-### Create `apps/webv` Directory
+### Create apps/webv Directory
 
-Add webv to the `apps/` directory. By default, this provides you with two deployments of `webv`:
-`webv-heartbeat` and `webv-imdb`.
+Now we can add `webv` to the `apps/` directory. By default, this provides you with two deployments
+of `webv`: `webv-heartbeat` and `webv-imdb`.
 
 ```bash
 # make sure you are in the monitoring directory
@@ -103,11 +88,10 @@ git push
 ### Configure WebV
 
 Before deploying, you need to update the arguments for the `webv-heartbeat` and `webv-imdb` deployments
-to target the clusters in your fleet. To do so, replace the server arguments (placeholders are
-`https://yourclustername.yourdomain.com`>`) with the fully qualified domanin name for the clusters in
-your fleet. You can find these values in the cluster`yaml` metadata files in the clusters/ directory.
+to target the clusters in your fleet. You'll need to replace the server placeholders like `https://yourclustername.yourdomain.com` with the full qualified domain name for the clusters in your fleet. You can find these
+values in the cluster `yaml` metadata files in the `clusters/` directory.
 
-If you are not using dns, use the cluster's IP: `http://yourclusterIP`.
+If you are not using DNS, use the cluster's IP like `http://yourclusterIP`.
 
 ```yaml
 ...
@@ -127,7 +111,6 @@ If you are not using dns, use the cluster's IP: `http://yourclusterIP`.
           - {{gitops.cluster.region}}
           - --log-format
           - Json
-...
 ```
 
 ### Deploy WebV to the Central Monitoring Cluster
@@ -148,7 +131,7 @@ flt targets add region:monitoring
 flt targets deploy
 ```
 
-### Verify WebV Was Deployed
+### Verify WebV was Deployed
 
 ```bash
 # should see webv added
@@ -224,7 +207,7 @@ flt exec kic pods -f monitoring
 
 ### Create apps/prometheus directory
 
-- Add `prometheus` to the `apps/` directory:
+Add `prometheus` to the `apps/` directory:
 
 ```bash
 cd $PIB_BASE/labs/advanced-labs/monitoring
