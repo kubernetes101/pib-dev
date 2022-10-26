@@ -2,27 +2,45 @@
 
 ## Breaking Changes in 0.11.0
 
-- Version 0.11.0 has breaking changes from 0.10.0
-- The CLIs will automatically use the latest when you create a new Codespace
-- Using the 0.11.0 or higher CLIs on an 0.10.0 branch will break
-- To check the version of your CLI
-  - `kic -v`
-  - `flt -v`
-- If you have an existing branch with work you want to save and create a new Codespace you can downgrade the CLI in that CS
-  - Make sure you're in the root of your branch repo
-  - `.devcontainer/cli-update.sh 0.10.0`
-- To go back to the current CLI
-  - `.devcontainer/cli-update.sh`
+>> **Warning!** Version `0.11.0` has breaking changes from `0.10.0`
+
+The CLIs will automatically use the latest when you create a new Codespace, so using the `0.11.0` or
+higher CLIs on an 0.10.0 branch will break. To check the version of your CLI use the `-v` flag:
+
+- `kic -v`
+- `flt -v`
+
+If you have an existing branch with work you want to save and create a new Codespace you can downgrade
+the CLI in that codespace.
+
+> **NOTE**: Make sure you're in the root of your branch repo when you run the following.
+
+```bash
+.devcontainer/cli-update.sh 0.10.0`
+```
+
+To go back to the current CLI: `.devcontainer/cli-update.sh`.
 
 ## Introduction
 
-Kubernetes is hard. Getting started and set up for the first time can take weeks to get right. Managing deployments on a fleet of Kubernetes clusters on the edge brings even more challenges.
+Kubernetes is hard. Getting started and set up for the first time can take weeks to get right.
+Managing deployments on a fleet of Kubernetes clusters on the edge brings even more challenges.
 
-Pilot-in-a-Box (PiB) is a `game-changer` for the end-to-end Kubernetes app development cycle from a local cluster to deployments on the edge. It reduces the initial friction and empowers the developer to get started and deployed to a dev/test environment within *minutes*. The pre-configured Codespaces environment includes a `Kubernetes` cluster and custom CLI's (`kic` and `flt`) that help streamline the initial learning curve to Kubernetes development commands.
+Pilot-in-a-Box (PiB) is a `game-changer` for the end-to-end Kubernetes app development cycle from a
+local cluster to deployments on the edge. It reduces the initial friction and empowers the developer
+to get started and deployed to a dev/test environment within *minutes*. The pre-configured Codespaces
+environment includes a `Kubernetes` cluster and custom CLI's (`kic` and `flt`) that help streamline
+the initial learning curve to Kubernetes development commands.
 
-This repo walks through the rich end-to-end developer experience in a series of labs. The labs start by walking you through creating, building, testing, and deploying an application on a local cluster ([inner-loop](./README.md#inner-loop)) with a complete CNCF observability stack. Then, the labs move on to the next step of deploying the application to a test cluster in the Cloud ([outer-loop](./README.md#outer-loop)). There are also several [advanced labs](./README.md#advanced-labs) that cover centralized monitoring, canary deployments, and targeting different devices.
+This repo walks through the rich end-to-end developer experience in a series of labs. The labs start
+by walking you through creating, building, testing, and deploying an application on a local cluster
+([inner-loop](./README.md#inner-loop)) with a complete CNCF observability stack. Then, the labs move
+on to the next step of deploying the application to a test cluster in the Cloud ([outer-loop](./README.md#outer-loop)).
+There are also several [advanced labs](./README.md#advanced-labs) that cover centralized monitoring,
+canary deployments, and targeting different devices.
 
-> Note: PiB is not intended as-is for production deployments. However, some concepts covered (GitOps and Observability) are production-ready.
+> **NOTE**: PiB is not intended as-is for production deployments. However, some concepts covered (GitOps
+> and Observability) are production-ready.
 
 ## Prerequisites
 
@@ -33,128 +51,144 @@ This repo walks through the rich end-to-end developer experience in a series of 
 
 ## GitHub Codespaces
 
-> Codespaces allows you to develop in a secure, configurable, and dedicated development environment in the cloud that works how and where you want it to
+> Codespaces allows you to develop in a secure, configurable, and dedicated development environment
+> in the cloud that works how and where you want it to.
 
-- [GitHub Codespaces Overview](https://docs.github.com/en/codespaces)
-  - GitHub Codespaces is available for organizations using GitHub Team or GitHub Enterprise Cloud. GitHub Codespaces is also available as a limited beta release for individual users on GitHub Pro plans.
-  - For more information, see ["GitHub's products"](https://docs.github.com/en/get-started/learning-about-github/githubs-products)
+Check out the [GitHub Codespaces Overview](https://docs.github.com/en/codespaces). GitHub Codespaces
+is available for organizations using GitHub Team or GitHub Enterprise Cloud. Codespaces are also available
+as a limited beta release for individual users on GitHub Pro plans. However, the waiting list
+is normally > 3 months.
 
-We use GitHub Codespaces for our `inner-loop` and `outer-loop` Developer Experiences. While other DevX are available, currently, we only support GitHub Codespaces.
+For more information, see ["GitHub's products"](https://docs.github.com/en/get-started/learning-about-github/githubs-products).
 
-The easiest way to get GitHub Codespaces access is to setup a [GitHub Team](https://docs.github.com/en/codespaces)
+We use GitHub Codespaces for our `inner-loop` and `outer-loop` Developer Experiences. While other DevX
+are available, currently, we only support GitHub Codespaces.
 
-GitHub Codespaces is also available in beta on a limited basis for GitHub Pro users. The waiting list is normally > 3 months.
+The easiest way to get GitHub Codespaces access is to setup a [GitHub Team](https://docs.github.com/en/codespaces).
 
-> Best Practice: as you begin projects, ensure that you have Codespaces and Azure subscriptions with proper permissions
+> Best Practice: as you begin projects, ensure that you have Codespaces and Azure subscriptions with
+> proper permissions.
 
-## inner-loop
+## `inner-loop`
 
-- `inner-loop` refers to the tasks that developers do every day as part of their development process
-  - Generally, `inner-loop` happens on the individual developer workstation
-    - For PiB, the inner-loop and developer workstation is Codespaces
-    - When a developer creates a Codespace, that is their "personal development workstation in the cloud"
-- As part of PiB, we have automated the creation of the developer workstation using a repeatable, consistent, Infrastructure as Code approach
-  - We have an advanced workshop planned for customizing the Codespaces experience for your project
-- With the power of Codespaces, a developer can create a consistent workstation with a few clicks in less than a minute
+The `inner-loop` refers to the tasks that developers do every day as part of their development process.
+Generally, `inner-loop` happens on the individual developer workstation. For PiB, the inner-loop and
+developer workstation is Codespaces. When a developer creates a Codespace, that is their "personal
+development workstation in the cloud." As part of PiB, we have automated the creation of the developer
+workstation using a repeatable, consistent, Infrastructure as Code (IaC) approach.
 
-## outer-loop
+We have an advanced workshop planned for customizing the Codespaces experience for your project. With
+the power of Codespaces, a developer can create a consistent workstation with a few clicks in less than
+a minute.
 
-- `outer-loop` refers to the tasks that developers and DevOps do as they move from dev to test to pre-prod to production
-  - Generally `outer-loop` happens on shared compute outside of the developer workstation
-  - For PiB, outer-loop uses a combination of Codespaces and `dev/test clusters` in Azure
-- As part of PiB, we have automated the creation of dev/test clusters using a repeatable, consistent, Infrastructure as Code approach
+## `outer-loop`
+
+The `outer-loop` refers to the tasks that developers and DevOps do as they move from dev to test to
+pre-prod to production stages. Generally `outer-loop` happens on shared compute outside of the
+developer workstation. For PiB, `outer-loop` uses a combination of Codespaces and `dev/test clusters`
+in Azure. As part of PiB, we have automated the creation of dev/test clusters using a repeatable,
+consistent, IaC approach.
 
 ## Create a Codespace
 
-> You can use the same Codespace for any of the labs
+> **NOTE**: You can use the same Codespace for any of the labs.
 
-- From this repo
-  - Click the `<> Code` button
-    - Make sure the Codespaces tab is active
-  - Click `Create Codespace on main`
-- After about 1 minute, you will have a GitHub Codespace running with a complete Kubernetes Developer Experience!
+From this repo, click the `<> Code` button. Make sure the Codespaces tab is active. Choose
+`Create Codespace on main`. After about 1 minute, you will have a GitHub Codespace running with a
+complete Kubernetes developer experience!
 
 ## Note on environment variables
 
-- Many of these tutorials make use of environment variables, using the export functionality. If you wish, you can also edit the Z shell preferences file to persist exported environment variables across terminal sessions. Just add the same "export FOO=BAR" lines to your .zshrc file.
+Many of these tutorials make use of environment variables, using the export functionality. If you
+wish, you can also edit the Z shell preferences file to persist exported environment variables
+across terminal sessions. Just add the same "export FOO=BAR" lines to your `.zshrc` file.
 
 ```bash
-
 nano ~/.zshrc
-
 ```
 
 ## Create a working branch
 
-- Because the main branch has a branch protection rule, you need to create a working branch
-  - You can use the same branch for any of the labs or create a new branch per lab (add 1, 2, 3 ... to the branch name)
+Because the main branch has a branch protection rule, you need to create a working branch. You can
+use the same branch for any of the labs or create a new branch per lab (add 1, 2, 3 ... to the branch
+name).
 
-  > 🛑 Many commands will fail in following labs if `MY_BRANCH` is not set or branch is not pushed upstream
+> **NOTE**: 🛑 Many commands will fail in following labs if `MY_BRANCH` is not set or that branch is
+> not pushed upstream.
 
-  ```bash
+```bash
+# by default, MY_BRANCH is set to your lower case GitHub User Name
+# the value can be overwritten if needed
+echo $MY_BRANCH
 
-  # by default, MY_BRANCH is set to your lower case GitHub User Name
-  # the value can be overwritten if needed
-  echo $MY_BRANCH
+# create a branch
+git checkout -b $MY_BRANCH
 
-  # create a branch
-  git checkout -b $MY_BRANCH
+# push the branch and set the remote
+git push -u origin $MY_BRANCH
+```
 
-  # push the branch and set the remote
-  git push -u origin $MY_BRANCH
-
-  ```
-
-- Your prompt should end like this
-  - /workspaces/Pilot-in-a-Box (mybranch) $
+Your prompt should end like this `/workspaces/Pilot-in-a-Box (mybranch) $ ...`.
 
 ## inner-loop Labs
 
-- [Lab 1](./labs/inner-loop.md#pib-inner-loop): Create, build, deploy, and test a new dotnet application and observability stack on your local cluster
-- [Lab 2](./labs/inner-loop-flux.md#create-a-new-cluster): Configure flux to automate the deployment process from Lab 1
+- [Lab 1](./labs/inner-loop.md#pib-inner-loop): Create, build, deploy, and test a new dotnet application
+  and observability stack on your local cluster.
+- [Lab 2](./labs/inner-loop-flux.md#create-a-new-cluster): Configure flux to automate the deployment
+  process from Lab 1.
 
 ## outer-loop Labs
 
-- [Lab 1](./labs/outer-loop.md#pib-outer-loop): Create a dev/test cluster and manage application deployments on the cluster
-- [Lab 2](./labs/outer-loop-multi-cluster.md#pib-outer-loop-multi-cluster): Manage application deployments on a fleet of multiple clusters
-- [Lab 3](./labs/outer-loop-ring-deployment.md#pib-outer-loop-with-ring-based-deployment): Configure ring based deployments
-
-- [Lab 4](./labs/azure-codespaces-setup.md#azure-subscription-and-codespaces-setup): Set up Azure subscription and Codespaces for advanced configuration
+- [Lab 1](./labs/outer-loop.md#pib-outer-loop): Create a dev/test cluster and manage application
+  deployments on the cluster.
+- [Lab 2](./labs/outer-loop-multi-cluster.md#pib-outer-loop-multi-cluster): Manage application deployments
+  on a fleet of multiple clusters.
+- [Lab 3](./labs/outer-loop-ring-deployment.md#pib-outer-loop-with-ring-based-deployment): Configure
+  ring-based deployments.
+- [Lab 4](./labs/azure-codespaces-setup.md#azure-subscription-and-codespaces-setup): Set up Azure
+  subscription and Codespaces for advanced configuration.
   - This is a prerequisite for the Advanced Labs
 
 ## Advanced Labs
 
-- [Arc enabled GitOps Lab](./labs/outer-loop-arc-gitops.md#pib-outer-loop-with-arc-enabled-gitops): Deploy to dev cluster running on an Azure VM with Arc enabled GitOps
-- [Canary Deployment Lab](./labs/advanced-labs/canary/README.md#pib-automated-canary-deployment-using-flagger): Use Flagger to experiment with canary deployments
-- [Vision on Edge (VoE) Lab](./labs/advanced-labs/voe/README.md#pib-outer-loop-vision-on-edge-voe): Deploy a more complex app (VoE) to a fleet
-- [Centralized Observability Lab](./labs/advanced-labs/monitoring/README.md#pib-centralized-monitoring): Deploy a centralized observability system with Fluent Bit, Prometheus, and Grafana to monitor fleet application deployments
-- [outer-loop with AKS-IoT](./labs/advanced-labs/aks-iot/README.md#pib-outer-loop-to-aks-iot): Deploy to an AKS-IoT cluster running on an Azure VM with Arc enabled GitOps
-- [outer-loop with AKS Lab](./labs/outer-loop-aks-azure.md#pib-outer-loop-to-aks-on-azure): Deploy to an AKS cluster with Arc enabled GitOps
+- [Arc enabled GitOps Lab](./labs/outer-loop-arc-gitops.md#pib-outer-loop-with-arc-enabled-gitops):
+  Deploy to dev cluster running on an Azure VM with Arc enabled GitOps.
+- [Canary Deployment Lab](./labs/advanced-labs/canary/README.md#pib-automated-canary-deployment-using-flagger):
+  Use Flagger to experiment with canary deployments.
+- [Vision on Edge (VoE) Lab](./labs/advanced-labs/voe/README.md#pib-outer-loop-vision-on-edge-voe):
+  Deploy a more complex app (VoE) to a fleet.
+- [Centralized Observability Lab](./labs/advanced-labs/monitoring/README.md#pib-centralized-monitoring):
+  Deploy a centralized observability system with Fluent Bit, Prometheus, and Grafana to monitor fleet
+  application deployments.
+- [outer-loop with AKS-IoT](./labs/advanced-labs/aks-iot/README.md#pib-outer-loop-to-aks-iot): Deploy
+  to an AKS-IoT cluster running on an Azure VM with Arc enabled GitOps.
+- [outer-loop with AKS Lab](./labs/outer-loop-aks-azure.md#pib-outer-loop-to-aks-on-azure): Deploy to
+  an AKS cluster with Arc enabled GitOps.
 
 ## Cleanup
 
-- Once you are finished with all of the labs and experimenting, please delete your branch
+- Once you are finished with all of the labs and experimenting, please delete your branch.
 
-  ```bash
+```bash
+# change to the root of the repo
+cd $PIB_BASE
 
-  # change to the root of the repo
-  cd $PIB_BASE
+git pull
+git add .
+git commit -am "deleting branch"
+git push
 
-  git pull
-  git add .
-  git commit -am "deleting branch"
-  git push
-
-  # checkout main branch, delete remote, delete local
-  git checkout main
-  git push origin $MY_BRANCH --delete
-  git branch -D $MY_BRANCH
-
-  ```
+# checkout main branch, delete remote, delete local
+git checkout main
+git push origin $MY_BRANCH --delete
+git branch -D $MY_BRANCH
+```
 
 ## Support
 
-This project uses GitHub Issues to track bugs and feature requests. Please search the existing issues before filing new issues to avoid duplicates.  For new issues, file your bug or feature request as a new issue.
+This project uses GitHub Issues to track bugs and feature requests. Please search the existing issues
+before filing new issues to avoid duplicates.  For new issues, file your bug or feature request as a
+new issue. See the [Contributing Guidance](.github/CONTRIBUTING.md) for more details.
 
 ## Contributing
 
