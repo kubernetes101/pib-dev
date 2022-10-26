@@ -1,12 +1,16 @@
-# PiB Automated Canary deployment using Flagger
+# PiB Automated Canary Deployment Using Flagger
 
 ## Introduction
 
-[Flagger](https://flagger.app/) is a progressive delivery tool that automates the release process for applications running on Kubernetes. It takes a Kubernetes deployment and creates a series of objects (Kubernetes deployments, ClusterIP services and Contour HTTPProxy) for an application. These objects expose the application in the cluster and drive the canary analysis and promotion.
+[Flagger](https://flagger.app/) is a progressive delivery tool that automates the release process
+for applications running on Kubernetes. It takes a Kubernetes deployment and creates a series of objects
+(Kubernetes deployments, ClusterIP services and Contour HTTPProxy) for an application. These objects
+expose the application in the cluster and drive the canary analysis and promotion.
 
 ## Lab Prerequisites
 
-- Complete outer-loop [Lab 1](../../outer-loop.md) and skip the [Delete Your Cluster](../../outer-loop.md#delete-your-cluster) section
+Complete outer-loop [Lab 1](../../outer-loop.md) **BUT** skip the [Delete Your Cluster](../../outer-loop.md#delete-your-cluster) section. The subsequent sections rely on the environment variables set in these
+labs.
 
 ## Validate cluster identifier and working branch
 
@@ -24,7 +28,6 @@ git branch --show-current
 ## Install Flagger
 
 ```bash
-
 # make sure you are in canary directory
 cd $PIB_BASE/labs/advanced-labs/canary
 
@@ -42,28 +45,25 @@ cd apps/flagger
 # check deploy targets (should be [])
 flt targets list
 
-# clear the targets if not []
-flt targets clear
+# if not [] then clear the targets
+# flt targets clear
 
 # add all clusters as a target
 flt targets add all
 
 # deploy the changes
 flt targets deploy
-
 ```
 
-### Check that your GitHub Action is running
+### Check Github Action Status
 
-- <https://github.com/kubernetes101/pib-dev/actions>
-  - your action should be queued or in-progress
+Check that your GitHub Action is running, either queued or in-progress. Check the action here: <https://github.com/kubernetes101/pib-dev/actions> TODO: Is this URL for all builds or will it be for a presumably forked repo?
 
-### Check deployment
+### Check Deployment
 
-- Once the action completes successfully
+Once the action completes successfully, check the deployment:
 
 ```bash
-
 # you should see flagger added to your cluster
 git pull
 
@@ -75,147 +75,139 @@ flt sync
 # NOTE: We also deploy prometheus to scrape metrics to monitor Canary deployment
 flt check app flagger
 flt check app prometheus
-
 ```
 
-## Update reference app to use Canary deployment Strategy
+## Update Reference App to Use Canary Deployment Strategy
 
-- To update IMDb reference app to use canary deployment template:
-  - Update `apps/imdb/app.yaml` with template value </br>
-      `template: pib-service-canary`
+In order to update IMDb reference app to use canary deployment template, you'll need to update a few
+values. In `apps/imdb/app.yaml`, change the `template` line to be `template: pib-service-canary` instead
+of `template: pib-service`
 
-    ```bash
+```bash
+# deploy imdb with canary template
+cd ../imdb
+flt targets deploy
+```
 
-    # deploy imdb with canary template
-    cd ../imdb
-    flt targets deploy
+Once the [github action](https://github.com/kubernetes101/pib-dev/actions) is completed, force flux
+to sync:
 
-    ```
+```bash
+# force flux to sync
+# flux will sync on a schedule - this command forces it to sync now for debugging
+git pull
+flt sync
+```
 
-  - Once the [github action](https://github.com/kubernetes101/pib-dev/actions) is completed, force flux to sync:
+The reference app should be updated with Canary Deployment objects listed:
 
-     ```bash
+```bash
+deployment.apps/imdb
+deployment.apps/imdb-primary
+deployment.apps/webv-imdb
+service/imdb
+service/imdb-canary
+service/imdb-primary
+service/webv-imdb
+httpproxy.projectcontour.io/imdb
+```
 
-    # force flux to sync
-    # flux will sync on a schedule - this command forces it to sync now for debugging
-    git pull
-    flt sync
+Then validate primary and canary objects in the cluster:
 
-    ```
+```bash
+flt ssh $MY_CLUSTER
+kic pods
+kic svc
+kubectl get canary -n imdb
 
-    The reference app should be updated with Canary Deployment objects listed:
+# exit from cluster
+exit
+```
 
-    ```bash
+## Observe Automated Canary Promotion
 
-      deployment.apps/imdb
-      deployment.apps/imdb-primary
-      deployment.apps/webv-imdb
-      service/imdb
-      service/imdb-canary
-      service/imdb-primary
-      service/webv-imdb
-      httpproxy.projectcontour.io/imdb
+Next, trigger a canary deployment by updating the container image for IMDb. In `apps/imdb/app.yaml`,
+change the image tag from `latest` to `beta`: `image: ghcr.io/cse-labs/pib-imdb:beta`.
 
-    ```
+```bash
+# deploy imdb with updated version
+cd ../imdb
+flt targets deploy
+```
 
-  - Validate primary and canary objects in the cluster:
+Once the [github action](https://github.com/kubernetes101/pib-dev/actions) is completed, force flux
+to sync again:
 
-    ```bash
+```bash
+# force flux to sync
+# flux will sync on a schedule - this command forces it to sync now for debugging
+git pull
+flt sync
+```
 
-    flt ssh $MY_CLUSTER
-    kic pods
-    kic svc
-    kubectl get canary -n imdb
+You can then observe the canary promotion in K9s:
 
-    # exit from cluster
-    exit
+```bash
+# start K9s for the cluster
+flt ssh $MY_CLUSTER
+k9s <enter>
+```
 
-    ```
+In K9s, you can type a few commands to view and observe the objects.
 
-## Observe automated canary promotion
+- Type `:canaries <enter>` to view canary object.
+- Observe `status` and `weight` for canary promotion.
 
-- Trigger a canary deployment by updating the container image for IMDb:
-  - Update `apps/imdb/app.yaml` with image tag from `latest` to `beta` </br>
-      `image: ghcr.io/cse-labs/pib-imdb:beta`
+> **NOTE**: Flagger detects the deployment version change and starts a new rollout with 20% traffic
+> progression. Once a canary `status` is updated to `Succeeded`, 100% of the traffic should be routed
+> to the new version.
 
-    ```bash
+To go back:
 
-    # deploy imdb with updated version
-    cd ../imdb
-    flt targets deploy
+- Press `enter` again and scroll to bottom to see events.
+- Press `escape` to go back.
+- Exit K9s: `:q <enter>`.
+- Exit from cluster: `exit <enter>`.
 
-    ```
+## Monitoring Canary Deployments Using Grafana
 
-  - Once the [github action](https://github.com/kubernetes101/pib-dev/actions) is completed, force flux to sync:
+Flagger comes with a Grafana dashboard made for canary analysis. Install Grafana following the instructions
+below.
 
-    ```bash
+```bash
+# cd to canary directory
+cd $PIB_BASE/labs/advanced-labs/canary
 
-    # force flux to sync
-    # flux will sync on a schedule - this command forces it to sync now for debugging
-    git pull
-    flt sync
+# copy flagger to apps directory
+cp -R ./flagger-grafana ../../../apps
 
-    ```
+# add and commit the flagger-grafana app
+cd $PIB_BASE
+git add .
+git commit -am "added flagger-grafana app"
+git push
 
-- Observe canary promotion in k9s:
+cd apps/flagger-grafana
 
-  ```bash
+# check deploy targets (should be [])
+flt targets list
 
-  # start k9s for the cluster
-  flt ssh $MY_CLUSTER
-  k9s <enter>
+# if not [], clear the targets
+# flt targets clear
 
-  ```
+# add all clusters as a target
+flt targets add all
 
-  - Type `:canaries <enter>` to view canary object
-  - Observe `status` and `weight` for canary promotion
+# deploy the changes
+flt targets deploy
+```
 
-    > - Flagger detects the deployment version change and starts a new rollout with 20% traffic progression
-    > - Once canary `status` is updated to `Succeeded`, 100% of the traffic should be routed to new version
+Once the [github action](https://github.com/kubernetes101/pib-dev/actions) is completed and flux sync
+is performed, navigate to grafana dashboard by appending `/grafana` to the host url in the browser tab.
 
-  - Press `enter` again and scroll to bottom to see events
-  - Press `escape` to go back
-  - Exit K9s: `:q <enter>`
-  - Exit from cluster: `exit <enter>`
+The default Grafana login info is a user name of `admin` with a password of `change-me`.
 
-## Monitoring Canary deployments using Grafana
-
-Flagger comes with a Grafana dashboard made for canary analysis. Install Grafana
-
-  ```bash
-
-  # cd to canary directory
-  cd $PIB_BASE/labs/advanced-labs/canary
-
-  # copy flagger to apps directory
-  cp -R ./flagger-grafana ../../../apps
-
-  # add and commit the flagger-grafana app
-  cd $PIB_BASE
-  git add .
-  git commit -am "added flagger-grafana app"
-  git push
-
-  cd apps/flagger-grafana
-
-  # check deploy targets (should be [])
-  flt targets list
-
-  # clear the targets if not []
-  flt targets clear
-
-  # add all clusters as a target
-  flt targets add all
-
-  # deploy the changes
-  flt targets deploy
-
-  ```
-
-Once the [github action](https://github.com/kubernetes101/pib-dev/actions) is completed and flux sync is performed, navigate to grafana dashboard by appending `/grafana` to the host url in the browser tab.
-
-- Grafana login info
-  - admin
-  - change-me
-
-![Canary Dashboard](../../images/envoyCanaryDashboard.png)
+![An image of an example Canary Dashboard on Grafana. There are a few graphs indicating traffic metrics.
+On the left hand side of the image there are the metrics for the "Primary" Deployment, where previous
+activity is visible. On the right hand side of the image, there are the graphs and metrics from the
+canary deployment, which should no current activity.](../../images/envoyCanaryDashboard.png)
