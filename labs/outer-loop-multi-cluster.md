@@ -9,36 +9,35 @@
 # the value can be overwritten if needed
 echo $MY_BRANCH
 
-# make sure your branch is set and pushed remotely
-# commands will fail if you are in main branch
-git branch --show-current
-
 ```
 
 ## Login to Azure
 
-- Login to Azure using `az login --use-device-code`
-  > Use `az login --use-device-code --tenant <tenant>` to specify a different tenant
-  - If you have more than one Azure subscription, select the correct subscription
+Login to Azure using `az login --use-device-code`.
 
-    ```bash
+Use `az login --use-device-code --tenant <tenant>` to specify a different tenant if you have access
+to more than one tenant.
 
-    # verify your account
-    az account show
+If you have more than one Azure subscription, select the correct subscription:
 
-    # list your Azure accounts
-    az account list -o table
+```bash
 
-    # set your Azure subscription
-    az account set -s mySubNameOrId
+# verify your account
+az account show
 
-    # verify your account
-    az account show
+# list your Azure accounts
+az account list -o table
 
-    ```
+# set your Azure subscription
+az account set -s mySubNameOrId
 
-- Validate user role on subscription
-  > Make sure your RoleDefinitionName is `Contributor` or `Owner` to create resources in this lab succssfully
+# verify your account
+az account show
+
+```
+
+Validate the user role on subscription. Make sure your RoleDefinitionName is `Contributor` or `Owner`
+to create resources in this lab successfully.
 
   ```bash
 
@@ -50,120 +49,111 @@ git branch --show-current
 
 ## Create 3 Clusters
 
-- Use one Azure Resource Group
-- Create a cluster in each region
-  - You can use different names as long as they are unique
-  - Standard Naming Format
-    - region (central, east, west)
-    - state
-    - city
-    - store_number
+In one Azure Resource Group, create a cluster in three different regions. You can use different
+names as long as they are unique.
 
-    ```bash
+In our example we're using the following name format:
+region (central, east, west), state, the branch name, and a "store number."
 
-    # start in the base of the repo
-    cd $PIB_BASE
+```bash
 
-    flt create \
-        -g $MY_BRANCH-fleet \
-        -c central-tx-$MY_BRANCH-1001 \
-        -c east-ga-$MY_BRANCH-1001 \
-        -c west-wa-$MY_BRANCH-1001
+# start in the base of the repo
+cd $PIB_BASE
 
-    ```
+flt create \
+    -g $MY_BRANCH-fleet \
+    -c central-tx-$MY_BRANCH-1001 \
+    -c east-ga-$MY_BRANCH-1001 \
+    -c west-wa-$MY_BRANCH-1001
+
+```
 
 ## Verifying the Clusters
 
-- Update Git Repo after [CI-CD](https://github.com/kubernetes101/pib-dev/actions) is complete (usually about 30 seconds)
+Update Git Repo after [CI-CD](https://github.com/kubernetes101/pib-dev/actions) is complete.
+This usually takes about 30 seconds.
 
-  ```bash
+```bash
 
-  # update the git repo after ci-cd completes
-  git pull
+# update the git repo after ci-cd completes
+git pull
 
-  # add ips to repo
-  git add ips
-  git commit -am "added ips"
-  git push
+# add ips to repo
+git add ips
+git commit -am "added ips"
+git push
 
-  ```
+```
 
-- Verify clusters setup
+Then verify the cluster's setup with `flt check setup`. Check the setup status for "complete",
+and rerun as necessary.
 
-  ```bash
+You can check the heartbeat.
 
-  # check the setup for "complete"
-  # rerun as necessary
-  flt check setup
+```bash
 
-  ```
+# check that heartbeat is running on your cluster
+flt check heartbeat
 
-- Check Heartbeat
+# check heartbeat on clusters in specific region
+flt check heartbeat --filter central
 
-  ```bash
-
-  # check that heartbeat is running on your cluster
-  flt check heartbeat
-
-  # check heartbeat on clusters in specific region
-  flt check heartbeat --filter central
-
-  ```
+```
 
 ## IMDb Deployment
 
-- By default, the IMDb app is not deployed to any clusters
-- Experiment with different deployments
+By default, the IMDb app is not deployed to any clusters. So now we can experiment with
+different deployments!
 
-  ```bash
+```bash
 
-  # start in the apps/imdb directory
-  cd $PIB_BASE/apps/imdb
+# start in the apps/imdb directory
+cd $PIB_BASE/apps/imdb
 
-  # deploy to central and west regions
-  flt targets add region:central region:west
-  flt targets deploy
+# deploy to central and west regions
+flt targets add region:central region:west
+flt targets deploy
 
-  # wait for ci-cd to complete and update the cluster
-  git pull
-  flt sync
+# wait for ci-cd to complete and update the cluster
+git pull
+flt sync
 
-  # check the cluster for imdb
-  flt check app imdb
+# check the cluster for imdb
+flt check app imdb
 
-  # deploy to just the east region
-  flt targets clear
-  flt targets add region:east
-  flt targets deploy
+# deploy to just the east region
+flt targets clear
+flt targets add region:east
+flt targets deploy
 
-  # wait for ci-cd to complete and update the repo
-  git pull
-  flt sync
+# wait for ci-cd to complete and update the repo
+git pull
+flt sync
 
-  # check the cluster for imdb
-  flt check app imdb
+# check the cluster for imdb
+flt check app imdb
 
-  # deploy to all clusters
-  flt targets clear
-  flt targets add all
-  flt targets deploy
+# deploy to all clusters
+flt targets clear
+flt targets add all
+flt targets deploy
 
-  # wait for ci-cd to complete and update the repo
-  git pull
-  flt sync
+# wait for ci-cd to complete and update the repo
+git pull
+flt sync
 
-  # check the cluster for imdb
-  flt check app imdb
+# check the cluster for imdb
+flt check app imdb
 
-  ```
+```
 
 ## Deploy Dogs-Cats App
 
-- Dogs and cats app is a simple "voting" app for demo purposes
-  - Note that dogs-cats and IMDb cannot be deployed to the same cluster due to ingress conflicts
-    - In a production environment, you would add ingress rules for host, url, or port based routing
+The "Dogs and Cats" app is a simple "voting" app for demo purposes.
 
-> Start in the apps/imdb directory
+> Note here that dogs-cats and IMDb cannot be deployed to the same cluster due to ingress conflicts.
+
+In a production environment, you would add ingress rules for host, url, or port-based routing.
 
 ```bash
 
@@ -194,7 +184,7 @@ flt curl /version
 
 ## Clean Up
 
-- Once you are finished with the workshop, you can delete your Azure resources
+Once you are finished with the workshop, you can delete your Azure resources.
 
 ```bash
 
