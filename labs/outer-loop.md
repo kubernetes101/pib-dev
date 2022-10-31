@@ -2,27 +2,33 @@
 
 ## Introduction
 
-- As part of PiB, we have automated the creation of `dev/test clusters` using a repeatable, consistent, Infrastructure as Code approach
-- PiB ships a separate CLI (`flt`) for outer-loop dev/test clusters
-- The dev/test clusters run `k3d` in an `Azure VM`
-- `flt` connects to the dev/test VMs via SSH
-- Access to the dev/test fleet can be shared between Codespaces and users
-  - We have an advanced workshop under development for fleet sharing
+As part of PiB, we have automated the creation of dev/test clusters using a repeatable,
+consistent, Infrastructure as Code approach. PiB ships a separate CLI (`flt`) for `outer-loop` dev/test
+clusters.
 
-![images](./images/outer-loop..drawio.png)
+The clusters run `k3d` in an Azure Virtual Machine (VM). `flt` connects to the dev/test VMs via SSH.
+Access to the dev/test fleet can be shared between Codespaces and users.
 
-## flt CLI
+We have an advanced workshop under development for fleet sharing! Keep your eyes out.
 
-- `flt` encapsulates many of the hard concepts of K8s for the application developer, tester, and ops team
-- A design requirement is that `flt` can't have any "magic"
-  - Anything you can do with `flt`, you can do using standard K8s tools
-- `flt` has rich tab completion
-- `flt` is `context aware`
-  - Running `flt list` will return Error: unknown command "list" for "flt"
-- The `flt CLI` is customizable and extensible
-  - We have a workshop under development as an advanced scenario
+![A diagram with a simplified fleet diagram. TODO: This diagram could be clearer.](./images/outer-loop.png)
 
-## Experiment with the `flt CLI`
+## `flt` CLI
+
+`flt` encapsulates many of the hard concepts of kubernetes (K8s) for the application developer,
+tester, and ops team. A design requirement is that `flt` can't have any "magic." Anything you can
+do with `flt`, you can do using standard K8s tools.
+
+`flt` has rich tab completion and is "context aware"; that is, depending on your location in the
+directory structure and what you have already run, different commands will be available to you.
+
+Running `flt list` will return `Error: unknown command "list" for "flt"` when you first start, since
+no fleets exist yet. TODO: CONFIRM THIS
+
+The `flt` CLI is customizable and extensible - we have a workshop under development as an advanced
+scenario! Keep an eye out!
+
+## Experiment with the `flt` CLI
 
 ```bash
 
@@ -55,36 +61,39 @@ git branch --show-current
 
 ## Login to Azure
 
-- Login to Azure using `az login --use-device-code`
-  > Use `az login --use-device-code --tenant <tenant>` to specify a different tenant
-  - If you have more than one Azure subscription, select the correct subscription
+Login to Azure using `az login --use-device-code`.
 
-    ```bash
+Use `az login --use-device-code --tenant <tenant>` to specify a different tenant if you have access
+to more than one tenant.
 
-    # verify your account
-    az account show
+If you have more than one Azure subscription, select the correct subscription:
 
-    # list your Azure accounts
-    az account list -o table
+```bash
 
-    # set your Azure subscription
-    az account set -s mySubNameOrId
+# verify your account
+az account show
 
-    # verify your account
-    az account show
+# list your Azure accounts
+az account list -o table
 
-    ```
+# set your Azure subscription
+az account set -s mySubNameOrId
 
-- Validate user role on subscription
-  > Make sure your RoleDefinitionName is `Contributor` or `Owner` to create resources in this lab succssfully
+# verify your account
+az account show
 
-  ```bash
+```
 
-  # get az user name and validate your role assignment
-  principal_name=$(az account show --query "user.name" --output tsv | sed -r 's/[@]+/_/g')
-  az role assignment list --query "[].{principalName:principalName, roleDefinitionName:roleDefinitionName, scope:scope} | [? contains(principalName,'$principal_name')]" -o table
+Validate the user role on the subscription, and make sure your RoleDefinitionName is `Contributor`
+or `Owner` to create resources in this lab successfully.
 
-  ```
+```bash
+
+# get az user name and validate your role assignment
+principal_name=$(az account show --query "user.name" --output tsv | sed -r 's/[@]+/_/g')
+az role assignment list --query "[].{principalName:principalName, roleDefinitionName:roleDefinitionName, scope:scope} | [? contains(principalName,'$principal_name')]" -o table
+
+```
 
 ## Create a Dev Cluster
 
@@ -101,9 +110,10 @@ flt create cluster -c $MY_CLUSTER
 
 ## Update Git Repo
 
-- `flt create` generates GitOps files for the cluster
-- [CI-CD](https://github.com/kubernetes101/pib-dev/actions) generates the deployment manifests
-  - Wait for CI-CD to complete (usually about 30 seconds)
+`flt create` generates GitOps files for the cluster.
+
+A GitHub action [CI-CD](https://github.com/kubernetes101/pib-dev/actions) generates the deployment
+manifests. You will need to wait for CI-CD to complete, which usually takes about 30 seconds.
 
 ```bash
 
@@ -119,12 +129,11 @@ git push
 
 ## Verify the Cluster Setup
 
-> If you get an SSH error, just retry every few seconds for the SSHD server to configure and start
+> If you get an SSH error, just retry every few seconds for the SSHD server to configure and start.
 
-- `flt create` creates the Azure VM that hosts the k3d cluster
-- Additional setup is done via the `cloud-init` script
-- We have to wait for the k3d setup to complete
-  - This usually takes 3-4 minutes after VM setup completes
+`flt create` creates the Azure VM that hosts the `k3d` cluster. Any additional setup is done via the
+`cloud-init` script. We have to wait for the `k3d` setup to complete, which usually takes 3-4 minutes
+after the VM setup completes.
 
 ```bash
 
@@ -140,9 +149,8 @@ watch flt check setup
 
 ## Force GitOps to Sync
 
-- We use Flux v2 for GitOps
-- Flux synchs on a schedule (1 minute)
-- We can force Flux to sync (reconcile) immediately at any time
+We use Flux v2 for GitOps. Flux syncs on a schedule  of 1 minute. We can force Flux to sync (reconcile)
+immediately at any time.
 
 ```bash
 
@@ -156,11 +164,10 @@ flt check flux
 
 ## Check Heartbeat
 
-- We deploy the `heartbeat` app to the cluster for observability
-- Check the heartbeat status
-  - Note that heartbeat uses Let's Encrypt for ingress
-    - It can take up to 60 seconds for the Let's Encrypt handshake to complete
-    - It's normal to get a `no healthy upstream` error until the handshake is completed
+We deploy the `heartbeat` app to the cluster for observability. We check the heartbeat status and
+note that heartbeat uses "Let's Encrypt" for ingress.  It can take up to 60 seconds for the "Let's
+Encrypt" handshake to complete. It's normal to get a `no healthy upstream` error until the handshake
+is completed.
 
 ```bash
 
@@ -174,15 +181,17 @@ flt curl /heartbeat/17
 
 ## Deploy Reference App
 
-- PiB provides a reference application - IMDb
-  - dotnet WebAPI that exposes actors, genres, and movies from a subset of the IMDb data set
-- `flt` provides `GitOps Automation` for the dev/test fleet
-- The `flt targets` commands control which clusters an app is deployed to
-  - `flt targets` is context aware, so the current directory matters
-- `flt targets` can use any KV pair defined in the cluster metadata
-  - `flt targets add all` is a special case that deploys to all clusters in the fleet (which is 1 for this lab)
-    - Note that the `all` target must be the only target specified
-  - An advanced workshop demonstrating `ring based deployment` is under development
+PiB provides a reference application IMDB, which is a dotnet WebAPI that exposes actors, genres,
+and movies from a subset of the IMDb data set.
+
+`flt` provides GitOps Automation for the dev/test fleet. The `flt targets` commands control which
+clusters an app is deployed to. `flt targets` is context aware, so the current directory matters!
+The command can use any KV pair defined in the cluster metadata too.
+
+`flt targets add all` is a special case that deploys to all clusters in the fleet (which is one fleet
+for this lab). Note that the `all` target must be the only target specified.
+
+An advanced workshop demonstrating `ring based deployment` can be found [here](outer-loop-ring-deployment.md).
 
 ```bash
 
@@ -211,14 +220,13 @@ flt targets deploy
 
 ```
 
-## Wait for ci-cd to finish
+## Wait for `ci-cd` to finish
 
-- Check [ci-cd status](https://github.com/kubernetes101/pib-dev/actions)
+Check on the [ci-cd status](https://github.com/kubernetes101/pib-dev/actions).
 
 ## Update Cluster
 
-- Force the cluster to sync
-- Update local git repo
+Force the cluster to sync and then update the local git repo.
 
 ```bash
 
@@ -232,7 +240,7 @@ flt sync
 
 ## Verify IMDb was Deployed
 
-- You may have to retry the command a few times as the pods start
+> You may have to retry the command a few times as the pods start.
 
 ```bash
 
@@ -243,60 +251,61 @@ flt check app imdb
 
 ## Curl an IMDb URL
 
-- Note that IMDb uses Let's Encrypt for ingress
-  - It can take up to 60 seconds for the Let's Encrypt handshake to complete
-  - It's normal to get a `no healthy upstream` error until the handshake is completed
+Note that IMDb uses "Let's Encrypt" for ingress. It can take up to 60 seconds for the "Let's Encrypt"
+handshake to complete. It's normal to get a `no healthy upstream` error until the handshake is
+completed.
 
-    ```bash
+```bash
 
-    flt curl /version
+flt curl /version
 
-    # curl additional URLs
-    flt curl /healthz
-    flt curl /readyz
-    flt curl /api/genres
-    flt curl /metrics
+# curl additional URLs
+flt curl /healthz
+flt curl /readyz
+flt curl /api/genres
+flt curl /metrics
 
-    ```
+```
 
 ## Test DNS Integration
 
-- Use http to test your external DNS name
+Use `http` to test your external DNS name.
 
-  ```bash
+```bash
 
-  # export MY_IP
-  cd $PIB_BASE
-  export MY_IP=$(cat ips | cut -f2)
+# export MY_IP
+cd $PIB_BASE
+export MY_IP=$(cat ips | cut -f2)
 
-  http http://$MY_IP/version
+http http://$MY_IP/version
 
-  http http://$MY_IP/api/genres
+http http://$MY_IP/api/genres
 
-  ```
+```
 
 ## Delete Your Cluster
 
-- Once you're finished with the workshop and experimenting, delete your cluster
+Once you're finished with the workshop and experimenting, delete your cluster.
 
-  ```bash
+```bash
 
-  # start in the root of your repo
-  cd $PIB_BASE
-  git pull
-  flt delete $MY_CLUSTER
-  rm ips
-  git commit -am "deleted cluster"
-  git push
+# start in the root of your repo
+cd $PIB_BASE
+git pull
+flt delete $MY_CLUSTER
+rm ips
+git commit -am "deleted cluster"
+git push
 
-  ```
+```
 
-- You can recreate your cluster at any time
-  - Note that to reuse the same name, you have to wait for the Azure RG to delete
+You can recreate your cluster at any time.
 
-    ```bash
+> To reuse the same name, you have to wait for the Azure resource group to delete.
 
-    # you should see your RG in the "deleting" state
-    flt az groups
+```bash
 
-    ```
+# you should see your RG in the "deleting" state
+flt az groups
+
+```

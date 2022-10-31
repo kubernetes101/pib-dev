@@ -17,25 +17,28 @@ git branch --show-current
 
 ## Login to Azure
 
-- Login to Azure using `az login --use-device-code`
-  > Use `az login --use-device-code --tenant <tenant>` to specify a different tenant
-  - If you have more than one Azure subscription, select the correct subscription
+Login to Azure using `az login --use-device-code`.
 
-    ```bash
+Use `az login --use-device-code --tenant <tenant>` to specify a different tenant if you have access
+to more than one tenant.
 
-    # verify your account
-    az account show
+If you have more than one Azure subscription, select the correct subscription:
 
-    # list your Azure accounts
-    az account list -o table
+```bash
 
-    # set your Azure subscription
-    az account set -s mySubNameOrId
+# verify your account
+az account show
 
-    # verify your account
-    az account show
+# list your Azure accounts
+az account list -o table
 
-    ```
+# set your Azure subscription
+az account set -s mySubNameOrId
+
+# verify your account
+az account show
+
+```
 
 - Validate user role on subscription
   > Make sure your RoleDefinitionName is `Contributor` or `Owner` to create resources in this lab succssfully
@@ -50,10 +53,14 @@ git branch --show-current
 
 ## Create/Set Managed Identity
 
-- If you don't already have managed identity set in your subscription, follow [these steps](./azure-codespaces-setup.md#create-managed-identity) to create RG and MI
-- Run `flt env` and make sure `PIB_MI` is set
+If you don't already have managed identity set in your subscription, follow [these steps](./azure-codespaces-setup.md#create-managed-identity)
+to create a resource group and managed identity.
+
+Run `flt env` and make sure `PIB_MI` is set.
 
 ## Create an Arc enabled Dev Cluster
+
+> The cluster name here is just an example. You can follow a different pattern.
 
 ```bash
 
@@ -68,8 +75,8 @@ flt create cluster -c $MY_CLUSTER --arc
 
 ## Update Git Repo
 
-- [CI-CD](https://github.com/kubernetes101/pib-dev/actions) generates the deployment manifests
-  - Wait for CI-CD to complete (usually about 30 seconds)
+[CI-CD](https://github.com/kubernetes101/pib-dev/actions) generates the deployment manifests. You
+will have to wait for CI-CD to complete, which usually takes about 30 seconds.
 
 ```bash
 
@@ -99,64 +106,67 @@ watch flt check setup
 
 ## Deploy IMDb App
 
-- Deploy IMDb app to Arc enabled K3d cluster
+Deploy IMDb app to Arc-enabled K3d cluster:
 
-  ```bash
+```bash
 
-  # start in the apps/imdb directory
-  cd $PIB_BASE/apps/imdb
+# start in the apps/imdb directory
+cd $PIB_BASE/apps/imdb
 
-  # deploy to central and west regions
-  flt targets add all
-  flt targets deploy
+# deploy to central and west regions
+flt targets add all
+flt targets deploy
 
-  ```
+```
 
-- Wait for [ci-cd](https://github.com/kubernetes101/pib-dev/actions) to finish
-- Force cluster to sync
+Then wait for [ci-cd](https://github.com/kubernetes101/pib-dev/actions) to finish.
 
-  ```bash
+You can force cluster to sync:
 
-  # should see imdb added
-  git pull
+```bash
 
-  # force flux to reconcile
-  flt sync
+# should see imdb added
+git pull
 
-  ```
+# force flux to reconcile
+flt sync
+
+```
 
 ## Validate IMDb app on Azure Arc
 
-- Get Azure Arc bearer token by running
-  `flt az arc-token`
-- Login to Azure Portal and navigate to `Azure Arc` service
-- Click on `Kubernetes clusters` from the left nav and select your cluster
-- Click on `Workloads` from the left nav and place bearer token retrieved earlier
-- Validate the IMDb app running on the cluster
+You can get Azure Arc bearer token by running `flt az arc-token`.
+
+To check the app:
+
+- Login to Azure Portal and navigate to `Azure Arc` service.
+- Click on `Kubernetes clusters` from the left navigation and select your cluster.
+- Click on `Workloads` from the left navigation and place bearer token retrieved earlier.
+- Validate the IMDb app running on the cluster.
 
 ## Delete Your Cluster
 
-- Once you're finished with the workshop and experimenting, delete your cluster
+Once you're finished with the workshop and experimenting, delete your cluster.
 
-  ```bash
+```bash
 
-  # start in the root of your repo
-  cd $PIB_BASE
-  git pull
+# start in the root of your repo
+cd $PIB_BASE
+git pull
 
-  # delete azure resource
-  flt delete $MY_CLUSTER
+# delete azure resource
+flt delete $MY_CLUSTER
 
-  # remove ips file
-  rm ips
+# remove ips file
+rm ips
 
-  # reset the targets
-  cd apps/imdb
-  flt targets clear
-  cd ../..
+# reset the targets
+cd apps/imdb
+flt targets clear
+cd ../..
 
-  # update the repo
-  git commit -am "deleted cluster"
-  git push
+# update the repo
+git commit -am "deleted cluster"
+git push
 
-  ```
+```
