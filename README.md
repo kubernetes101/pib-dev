@@ -1,19 +1,5 @@
 # Pilot-in-a-Box Overview
 
-## Breaking Changes in 0.11.0
-
-- Version 0.11.0 has breaking changes from 0.10.0
-- The CLIs will automatically use the latest when you create a new Codespace
-- Using the 0.11.0 or higher CLIs on an 0.10.0 branch will break
-- To check the version of your CLI
-  - `kic -v`
-  - `flt -v`
-- If you have an existing branch with work you want to save and create a new Codespace you can downgrade the CLI in that CS
-  - Make sure you're in the root of your branch repo
-  - `.devcontainer/cli-update.sh 0.10.0`
-- To go back to the current CLI
-  - `.devcontainer/cli-update.sh`
-
 ## Introduction
 
 Kubernetes is hard. Getting started and set up for the first time can take weeks to get right. Managing deployments on a fleet of Kubernetes clusters on the edge brings even more challenges.
@@ -22,7 +8,7 @@ Pilot-in-a-Box (PiB) is a `game-changer` for the end-to-end Kubernetes app devel
 
 This repo walks through the rich end-to-end developer experience in a series of labs. The labs start by walking you through creating, building, testing, and deploying an application on a local cluster ([inner-loop](./README.md#inner-loop)) with a complete CNCF observability stack. Then, the labs move on to the next step of deploying the application to a test cluster in the Cloud ([outer-loop](./README.md#outer-loop)). There are also several [advanced labs](./README.md#advanced-labs) that cover centralized monitoring, canary deployments, and targeting different devices.
 
-> Note: PiB is not intended as-is for production deployments. However, some concepts covered (GitOps and Observability) are production-ready.
+> PiB is not intended for production deployments. However, some concepts covered (GitOps and Observability) are production-ready
 
 ## Prerequisites
 
@@ -74,13 +60,13 @@ GitHub Codespaces is also available in beta on a limited basis for GitHub Pro us
   - Click `Create Codespace on main`
 - After about 1 minute, you will have a GitHub Codespace running with a complete Kubernetes Developer Experience!
 
-## Note on environment variables
+## Environment variables
 
-- Many of these tutorials make use of environment variables, using the export functionality. If you wish, you can also edit the Z shell preferences file to persist exported environment variables across terminal sessions. Just add the same "export FOO=BAR" lines to your .zshrc file.
+Many of these tutorials make use of environment variables, using the export functionality. If you wish, you can also edit the Z shell preferences file to persist exported environment variables across terminal sessions. Just add the same "export FOO=BAR" lines to your .zshrc file.
 
 ```bash
 
-nano ~/.zshrc
+code ~/.zshrc
 
 ```
 
@@ -133,7 +119,7 @@ nano ~/.zshrc
 
 ## Cleanup
 
-- Once you are finished with all of the labs and experimenting, please delete your branch
+- Once you are finished experimenting, please delete your branch
 
   ```bash
 
@@ -158,21 +144,12 @@ This project uses GitHub Issues to track bugs and feature requests. Please searc
 
 ## Contributing
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit <https://cla.opensource.microsoft.com>.
+This project welcomes contributions and suggestions.  Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit <https://cla.opensource.microsoft.com>.
 
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
+When you submit a pull request, a CLA bot will automatically determine whether you need to provide a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions provided by the bot. You will only need to do this once across all repos using our CLA.
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 ## Trademarks
 
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft
-trademarks or logos is subject to and must follow [Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
-Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
-Any use of third-party trademarks or logos are subject to those third-party's policies.
+This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft trademarks or logos is subject to and must follow [Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general). Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship. Any use of third-party trademarks or logos are subject to those third-party's policies.

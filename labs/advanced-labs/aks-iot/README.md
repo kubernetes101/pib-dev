@@ -3,7 +3,6 @@
 ## AKS-IoT is in Preview
 
 - AKS-IoT is in preview so there's a chance these instructions will change over time
-- Reach out to the soldevx team for access to AKS-IoT preview
 
 ## This document is a work in progress
 
