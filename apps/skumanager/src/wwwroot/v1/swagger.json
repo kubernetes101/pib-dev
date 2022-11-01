@@ -12,9 +12,7 @@
     "responses": {},
     "securityDefinitions": {},
     "security": [],
-    "tags": [
-        "SkuManager"
-    ],
+    "tags": [],
     "schemes": [
         "https",
         "http"
@@ -248,71 +246,69 @@
         }
     },
     "x-sample-data": {
-        "Skus": {
-            "coke12": {
-                "sku": 1234101,
-                "id": "coke12",
-                "name": "Coke 12 oz can",
-                "description": "Coke 12 oz can",
-                "categoryId": "SoftDrinks",
-                "price": 1.09
-            },
-            "coke20": {
-                "sku": 1234102,
-                "id": "coke20",
-                "name": "Coke 20 oz bottle",
-                "description": "Coke 20 oz bottle",
-                "categoryId": "SoftDrinks",
-                "price": 2.19
-            },
-            "dietcoke12": {
-                "sku": 1234103,
-                "id": "dietcoke12",
-                "name": "Diet Coke 12 oz can",
-                "description": "Diet Coke 12 oz can",
-                "categoryId": "SoftDrinks",
-                "price": 1.09
-            },
-            "dietcoke20": {
-                "sku": 1234104,
-                "id": "dietcoke20",
-                "name": "Diet Coke 20 oz bottle",
-                "description": "Diet Coke 20 oz bottle",
-                "categoryId": "SoftDrinks",
-                "price": 2.19
-            },
-            "dp12": {
-                "sku": 1234105,
-                "id": "dp12",
-                "name": "Dr Pepper 12 oz can",
-                "description": "Dr Pepper 12 oz can",
-                "categoryId": "SoftDrinks",
-                "price": 1.09
-            },
-            "dp20": {
-                "sku": 1234106,
-                "id": "dp20",
-                "name": "Dr Pepper 20 oz bottle",
-                "description": "Dr Pepper 20 oz bottle",
-                "categoryId": "SoftDrinks",
-                "price": 2.19
-            },
-            "dietdp12": {
-                "sku": 1234107,
-                "id": "dietdp12",
-                "name": "Diet Dr Pepper 12 oz can",
-                "description": "Diet Dr Pepper 12 oz can",
-                "categoryId": "SoftDrinks",
-                "price": 1.09
-            },
-            "dietdp20": {
-                "sku": 1234108,
-                "id": "dietdp20",
-                "name": "Diet Dr Pepper 20 oz bottle",
-                "description": "Diet Dr Pepper 20 oz bottle",
-                "categoryId": "SoftDrinks",
-                "price": 2.19
-            }
-        }
+        "coke12": {
+            "sku": "1234101",
+            "id": "coke12",
+            "name": "Coke 12 oz can",
+            "description": "Coke 12 oz can",
+            "categoryId": "SoftDrinks",
+            "price": 1.09
+        },
+        "coke20": {
+            "sku": "1234102",
+            "id": "coke20",
+            "name": "Coke 20 oz bottle",
+            "description": "Coke 20 oz bottle",
+            "categoryId": "SoftDrinks",
+            "price": 2.19
+        },
+        "dietcoke12": {
+            "sku": "1234103",
+            "id": "dietcoke12",
+            "name": "Diet Coke 12 oz can",
+            "description": "Diet Coke 12 oz can",
+            "categoryId": "SoftDrinks",
+            "price": 1.09
+        },
+      "dietcoke20": {
+        "sku": "1234104",
+        "id": "dietcoke20",
+        "name": "Diet Coke 20 oz bottle",
+        "description": "Diet Coke 20 oz bottle",
+        "categoryId": "SoftDrinks",
+        "price": 2.19
+      },
+      "dp12": {
+        "sku": "1234105",
+        "id": "dp12",
+        "name": "Dr Pepper 12 oz can",
+        "description": "Dr Pepper 12 oz can",
+        "categoryId": "SoftDrinks",
+        "price": 1.09
+      },
+      "dp20": {
+        "sku": "1234106",
+        "id": "dp20",
+        "name": "Dr Pepper 20 oz bottle",
+        "description": "Dr Pepper 20 oz bottle",
+        "categoryId": "SoftDrinks",
+        "price": 2.19
+      },
+      "dietdp12": {
+        "sku": "1234107",
+        "id": "dietdp12",
+        "name": "Diet Dr Pepper 12 oz can",
+        "description": "Diet Dr Pepper 12 oz can",
+        "categoryId": "SoftDrinks",
+        "price": 1.09
+      },
+      "dietdp20": {
+        "sku": "1234108",
+        "id": "dietdp20",
+        "name": "Diet Dr Pepper 20 oz bottle",
+        "description": "Diet Dr Pepper 20 oz bottle",
+        "categoryId": "SoftDrinks",
+        "price": 2.19
+      }
     }
-}
+  }

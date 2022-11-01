@@ -29,6 +29,8 @@ namespace SkuManager
         /// <returns>0 == success</returns>
         public static int Main(string[] args)
         {
+            Database db = new();
+
             DisplayAsciiArt(args);
 
             // build the System.CommandLine.RootCommand

@@ -20,14 +20,14 @@ namespace SkuManager.Controllers
     public class HealthzController : Controller
     {
         private readonly ILogger logger;
-        private readonly ILogger<BenchmarkHealthCheck> hcLogger;
+        private readonly ILogger<HealthCheck> hcLogger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HealthzController"/> class.
         /// </summary>
         /// <param name="logger">logger</param>
         /// <param name="hcLogger">HealthCheck logger</param>
-        public HealthzController(ILogger<HealthzController> logger, ILogger<BenchmarkHealthCheck> hcLogger)
+        public HealthzController(ILogger<HealthzController> logger, ILogger<HealthCheck> hcLogger)
         {
             this.logger = logger;
             this.hcLogger = hcLogger;
@@ -64,7 +64,7 @@ namespace SkuManager.Controllers
         /// <returns>IActionResult</returns>
         [HttpGet("ietf")]
         [Produces("application/health+json")]
-        [ProducesResponseType(typeof(BenchmarkHealthCheck), 200)]
+        [ProducesResponseType(typeof(HealthCheck), 200)]
         public async Task RunIetfAsync()
         {
             logger.LogInformation(nameof(RunHealthzAsync));
@@ -75,7 +75,7 @@ namespace SkuManager.Controllers
 
             HttpContext.Items.Add(typeof(HealthCheckResult).ToString(), res);
 
-            await BenchmarkHealthCheck.IetfResponseWriter(HttpContext, res, DateTime.UtcNow.Subtract(dt)).ConfigureAwait(false);
+            await HealthCheck.IetfResponseWriter(HttpContext, res, DateTime.UtcNow.Subtract(dt)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace SkuManager.Controllers
         /// <returns>HealthCheckResult</returns>
         private async Task<HealthCheckResult> RunBenchmarkHealthCheck()
         {
-            BenchmarkHealthCheck chk = new (hcLogger);
+            HealthCheck chk = new (hcLogger);
 
             return await chk.CheckHealthAsync(new HealthCheckContext()).ConfigureAwait(false);
         }

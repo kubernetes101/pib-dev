@@ -1,6 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
+using System.IO;
+using System.Reflection;
 using Microsoft.Extensions.Logging;
 
 namespace SkuManager
@@ -32,6 +35,14 @@ namespace SkuManager
         public int Retries { get; set; } = 10;
         public int Timeout { get; set; } = 10;
         public LogLevel RequestLogLevel { get; set; } = LogLevel.Information;
+        public string DataFilePath { get; set; } = Path.Combine("data", "data.json");
+        public string SwaggerFilePath { get; set; } = Path.Combine("wwwroot", "v1", "swagger.json");
+        public string SwaggerUri { get; set; } = "/v1/swagger.json";
+        public string Title { get; set; } = "Sku Manager Service";
+        public string Namespace { get; } = "SkuManager";
+        public string Service { get; } = "s";
+        public string Version { get; } = GetVersion();
+        public string ApiPathBase { get; } = "/api/v1";
 
         public void SetConfig(Config config)
         {
@@ -51,6 +62,18 @@ namespace SkuManager
             SecretsVolume = string.IsNullOrWhiteSpace(config.SecretsVolume) ? string.Empty : config.SecretsVolume.Trim();
             Zone = string.IsNullOrWhiteSpace(config.Zone) ? string.Empty : config.Zone.Trim();
             Region = string.IsNullOrWhiteSpace(config.Region) ? string.Empty : config.Region.Trim();
+        }
+
+        // get the version info
+        private static string GetVersion()
+        {
+            // use reflection
+            if (Attribute.GetCustomAttribute(Assembly.GetEntryAssembly(), typeof(AssemblyInformationalVersionAttribute)) is AssemblyInformationalVersionAttribute v)
+            {
+                return v.InformationalVersion;
+            }
+
+            return "unknown";
         }
     }
 }

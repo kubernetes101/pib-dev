@@ -14,7 +14,7 @@
     "documentationRules": {
       "xmlHeader": false,
       "companyName": "Microsoft",
-      "copyrightText": "Copyright (c) Microsoft. All rights reserved.\nLicensed under the MIT License. See LICENSE in the project root for license information."
+      "copyrightText": "Copyright (c) Microsoft Corporation. All rights reserved.\nLicensed under the MIT License. See LICENSE in the project root for license information."
     }
   }
 }

@@ -203,6 +203,9 @@ dotnet_diagnostic.SA0001.severity = none
 # CA1002: Do not expose generic lists
 dotnet_diagnostic.CA1002.severity = none
 
+# SA1000: The keyword 'new' should be followed by a space
+dotnet_diagnostic.SA1000.severity = none
+
 # SA1005: Single line comment should begin with a space
 dotnet_diagnostic.SA1005.severity = none
 
