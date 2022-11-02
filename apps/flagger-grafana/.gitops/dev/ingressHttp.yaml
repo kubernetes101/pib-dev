@@ -4,12 +4,14 @@ metadata:
   name: {{gitops.app}}
   namespace: {{gitops.namespace}}
   annotations:
+    ert-manager.io/cluster-issuer: letsencrypt-prod
     ingress.kubernetes.io/force-ssl-redirect: "false"
     kubernetes.io/ingress.class: contour
 
 spec:
   rules:
-  - http:
+  - host: {{gitops.cluster.domain}}
+    http:
       paths:
       - pathType: Prefix
         path: {{gitops.ingressPrefix}}
