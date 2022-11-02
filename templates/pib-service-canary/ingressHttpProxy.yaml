@@ -9,9 +9,9 @@ spec:
   includes:
     - name: {{gitops.app}}
       namespace: {{gitops.namespace}}
-  routes:
-    - conditions:
-      - prefix: /
-        services:
-      - name: {{gitops.app}}
-        port: 80
+  # routes:
+  #   - conditions:
+  #     - prefix: /
+  #       services:
+  #     - name: {{gitops.app}}
+  #       port: 80

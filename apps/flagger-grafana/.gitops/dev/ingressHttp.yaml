@@ -31,9 +31,9 @@ spec:
   includes:
     - name: {{gitops.app}}
       namespace: {{gitops.namespace}}
-  routes:
-    - conditions:
-      - prefix: /grafana
-        services:
-      - name: {{gitops.app}}
-        port: 80
+  # routes:
+  #   - conditions:
+  #     - prefix: /grafana
+  #       services:
+  #     - name: {{gitops.app}}
+  #       port: 80

@@ -9,9 +9,9 @@ spec:
   includes:
     - name: imdb
       namespace: imdb
-  routes:
-    - conditions:
-      - prefix: /
-        services:
-      - name: imdb
-        port: 80
+  # routes:
+  #   - conditions:
+  #     - prefix: /
+  #       services:
+  #     - name: imdb
+  #       port: 80
