@@ -7,6 +7,7 @@ using System.CommandLine.Invocation;
 using System.CommandLine.Parsing;
 using System.IO;
 using System.Threading;
+using CoffeeShop.Model;
 using CseLabs.Middleware;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;

@@ -8,20 +8,20 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using CoffeeShop;
 using CseLabs.Middleware;
+using CoffeeShop.Model;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 
-namespace SkuManager
+namespace CoffeeShop
 {
     /// <summary>
     /// Health Check
     /// </summary>
     public partial class HealthCheck : IHealthCheck
     {
-        public static readonly string ServiceId = "SkuManager";
-        public static readonly string Description = "SkuManager Health Check";
+        public static readonly string ServiceId = "CoffeeShop";
+        public static readonly string Description = "CoffeeShop Health Check";
 
         private const int MaxResponseTime = 200;
         private static JsonSerializerOptions jsonOptions;

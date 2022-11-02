@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace SkuManager
+namespace CoffeeShop
 {
     /// <summary>
     /// Benchmark Health Check

@@ -291,87 +291,99 @@
     }
   },
   "x-sampleData": {
-    "Sweeteners": [
-      {
+    "Sweeteners": {
+      "sugar": {
         "sugar": null,
         "id": "sugar",
         "name": "Cane Sugar"
       },
-      {
+      "raw": {
         "raw": null,
         "id": "raw",
         "name": "Raw Sugar"
       },
-      {
+      "equal": {
         "equal": null,
         "id": "equal",
         "name": "Equal"
       },
-      {
+      "sweetlow": {
         "sweetlow": null,
         "id": "sweetlow",
         "name": "Sweet and Low"
       },
-      {
+      "stevia": {
         "stevia": null,
         "id": "stevia",
         "name": "Stevia"
       }
-    ],
-    "Milks": [
+    },
+    "Milks": {
+      "cream"
+      :
       {
         "cream": null,
         "id": "cream",
         "name": "Cream"
       },
+      "halfhalf"
+      :
       {
         "halfhalf": null,
         "id": "halfhalf",
         "name": "Half and Half"
       },
+      "whole"
+      :
       {
         "whole": null,
         "id": "whole",
         "name": "Whole Milk"
       },
+      "2percent"
+      :
       {
         "2percent": null,
         "id": "2percent",
         "name": "2 % Milk"
       },
+      "skim"
+      :
       {
         "skim": null,
         "id": "skim",
         "name": "Skim Milk"
       },
+      "almond"
+      :
       {
         "almond": null,
         "id": "almond",
         "name": "Almond Milk"
       }
-    ],
-    "Sizes": [
-      {
+  },
+    "Sizes": {
+      "short": {
         "short": null,
         "id": "short",
         "name": "Short (8 oz)"
       },
-      {
+      "tall": {
         "tall": null,
         "id": "tall",
         "name": "Tall (12 oz)"
       },
-      {
+      "grande": {
         "grande": null,
         "id": "grande",
         "name": "Grande (16 oz)"
       },
-      {
+      "venti": {
         "venti": null,
         "id": "venti",
         "name": "Venti (20 oz)"
       }
-    ],
+    },
     "Coffees": {
       "decaf": {
         "id": "decaf",
