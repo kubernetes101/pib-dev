@@ -31,4 +31,4 @@ USER app
 ### copy the app
 COPY --from=build /app .
 
-ENTRYPOINT [ "dotnet",  "sku.dll" ]
+ENTRYPOINT [ "dotnet",  "skumanager.dll" ]
