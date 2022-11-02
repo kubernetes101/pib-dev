@@ -1,7 +1,0 @@
-#!/bin/bash
-
-docker build . -t ghcr.io/cse-labs/skumanager:beta
-
-docker login ghcr.io -u bartr -p $PAT
-
-docker push ghcr.io/cse-labs/skumanager:beta

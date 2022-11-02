@@ -1,5 +1,0 @@
-app: redis
-environment: dev
-namespace: redis
-targets: [ all ]
-template: .gitops
