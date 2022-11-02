@@ -1,6 +1,15 @@
 # PiB outer-loop with Arc Enabled Gitops
 
-## Validate cluster identifier and working branch
+## Introduction
+
+- This lab extends the previous outer-loop labs ([outer-loop](./outer-loop.md) and [multi-cluster](./outer-loop-multi-cluster.md)) by Arc enabling the clusters in the fleet
+- Arc enablement allows the k3d clusters in the fleet to be monitored and managed from the Azure Portal
+- In this lab we will:
+  - Create an Arc enabled, single-cluster fleet
+  - Deploy an application to the fleet (with GitOps)
+  - Validate the deployment in the Azure Arc Portal
+
+## Validate Cluster Identifier and Working Branch
 
 ```bash
 
@@ -53,7 +62,7 @@ git branch --show-current
 - If you don't already have managed identity set in your subscription, follow [these steps](./azure-codespaces-setup.md#create-managed-identity) to create RG and MI
 - Run `flt env` and make sure `PIB_MI` is set
 
-## Create an Arc enabled Dev Cluster
+## Create an Arc Enabled Dev Cluster
 
 ```bash
 
@@ -65,6 +74,16 @@ export MY_CLUSTER=central-tx-atx-$MY_BRANCH
 flt create cluster -c $MY_CLUSTER --arc
 
 ```
+
+### `flt create` Arc Enablement Details
+
+- Running `flt create` with the --arc flag affects what is run in the vm setup scripts by setting the `PIB_ARC_ENABLED` environment variable to true
+- The key differences are in:
+  - [flux-setup.sh](../vm/setup/flux-setup.sh)
+    - This script is ignored as Arc enabled flux is used instead
+  - [arc-setup.sh](../vm/setup/arc-setup.sh)
+    - This script adds Arc dependencies, connects the cluster to Arc, and configures Arc enabled flux
+    - Run `code /workspaces/pib-dev/vm/setup/arc-setup.sh` to view the commands used for configuration
 
 ## Update Git Repo
 
