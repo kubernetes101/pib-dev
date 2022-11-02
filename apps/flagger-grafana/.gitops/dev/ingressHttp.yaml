@@ -9,8 +9,7 @@ metadata:
 
 spec:
   rules:
-  - host: {{gitops.cluster.domain}}
-    http:
+  - http:
       paths:
       - pathType: Prefix
         path: {{gitops.ingressPrefix}}
