@@ -9,16 +9,9 @@ spec:
   includes:
     - name: imdb
       namespace: imdb
-    - name: flagger-grafana
-      namespace: projectcontour
-  routes:
-  - services:
-    - name: imdb
-      port: 80
-    conditions:
-      - prefix: /
-  - services:
-    - name: flagger-grafana
-      port: 80
-    conditions:
-      - prefix: /grafana
+  # routes:
+  #   - conditions:
+  #     - prefix: /
+  #       services:
+  #     - name: imdb
+  #       port: 80
