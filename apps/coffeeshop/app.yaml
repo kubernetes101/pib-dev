@@ -1,0 +1,16 @@
+app: coffeeshop
+containerArgs: []
+cpuLimit: 500m
+cpuRequest: 300m
+environment: dev
+image: ghcr.io/cse-labs/coffeeshop:latest
+ingressPrefix: /
+livenessProbe: /healthz
+memoryLimit: 128Mi
+memoryRequest: 64Mi
+namespace: coffeeshop
+nodePort: 30080
+port: 8080
+readinessProbe: /readyz
+targets: []
+template: pib-service
