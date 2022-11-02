@@ -9,17 +9,23 @@ spec:
   includes:
     - name: {{gitops.app}}
       namespace: {{gitops.namespace}}
-  routes:
-  - services:
-    - name: {{gitops.app}}
-      port: 80
-    conditions:
+      conditions:
       - prefix: /
+    - name: flagger-grafana
+      namespace: projectcontour
+      conditions:
+      - prefix: /grafana
+  # routes:
+  # - services:
+  #   - name: {{gitops.app}}
+  #     port: 80
+  #   conditions:
+  #     - prefix: /
 ---
 apiVersion: projectcontour.io/v1
 kind: HTTPProxy
 metadata:
-  name: flagger-grafana-ingress
+  name: flagger-grafana
   namespace: projectcontour
 spec:
   routes:
