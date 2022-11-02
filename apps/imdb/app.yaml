@@ -1,7 +1,7 @@
 app: imdb
 containerArgs: []
 environment: dev
-image: ghcr.io/cse-labs/pib-imdb:latest
+image: ghcr.io/cse-labs/pib-imdb:beta
 namespace: imdb
 nodePort: 30080
 port: 8080
