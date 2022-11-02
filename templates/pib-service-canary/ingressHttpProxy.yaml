@@ -12,9 +12,11 @@ spec:
   routes:
   - services:
     - name: {{gitops.app}}
+      port: 8080
     conditions:
       - prefix: /
   - services:
     - name: projectcontour/flagger-grafana
+      port: 8080
     conditions:
       - prefix: /grafana
