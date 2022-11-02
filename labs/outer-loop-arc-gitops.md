@@ -82,7 +82,7 @@ flt create cluster -c $MY_CLUSTER --arc
   - [flux-setup.sh](../vm/setup/flux-setup.sh)
     - This script is ignored as Arc enabled flux is used instead
   - [arc-setup.sh](../vm/setup/arc-setup.sh)
-    - This script adds Arc dependencies, connects the cluster to Arc, and configures Arc enabled flux.
+    - This script adds Arc dependencies, connects the cluster to Arc, and configures Arc enabled flux
     - Run `code /workspaces/pib-dev/vm/setup/arc-setup.sh` to view the commands used for configuration
 
 ## Update Git Repo
