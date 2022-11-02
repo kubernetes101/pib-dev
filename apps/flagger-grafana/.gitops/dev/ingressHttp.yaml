@@ -1,39 +1,21 @@
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: {{gitops.app}}
-#   namespace: {{gitops.namespace}}
-#   annotations:
-#     ingress.kubernetes.io/force-ssl-redirect: "false"
-#     kubernetes.io/ingress.class: contour
-
-# spec:
-#   rules:
-#   - host: {{gitops.cluster.domain}}
-#     http:
-#       paths:
-#       - pathType: Prefix
-#         path: {{gitops.ingressPrefix}}
-#         backend:
-#           service:
-#             name: {{gitops.app}}
-#             port:
-#               number: {{gitops.port}}
-
-apiVersion: projectcontour.io/v1
-kind: HTTPProxy
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: {{gitops.app}}-ingress
+  name: {{gitops.app}}
   namespace: {{gitops.namespace}}
+  annotations:
+    ingress.kubernetes.io/force-ssl-redirect: "false"
+    kubernetes.io/ingress.class: contour
+
 spec:
-  virtualhost:
-    fqdn: {{gitops.cluster.domain}}/grafana
-  includes:
-    - name: {{gitops.app}}
-      namespace: {{gitops.namespace}}
-  # routes:
-  #   - conditions:
-  #     - prefix: /grafana
-  #       services:
-  #     - name: {{gitops.app}}
-  #       port: 80
+  rules:
+  - host: {{gitops.cluster.domain}}
+    http:
+      paths:
+      - pathType: Prefix
+        path: {{gitops.ingressPrefix}}
+        backend:
+          service:
+            name: {{gitops.app}}
+            port:
+              number: {{gitops.port}}
