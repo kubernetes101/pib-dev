@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: imdb
-          image: ghcr.io/cse-labs/pib-imdb:latest
+          image: ghcr.io/cse-labs/pib-imdb:beta
           imagePullPolicy: Always
           ports:
           - name: http
