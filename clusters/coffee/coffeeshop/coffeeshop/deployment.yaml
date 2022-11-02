@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: ghcr.io/cse-labs/coffeeshop:latest
+          image: ghcr.io/bartr/coffeeshop:beta
           imagePullPolicy: Always
           args: [ ]
           ports:
