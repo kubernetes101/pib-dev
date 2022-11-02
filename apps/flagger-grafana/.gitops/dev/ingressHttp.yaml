@@ -27,7 +27,7 @@ metadata:
   namespace: {{gitops.namespace}}
 spec:
   virtualhost:
-    fqdn: {{gitops.cluster.domain}}
+    fqdn: {{gitops.cluster.domain}}/grafana
   includes:
     - name: {{gitops.app}}
       namespace: {{gitops.namespace}}

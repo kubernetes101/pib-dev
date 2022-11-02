@@ -27,7 +27,7 @@ metadata:
   namespace: projectcontour
 spec:
   virtualhost:
-    fqdn: 20.169.44.36
+    fqdn: 20.169.44.36/grafana
   includes:
     - name: flagger-grafana
       namespace: projectcontour
