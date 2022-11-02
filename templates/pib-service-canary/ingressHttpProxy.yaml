@@ -5,7 +5,7 @@ metadata:
   namespace: {{gitops.namespace}}
 spec:
   virtualhost:
-    fqdn: {{gitops.cluster.domain}}
+    fqdn: {{gitops.cluster.domain}}:htt
   includes:
     - name: {{gitops.app}}
       namespace: {{gitops.namespace}}
@@ -17,7 +17,6 @@ spec:
       - prefix: /
   - services:
     - name: flagger-grafana
-      namespace: projectcontour
       port: 80
     conditions:
       - prefix: /grafana
