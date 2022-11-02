@@ -5,7 +5,7 @@
     "title": "SKU Manager",
     "version": "1.0"
   },
-  "host": "sku.cseretail.com",
+  "host": "skus.cseretail.com",
   "basePath": "/",
   "consumes": [],
   "produces": [],
