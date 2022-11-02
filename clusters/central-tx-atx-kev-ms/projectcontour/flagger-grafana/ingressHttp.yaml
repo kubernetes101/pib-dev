@@ -1,39 +1,41 @@
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: flagger-grafana
-#   namespace: projectcontour
-#   annotations:
-#     ingress.kubernetes.io/force-ssl-redirect: "false"
-#     kubernetes.io/ingress.class: contour
-
-# spec:
-#   rules:
-#   - host: 20.169.44.36
-#     http:
-#       paths:
-#       - pathType: Prefix
-#         path: /grafana
-#         backend:
-#           service:
-#             name: flagger-grafana
-#             port:
-#               number: 8080
-
-apiVersion: projectcontour.io/v1
-kind: HTTPProxy
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: flagger-grafana-ingress
+  name: flagger-grafana
   namespace: projectcontour
+  annotations:
+    ingress.kubernetes.io/force-ssl-redirect: "false"
+    kubernetes.io/ingress.class: contour
+
 spec:
-  virtualhost:
-    fqdn: 20.169.44.36/grafana
-  includes:
-    - name: flagger-grafana
-      namespace: projectcontour
-  # routes:
-  #   - conditions:
-  #     - prefix: /grafana
-  #       services:
-  #     - name: flagger-grafana
-  #       port: 80
+  rules:
+  - host: 20.169.44.36
+    http:
+      paths:
+      - pathType: Prefix
+        path: /grafana
+        backend:
+          service:
+            name: flagger-grafana
+            port:
+              number: 8080
+
+# apiVersion: projectcontour.io/v1
+# kind: HTTPProxy
+# metadata:
+#   name: flagger-grafana-ingress
+#   namespace: projectcontour
+# spec:
+#   virtualhost:
+#     fqdn: 20.169.44.36/grafana
+#   includes:
+#     - name: flagger-grafana
+#       namespace: projectcontour
+#     - name: imdb
+#       namespace: imdb
+#   # routes:
+#   #   - conditions:
+#   #     - prefix: /grafana
+#   #       services:
+#   #     - name: flagger-grafana
+#   #       port: 80
