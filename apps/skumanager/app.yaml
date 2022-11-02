@@ -12,6 +12,5 @@ namespace: skumanager
 nodePort: 30080
 port: 8080
 readinessProbe: /version
-targets:
-- all
+targets: []
 template: pib-service
