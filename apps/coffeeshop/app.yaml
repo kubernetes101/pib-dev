@@ -3,7 +3,7 @@ containerArgs: []
 cpuLimit: 500m
 cpuRequest: 300m
 environment: dev
-image: ghcr.io/cse-labs/coffeeshop:latest
+image: ghcr.io/bartr/coffeeshop:beta
 ingressPrefix: /
 livenessProbe: /healthz
 memoryLimit: 128Mi
