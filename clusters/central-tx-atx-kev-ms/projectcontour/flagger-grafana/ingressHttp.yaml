@@ -4,12 +4,14 @@ metadata:
   name: flagger-grafana
   namespace: projectcontour
   annotations:
+    ert-manager.io/cluster-issuer: letsencrypt-prod
     ingress.kubernetes.io/force-ssl-redirect: "false"
     kubernetes.io/ingress.class: contour
 
 spec:
   rules:
-  - http:
+  - host: 20.169.44.36
+    http:
       paths:
       - pathType: Prefix
         path: /grafana
