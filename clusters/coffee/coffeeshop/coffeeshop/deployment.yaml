@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: skumanager
-  namespace: skumanager
+  name: coffeeshop
+  namespace: coffeeshop
   labels:
-    app.kubernetes.io/name: skumanager
+    app.kubernetes.io/name: coffeeshop
 spec:
   replicas: 1
   strategy:
@@ -14,15 +14,15 @@ spec:
        maxUnavailable: 1
   selector:
     matchLabels:
-      app: skumanager
+      app: coffeeshop
   template:
     metadata:
       labels:
-        app: skumanager
+        app: coffeeshop
     spec:
       containers:
         - name: app
-          image: ghcr.io/cse-labs/skumanager:beta
+          image: ghcr.io/cse-labs/coffeeshop:latest
           imagePullPolicy: Always
           args: [ ]
           ports:
@@ -31,22 +31,22 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /version
+              path: /healthz
               port: http
             initialDelaySeconds: 5
             failureThreshold: 10
             periodSeconds: 60
           readinessProbe:
             httpGet:
-              path: /version
+              path: /readyz
               port: http
             initialDelaySeconds: 5
             failureThreshold: 10
             periodSeconds: 60
           resources:
             limits:
-              cpu: 2000m
-              memory: 2048Mi
+              cpu: 500m
+              memory: 128Mi
             requests:
-              cpu: 1000m
-              memory: 1024Mi
+              cpu: 300m
+              memory: 64Mi
