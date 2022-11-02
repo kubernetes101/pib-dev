@@ -1,0 +1,360 @@
+{
+  "swagger": "2.0",
+  "x-namespace": "SkuManager",
+  "info": {
+    "title": "SKU Manager",
+    "version": "1.0"
+  },
+  "basePath": "/",
+  "consumes": [],
+  "produces": [],
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {},
+  "security": [],
+  "tags": [],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/api/v1/skus": {
+      "get": {
+        "tags": [
+          "Skus"
+        ],
+        "summary": "Get all SKUs",
+        "description": "Get all SKUs",
+        "operationId": "GetSKUs",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Sku"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Skus"
+        ],
+        "summary": "Add SKU",
+        "description": "Add SKU",
+        "operationId": "AddSKU",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "sku",
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/v1/skus/{id}": {
+      "get": {
+        "tags": [
+          "Skus"
+        ],
+        "summary": "Get SKU by Id",
+        "description": "Get SKU by Id",
+        "operationId": "GetSKUById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Skus"
+        ],
+        "summary": "Delete SKU",
+        "description": "Delete SKU",
+        "operationId": "DeleteSKU",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Skus"
+        ],
+        "summary": "Update SKU",
+        "description": "Update SKU",
+        "operationId": "UpdateApp",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "sku",
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/v1/skus/category/{categoryId}": {
+      "get": {
+        "tags": [
+          "Skus"
+        ],
+        "summary": "Get SKUs by Category",
+        "description": "Get SKUs by Category",
+        "operationId": "GetSKUsByCategoryId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "categoryId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Sku"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Sku": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 20,
+          "title": "SKU Value",
+          "description": "SKU Value"
+        },
+        "skuId": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 15,
+          "title": "SKU Id",
+          "description": "SKU Id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 20,
+          "title": "Name",
+          "description": "SKU Name"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 20,
+          "title": "Description",
+          "description": "SKU Descrription"
+        },
+        "categoryId": {
+          "type": "string",
+          "title": "Category Id",
+          "description": "SKU Category Id",
+          "default": "SoftDrinks",
+          "enum": [
+            "SoftDrinks",
+            "Chips",
+            "Snacks",
+            "Grocery",
+            "Candy",
+            "Dairy",
+            "Grill"
+          ]
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "title": "Price",
+          "description": "SKU Price"
+        }
+      },
+      "required": [
+        "value",
+        "skuId",
+        "name",
+        "description",
+        "categoryId",
+        "price"
+      ],
+      "example": {
+        "value": 1234101,
+        "skuId": "coke12",
+        "name": "Coke 12 oz can",
+        "description": "Coke 12 oz can",
+        "categoryId": "SoftDrinks",
+        "price": 1.09
+      }
+    }
+  },
+  "x-sampleData": {
+    "coke12": {
+      "value": "1234101",
+      "skuId": "coke12",
+      "name": "Coke 12 oz can",
+      "description": "Coke 12 oz can",
+      "categoryId": "SoftDrinks",
+      "price": 1.09
+    },
+    "coke20": {
+      "value": "1234102",
+      "skuId": "coke20",
+      "name": "Coke 20 oz bottle",
+      "description": "Coke 20 oz bottle",
+      "categoryId": "SoftDrinks",
+      "price": 2.19
+    },
+    "dietcoke12": {
+      "value": "1234103",
+      "skuId": "dietcoke12",
+      "name": "Diet Coke 12 oz can",
+      "description": "Diet Coke 12 oz can",
+      "categoryId": "SoftDrinks",
+      "price": 1.09
+    },
+    "dietcoke20": {
+      "value": "1234104",
+      "skuId": "dietcoke20",
+      "name": "Diet Coke 20 oz bottle",
+      "description": "Diet Coke 20 oz bottle",
+      "categoryId": "SoftDrinks",
+      "price": 2.19
+    },
+    "dp12": {
+      "value": "1234105",
+      "skuId": "dp12",
+      "name": "Dr Pepper 12 oz can",
+      "description": "Dr Pepper 12 oz can",
+      "categoryId": "SoftDrinks",
+      "price": 1.09
+    },
+    "dp20": {
+      "value": "1234106",
+      "skuId": "dp20",
+      "name": "Dr Pepper 20 oz bottle",
+      "description": "Dr Pepper 20 oz bottle",
+      "categoryId": "SoftDrinks",
+      "price": 2.19
+    },
+    "dietdp12": {
+      "value": "1234107",
+      "skuId": "dietdp12",
+      "name": "Diet Dr Pepper 12 oz can",
+      "description": "Diet Dr Pepper 12 oz can",
+      "categoryId": "SoftDrinks",
+      "price": 1.09
+    },
+    "dietdp20": {
+      "value": "1234108",
+      "skuId": "dietdp20",
+      "name": "Diet Dr Pepper 20 oz bottle",
+      "description": "Diet Dr Pepper 20 oz bottle",
+      "categoryId": "SoftDrinks",
+      "price": 2.19
+    },
+    "kettle-bbq-2.4": {
+      "value": "1234108",
+      "skuId": "kettle-bbq-2.4",
+      "name": "Kettle BBQ Chips 2.4 oz",
+      "description": "Kettle BBQ Chips 2.4 oz",
+      "categoryId": "Chips",
+      "price": 1.99
+    },
+    "reeses-pb-cups": {
+      "value": "1234108",
+      "skuId": "reeses-pb-cups",
+      "name": "Reese's Peanut Butter Cups",
+      "description": "Reese's Peanut Butter Cups",
+      "categoryId": "Candy",
+      "price": 1.79
+    }
+  }
+}
