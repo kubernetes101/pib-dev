@@ -38,7 +38,7 @@ namespace SkuManager
         public string DataFilePath { get; set; } = Path.Combine("data", "data.json");
         public string SwaggerFilePath { get; set; } = Path.Combine("wwwroot", "v1", "swagger.json");
         public string SwaggerUri { get; set; } = "/v1/swagger.json";
-        public string Title { get; set; } = "Sku Manager Service";
+        public string Title { get; set; } = "SKU Manager Service";
         public string Namespace { get; } = "SkuManager";
         public string Service { get; } = "s";
         public string Version { get; } = GetVersion();

@@ -9,7 +9,7 @@ using CseLabs.Middleware;
 using CseLabs.Middleware.Validation;
 using Microsoft.AspNetCore.Mvc;
 
-namespace SkuManager.Controllers
+namespace InventoryDataService.Controllers
 {
     /// <summary>
     /// Handles query requests from the controllers

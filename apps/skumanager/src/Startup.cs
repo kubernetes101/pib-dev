@@ -22,9 +22,6 @@ namespace SkuManager
     /// </summary>
     public class Startup
     {
-        private const string SwaggerTitle = "SkuManager Web API";
-        private const string SwaggerPath = "/swagger/v1/swagger.json";
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Startup"/> class.
         /// </summary>
@@ -100,15 +97,25 @@ namespace SkuManager
                     ep.MapControllers();
                     ep.MapMetrics("/metrics");
                 })
-                .UseSwagger()
+                .UseVersion()
+                .UseHealthz()
+                .UseReadyz()
+                .UseResetData()
+                .UseStaticFiles()
+                .UseSwagger(p =>
+                {
+                    p.SerializeAsV2 = true;
+
+                    //p.PreSerializeFilters.Add((swagger, httpReq) =>
+                    //{
+                    //    swagger.Servers = new List<OpenApiServer> { new OpenApiServer { Url = "https://ist.cseretail.com" } };
+                    //});
+                })
                 .UseSwaggerUI(c =>
                 {
-                    c.DocumentTitle = SwaggerTitle;
-                    c.SwaggerEndpoint(SwaggerPath, SwaggerTitle);
+                    c.SwaggerEndpoint(App.Config.SwaggerUri, App.Config.Title);
                     c.RoutePrefix = string.Empty;
-                })
-                .UseStaticFiles()
-                .UseVersion();
+                });
         }
 
         /// <summary>
@@ -118,17 +125,7 @@ namespace SkuManager
         public static void ConfigureServices(IServiceCollection services)
         {
             // set json serialization defaults and api behavior
-            services.AddSwaggerGen(options =>
-                    {
-                        options.SwaggerDoc(
-                            "v1",
-                            new Microsoft.OpenApi.Models.OpenApiInfo
-                            {
-                                Title = SwaggerTitle,
-                                Version = "1.0",
-                            });
-                        options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
-                    })
+            services.AddSwaggerGen(c => c.EnableAnnotations())
                 .AddControllers()
                 .AddJsonOptions(options =>
                 {

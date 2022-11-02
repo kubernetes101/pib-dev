@@ -1,6 +1,6 @@
 {
   "swagger": "2.0",
-  "x-serviceName": "SkuManager",
+  "x-namespace": "SkuManager",
   "info": {
     "title": "SKU Manager",
     "version": "1.0"

@@ -9,7 +9,6 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using CseLabs.Middleware;
-using SkuManager.Model;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 
@@ -170,6 +169,12 @@ namespace SkuManager
             try
             {
                 db = new();
+
+                if (db == null)
+                {
+                    Exception ex = new NullReferenceException("Database::New is null");
+                    return BuildHealthzCheck(path, MaxResponseTime, ex, data, name);
+                }
 
                 return BuildHealthzCheck(path, MaxResponseTime, null, data, name);
             }

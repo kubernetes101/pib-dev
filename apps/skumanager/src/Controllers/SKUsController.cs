@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using CseLabs.Middleware;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
 using SkuManager.Model;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace SkuManager.Controllers
 {
