@@ -11,11 +11,6 @@ spec:
       namespace: imdb
   routes:
     - conditions:
-      - prefix: /grafana
-        services:
-      - name: flagger-grafana
-        port: 80
-    - conditions:
       - prefix: /
         services:
       - name: imdb
