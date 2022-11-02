@@ -40,6 +40,7 @@ namespace SkuManager.Model
         return false;
       }
 
+
       return true;
     }
 
@@ -54,6 +55,7 @@ namespace SkuManager.Model
         CategoryId = this.CategoryId,
         Price = this.Price,
       };
+
 
       return tgt;
     }

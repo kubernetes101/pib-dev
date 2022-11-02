@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using CseLabs.Middleware;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SkuManager.Model;
 using Swashbuckle.AspNetCore.Annotations;
+using SkuManager.Model;
 
 namespace SkuManager.Controllers
 {
@@ -143,6 +143,39 @@ namespace SkuManager.Controllers
             }
 
             return NoContent();
+        }
+
+        /// <summary>
+        /// Get SKUs by Category
+        /// </summary>
+        /// <param name="categoryId">Category ID</param>
+        /// <returns>IActionResult</returns>
+        [HttpGet("category/{categoryId}", Name = "GetSKUsByCategoryId")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Sku))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [SwaggerOperation(Summary = "Get SKUs by Category", Description = "Get SKUs by Category")]
+        public IActionResult GetSKUsByCategoryId([FromRoute] string categoryId)
+        {
+            Logger.LogInformation("get", "GetSKUsByCategoryId");
+
+            Database db = new();
+
+            if (string.IsNullOrEmpty(categoryId))
+            {
+                return NotFound("Sku not found");
+            }
+
+            List<Sku> list = new();
+
+            foreach (Sku s in db.Skus.Values)
+            {
+                if (s.CategoryId.Equals(categoryId, System.StringComparison.OrdinalIgnoreCase))
+                {
+                    list.Add(s);
+                }
+            }
+
+            return Ok(list);
         }
     }
 }

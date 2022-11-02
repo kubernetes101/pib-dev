@@ -5,7 +5,6 @@
     "title": "SKU Manager",
     "version": "1.0"
   },
-  "host": "sku.cseretail.com",
   "basePath": "/",
   "consumes": [],
   "produces": [],
@@ -167,6 +166,41 @@
           }
         }
       }
+    },
+    "/api/v1/skus/category/{categoryId}": {
+      "get": {
+        "tags": [
+          "Skus"
+        ],
+        "summary": "Get SKUs by Category",
+        "description": "Get SKUs by Category",
+        "operationId": "GetSKUsByCategoryId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "categoryId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Sku"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -305,6 +339,22 @@
       "description": "Diet Dr Pepper 20 oz bottle",
       "categoryId": "SoftDrinks",
       "price": 2.19
+    },
+    "kettle-bbq-2.4": {
+      "value": "1234108",
+      "skuId": "kettle-bbq-2.4",
+      "name": "Kettle BBQ Chips 2.4 oz",
+      "description": "Kettle BBQ Chips 2.4 oz",
+      "categoryId": "Chips",
+      "price": 1.99
+    },
+    "reeses-pb-cups": {
+      "value": "1234108",
+      "skuId": "reeses-pb-cups",
+      "name": "Reese's Peanut Butter Cups",
+      "description": "Reese's Peanut Butter Cups",
+      "categoryId": "Candy",
+      "price": 1.79
     }
   }
 }
