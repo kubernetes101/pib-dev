@@ -5,7 +5,7 @@ metadata:
   namespace: imdb
 spec:
   virtualhost:
-    fqdn: 20.169.44.36
+    fqdn: 20.169.44.36:htt
   includes:
     - name: imdb
       namespace: imdb
@@ -17,7 +17,6 @@ spec:
       - prefix: /
   - services:
     - name: flagger-grafana
-      namespace: projectcontour
       port: 80
     conditions:
       - prefix: /grafana
