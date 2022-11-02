@@ -9,8 +9,6 @@ spec:
   includes:
     - name: {{gitops.app}}
       namespace: {{gitops.namespace}}
-      name: flagger-grafana
-      namespave: projectcontour
   routes:
   - services:
     - name: {{gitops.app}}
@@ -19,6 +17,7 @@ spec:
       - prefix: /
   - services:
     - name: flagger-grafana
+      namespace: projectcontour
       port: 80
     conditions:
       - prefix: /grafana
