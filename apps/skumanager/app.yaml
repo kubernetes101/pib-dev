@@ -1,16 +1,17 @@
 app: skumanager
 containerArgs: []
-cpuLimit: 500m
-cpuRequest: 300m
+cpuLimit: 2000m
+cpuRequest: 1000m
 environment: dev
-image: ghcr.io/cse-labs/skumanager:latest
+image: ghcr.io/cse-labs/skumanager:beta
 ingressPrefix: /
-livenessProbe: /healthz
-memoryLimit: 128Mi
-memoryRequest: 64Mi
+livenessProbe: /version
+memoryLimit: 2048Mi
+memoryRequest: 1024Mi
 namespace: skumanager
 nodePort: 30080
 port: 8080
-readinessProbe: /readyz
-targets: []
+readinessProbe: /version
+targets:
+- all
 template: pib-service
