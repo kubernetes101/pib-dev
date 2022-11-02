@@ -12,11 +12,9 @@ spec:
   routes:
   - services:
     - name: imdb
-      port: 80
     conditions:
       - prefix: /
   - services:
-    - name: flagger-grafana
-      port: 80
+    - name: projectcontour/flagger-grafana
     conditions:
       - prefix: /grafana
