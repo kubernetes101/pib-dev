@@ -5,7 +5,7 @@ using System;
 using System.Globalization;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace CoffeeShop.Model
+namespace SkuManager
 {
     /// <summary>
     /// Health Check that supports dotnet IHeathCheck

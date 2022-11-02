@@ -85,8 +85,14 @@ namespace CseLabs.Middleware
             long nowTicks = Environment.TickCount64;
             long nowCpu = Proc.TotalProcessorTime.Ticks;
 
-            // compute CPU percentage
-            cpu = (int)Math.Round((nowCpu - lastCpu) / (procCount * (nowTicks - lastTicks)) / 100.0, 0);
+            try
+            {
+                // compute CPU percentage
+                cpu = (int)Math.Round((nowCpu - lastCpu) / (procCount * (nowTicks - lastTicks)) / 100.0, 0);
+            }
+            catch
+            {
+            }
 
             // update last reading
             lastCpu = nowCpu;

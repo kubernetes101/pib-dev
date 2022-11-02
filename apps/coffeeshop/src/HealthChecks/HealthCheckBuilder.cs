@@ -5,18 +5,18 @@ using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace CoffeeShop
+namespace SkuManager
 {
-    public static class BenchmarkHealthCheckBuilderExtensions
+    public static class HealthCheckBuilder
     {
-        public static IHealthChecksBuilder AddBenchmarkHealthCheck(
+        public static IHealthChecksBuilder AddHealthCheck(
             this IHealthChecksBuilder builder,
             string name,
             HealthStatus? failureStatus = null,
             IEnumerable<string> tags = null)
         {
             // Register a check of type Benchmark
-            return builder.AddCheck<BenchmarkHealthCheck>(name, failureStatus ?? HealthStatus.Degraded, tags);
+            return builder.AddCheck<HealthCheck>(name, failureStatus ?? HealthStatus.Degraded, tags);
         }
     }
 }

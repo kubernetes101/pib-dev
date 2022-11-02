@@ -1,0 +1,490 @@
+{
+  "swagger": "2.0",
+  "x-namespace": "CoffeeShop",
+  "info": {
+    "title": "Contoso Coffee",
+    "version": "1.0"
+  },
+  "basePath": "/",
+  "consumes": [],
+  "produces": [],
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {},
+  "security": [],
+  "tags": [],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/api/v1/coffees": {
+      "get": {
+        "tags": [
+          "Drinks"
+        ],
+        "summary": "Get all Coffees",
+        "description": "Get all Coffees",
+        "operationId": "GetCoffees",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Coffee"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/teas": {
+      "get": {
+        "tags": [
+          "Drinks"
+        ],
+        "summary": "Get all Teas",
+        "description": "Get all Teas",
+        "operationId": "GetTeas",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Tea"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sweeteners": {
+      "get": {
+        "tags": [
+          "Modifiers"
+        ],
+        "summary": "Get all Sweeteners",
+        "description": "Get all Sweeteners",
+        "operationId": "GetSweeteners",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Sweetener"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/milks": {
+      "get": {
+        "tags": [
+          "Modifiers"
+        ],
+        "summary": "Get all Milks",
+        "description": "Get all Milks",
+        "operationId": "GetMilks",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Milk"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sizes": {
+      "get": {
+        "tags": [
+          "Modifiers"
+        ],
+        "summary": "Get all Sizes",
+        "description": "Get all Sizes",
+        "operationId": "GetSizes",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Size"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Coffee": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 15,
+          "title": "Id",
+          "description": "Id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 20,
+          "title": "Name",
+          "description": "Name"
+        },
+        "isHot": {
+          "type": "boolean",
+          "title": "Is Hot",
+          "description": "Is Hot"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "isHot"
+      ],
+      "example": {
+        "skuId": "decaf",
+        "name": "Hot Decaf Coffee",
+        "isHot": true
+      }
+    },
+    "Tea": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 15,
+          "title": "Id",
+          "description": "Id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 20,
+          "title": "Name",
+          "description": "Name"
+        },
+        "isHot": {
+          "type": "boolean",
+          "title": "Is Hot",
+          "description": "Is Hot"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "isHot"
+      ],
+      "example": {
+        "skuId": "greenTea",
+        "name": "Hot Green Tea",
+        "isHot": true
+      }
+    },
+    "Sweetener": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 15,
+          "title": "Id",
+          "description": "Sweetener Id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 20,
+          "title": "Name",
+          "description": "Sweetener Name"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "example": {
+        "skuId": "sugar",
+        "name": "Sugar"
+      }
+    },
+    "Milk": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 15,
+          "title": "Id",
+          "description": "Milk Id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 20,
+          "title": "Name",
+          "description": "Milk Name"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "example": {
+        "skuId": "halfhalf",
+        "name": "Half and Half"
+      }
+    },
+    "Size": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 15,
+          "title": "Id",
+          "description": "Id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 20,
+          "title": "Name",
+          "description": "Name"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "example": {
+        "skuId": "grande",
+        "name": "Grande (16 oz)"
+      }
+    }
+  },
+  "x-sampleData": {
+    "Sweeteners": [
+      {
+        "sugar": null,
+        "id": "sugar",
+        "name": "Cane Sugar"
+      },
+      {
+        "raw": null,
+        "id": "raw",
+        "name": "Raw Sugar"
+      },
+      {
+        "equal": null,
+        "id": "equal",
+        "name": "Equal"
+      },
+      {
+        "sweetlow": null,
+        "id": "sweetlow",
+        "name": "Sweet and Low"
+      },
+      {
+        "stevia": null,
+        "id": "stevia",
+        "name": "Stevia"
+      }
+    ],
+    "Milks": [
+      {
+        "cream": null,
+        "id": "cream",
+        "name": "Cream"
+      },
+      {
+        "halfhalf": null,
+        "id": "halfhalf",
+        "name": "Half and Half"
+      },
+      {
+        "whole": null,
+        "id": "whole",
+        "name": "Whole Milk"
+      },
+      {
+        "2percent": null,
+        "id": "2percent",
+        "name": "2 % Milk"
+      },
+      {
+        "skim": null,
+        "id": "skim",
+        "name": "Skim Milk"
+      },
+      {
+        "almond": null,
+        "id": "almond",
+        "name": "Almond Milk"
+      }
+    ],
+    "Sizes": [
+      {
+        "short": null,
+        "id": "short",
+        "name": "Short (8 oz)"
+      },
+      {
+        "tall": null,
+        "id": "tall",
+        "name": "Tall (12 oz)"
+      },
+      {
+        "grande": null,
+        "id": "grande",
+        "name": "Grande (16 oz)"
+      },
+      {
+        "venti": null,
+        "id": "venti",
+        "name": "Venti (20 oz)"
+      }
+    ],
+    "Coffees": {
+      "decaf": {
+        "id": "decaf",
+        "isHot": true,
+        "name": "Hot Decaf Coffee"
+      },
+      "coffee": {
+        "id": "coffee",
+        "isHot": true,
+        "name": "Hot Coffee"
+      },
+      "darkRoast": {
+        "id": "darkRoast",
+        "isHot": true,
+        "name": "Hot Dark Roast Coffee"
+      },
+      "cappucino": {
+        "id": "cappucino",
+        "isHot": true,
+        "name": "Hot Cappucino"
+      },
+      "espresso": {
+        "id": "espresso",
+        "isHot": true,
+        "name": "Hot Espresso Shot"
+      },
+      "latte": {
+        "id": "latte",
+        "isHot": true,
+        "name": "Hot Latte"
+      },
+      "machiatto": {
+        "id": "machiatto",
+        "isHot": true,
+        "name": "Hot Machiatto"
+      },
+      "mocha": {
+        "id": "mocha",
+        "isHot": true,
+        "name": "Hot Mocha"
+      },
+      "coffeeIced": {
+        "id": "coffeeIced",
+        "isHot": false,
+        "name": "Iced Coffee"
+      },
+      "decafIced": {
+        "id": "decafIced",
+        "isHot": false,
+        "name": "Iced Decaf"
+      },
+      "espressoIced": {
+        "id": "espressoIced",
+        "isHot": false,
+        "name": "Iced Espresso"
+      },
+      "coffeeMilkIced": {
+        "id": "coffeeMilkIced",
+        "isHot": false,
+        "name": "Iced Coffee with Milk"
+      },
+      "latteIced": {
+        "id": "latteIced",
+        "isHot": false,
+        "name": "Iced Latte"
+      },
+      "machiattoIced": {
+        "id": "machiattoIced",
+        "isHot": false,
+        "name": "Iced Machiatto"
+      },
+      "mochaIced": {
+        "id": "mochaIced",
+        "isHot": false,
+        "name": "Iced Mocha"
+      }
+    },
+    "Teas": {
+      "greenTea": {
+        "id": "greenTea",
+        "name": "Hot Green Tea",
+        "isHot": true
+      },
+      "blackTea": {
+        "id": "blackTea",
+        "isHot": true,
+        "name": "Hot Black Tea"
+      },
+      "icedTea": {
+        "id": "icedTea",
+        "isHot": false,
+        "name": "Iced Tea"
+      },
+      "sweetTea": {
+        "id": "sweetTea",
+        "isHot": false,
+        "name": "Iced Sweet Tea"
+      },
+      "lemonade": {
+        "id": "lemonade",
+        "isHot": false,
+        "name": "Iced Lemonade"
+      },
+      "strawberryLemonade": {
+        "id": "strawberryLemonade",
+        "isHot": false,
+        "name": "Iced Strawberry Lemonade"
+      },
+      "arnoldPalmer": {
+        "id": "arnoldPalmer",
+        "isHot": false,
+        "name": "Half Iced Tea and Half Lemonade"
+      }
+    }
+  }
+}

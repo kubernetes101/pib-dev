@@ -5,16 +5,15 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
-using CoffeeShop.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace CoffeeShop
+namespace SkuManager
 {
     /// <summary>
     /// Benchmark Health Check
     /// </summary>
-    public partial class BenchmarkHealthCheck : IHealthCheck
+    public partial class HealthCheck : IHealthCheck
     {
         /// <summary>
         /// Write the health check results as json
@@ -88,7 +87,7 @@ namespace CoffeeShop
 
             // Convert the HealthCheckResult to a HealthReport
             HealthReport rpt = new (
-                new Dictionary<string, HealthReportEntry> { { BenchmarkHealthCheck.ServiceId, new HealthReportEntry(res.Status, res.Description, totalTime, res.Exception, res.Data) } },
+                new Dictionary<string, HealthReportEntry> { { HealthCheck.ServiceId, new HealthReportEntry(res.Status, res.Description, totalTime, res.Exception, res.Data) } },
                 totalTime);
 
             // call the response writer

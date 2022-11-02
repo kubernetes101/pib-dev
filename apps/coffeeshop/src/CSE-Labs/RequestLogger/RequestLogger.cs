@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
-using CoffeeShop;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Prometheus;
+using CoffeeShop;
 
 namespace CseLabs.Middleware
 {
@@ -25,6 +25,8 @@ namespace CseLabs.Middleware
 
         // next action to Invoke
         private readonly RequestDelegate next;
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0052:Remove unread private members", Justification = "used by DI")]
         private readonly RequestLoggerOptions options;
 
         /// <summary>
@@ -38,14 +40,10 @@ namespace CseLabs.Middleware
             this.next = next;
             this.options = options?.Value;
 
-            if (this.options == null)
-            {
-                // use default
-                this.options = new RequestLoggerOptions();
-            }
+            this.options ??= new RequestLoggerOptions();
 
             requestHistogram = Metrics.CreateHistogram(
-                        "CoffeeShopDuration",
+                        "InventoryDataServiceDuration",
                         "Histogram of app request duration",
                         new HistogramConfiguration
                         {
@@ -54,7 +52,7 @@ namespace CseLabs.Middleware
                         });
 
             requestSummary = Metrics.CreateSummary(
-                "CoffeeShopSummary",
+                "InventoryDataServiceSummary",
                 "Summary of app request duration",
                 new SummaryConfiguration
                 {
@@ -65,7 +63,7 @@ namespace CseLabs.Middleware
                 });
 
             cpuGauge = Metrics.CreateGauge(
-                "CoffeeShopCpuPercent",
+                "InventoryDataServiceCpuPercent",
                 "CPU Percent Used",
                 new GaugeConfiguration
                 {

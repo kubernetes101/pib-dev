@@ -29,6 +29,8 @@ namespace CoffeeShop
         /// <returns>0 == success</returns>
         public static int Main(string[] args)
         {
+            Database db = new();
+
             DisplayAsciiArt(args);
 
             // build the System.CommandLine.RootCommand
@@ -42,7 +44,7 @@ namespace CoffeeShop
         // load secrets from volume
         private static void LoadSecrets()
         {
-            Config.Secrets = new () { Volume = Config.SecretsVolume };
+            Config.Secrets = new() { Volume = Config.SecretsVolume };
         }
 
         // display Ascii Art
@@ -107,7 +109,7 @@ namespace CoffeeShop
         // Log startup messages
         private static void LogStartup(CseLog logger)
         {
-            logger.LogInformation($"CoffeeShop Started", VersionExtension.Version);
+            logger.LogInformation($"SkuManager Started", VersionExtension.Version);
         }
 
         // Build the web host
@@ -132,7 +134,7 @@ namespace CoffeeShop
                         logger.AddFilter("Microsoft", Config.LogLevel)
                         .AddFilter("System", Config.LogLevel)
                         .AddFilter("Default", Config.LogLevel)
-                        .AddFilter("CoffeeShop", Config.LogLevel);
+                        .AddFilter("SkuManager", Config.LogLevel);
                     }
                 });
 
