@@ -1,0 +1,10 @@
+name: coffee
+environment: dev
+region: coffee
+zone: coffee
+district: coffee
+store: coffee
+domain: coffee.cseretail.com
+ingressType: Https
+gitopsRepo: kubernetes101/pib-dev
+gitopsBranch: coffee
