@@ -2,7 +2,7 @@
 
 ## Introduction
 
-- This lab builds off of the previous outer-loop labs ([outer-loop](./outer-loop.md) and [multi-cluster](./outer-loop-multi-cluster.md)) by arc enabling the clusters in the fleet
+- This lab extends the previous outer-loop labs ([outer-loop](./outer-loop.md) and [multi-cluster](./outer-loop-multi-cluster.md)) by arc enabling the clusters in the fleet
 - Arc enablement allows the k3d clusters in the fleet to be monitored and managed from the Azure Portal
 - In this lab we will:
   - Create an arc-enabled, single-cluster fleet
