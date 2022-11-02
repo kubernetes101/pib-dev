@@ -319,43 +319,37 @@
       }
     },
     "Milks": {
-      "cream"
-      :
+      "cream":
       {
         "cream": null,
         "id": "cream",
         "name": "Cream"
       },
-      "halfhalf"
-      :
+      "halfhalf":
       {
         "halfhalf": null,
         "id": "halfhalf",
         "name": "Half and Half"
       },
-      "whole"
-      :
+      "whole":
       {
         "whole": null,
         "id": "whole",
         "name": "Whole Milk"
       },
-      "2percent"
-      :
+      "2percent":
       {
         "2percent": null,
         "id": "2percent",
         "name": "2 % Milk"
       },
-      "skim"
-      :
+      "skim":
       {
         "skim": null,
         "id": "skim",
         "name": "Skim Milk"
       },
-      "almond"
-      :
+      "almond":
       {
         "almond": null,
         "id": "almond",

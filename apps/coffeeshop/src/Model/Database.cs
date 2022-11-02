@@ -33,7 +33,7 @@ namespace CoffeeShop.Model
                     {
                         var json = JsonSerializer.Serialize<object>(sw["x-sampleData"]);
 
-                        inventory = JsonSerializer.Deserialize<Inventory>(json);
+                        inventory = JsonSerializer.Deserialize<Inventory>(json, JsonOptions);
                     }
                 }
             }
