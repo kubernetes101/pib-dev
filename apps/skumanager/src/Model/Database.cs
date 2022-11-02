@@ -15,24 +15,25 @@ namespace SkuManager
     /// </summary>
     public sealed class Database
     {
-        private readonly Dictionary<string, SKU> skus;
+        private readonly Dictionary<string, Sku> skus;
 
         public Database()
         {
             if (File.Exists(App.Config.DataFilePath))
             {
-                skus = JsonSerializer.Deserialize<Dictionary<string, SKU>>(File.ReadAllText(App.Config.DataFilePath), JsonOptions);
+                skus = JsonSerializer.Deserialize<Dictionary<string, Sku>>(File.ReadAllText(App.Config.DataFilePath));
             }
             else
             {
                 if (File.Exists(App.Config.SwaggerFilePath))
                 {
-                    var sw = JsonSerializer.Deserialize<Dictionary<string, object>>(File.ReadAllText(App.Config.SwaggerFilePath), JsonOptions);
+                    var sw = JsonSerializer.Deserialize<Dictionary<string, object>>(File.ReadAllText(App.Config.SwaggerFilePath));
 
-                    if (sw.ContainsKey("x-sample-data"))
+                    if (sw.ContainsKey("x-sampleData"))
                     {
-                        string json = JsonSerializer.Serialize<object>(sw["x-sample-data"]);
-                        skus = JsonSerializer.Deserialize<Dictionary<string, SKU>>(json);
+                        var json = JsonSerializer.Serialize<object>(sw["x-sampleData"]);
+
+                        skus = JsonSerializer.Deserialize<Dictionary<string, Sku>>(json, JsonOptions);
                     }
                 }
             }
@@ -43,16 +44,14 @@ namespace SkuManager
             WriteIndented = true,
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
 
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-
+            //PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             //DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
-
             PropertyNameCaseInsensitive = true,
             ReadCommentHandling = JsonCommentHandling.Skip,
             NumberHandling = JsonNumberHandling.AllowReadingFromString,
         };
 
-        public Dictionary<string, SKU> SKUs
+        public Dictionary<string, Sku> Skus
         {
             get
             {
@@ -85,19 +84,19 @@ namespace SkuManager
             }
         }
 
-        public bool IsValid(SKU sku, bool shouldExist)
+        public bool IsValid(Sku sku, bool shouldExist)
         {
             if (sku == null)
             {
                 return false;
             }
 
-            if (string.IsNullOrEmpty(sku.Id))
+            if (string.IsNullOrEmpty(sku.SkuId))
             {
                 return false;
             }
 
-            if (shouldExist != skus.ContainsKey(sku.Id))
+            if (shouldExist != skus.ContainsKey(sku.SkuId))
             {
                 return false;
             }
@@ -107,12 +106,12 @@ namespace SkuManager
                 return false;
             }
 
-            if (string.IsNullOrEmpty(sku.Sku))
+            if (string.IsNullOrEmpty(sku.Description))
             {
                 return false;
             }
 
-            if (string.IsNullOrEmpty(sku.Description))
+            if (string.IsNullOrEmpty(sku.Value))
             {
                 return false;
             }
@@ -125,15 +124,15 @@ namespace SkuManager
             return true;
         }
 
-        public void UpdateSKU(SKU sku)
+        public void UpdateSku(Sku sku)
         {
-            if (skus != null)
+            if (sku != null)
             {
-                skus[sku.Id] = sku;
+                skus[sku.SkuId] = sku;
             }
         }
 
-        public void DeleteSKU(string id)
+        public void DeleteSku(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -158,6 +157,14 @@ namespace SkuManager
 
         public bool Equals(Database other)
         {
+            // todo - update
+            if (other == null ||
+                other.skus == null ||
+                skus.Count != other.skus.Count)
+            {
+                return false;
+            }
+
             return true;
         }
     }

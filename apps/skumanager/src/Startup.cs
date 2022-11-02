@@ -125,7 +125,7 @@ namespace SkuManager
                             new Microsoft.OpenApi.Models.OpenApiInfo
                             {
                                 Title = SwaggerTitle,
-                                Version = "1.0"
+                                Version = "1.0",
                             });
                         options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
                     })

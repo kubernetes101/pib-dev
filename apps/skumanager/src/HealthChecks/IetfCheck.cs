@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace SkuManager.Model
+namespace SkuManager
 {
     /// <summary>
     /// Health Check that supports IETF json

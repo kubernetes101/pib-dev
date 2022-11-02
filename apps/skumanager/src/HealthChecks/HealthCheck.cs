@@ -20,15 +20,14 @@ namespace SkuManager
     /// </summary>
     public partial class HealthCheck : IHealthCheck
     {
-        public static readonly string ServiceId = "InventoryDataService";
-        public static readonly string Description = "InventoryDataService Health Check";
+        public static readonly string ServiceId = "SkuManager";
+        public static readonly string Description = "SkuManager Health Check";
 
         private const int MaxResponseTime = 200;
         private static JsonSerializerOptions jsonOptions;
         private readonly Stopwatch stopwatch = new ();
-        private readonly Database db = new();
-
         private readonly ILogger logger;
+        private Database db = new();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HealthCheck"/> class.
@@ -74,10 +73,10 @@ namespace SkuManager
                 HealthStatus status = HealthStatus.Healthy;
 
                 // add version
-                data.Add("Version", "todo");
+                data.Add("Version", App.Config.Version);
 
                 // Run each health check
-                GetSKUsCheck(data);
+                DbCheck(data);
 
                 // todo - make async
                 await Task.Delay(1, CancellationToken.None);
@@ -161,16 +160,16 @@ namespace SkuManager
         /// Healthcheck
         /// </summary>
         /// <returns>HealthzCheck</returns>
-        private HealthzCheck GetSKUsCheck(Dictionary<string, object> data = null)
+        private HealthzCheck DbCheck(Dictionary<string, object> data = null)
         {
-            const string name = "getSKUs";
-            string path = App.Config.ApiPathBase + "/apps";
+            const string name = "dbCheck";
+            string path = "/";
 
             stopwatch.Restart();
 
             try
             {
-                var skus = db.SKUs;
+                db = new();
 
                 return BuildHealthzCheck(path, MaxResponseTime, null, data, name);
             }

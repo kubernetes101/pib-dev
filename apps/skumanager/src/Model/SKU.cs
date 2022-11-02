@@ -2,26 +2,19 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace SkuManager.Model
 {
   /// <summary>
-  /// SKU model
+  /// Sku model
   /// </summary>
-  public partial class SKU
+  public partial class Sku
   {
-    [JsonPropertyName("sku")]
-    public string Sku { get; set; }
-    [JsonPropertyName("id")]
-    public string Id { get; set; }
-    [JsonPropertyName("name")]
+    public string Value { get; set; }
+    public string SkuId { get; set; }
     public string Name { get; set; }
-    [JsonPropertyName("description")]
     public string Description { get; set; }
-    [JsonPropertyName("categoryId")]
     public string CategoryId { get; set; }
-    [JsonPropertyName("price")]
     public double Price { get; set; }
 
     public override int GetHashCode()
@@ -31,14 +24,14 @@ namespace SkuManager.Model
 
     public override bool Equals(object obj)
     {
-        return Equals(obj as SKU);
+        return Equals(obj as Sku);
     }
 
-    public bool Equals(SKU other)
+    public bool Equals(Sku other)
     {
       if (other == null ||
-        Sku != other.Sku ||
-        Id != other.Id ||
+        Value != other.Value ||
+        SkuId != other.SkuId ||
         Name != other.Name ||
         Description != other.Description ||
         CategoryId != other.CategoryId ||
@@ -51,12 +44,12 @@ namespace SkuManager.Model
       return true;
     }
 
-    public SKU DeepCopy()
+    public Sku DeepCopy()
     {
-      SKU tgt = new()
+      Sku tgt = new()
       {
-        Sku = this.Sku,
-        Id = this.Id,
+        Value = this.Value,
+        SkuId = this.SkuId,
         Name = this.Name,
         Description = this.Description,
         CategoryId = this.CategoryId,

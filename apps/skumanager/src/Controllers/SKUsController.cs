@@ -3,33 +3,32 @@
 
 using System.Collections.Generic;
 using CseLabs.Middleware;
-using SkuManager.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Prometheus;
 using Swashbuckle.AspNetCore.Annotations;
+using SkuManager.Model;
 
 namespace SkuManager.Controllers
 {
     /// <summary>
-    /// Handle SKUs requests
+    /// Handle Skus requests
     /// </summary>
     [Route("api/v1/[controller]")]
     [Produces("application/json")]
-    public class SKUsController : Controller
+    public class SkusController : Controller
     {
         private static readonly CseLog Logger = new ()
         {
-            Name = typeof(SKUsController).FullName,
-            ErrorMessage = "SKUsControllerException",
+            Name = typeof(SkusController).FullName,
+            ErrorMessage = "SkusControllerException",
         };
 
         /// <summary>
-        /// Returns an array of SKU
+        /// Get all SKUs
         /// </summary>
         /// <returns>IActionResult</returns>
         [HttpGet(Name = "GetSKUs")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<SKU>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Sku>))]
         [SwaggerOperation(Summary = "Get all SKUs", Description = "Get all SKUs")]
         public IActionResult GetSKUs()
         {
@@ -37,16 +36,42 @@ namespace SkuManager.Controllers
 
             Database db = new();
 
-            return Ok(db.SKUs.Values);
+            return Ok(db.Skus.Values);
         }
 
         /// <summary>
-        /// Returns SKU by ID
+        /// Add SKU
         /// </summary>
-        /// <param name="id">SKU ID</param>
+        /// <param name="sku">Sku in json format</param>
+        /// <returns>IActionResult</returns>
+        [HttpPost(Name = "AddSKU")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [SwaggerOperation(Summary = "Add SKU", Description = "Add SKU")]
+        public IActionResult AddSKU([FromBody] Sku sku)
+        {
+            Logger.LogInformation("post", "AddSKU");
+
+            Database db = new();
+
+            if (!db.IsValid(sku, false))
+            {
+                return BadRequest("Invalid Sku Data");
+            }
+
+            db.UpdateSku(sku);
+            db.Save();
+
+            return Created($"/api/v1/skus/{sku.SkuId}", null);
+        }
+
+        /// <summary>
+        /// Get SKU by Id
+        /// </summary>
+        /// <param name="id">Sku ID</param>
         /// <returns>IActionResult</returns>
         [HttpGet("{id}", Name = "GetSKUById")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SKU))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Sku))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [SwaggerOperation(Summary = "Get SKU by Id", Description = "Get SKU by Id")]
         public IActionResult GetSKUById([FromRoute] string id)
@@ -55,82 +80,18 @@ namespace SkuManager.Controllers
 
             Database db = new();
 
-            if (string.IsNullOrEmpty(id) || !db.SKUs.ContainsKey(id))
+            if (string.IsNullOrEmpty(id) || !db.Skus.ContainsKey(id))
             {
-                return NotFound("SKU not found");
+                return NotFound("Sku not found");
             }
 
-            return Ok(db.SKUs[id]);
+            return Ok(db.Skus[id]);
         }
 
         /// <summary>
-        /// Add SKU
+        /// Delete SKU
         /// </summary>
-        /// <param name="sku">SKU in json format</param>
-        /// <returns>IActionResult</returns>
-        [HttpPost(Name = "AddSKU")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [SwaggerOperation(Summary = "Add SKU", Description = "Add SKU")]
-        public IActionResult AddSKU([FromBody] SKU sku)
-        {
-            Logger.LogInformation("post", "AddSKU");
-
-            Database db = new();
-
-            if (!db.IsValid(sku, false))
-            {
-                return BadRequest("Invalid SKU Data");
-            }
-
-            db.UpdateSKU(sku);
-            db.Save();
-
-            return Created($"/api/v1/skus/{sku.Id}", null);
-        }
-
-        /// <summary>
-        /// Update SKU by ID
-        /// </summary>
-        /// <param name="id">SKU ID</param>
-        /// <param name="sku">SKU in json body</param>
-        /// <returns>IActionResult</returns>
-        [HttpPut("{id}", Name = "UpdateApp")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [SwaggerOperation(Summary = "Update SKU", Description = "update SKU")]
-        public IActionResult UpdateApp([FromRoute] string id, [FromBody] SKU sku)
-        {
-            Logger.LogInformation("put", "UpdateApp");
-
-            Database db = new();
-
-            if (!db.IsValid(sku, false) && !db.IsValid(sku, true))
-            {
-                return BadRequest("Invalid SKU Data");
-            }
-
-            if (sku.Id != id)
-            {
-                return BadRequest("id param doesn't match json SKUId");
-            }
-
-            db.UpdateSKU(sku);
-            db.Save();
-
-            if (db.IsValid(sku, false))
-            {
-                return Created($"/api/v1/skus/{sku.Id}", null);
-            }
-
-            return NoContent();
-        }
-
-        /// <summary>
-        /// Delete SKU by ID
-        /// </summary>
-        /// <param name="id">SKU ID</param>
+        /// <param name="id">Sku ID</param>
         /// <returns>IActionResult</returns>
         [HttpDelete("{id}", Name = "DeleteSKU")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -140,8 +101,46 @@ namespace SkuManager.Controllers
             Logger.LogInformation("delete", $"{id}");
 
             Database db = new();
-            db.DeleteSKU(id);
+            db.DeleteSku(id);
             db.Save();
+
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Update SKU
+        /// </summary>
+        /// <param name="id">Sku ID</param>
+        /// <param name="sku">Sku in json body</param>
+        /// <returns>IActionResult</returns>
+        [HttpPut("{id}", Name = "UpdateApp")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [SwaggerOperation(Summary = "Update SKU", Description = "Update SKU")]
+        public IActionResult UpdateApp([FromRoute] string id, [FromBody] Sku sku)
+        {
+            Logger.LogInformation("put", "UpdateApp");
+
+            Database db = new();
+
+            if (!db.IsValid(sku, false) && !db.IsValid(sku, true))
+            {
+                return BadRequest("Invalid Sku Data");
+            }
+
+            if (sku.SkuId != id)
+            {
+                return BadRequest("id param doesn't match json SkuId");
+            }
+
+            db.UpdateSku(sku);
+            db.Save();
+
+            if (db.IsValid(sku, false))
+            {
+                return Created($"/api/v1/skus/{sku.SkuId}", null);
+            }
 
             return NoContent();
         }
