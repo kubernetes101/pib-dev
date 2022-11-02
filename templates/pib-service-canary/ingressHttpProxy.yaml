@@ -9,3 +9,14 @@ spec:
   includes:
     - name: {{gitops.app}}
       namespace: {{gitops.namespace}}
+  routes:
+    - conditions:
+      - prefix: /grafana
+        services:
+      - name: flagger-grafana
+        port: 80
+    - conditions:
+      - prefix: /
+        services:
+      - name: {{gitops.app}}
+        port: 80
