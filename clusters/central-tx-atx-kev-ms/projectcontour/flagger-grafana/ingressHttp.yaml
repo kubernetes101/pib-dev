@@ -9,8 +9,7 @@ metadata:
 
 spec:
   rules:
-  - host: 20.169.44.36
-    http:
+  - http:
       paths:
       - pathType: Prefix
         path: /grafana
