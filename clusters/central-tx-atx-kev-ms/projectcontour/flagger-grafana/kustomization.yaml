@@ -1,0 +1,10 @@
+namespace: projectcontour
+commonLabels:
+  app: flagger-grafana
+resources:
+  - deployment.yaml
+  - service.yaml
+  - ingressHttp.yaml
+  - providers.yaml
+  - datasource.yaml
+  - dashboards.yaml
