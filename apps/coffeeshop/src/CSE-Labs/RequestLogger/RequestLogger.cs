@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
+using CoffeeShop;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Prometheus;
-using CoffeeShop;
 
 namespace CseLabs.Middleware
 {

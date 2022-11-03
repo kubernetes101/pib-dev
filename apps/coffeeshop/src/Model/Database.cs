@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using CoffeeShop.Model;
 
 namespace CoffeeShop.Model
 {
@@ -43,6 +42,9 @@ namespace CoffeeShop.Model
             inventory.Sweeteners ??= new();
             inventory.Milks ??= new();
             inventory.Sizes ??= new();
+            inventory.Breakfast ??= new();
+            inventory.Lunch ??= new();
+            inventory.Snacks ??= new();
         }
 
         public static JsonSerializerOptions JsonOptions { get; } = new JsonSerializerOptions
@@ -119,6 +121,45 @@ namespace CoffeeShop.Model
                 }
 
                 return inventory.Sweeteners;
+            }
+        }
+
+        public Dictionary<string, FoodItem> Breakfast
+        {
+            get
+            {
+                if (inventory == null || inventory.Breakfast == null)
+                {
+                    return new();
+                }
+
+                return inventory.Breakfast;
+            }
+        }
+
+        public Dictionary<string, FoodItem> Lunch
+        {
+            get
+            {
+                if (inventory == null || inventory.Lunch == null)
+                {
+                    return new();
+                }
+
+                return inventory.Lunch;
+            }
+        }
+
+        public Dictionary<string, FoodItem> Snacks
+        {
+            get
+            {
+                if (inventory == null || inventory.Snacks == null)
+                {
+                    return new();
+                }
+
+                return inventory.Snacks;
             }
         }
 

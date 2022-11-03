@@ -161,6 +161,54 @@
           }
         }
       }
+    },
+    "/api/v1/lunch": {
+      "get": {
+        "tags": [
+          "Lunch"
+        ],
+        "summary": "Get all Lunch Items",
+        "description": "Get all Lunch Items",
+        "operationId": "GetLunch",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FoodItem"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/snacks": {
+      "get": {
+        "tags": [
+          "Snacks"
+        ],
+        "summary": "Get all Snacks Items",
+        "description": "Get all Snacks Items",
+        "operationId": "GetSnacks",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FoodItem"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -376,43 +424,37 @@
       }
     },
     "Milks": {
-      "cream":
-      {
+      "cream": {
         "cream": null,
         "id": "cream",
         "name": "Cream"
       },
-      "halfhalf":
-      {
+      "halfhalf": {
         "halfhalf": null,
         "id": "halfhalf",
         "name": "Half and Half"
       },
-      "whole":
-      {
+      "whole": {
         "whole": null,
         "id": "whole",
         "name": "Whole Milk"
       },
-      "2percent":
-      {
+      "2percent": {
         "2percent": null,
         "id": "2percent",
         "name": "2 % Milk"
       },
-      "skim":
-      {
+      "skim": {
         "skim": null,
         "id": "skim",
         "name": "Skim Milk"
       },
-      "almond":
-      {
+      "almond": {
         "almond": null,
         "id": "almond",
         "name": "Almond Milk"
       }
-  },
+    },
     "Sizes": {
       "short": {
         "short": null,
@@ -569,6 +611,50 @@
         "id": "bagel",
         "name": "Toasted Bagel",
         "price": 1.99
+      }
+    },
+    "Lunch": {
+      "croisRB": {
+        "id": "croisRB",
+        "name": "Roast Beef and Cheddar Croisant",
+        "price": 4.49
+      },
+      "croisHam": {
+        "id": "croisHam",
+        "name": "Ham and Cheddar Croisont",
+        "price": 4.49
+      },
+      "croisTurkey": {
+        "id": "croisTurkey",
+        "name": "Turkey and Swiss Croisant",
+        "price": 4.49
+      },
+      "croisBLTA": {
+        "id": "croisBLTA",
+        "name": "Bacon, Lettuce, Tomato, and Avacado Croissant",
+        "price": 4.99
+      }
+    },
+    "Snacks": {
+      "cpChoc": {
+        "id": "cpChoc",
+        "name": "Chocolate Cake Pop",
+        "price": 2.49
+      },
+      "cpWhite": {
+        "id": "cpWhite",
+        "name": "White Cake Pop",
+        "price": 2.49
+      },
+      "cpRedV": {
+        "id": "cpRedV",
+        "name": "Red Velvet Cake Pop",
+        "price": 2.49
+      },
+      "banBread": {
+        "id": "banBread",
+        "name": "Fresh Baked Banana Bread",
+        "price": 2.99
       }
     }
   }

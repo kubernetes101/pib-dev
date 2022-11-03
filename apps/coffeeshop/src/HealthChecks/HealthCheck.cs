@@ -8,8 +8,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using CseLabs.Middleware;
 using CoffeeShop.Model;
+using CseLabs.Middleware;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 

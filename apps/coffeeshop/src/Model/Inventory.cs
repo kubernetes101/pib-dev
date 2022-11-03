@@ -5,15 +5,18 @@ using System.Collections.Generic;
 
 namespace CoffeeShop.Model
 {
-  /// <summary>
-  /// Coffee model
-  /// </summary>
-  public partial class Inventory
-  {
+    /// <summary>
+    /// Coffee model
+    /// </summary>
+    public partial class Inventory
+    {
         public Dictionary<string, Coffee> Coffees { get; set; }
         public Dictionary<string, Tea> Teas { get; set; }
         public Dictionary<string, Sweetener> Sweeteners { get; set; }
         public Dictionary<string, Milk> Milks { get; set; }
         public Dictionary<string, Size> Sizes { get; set; }
+        public Dictionary<string, FoodItem> Breakfast { get; set; }
+        public Dictionary<string, FoodItem> Lunch { get; set; }
+        public Dictionary<string, FoodItem> Snacks { get; set; }
     }
 }
