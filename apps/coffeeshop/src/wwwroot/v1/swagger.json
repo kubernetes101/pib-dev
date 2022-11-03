@@ -350,6 +350,10 @@
           "maxLength": 20,
           "title": "Name",
           "description": "Name"
+        },
+        "price": {
+          "type": "number",
+          "description": "price"
         }
       },
       "required": [
@@ -392,6 +396,58 @@
         "skuId": "tacoBacon",
         "name": "Bacon, Egg, and Cheese Breakfast Taco",
         "price": 2.49
+      }
+    },
+    "Drink": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 15,
+          "title": "Id",
+          "description": "Id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 20,
+          "title": "Name",
+          "description": "Name"
+        },
+        "isHot": {
+          "type": "boolean",
+          "title": "Is Hot",
+          "description": "Is Hot"
+        },
+        "sizes": {
+          "type":"array",
+          "items": {
+            "$ref": "#/definitions/Size"
+          }
+        },
+        "sweeteners": {
+          "type":"array",
+          "items": {
+            "$ref": "#/definitions/Sweetener"
+          }
+        },
+        "milks": {
+          "type":"array",
+          "items": {
+            "$ref": "#/definitions/Milk"
+          }
+        },
+      },
+      "required": [
+        "id",
+        "name",
+        "isHot"
+      ],
+      "example": {
+        "skuId": "greenTea",
+        "name": "Green Tea",
+        "isHot": true
       }
     }
   },
@@ -541,6 +597,18 @@
         "id": "mochaIced",
         "isHot": false,
         "name": "Iced Mocha"
+      }
+    },
+    "Drinks": {
+      "topo": {
+        "id": "topo",
+        "name": "Topo Chico",
+        "isHot": false
+      },
+      "ozarka": {
+        "id": "ozarka",
+        "name": "Ozarka Spring Water",
+        "isHot": false
       }
     },
     "Teas": {
