@@ -18,5 +18,6 @@ namespace CoffeeShop.Model
         public Dictionary<string, FoodItem> Breakfast { get; set; }
         public Dictionary<string, FoodItem> Lunch { get; set; }
         public Dictionary<string, FoodItem> Snacks { get; set; }
+        public Dictionary<string, Drink> Drinks { get; set; }
     }
 }

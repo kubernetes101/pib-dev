@@ -26,11 +26,11 @@ namespace CoffeeShop.Model
             {
                 if (File.Exists(App.Config.SwaggerFilePath))
                 {
-                    var sw = JsonSerializer.Deserialize<Dictionary<string, object>>(File.ReadAllText(App.Config.SwaggerFilePath));
+                    var sw = JsonSerializer.Deserialize<Dictionary<string, object>>(File.ReadAllText(App.Config.SwaggerFilePath), JsonOptions);
 
                     if (sw.ContainsKey("x-sampleData"))
                     {
-                        var json = JsonSerializer.Serialize<object>(sw["x-sampleData"]);
+                        var json = JsonSerializer.Serialize<object>(sw["x-sampleData"], JsonOptions);
 
                         inventory = JsonSerializer.Deserialize<Inventory>(json, JsonOptions);
                     }
@@ -45,6 +45,7 @@ namespace CoffeeShop.Model
             inventory.Breakfast ??= new();
             inventory.Lunch ??= new();
             inventory.Snacks ??= new();
+            inventory.Drinks ??= new();
         }
 
         public static JsonSerializerOptions JsonOptions { get; } = new JsonSerializerOptions
@@ -54,10 +55,30 @@ namespace CoffeeShop.Model
 
             //PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             //DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
+
             PropertyNameCaseInsensitive = true,
             ReadCommentHandling = JsonCommentHandling.Skip,
             NumberHandling = JsonNumberHandling.AllowReadingFromString,
+            AllowTrailingCommas = true,
+
+            Converters =
+            {
+                new JsonStringEnumConverter()
+            },
         };
+
+        public Dictionary<string, Drink> Drinks
+        {
+            get
+            {
+                if (inventory == null || inventory.Drinks == null)
+                {
+                    return new();
+                }
+
+                return inventory.Drinks;
+            }
+        }
 
         public Dictionary<string, Coffee> Coffees
         {

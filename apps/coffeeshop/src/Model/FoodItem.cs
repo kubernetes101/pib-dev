@@ -13,6 +13,8 @@ namespace CoffeeShop.Model
     public string Id { get; set; }
     public string Name { get; set; }
     public double Price { get; set; }
+    public Dictionary<string, FoodItem> Ingredients { get; set; }
+    public Dictionary<string, FoodItem> AddOns { get; set; }
 
     public override int GetHashCode()
     {

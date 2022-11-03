@@ -18,6 +18,30 @@
     "http"
   ],
   "paths": {
+    "/api/v1/drinks": {
+      "get": {
+        "tags": [
+          "Drinks"
+        ],
+        "summary": "Get all Drinks",
+        "description": "Get all Drinks",
+        "operationId": "GetDrinks",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Drink"
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/coffees": {
       "get": {
         "tags": [
@@ -385,6 +409,18 @@
         "price": {
           "type": "number",
           "format": "double"
+        },
+        "ingredients": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FoodIngredient"
+          }
+        },
+        "addOns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FoodIngredient"
+          }
         }
       },
       "required": [
@@ -396,6 +432,37 @@
         "skuId": "tacoBacon",
         "name": "Bacon, Egg, and Cheese Breakfast Taco",
         "price": 2.49
+      }
+    },
+    "FoodIngredient": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 15,
+          "title": "Id",
+          "description": "Id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 20,
+          "title": "Name",
+          "description": "Name"
+        },
+        "price": {
+          "type": "number",
+          "description": "Add on Price"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "example": {
+        "skuId": "halfhalf",
+        "name": "Half and Half"
       }
     },
     "Drink": {
@@ -420,24 +487,40 @@
           "title": "Is Hot",
           "description": "Is Hot"
         },
+        "ice": {
+          "type": "object",
+          "title": "Ice",
+          "description": "Ice",
+          "items": {
+            "$ref": "#/definitions/IceEnum"
+          }
+        },
+        "foam": {
+          "type": "object",
+          "title": "Foam",
+          "description": "Foam",
+          "items": {
+            "$ref": "#/definitions/FoamEnum"
+          }
+        },
         "sizes": {
-          "type":"array",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/Size"
           }
         },
         "sweeteners": {
-          "type":"array",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/Sweetener"
           }
         },
         "milks": {
-          "type":"array",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/Milk"
           }
-        },
+        }
       },
       "required": [
         "id",
@@ -449,9 +532,556 @@
         "name": "Green Tea",
         "isHot": true
       }
+    },
+    "IceEnum": {
+      "type": "string",
+      "enum": [
+        "NA",
+        "NormalIce",
+        "NoIce",
+        "LightIce",
+        "ExtraIce"
+      ]
+    },
+    "FoamEnum": {
+      "type": "string",
+      "enum": [
+        "NA",
+        "NormalFoam",
+        "NoFoam",
+        "LightFoam",
+        "ExtraFoam"
+      ]
     }
   },
   "x-sampleData": {
+    "Drinks": {
+      "icedTea": {
+        "id": "icedTea",
+        "isHot": false,
+        "name": "Iced Tea",
+        "category": "Tea",
+        "ice": "NormalIce",
+        "sizes": {
+          "grande": {
+            "id": "grande",
+            "name": "Grande (16 oz)",
+            "price": 1.49
+          },
+          "venti": {
+            "id": "venti",
+            "name": "Venti (20 oz)",
+            "price": 1.99
+          },
+          "biggulp": {
+            "id": "biggulp",
+            "name": "Big Gulp",
+            "price": 2.49
+          }
+        },
+        "sweeteners": {
+          "sugar": {
+            "id": "sugar",
+            "name": "Cane Sugar"
+          },
+          "raw": {
+            "id": "raw",
+            "name": "Raw Sugar"
+          },
+          "equal": {
+            "id": "equal",
+            "name": "Equal"
+          },
+          "sweetlow": {
+            "id": "sweetlow",
+            "name": "Sweet and Low"
+          },
+          "stevia": {
+            "id": "stevia",
+            "name": "Stevia"
+          }
+        }
+      },
+      "sweetTea": {
+        "id": "sweetTea",
+        "isHot": false,
+        "name": "Sweet Tea",
+        "category": "Tea",
+        "ice": "NormalIce",
+        "sizes": {
+          "grande": {
+            "id": "grande",
+            "name": "Grande (16 oz)",
+            "price": 1.49
+          },
+          "venti": {
+            "id": "venti",
+            "name": "Venti (20 oz)",
+            "price": 1.99
+          },
+          "biggulp": {
+            "id": "biggulp",
+            "name": "Big Gulp",
+            "price": 2.49
+          }
+        },
+        "sweeteners": {
+          "sugar": {
+            "id": "sugar",
+            "name": "Cane Sugar"
+          },
+          "raw": {
+            "id": "raw",
+            "name": "Raw Sugar"
+          },
+          "equal": {
+            "id": "equal",
+            "name": "Equal"
+          },
+          "sweetlow": {
+            "id": "sweetlow",
+            "name": "Sweet and Low"
+          },
+          "stevia": {
+            "id": "stevia",
+            "name": "Stevia"
+          }
+        }
+      },
+      "lemonade": {
+        "id": "lemonade",
+        "isHot": false,
+        "name": "Lemonade",
+        "category": "Tea",
+        "ice": "NormalIce",
+        "sizes": {
+          "grande": {
+            "id": "grande",
+            "name": "Grande (16 oz)",
+            "price": 1.49
+          },
+          "venti": {
+            "id": "venti",
+            "name": "Venti (20 oz)",
+            "price": 1.99
+          },
+          "biggulp": {
+            "id": "biggulp",
+            "name": "Big Gulp",
+            "price": 2.49
+          }
+        },
+        "sweeteners": {
+          "sugar": {
+            "id": "sugar",
+            "name": "Cane Sugar"
+          },
+          "raw": {
+            "id": "raw",
+            "name": "Raw Sugar"
+          },
+          "equal": {
+            "id": "equal",
+            "name": "Equal"
+          },
+          "sweetlow": {
+            "id": "sweetlow",
+            "name": "Sweet and Low"
+          },
+          "stevia": {
+            "id": "stevia",
+            "name": "Stevia"
+          }
+        }
+      },
+      "lemonadeStrawberry": {
+        "id": "lemonadeStrawberry",
+        "isHot": false,
+        "name": "Strawberry Lemonade",
+        "category": "Tea",
+        "ice": "NormalIce",
+        "sizes": {
+          "grande": {
+            "id": "grande",
+            "name": "Grande (16 oz)",
+            "price": 1.49
+          },
+          "venti": {
+            "id": "venti",
+            "name": "Venti (20 oz)",
+            "price": 1.99
+          },
+          "biggulp": {
+            "id": "biggulp",
+            "name": "Big Gulp",
+            "price": 2.49
+          }
+        },
+        "sweeteners": {
+          "sugar": {
+            "id": "sugar",
+            "name": "Cane Sugar"
+          },
+          "raw": {
+            "id": "raw",
+            "name": "Raw Sugar"
+          },
+          "equal": {
+            "id": "equal",
+            "name": "Equal"
+          },
+          "sweetlow": {
+            "id": "sweetlow",
+            "name": "Sweet and Low"
+          },
+          "stevia": {
+            "id": "stevia",
+            "name": "Stevia"
+          }
+        }
+      },
+      "decaf": {
+        "id": "decaf",
+        "isHot": true,
+        "name": "Decaf Coffee",
+        "category": "Coffee",
+        "sizes": {
+          "short": {
+            "id": "short",
+            "name": "Short (8 oz)",
+            "price": 1.49
+          },
+          "tall": {
+            "id": "tall",
+            "name": "Tall (12 oz)",
+            "price": 1.99
+          },
+          "grande": {
+            "id": "grande",
+            "name": "Grande (16 oz)",
+            "price": 2.49
+          },
+          "venti": {
+            "id": "venti",
+            "name": "Venti (20 oz)",
+            "price": 2.99
+          }
+        },
+        "sweeteners": {
+          "sugar": {
+            "id": "sugar",
+            "name": "Cane Sugar"
+          },
+          "raw": {
+            "id": "raw",
+            "name": "Raw Sugar"
+          },
+          "equal": {
+            "id": "equal",
+            "name": "Equal"
+          },
+          "sweetlow": {
+            "id": "sweetlow",
+            "name": "Sweet and Low"
+          },
+          "stevia": {
+            "id": "stevia",
+            "name": "Stevia"
+          }
+        },
+        "milks": {
+          "cream": {
+            "id": "cream",
+            "name": "Cream"
+          },
+          "halfhalf": {
+            "id": "halfhalf",
+            "name": "Half and Half"
+          },
+          "whole": {
+            "id": "whole",
+            "name": "Whole Milk"
+          },
+          "2percent": {
+            "id": "2percent",
+            "name": "2 % Milk"
+          },
+          "skim": {
+            "id": "skim",
+            "name": "Skim Milk"
+          },
+          "almond": {
+            "id": "almond",
+            "name": "Almond Milk"
+          }
+        }
+      },
+      "coffee": {
+        "id": "coffee",
+        "isHot": true,
+        "name": "Coffee",
+        "category": "Coffee",
+        "sizes": {
+          "short": {
+            "id": "short",
+            "name": "Short (8 oz)",
+            "price": 1.49
+          },
+          "tall": {
+            "id": "tall",
+            "name": "Tall (12 oz)",
+            "price": 1.99
+          },
+          "grande": {
+            "id": "grande",
+            "name": "Grande (16 oz)",
+            "price": 2.49
+          },
+          "venti": {
+            "id": "venti",
+            "name": "Venti (20 oz)",
+            "price": 2.99
+          }
+        },
+        "sweeteners": {
+          "sugar": {
+            "id": "sugar",
+            "name": "Cane Sugar"
+          },
+          "raw": {
+            "id": "raw",
+            "name": "Raw Sugar"
+          },
+          "equal": {
+            "id": "equal",
+            "name": "Equal"
+          },
+          "sweetlow": {
+            "id": "sweetlow",
+            "name": "Sweet and Low"
+          },
+          "stevia": {
+            "id": "stevia",
+            "name": "Stevia"
+          }
+        },
+        "milks": {
+          "cream": {
+            "id": "cream",
+            "name": "Cream"
+          },
+          "halfhalf": {
+            "id": "halfhalf",
+            "name": "Half and Half"
+          },
+          "whole": {
+            "id": "whole",
+            "name": "Whole Milk"
+          },
+          "2percent": {
+            "id": "2percent",
+            "name": "2 % Milk"
+          },
+          "skim": {
+            "id": "skim",
+            "name": "Skim Milk"
+          },
+          "almond": {
+            "id": "almond",
+            "name": "Almond Milk"
+          }
+        }
+      },
+      "darkroast": {
+        "id": "darkroast",
+        "isHot": true,
+        "name": "Dark Roast Coffee",
+        "category": "Coffee",
+        "sizes": {
+          "short": {
+            "id": "short",
+            "name": "Short (8 oz)",
+            "price": 1.49
+          },
+          "tall": {
+            "id": "tall",
+            "name": "Tall (12 oz)",
+            "price": 1.99
+          },
+          "grande": {
+            "id": "grande",
+            "name": "Grande (16 oz)",
+            "price": 2.49
+          },
+          "venti": {
+            "id": "venti",
+            "name": "Venti (20 oz)",
+            "price": 2.99
+          }
+        },
+        "sweeteners": {
+          "sugar": {
+            "id": "sugar",
+            "name": "Cane Sugar"
+          },
+          "raw": {
+            "id": "raw",
+            "name": "Raw Sugar"
+          },
+          "equal": {
+            "id": "equal",
+            "name": "Equal"
+          },
+          "sweetlow": {
+            "id": "sweetlow",
+            "name": "Sweet and Low"
+          },
+          "stevia": {
+            "id": "stevia",
+            "name": "Stevia"
+          }
+        },
+        "milks": {
+          "cream": {
+            "id": "cream",
+            "name": "Cream"
+          },
+          "halfhalf": {
+            "id": "halfhalf",
+            "name": "Half and Half"
+          },
+          "whole": {
+            "id": "whole",
+            "name": "Whole Milk"
+          },
+          "2percent": {
+            "id": "2percent",
+            "name": "2 % Milk"
+          },
+          "skim": {
+            "id": "skim",
+            "name": "Skim Milk"
+          },
+          "almond": {
+            "id": "almond",
+            "name": "Almond Milk"
+          }
+        }
+      },
+      "cappucino": {
+        "id": "cappucino",
+        "isHot": true,
+        "name": "Cappucino",
+        "category": "Coffee",
+        "foam": "NormalFoam",
+        "sizes": {
+          "short": {
+            "id": "short",
+            "name": "Short (8 oz)",
+            "price": 1.49
+          },
+          "tall": {
+            "id": "tall",
+            "name": "Tall (12 oz)",
+            "price": 1.99
+          },
+          "grande": {
+            "id": "grande",
+            "name": "Grande (16 oz)",
+            "price": 2.49
+          },
+          "venti": {
+            "id": "venti",
+            "name": "Venti (20 oz)",
+            "price": 2.99
+          }
+        },
+        "sweeteners": {
+          "sugar": {
+            "id": "sugar",
+            "name": "Cane Sugar"
+          },
+          "raw": {
+            "id": "raw",
+            "name": "Raw Sugar"
+          },
+          "equal": {
+            "id": "equal",
+            "name": "Equal"
+          },
+          "sweetlow": {
+            "id": "sweetlow",
+            "name": "Sweet and Low"
+          },
+          "stevia": {
+            "id": "stevia",
+            "name": "Stevia"
+          }
+        },
+        "milks": {
+          "cream": {
+            "id": "cream",
+            "name": "Cream"
+          },
+          "halfhalf": {
+            "id": "halfhalf",
+            "name": "Half and Half"
+          },
+          "whole": {
+            "id": "whole",
+            "name": "Whole Milk"
+          },
+          "2percent": {
+            "id": "2percent",
+            "name": "2 % Milk"
+          },
+          "skim": {
+            "id": "skim",
+            "name": "Skim Milk"
+          },
+          "almond": {
+            "id": "almond",
+            "name": "Almond Milk"
+          }
+        }
+      },
+      "topo": {
+        "id": "topo",
+        "name": "Topo Chico",
+        "category": "Water",
+        "isHot": false,
+        "sizes": {
+          "20oz": {
+            "id": "200z",
+            "name": "Topo Chico (20 oz)",
+            "price": 1.99
+          },
+          "liter": {
+            "id": "liter",
+            "name": "Topo Chico (1L)",
+            "price": 3.49
+          }
+        }
+      },
+      "ozarka": {
+        "id": "ozarka",
+        "name": "Ozarka Spring Water",
+        "category": "Water",
+        "isHot": false,
+        "sizes": {
+          "20oz": {
+            "id": "200z",
+            "name": "Ozarka Spring Water (20 oz)",
+            "price": 1.49
+          },
+          "liter": {
+            "id": "liter",
+            "name": "Ozarka Spring Water (1L)",
+            "price": 2.99
+          }
+        }
+      }
+    },
     "Sweeteners": {
       "sugar": {
         "id": "sugar",
@@ -599,18 +1229,6 @@
         "name": "Iced Mocha"
       }
     },
-    "Drinks": {
-      "topo": {
-        "id": "topo",
-        "name": "Topo Chico",
-        "isHot": false
-      },
-      "ozarka": {
-        "id": "ozarka",
-        "name": "Ozarka Spring Water",
-        "isHot": false
-      }
-    },
     "Teas": {
       "greenTea": {
         "id": "greenTea",
@@ -652,44 +1270,607 @@
       "tacoBacon": {
         "id": "tacoBacon",
         "name": "Bacon, Egg, and Cheese Breakfast Taco",
-        "price": 2.49
+        "price": 2.49,
+        "ingredients": {
+          "bacon": {
+            "id": "bacon",
+            "name": "Bacon"
+          },
+          "tortilla": {
+            "id": "tortilla",
+            "name": "Flour Tortilla"
+          },
+          "egg": {
+            "id": "egg",
+            "name": "Scrambled Eggs"
+          },
+          "cheese": {
+            "id": "cheese",
+            "name": "Shredded Cheese"
+          }
+        },
+        "addOns": {
+          "bacon": {
+            "id": "bacon",
+            "name": "Bacon",
+            "price": 1.49
+          },
+          "sausage": {
+            "id": "sausage",
+            "name": "Sausage",
+            "price": 1.49
+          },
+          "potatoes": {
+            "id": "potatoes",
+            "name": "Breakfast Potatoes",
+            "price": 0.99
+          },
+          "beans": {
+            "id": "beans",
+            "name": "Refied Beans",
+            "price": 0.99
+          },
+          "cheese": {
+            "id": "cheese",
+            "name": "Shredded Cheese",
+            "price": 0.99
+          }
+        }
       },
       "tacoSausage": {
         "id": "tacoSausage",
         "name": "Sausage, Egg, and Cheese Breakfast Taco",
-        "price": 2.49
+        "price": 2.49,
+        "ingredients": {
+          "sausage": {
+            "id": "sausage",
+            "name": "Sausage"
+          },
+          "tortilla": {
+            "id": "tortilla",
+            "name": "Flour Tortilla"
+          },
+          "egg": {
+            "id": "egg",
+            "name": "Scrambled Eggs"
+          },
+          "cheese": {
+            "id": "cheese",
+            "name": "Shredded Cheese"
+          }
+        },
+        "addOns": {
+          "bacon": {
+            "id": "bacon",
+            "name": "Bacon",
+            "price": 1.49
+          },
+          "sausage": {
+            "id": "sausage",
+            "name": "Sausage",
+            "price": 1.49
+          },
+          "potatoes": {
+            "id": "potatoes",
+            "name": "Breakfast Potatoes",
+            "price": 0.99
+          },
+          "beans": {
+            "id": "beans",
+            "name": "Refied Beans",
+            "price": 0.99
+          },
+          "cheese": {
+            "id": "cheese",
+            "name": "Shredded Cheese",
+            "price": 0.99
+          }
+        }
       },
       "tacoPotato": {
         "id": "tacoPotato",
         "name": "Potatoes, Egg, and Cheese Breakfast Taco",
-        "price": 2.49
+        "price": 2.49,
+        "ingredients": {
+          "potatoes": {
+            "id": "potatoes",
+            "name": "Breakfast Potatoes"
+          },
+          "tortilla": {
+            "id": "tortilla",
+            "name": "Flour Tortilla"
+          },
+          "egg": {
+            "id": "egg",
+            "name": "Scrambled Eggs"
+          },
+          "cheese": {
+            "id": "cheese",
+            "name": "Shredded Cheese"
+          }
+        },
+        "addOns": {
+          "bacon": {
+            "id": "bacon",
+            "name": "Bacon",
+            "price": 1.49
+          },
+          "sausage": {
+            "id": "sausage",
+            "name": "Sausage",
+            "price": 1.49
+          },
+          "potatoes": {
+            "id": "potatoes",
+            "name": "Breakfast Potatoes",
+            "price": 0.99
+          },
+          "beans": {
+            "id": "beans",
+            "name": "Refied Beans",
+            "price": 0.99
+          },
+          "cheese": {
+            "id": "cheese",
+            "name": "Shredded Cheese",
+            "price": 0.99
+          }
+        }
       },
       "bagel": {
         "id": "bagel",
         "name": "Toasted Bagel",
-        "price": 1.99
+        "price": 1.99,
+        "ingredients": {
+          "bagel": {
+            "id": "bagel",
+            "name": "Toasted Bagel"
+          },
+          "butter": {
+            "id": "butter",
+            "name": "Butter"
+          }
+        },
+        "addOns": {
+          "bacon": {
+            "id": "bacon",
+            "name": "Bacon",
+            "price": 1.49
+          },
+          "sausage": {
+            "id": "sausage",
+            "name": "Sausage",
+            "price": 1.49
+          },
+          "cheddar": {
+            "id": "cheddar",
+            "name": "Cheddar Cheese",
+            "price": 1.49
+          },
+          "swiss": {
+            "id": "swiss",
+            "name": "Swiss Cheese",
+            "price": 1.49
+          },
+          "crchz": {
+            "id": "crchz",
+            "name": "Cream Cheese",
+            "price": 0.99
+          },
+          "crchzStraw": {
+            "id": "crchzStraw",
+            "name": "Strawberry Cream Cheese",
+            "price": 0.99
+          },
+          "crchzCinn": {
+            "id": "crchzCinn",
+            "name": "Cinnamon Cream Cheese",
+            "price": 0.99
+          },
+          "nutella": {
+            "id": "nutella",
+            "name": "Nutella",
+            "price": 0.99
+          }
+        }
       }
     },
     "Lunch": {
       "croisRB": {
         "id": "croisRB",
         "name": "Roast Beef and Cheddar Croissant",
-        "price": 4.49
+        "price": 4.49,
+        "ingredients": {
+          "crois": {
+            "id": "crois",
+            "name": "Croissant"
+          },
+          "rb": {
+            "id": "rb",
+            "name": "Roast Beef"
+          },
+          "cheddar": {
+            "id": "crois",
+            "name": "Croissant"
+          },
+          "mustard": {
+            "id": "mustard",
+            "name": "Yellow Mustard"
+          },
+          "lettuce": {
+            "id": "lettuce",
+            "name": "Lettuce"
+          },
+          "tomato": {
+            "id": "tomato",
+            "name": "Sliced Tomatoes"
+          }
+        },
+        "addOns": {
+          "rb": {
+            "id": "rb",
+            "name": "Roast Beef",
+            "price": 1.99
+          },
+          "ham": {
+            "id": "ham",
+            "name": "Black Forest Ham",
+            "price": 1.99
+          },
+          "turkey": {
+            "id": "turkey",
+            "name": "Honey Smoked Turkey Breast",
+            "price": 1.99
+          },
+          "bacon": {
+            "id": "bacon",
+            "name": "Bacon",
+            "price": 1.49
+          },
+          "avocado": {
+            "id": "avocado",
+            "name": "Avocado",
+            "price": 1.49
+          },
+          "mayo": {
+            "id": "mayo",
+            "name": "Mayo"
+          },
+          "mustard": {
+            "id": "mustard",
+            "name": "Yellow Mustard"
+          },
+          "dijon": {
+            "id": "dijon",
+            "name": "Dijon Mustard"
+          },
+          "cheddar": {
+            "id": "cheddar",
+            "name": "Cheddar Cheese",
+            "price": 1.49
+          },
+          "swiss": {
+            "id": "swiss",
+            "name": "Swiss Cheese",
+            "price": 1.49
+          },
+          "lettuce": {
+            "id": "lettuce",
+            "name": "Iceberg Lettuce"
+          },
+          "tomato": {
+            "id": "tomato",
+            "name": "Sliced Tomato",
+            "price": 0.49
+          },
+          "pickles": {
+            "id": "pickles",
+            "name": "Dill Pickle Chips"
+          },
+          "onion": {
+            "id": "onion",
+            "name": "Sliced Onion"
+          }
+        }
       },
       "croisHam": {
         "id": "croisHam",
         "name": "Ham and Cheddar Croissant",
-        "price": 4.49
+        "price": 4.49,
+        "ingredients": {
+          "crois": {
+            "id": "crois",
+            "name": "Croissant"
+          },
+          "ham": {
+            "id": "ham",
+            "name": "Black Forest Ham",
+            "price": 1.99
+          },
+          "cheddar": {
+            "id": "crois",
+            "name": "Croissant"
+          },
+          "mayo": {
+            "id": "mayo",
+            "name": "Mayo"
+          },
+          "lettuce": {
+            "id": "lettuce",
+            "name": "Lettuce"
+          },
+          "tomato": {
+            "id": "tomato",
+            "name": "Sliced Tomatoes"
+          }
+        },
+        "addOns": {
+          "rb": {
+            "id": "rb",
+            "name": "Roast Beef",
+            "price": 1.99
+          },
+          "ham": {
+            "id": "ham",
+            "name": "Black Forest Ham",
+            "price": 1.99
+          },
+          "turkey": {
+            "id": "turkey",
+            "name": "Honey Smoked Turkey Breast",
+            "price": 1.99
+          },
+          "bacon": {
+            "id": "bacon",
+            "name": "Bacon",
+            "price": 1.49
+          },
+          "avocado": {
+            "id": "avocado",
+            "name": "Avocado",
+            "price": 1.49
+          },
+          "mayo": {
+            "id": "mayo",
+            "name": "Mayo"
+          },
+          "mustard": {
+            "id": "mustard",
+            "name": "Yellow Mustard"
+          },
+          "dijon": {
+            "id": "dijon",
+            "name": "Dijon Mustard"
+          },
+          "cheddar": {
+            "id": "cheddar",
+            "name": "Cheddar Cheese",
+            "price": 1.49
+          },
+          "swiss": {
+            "id": "swiss",
+            "name": "Swiss Cheese",
+            "price": 1.49
+          },
+          "lettuce": {
+            "id": "lettuce",
+            "name": "Iceberg Lettuce"
+          },
+          "tomato": {
+            "id": "tomato",
+            "name": "Sliced Tomato",
+            "price": 0.49
+          },
+          "pickles": {
+            "id": "pickles",
+            "name": "Dill Pickle Chips"
+          },
+          "onion": {
+            "id": "onion",
+            "name": "Sliced Onion"
+          }
+        }
       },
       "croisTurkey": {
         "id": "croisTurkey",
         "name": "Turkey and Swiss Croissant",
-        "price": 4.49
+        "price": 4.49,
+        "ingredients": {
+          "crois": {
+            "id": "crois",
+            "name": "Croissant"
+          },
+          "turkey": {
+            "id": "turkey",
+            "name": "Honey Smoked Turkey Breast",
+            "price": 1.99
+          },
+          "cheddar": {
+            "id": "crois",
+            "name": "Croissant"
+          },
+          "mayo": {
+            "id": "mayo",
+            "name": "Mayo"
+          },
+          "lettuce": {
+            "id": "lettuce",
+            "name": "Lettuce"
+          },
+          "tomato": {
+            "id": "tomato",
+            "name": "Sliced Tomatoes"
+          }
+        },
+        "addOns": {
+          "rb": {
+            "id": "rb",
+            "name": "Roast Beef",
+            "price": 1.99
+          },
+          "ham": {
+            "id": "ham",
+            "name": "Black Forest Ham",
+            "price": 1.99
+          },
+          "turkey": {
+            "id": "turkey",
+            "name": "Honey Smoked Turkey Breast",
+            "price": 1.99
+          },
+          "bacon": {
+            "id": "bacon",
+            "name": "Bacon",
+            "price": 1.49
+          },
+          "avocado": {
+            "id": "avocado",
+            "name": "Avocado",
+            "price": 1.49
+          },
+          "mayo": {
+            "id": "mayo",
+            "name": "Mayo"
+          },
+          "mustard": {
+            "id": "mustard",
+            "name": "Yellow Mustard"
+          },
+          "dijon": {
+            "id": "dijon",
+            "name": "Dijon Mustard"
+          },
+          "cheddar": {
+            "id": "cheddar",
+            "name": "Cheddar Cheese",
+            "price": 1.49
+          },
+          "swiss": {
+            "id": "swiss",
+            "name": "Swiss Cheese",
+            "price": 1.49
+          },
+          "lettuce": {
+            "id": "lettuce",
+            "name": "Iceberg Lettuce"
+          },
+          "tomato": {
+            "id": "tomato",
+            "name": "Sliced Tomato",
+            "price": 0.49
+          },
+          "pickles": {
+            "id": "pickles",
+            "name": "Dill Pickle Chips"
+          },
+          "onion": {
+            "id": "onion",
+            "name": "Sliced Onion"
+          }
+        }
       },
       "croisBLTA": {
         "id": "croisBLTA",
         "name": "Bacon, Lettuce, Tomato, and Avacado Croissant",
-        "price": 4.99
+        "price": 4.99,
+        "ingredients": {
+          "crois": {
+            "id": "crois",
+            "name": "Croissant"
+          },
+          "bacon": {
+            "id": "bacon",
+            "name": "Bacon",
+            "price": 1.49
+          },
+          "avocado": {
+            "id": "avocado",
+            "name": "Avocado",
+            "price": 1.49
+          },
+          "cheddar": {
+            "id": "crois",
+            "name": "Croissant"
+          },
+          "mayo": {
+            "id": "mayo",
+            "name": "Mayo"
+          },
+          "lettuce": {
+            "id": "lettuce",
+            "name": "Lettuce"
+          },
+          "tomato": {
+            "id": "tomato",
+            "name": "Sliced Tomatoes"
+          }
+        },
+        "addOns": {
+          "rb": {
+            "id": "rb",
+            "name": "Roast Beef",
+            "price": 1.99
+          },
+          "ham": {
+            "id": "ham",
+            "name": "Black Forest Ham",
+            "price": 1.99
+          },
+          "turkey": {
+            "id": "turkey",
+            "name": "Honey Smoked Turkey Breast",
+            "price": 1.99
+          },
+          "bacon": {
+            "id": "bacon",
+            "name": "Bacon",
+            "price": 1.49
+          },
+          "avocado": {
+            "id": "avocado",
+            "name": "Avocado",
+            "price": 1.49
+          },
+          "mayo": {
+            "id": "mayo",
+            "name": "Mayo"
+          },
+          "mustard": {
+            "id": "mustard",
+            "name": "Yellow Mustard"
+          },
+          "dijon": {
+            "id": "dijon",
+            "name": "Dijon Mustard"
+          },
+          "cheddar": {
+            "id": "cheddar",
+            "name": "Cheddar Cheese",
+            "price": 1.49
+          },
+          "swiss": {
+            "id": "swiss",
+            "name": "Swiss Cheese",
+            "price": 1.49
+          },
+          "lettuce": {
+            "id": "lettuce",
+            "name": "Iceberg Lettuce"
+          },
+          "tomato": {
+            "id": "tomato",
+            "name": "Sliced Tomato",
+            "price": 0.49
+          },
+          "pickles": {
+            "id": "pickles",
+            "name": "Dill Pickle Chips"
+          },
+          "onion": {
+            "id": "onion",
+            "name": "Sliced Onion"
+          }
+        }
       }
     },
     "Snacks": {
