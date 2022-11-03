@@ -616,17 +616,17 @@
     "Lunch": {
       "croisRB": {
         "id": "croisRB",
-        "name": "Roast Beef and Cheddar Croisant",
+        "name": "Roast Beef and Cheddar Croissant",
         "price": 4.49
       },
       "croisHam": {
         "id": "croisHam",
-        "name": "Ham and Cheddar Croisont",
+        "name": "Ham and Cheddar Croissant",
         "price": 4.49
       },
       "croisTurkey": {
         "id": "croisTurkey",
-        "name": "Turkey and Swiss Croisant",
+        "name": "Turkey and Swiss Croissant",
         "price": 4.49
       },
       "croisBLTA": {
