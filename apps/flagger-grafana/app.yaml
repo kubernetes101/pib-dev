@@ -3,5 +3,6 @@ environment: dev
 ingressPrefix: /grafana
 namespace: projectcontour
 port: 8080
-targets: []
+targets:
+    - all
 template: .gitops
