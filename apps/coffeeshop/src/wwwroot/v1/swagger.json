@@ -21,7 +21,7 @@
     "/api/v1/coffees": {
       "get": {
         "tags": [
-          "Drinks"
+          "Coffees"
         ],
         "summary": "Get all Coffees",
         "description": "Get all Coffees",
@@ -45,7 +45,7 @@
     "/api/v1/teas": {
       "get": {
         "tags": [
-          "Drinks"
+          "Teas"
         ],
         "summary": "Get all Teas",
         "description": "Get all Teas",
@@ -69,7 +69,7 @@
     "/api/v1/sweeteners": {
       "get": {
         "tags": [
-          "Modifiers"
+          "Sweeteners"
         ],
         "summary": "Get all Sweeteners",
         "description": "Get all Sweeteners",
@@ -93,7 +93,7 @@
     "/api/v1/milks": {
       "get": {
         "tags": [
-          "Modifiers"
+          "Milks"
         ],
         "summary": "Get all Milks",
         "description": "Get all Milks",
@@ -117,7 +117,7 @@
     "/api/v1/sizes": {
       "get": {
         "tags": [
-          "Modifiers"
+          "Sizes"
         ],
         "summary": "Get all Sizes",
         "description": "Get all Sizes",
@@ -132,6 +132,30 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Size"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/breakfast": {
+      "get": {
+        "tags": [
+          "Breakfast"
+        ],
+        "summary": "Get all Breakfast Items",
+        "description": "Get all Breakfast Items",
+        "operationId": "GetBreakfast",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FoodItem"
               }
             }
           }
@@ -287,6 +311,39 @@
       "example": {
         "skuId": "grande",
         "name": "Grande (16 oz)"
+      }
+    },
+    "FoodItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 15,
+          "title": "Id",
+          "description": "Id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 20,
+          "title": "Name",
+          "description": "Name"
+        },
+        "price": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "price"
+      ],
+      "example": {
+        "skuId": "tacoBacon",
+        "name": "Bacon, Egg, and Cheese Breakfast Taco",
+        "price": 2.49
       }
     }
   },
@@ -490,6 +547,28 @@
         "id": "arnoldPalmer",
         "isHot": false,
         "name": "Half Iced Tea and Half Lemonade"
+      }
+    },
+    "Breakfast": {
+      "tacoBacon": {
+        "id": "tacoBacon",
+        "name": "Bacon, Egg, and Cheese Breakfast Taco",
+        "price": 2.49
+      },
+      "tacoSausage": {
+        "id": "tacoSausage",
+        "name": "tacoSausage, Egg, and Cheese Breakfast Taco",
+        "price": 2.49
+      },
+      "tacoPotato": {
+        "id": "tacoPotato",
+        "name": "Potatoes, Egg, and Cheese Breakfast Taco",
+        "price": 2.49
+      },
+      "bagel": {
+        "id": "bagel",
+        "name": "Toasted Bagel",
+        "price": 1.99
       }
     }
   }
