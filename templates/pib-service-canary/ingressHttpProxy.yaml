@@ -31,6 +31,4 @@ spec:
   routes:
     - services:
         - name: flagger-grafana
-          port: 80
-      conditions:
-        - prefix: /grafana
+          port: 8080
