@@ -47,9 +47,9 @@
         "tags": [
           "Drinks"
         ],
-        "summary": "Get all Coffees",
-        "description": "Get all Coffees",
-        "operationId": "GetCoffees",
+        "summary": "Get all Coffee",
+        "description": "Get all Coffee",
+        "operationId": "GetCoffee",
         "produces": [
           "application/json"
         ],
@@ -59,7 +59,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Coffee"
+                "$ref": "#/definitions/Drink"
               }
             }
           }
@@ -71,9 +71,9 @@
         "tags": [
           "Drinks"
         ],
-        "summary": "Get all Teas",
-        "description": "Get all Teas",
-        "operationId": "GetTeas",
+        "summary": "Get all Tea",
+        "description": "Get all Tea",
+        "operationId": "GetTea",
         "produces": [
           "application/json"
         ],
@@ -83,7 +83,55 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Tea"
+                "$ref": "#/definitions/Drink"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/drinks/lemonade": {
+      "get": {
+        "tags": [
+          "Drinks"
+        ],
+        "summary": "Get all Lemonade",
+        "description": "Get all Lemonade",
+        "operationId": "GetLemonade",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Drink"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/drinks/water": {
+      "get": {
+        "tags": [
+          "Drinks"
+        ],
+        "summary": "Get all Water",
+        "description": "Get all Water",
+        "operationId": "GetWater",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Drink"
               }
             }
           }
@@ -167,9 +215,9 @@
         "tags": [
           "Food"
         ],
-        "summary": "Get all Snacks Items",
-        "description": "Get all Snacks Items",
-        "operationId": "GetSnacks",
+        "summary": "Get all Snack Items",
+        "description": "Get all Snack Items",
+        "operationId": "GetSnack",
         "produces": [
           "application/json"
         ],
@@ -189,7 +237,7 @@
     "/api/v1/sweeteners": {
       "get": {
         "tags": [
-          "Sweeteners"
+          "Options"
         ],
         "summary": "Get all Sweeteners",
         "description": "Get all Sweeteners",
@@ -213,7 +261,7 @@
     "/api/v1/milks": {
       "get": {
         "tags": [
-          "Milks"
+          "Options"
         ],
         "summary": "Get all Milks",
         "description": "Get all Milks",
@@ -237,7 +285,7 @@
     "/api/v1/sizes": {
       "get": {
         "tags": [
-          "Sizes"
+          "Options"
         ],
         "summary": "Get all Sizes",
         "description": "Get all Sizes",
@@ -260,61 +308,7 @@
     }
   },
   "definitions": {
-    "Sweetener": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "minLength": 5,
-          "maxLength": 15,
-          "title": "Id",
-          "description": "Sweetener Id"
-        },
-        "name": {
-          "type": "string",
-          "minLength": 5,
-          "maxLength": 20,
-          "title": "Name",
-          "description": "Sweetener Name"
-        }
-      },
-      "required": [
-        "id",
-        "name"
-      ],
-      "example": {
-        "skuId": "sugar",
-        "name": "Sugar"
-      }
-    },
-    "Milk": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "minLength": 5,
-          "maxLength": 15,
-          "title": "Id",
-          "description": "Milk Id"
-        },
-        "name": {
-          "type": "string",
-          "minLength": 5,
-          "maxLength": 20,
-          "title": "Name",
-          "description": "Milk Name"
-        }
-      },
-      "required": [
-        "id",
-        "name"
-      ],
-      "example": {
-        "skuId": "halfhalf",
-        "name": "Half and Half"
-      }
-    },
-    "Size": {
+    "Drink": {
       "type": "object",
       "properties": {
         "id": {
@@ -331,18 +325,55 @@
           "title": "Name",
           "description": "Name"
         },
-        "price": {
-          "type": "number",
-          "description": "price"
+        "isHot": {
+          "type": "boolean",
+          "title": "Is Hot",
+          "description": "Is Hot"
+        },
+        "ice": {
+          "type": "object",
+          "title": "Ice",
+          "description": "Ice",
+          "items": {
+            "$ref": "#/definitions/IceEnum"
+          }
+        },
+        "foam": {
+          "type": "object",
+          "title": "Foam",
+          "description": "Foam",
+          "items": {
+            "$ref": "#/definitions/FoamEnum"
+          }
+        },
+        "sizes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Size"
+          }
+        },
+        "sweeteners": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sweetener"
+          }
+        },
+        "milks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Milk"
+          }
         }
       },
       "required": [
         "id",
-        "name"
+        "name",
+        "isHot"
       ],
       "example": {
-        "skuId": "grande",
-        "name": "Grande (16 oz)"
+        "skuId": "greenTea",
+        "name": "Green Tea",
+        "isHot": true
       }
     },
     "FoodItem": {
@@ -428,7 +459,61 @@
         "name": "Half and Half"
       }
     },
-    "Drink": {
+    "Sweetener": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 15,
+          "title": "Id",
+          "description": "Sweetener Id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 20,
+          "title": "Name",
+          "description": "Sweetener Name"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "example": {
+        "skuId": "sugar",
+        "name": "Sugar"
+      }
+    },
+    "Milk": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 15,
+          "title": "Id",
+          "description": "Milk Id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 20,
+          "title": "Name",
+          "description": "Milk Name"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "example": {
+        "skuId": "halfhalf",
+        "name": "Half and Half"
+      }
+    },
+    "Size": {
       "type": "object",
       "properties": {
         "id": {
@@ -445,55 +530,18 @@
           "title": "Name",
           "description": "Name"
         },
-        "isHot": {
-          "type": "boolean",
-          "title": "Is Hot",
-          "description": "Is Hot"
-        },
-        "ice": {
-          "type": "object",
-          "title": "Ice",
-          "description": "Ice",
-          "items": {
-            "$ref": "#/definitions/IceEnum"
-          }
-        },
-        "foam": {
-          "type": "object",
-          "title": "Foam",
-          "description": "Foam",
-          "items": {
-            "$ref": "#/definitions/FoamEnum"
-          }
-        },
-        "sizes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Size"
-          }
-        },
-        "sweeteners": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Sweetener"
-          }
-        },
-        "milks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Milk"
-          }
+        "price": {
+          "type": "number",
+          "description": "price"
         }
       },
       "required": [
         "id",
-        "name",
-        "isHot"
+        "name"
       ],
       "example": {
-        "skuId": "greenTea",
-        "name": "Green Tea",
-        "isHot": true
+        "skuId": "grande",
+        "name": "Grande (16 oz)"
       }
     },
     "IceEnum": {
