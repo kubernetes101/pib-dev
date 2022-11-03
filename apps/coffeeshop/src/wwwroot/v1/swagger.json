@@ -42,10 +42,10 @@
         }
       }
     },
-    "/api/v1/coffees": {
+    "/api/v1/drinks/coffee": {
       "get": {
         "tags": [
-          "Coffees"
+          "Drinks"
         ],
         "summary": "Get all Coffees",
         "description": "Get all Coffees",
@@ -66,10 +66,10 @@
         }
       }
     },
-    "/api/v1/teas": {
+    "/api/v1/drinks/tea": {
       "get": {
         "tags": [
-          "Teas"
+          "Drinks"
         ],
         "summary": "Get all Teas",
         "description": "Get all Teas",
@@ -84,6 +84,102 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Tea"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/foods": {
+      "get": {
+        "tags": [
+          "Food"
+        ],
+        "summary": "Get all Food Items",
+        "description": "Get all Food Items",
+        "operationId": "GetFood",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FoodItem"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/foods/breakfast": {
+      "get": {
+        "tags": [
+          "Food"
+        ],
+        "summary": "Get all Breakfast Items",
+        "description": "Get all Breakfast Items",
+        "operationId": "GetBreakfast",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FoodItem"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/foods/lunch": {
+      "get": {
+        "tags": [
+          "Food"
+        ],
+        "summary": "Get all Lunch Items",
+        "description": "Get all Lunch Items",
+        "operationId": "GetLunch",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FoodItem"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/foods/snacks": {
+      "get": {
+        "tags": [
+          "Food"
+        ],
+        "summary": "Get all Snacks Items",
+        "description": "Get all Snacks Items",
+        "operationId": "GetSnacks",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FoodItem"
               }
             }
           }
@@ -161,149 +257,9 @@
           }
         }
       }
-    },
-    "/api/v1/breakfast": {
-      "get": {
-        "tags": [
-          "Breakfast"
-        ],
-        "summary": "Get all Breakfast Items",
-        "description": "Get all Breakfast Items",
-        "operationId": "GetBreakfast",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/FoodItem"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/lunch": {
-      "get": {
-        "tags": [
-          "Lunch"
-        ],
-        "summary": "Get all Lunch Items",
-        "description": "Get all Lunch Items",
-        "operationId": "GetLunch",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/FoodItem"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/snacks": {
-      "get": {
-        "tags": [
-          "Snacks"
-        ],
-        "summary": "Get all Snacks Items",
-        "description": "Get all Snacks Items",
-        "operationId": "GetSnacks",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/FoodItem"
-              }
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
-    "Coffee": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "minLength": 5,
-          "maxLength": 15,
-          "title": "Id",
-          "description": "Id"
-        },
-        "name": {
-          "type": "string",
-          "minLength": 5,
-          "maxLength": 20,
-          "title": "Name",
-          "description": "Name"
-        },
-        "isHot": {
-          "type": "boolean",
-          "title": "Is Hot",
-          "description": "Is Hot"
-        }
-      },
-      "required": [
-        "id",
-        "name",
-        "isHot"
-      ],
-      "example": {
-        "skuId": "decaf",
-        "name": "Decaf Coffee",
-        "isHot": true
-      }
-    },
-    "Tea": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "minLength": 5,
-          "maxLength": 15,
-          "title": "Id",
-          "description": "Id"
-        },
-        "name": {
-          "type": "string",
-          "minLength": 5,
-          "maxLength": 20,
-          "title": "Name",
-          "description": "Name"
-        },
-        "isHot": {
-          "type": "boolean",
-          "title": "Is Hot",
-          "description": "Is Hot"
-        }
-      },
-      "required": [
-        "id",
-        "name",
-        "isHot"
-      ],
-      "example": {
-        "skuId": "greenTea",
-        "name": "Green Tea",
-        "isHot": true
-      }
-    },
     "Sweetener": {
       "type": "object",
       "properties": {
@@ -405,6 +361,13 @@
           "maxLength": 20,
           "title": "Name",
           "description": "Name"
+        },
+        "category": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 20,
+          "title": "Category",
+          "description": "Category"
         },
         "price": {
           "type": "number",
@@ -552,6 +515,24 @@
         "LightFoam",
         "ExtraFoam"
       ]
+    },
+    "DrinkEnum": {
+      "type": "string",
+      "enum": [
+        "HotCoffee",
+        "ColdCoffee",
+        "HotTea",
+        "CodeTea",
+        "Lemonade"
+      ]
+    },
+    "FoodEnum": {
+      "type": "string",
+      "enum": [
+        "Snacks",
+        "Breakfast",
+        "Lunch"
+      ]
     }
   },
   "x-sampleData": {
@@ -652,7 +633,7 @@
         "id": "lemonade",
         "isHot": false,
         "name": "Lemonade",
-        "category": "Tea",
+        "category": "Lemonade",
         "ice": "NormalIce",
         "sizes": {
           "grande": {
@@ -698,7 +679,7 @@
         "id": "lemonadeStrawberry",
         "isHot": false,
         "name": "Strawberry Lemonade",
-        "category": "Tea",
+        "category": "Lemonade",
         "ice": "NormalIce",
         "sizes": {
           "grande": {
@@ -1080,6 +1061,76 @@
             "price": 2.99
           }
         }
+      },
+      "espresso": {
+        "id": "espresso",
+        "isHot": true,
+        "name": "Espresso Shot"
+      },
+      "latte": {
+        "id": "latte",
+        "isHot": true,
+        "name": "Latte"
+      },
+      "machiatto": {
+        "id": "machiatto",
+        "isHot": true,
+        "name": "Machiatto"
+      },
+      "mocha": {
+        "id": "mocha",
+        "isHot": true,
+        "name": "Mocha"
+      },
+      "coffeeIced": {
+        "id": "coffeeIced",
+        "isHot": false,
+        "name": "Iced Coffee"
+      },
+      "decafIced": {
+        "id": "decafIced",
+        "isHot": false,
+        "name": "Iced Decaf"
+      },
+      "espressoIced": {
+        "id": "espressoIced",
+        "isHot": false,
+        "name": "Iced Espresso"
+      },
+      "coffeeMilkIced": {
+        "id": "coffeeMilkIced",
+        "isHot": false,
+        "name": "Iced Coffee with Milk"
+      },
+      "latteIced": {
+        "id": "latteIced",
+        "isHot": false,
+        "name": "Iced Latte"
+      },
+      "machiattoIced": {
+        "id": "machiattoIced",
+        "isHot": false,
+        "name": "Iced Machiatto"
+      },
+      "mochaIced": {
+        "id": "mochaIced",
+        "isHot": false,
+        "name": "Iced Mocha"
+      },
+      "greenTea": {
+        "id": "greenTea",
+        "name": "Green Tea",
+        "isHot": true
+      },
+      "blackTea": {
+        "id": "blackTea",
+        "isHot": true,
+        "name": "Black Tea"
+      },
+      "arnoldPalmer": {
+        "id": "arnoldPalmer",
+        "isHot": false,
+        "name": "Arnold Palmer"
       }
     },
     "Sweeteners": {
@@ -1152,125 +1203,12 @@
         "name": "Big Gulp"
       }
     },
-    "Coffees": {
-      "decaf": {
-        "id": "decaf",
-        "isHot": true,
-        "name": "Decaf Coffee"
-      },
-      "coffee": {
-        "id": "coffee",
-        "isHot": true,
-        "name": "Coffee"
-      },
-      "darkRoast": {
-        "id": "darkRoast",
-        "isHot": true,
-        "name": "Dark Roast Coffee"
-      },
-      "cappucino": {
-        "id": "cappucino",
-        "isHot": true,
-        "name": "Cappucino"
-      },
-      "espresso": {
-        "id": "espresso",
-        "isHot": true,
-        "name": "Espresso Shot"
-      },
-      "latte": {
-        "id": "latte",
-        "isHot": true,
-        "name": "Latte"
-      },
-      "machiatto": {
-        "id": "machiatto",
-        "isHot": true,
-        "name": "Machiatto"
-      },
-      "mocha": {
-        "id": "mocha",
-        "isHot": true,
-        "name": "Mocha"
-      },
-      "coffeeIced": {
-        "id": "coffeeIced",
-        "isHot": false,
-        "name": "Iced Coffee"
-      },
-      "decafIced": {
-        "id": "decafIced",
-        "isHot": false,
-        "name": "Iced Decaf"
-      },
-      "espressoIced": {
-        "id": "espressoIced",
-        "isHot": false,
-        "name": "Iced Espresso"
-      },
-      "coffeeMilkIced": {
-        "id": "coffeeMilkIced",
-        "isHot": false,
-        "name": "Iced Coffee with Milk"
-      },
-      "latteIced": {
-        "id": "latteIced",
-        "isHot": false,
-        "name": "Iced Latte"
-      },
-      "machiattoIced": {
-        "id": "machiattoIced",
-        "isHot": false,
-        "name": "Iced Machiatto"
-      },
-      "mochaIced": {
-        "id": "mochaIced",
-        "isHot": false,
-        "name": "Iced Mocha"
-      }
-    },
-    "Teas": {
-      "greenTea": {
-        "id": "greenTea",
-        "name": "Green Tea",
-        "isHot": true
-      },
-      "blackTea": {
-        "id": "blackTea",
-        "isHot": true,
-        "name": "Black Tea"
-      },
-      "icedTea": {
-        "id": "icedTea",
-        "isHot": false,
-        "name": "Iced Tea"
-      },
-      "sweetTea": {
-        "id": "sweetTea",
-        "isHot": false,
-        "name": "Sweet Tea"
-      },
-      "lemonade": {
-        "id": "lemonade",
-        "isHot": false,
-        "name": "Lemonade"
-      },
-      "strawberryLemonade": {
-        "id": "strawberryLemonade",
-        "isHot": false,
-        "name": "Strawberry Lemonade"
-      },
-      "arnoldPalmer": {
-        "id": "arnoldPalmer",
-        "isHot": false,
-        "name": "Arnold Palmer"
-      }
-    },
-    "Breakfast": {
+    "Food": {
       "tacoBacon": {
         "id": "tacoBacon",
         "name": "Bacon, Egg, and Cheese Breakfast Taco",
         "price": 2.49,
+        "category": "Breakfast",
         "ingredients": {
           "bacon": {
             "id": "bacon",
@@ -1321,6 +1259,7 @@
         "id": "tacoSausage",
         "name": "Sausage, Egg, and Cheese Breakfast Taco",
         "price": 2.49,
+        "category": "Breakfast",
         "ingredients": {
           "sausage": {
             "id": "sausage",
@@ -1371,6 +1310,7 @@
         "id": "tacoPotato",
         "name": "Potatoes, Egg, and Cheese Breakfast Taco",
         "price": 2.49,
+        "category": "Breakfast",
         "ingredients": {
           "potatoes": {
             "id": "potatoes",
@@ -1421,6 +1361,7 @@
         "id": "bagel",
         "name": "Toasted Bagel",
         "price": 1.99,
+        "category": "Breakfast",
         "ingredients": {
           "bagel": {
             "id": "bagel",
@@ -1473,13 +1414,12 @@
             "price": 0.99
           }
         }
-      }
-    },
-    "Lunch": {
+      },
       "croisRB": {
         "id": "croisRB",
         "name": "Roast Beef and Cheddar Croissant",
         "price": 4.49,
+        "category": "Lunch",
         "ingredients": {
           "crois": {
             "id": "crois",
@@ -1577,6 +1517,7 @@
         "id": "croisHam",
         "name": "Ham and Cheddar Croissant",
         "price": 4.49,
+        "category": "Lunch",
         "ingredients": {
           "crois": {
             "id": "crois",
@@ -1675,6 +1616,7 @@
         "id": "croisTurkey",
         "name": "Turkey and Swiss Croissant",
         "price": 4.49,
+        "category": "Lunch",
         "ingredients": {
           "crois": {
             "id": "crois",
@@ -1773,6 +1715,7 @@
         "id": "croisBLTA",
         "name": "Bacon, Lettuce, Tomato, and Avacado Croissant",
         "price": 4.99,
+        "category": "Lunch",
         "ingredients": {
           "crois": {
             "id": "crois",
@@ -1871,27 +1814,29 @@
             "name": "Sliced Onion"
           }
         }
-      }
-    },
-    "Snacks": {
+      },
       "cpChoc": {
         "id": "cpChoc",
         "name": "Chocolate Cake Pop",
-        "price": 2.49
+        "price": 2.49,
+        "category": "Snack"
       },
       "cpWhite": {
         "id": "cpWhite",
         "name": "White Cake Pop",
+        "category": "Snack",
         "price": 2.49
       },
       "cpRedV": {
         "id": "cpRedV",
         "name": "Red Velvet Cake Pop",
+        "category": "Snack",
         "price": 2.49
       },
       "banBread": {
         "id": "banBread",
         "name": "Fresh Baked Banana Bread",
+        "category": "Snack",
         "price": 2.99
       }
     }

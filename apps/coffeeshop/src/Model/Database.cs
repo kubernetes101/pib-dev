@@ -37,15 +37,11 @@ namespace CoffeeShop.Model
                 }
             }
 
-            inventory.Coffees ??= new();
-            inventory.Teas ??= new();
+            inventory.Drinks ??= new();
+            inventory.Food ??= new();
             inventory.Sweeteners ??= new();
             inventory.Milks ??= new();
             inventory.Sizes ??= new();
-            inventory.Breakfast ??= new();
-            inventory.Lunch ??= new();
-            inventory.Snacks ??= new();
-            inventory.Drinks ??= new();
         }
 
         public static JsonSerializerOptions JsonOptions { get; } = new JsonSerializerOptions
@@ -61,10 +57,7 @@ namespace CoffeeShop.Model
             NumberHandling = JsonNumberHandling.AllowReadingFromString,
             AllowTrailingCommas = true,
 
-            Converters =
-            {
-                new JsonStringEnumConverter()
-            },
+            Converters = { new JsonStringEnumConverter() },
         };
 
         public Dictionary<string, Drink> Drinks
@@ -77,32 +70,6 @@ namespace CoffeeShop.Model
                 }
 
                 return inventory.Drinks;
-            }
-        }
-
-        public Dictionary<string, Coffee> Coffees
-        {
-            get
-            {
-                if (inventory == null || inventory.Coffees == null)
-                {
-                    return new();
-                }
-
-                return inventory.Coffees;
-            }
-        }
-
-        public Dictionary<string, Tea> Teas
-        {
-            get
-            {
-                if (inventory == null || inventory.Teas == null)
-                {
-                    return new();
-                }
-
-                return inventory.Teas;
             }
         }
 
@@ -145,42 +112,16 @@ namespace CoffeeShop.Model
             }
         }
 
-        public Dictionary<string, FoodItem> Breakfast
+        public Dictionary<string, FoodItem> Foods
         {
             get
             {
-                if (inventory == null || inventory.Breakfast == null)
+                if (inventory == null || inventory.Food == null)
                 {
                     return new();
                 }
 
-                return inventory.Breakfast;
-            }
-        }
-
-        public Dictionary<string, FoodItem> Lunch
-        {
-            get
-            {
-                if (inventory == null || inventory.Lunch == null)
-                {
-                    return new();
-                }
-
-                return inventory.Lunch;
-            }
-        }
-
-        public Dictionary<string, FoodItem> Snacks
-        {
-            get
-            {
-                if (inventory == null || inventory.Snacks == null)
-                {
-                    return new();
-                }
-
-                return inventory.Snacks;
+                return inventory.Food;
             }
         }
 
@@ -204,44 +145,19 @@ namespace CoffeeShop.Model
             }
         }
 
-        public bool IsValid(Coffee c, bool shouldExist)
+        public bool IsValid(Drink drink, bool shouldExist)
         {
-            if (c == null)
+            if (drink == null)
             {
                 return false;
             }
 
-            if (string.IsNullOrEmpty(c.Id))
+            if (string.IsNullOrEmpty(drink.Id))
             {
                 return false;
             }
 
-            if (shouldExist != Coffees.ContainsKey(c.Id))
-            {
-                return false;
-            }
-
-            if (string.IsNullOrEmpty(c.Name))
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        public bool IsValid(Tea tea, bool shouldExist)
-        {
-            if (tea == null)
-            {
-                return false;
-            }
-
-            if (string.IsNullOrEmpty(tea.Id))
-            {
-                return false;
-            }
-
-            if (shouldExist != Teas.ContainsKey(tea.Id))
+            if (shouldExist != Drinks.ContainsKey(drink.Id))
             {
                 return false;
             }
@@ -289,22 +205,12 @@ namespace CoffeeShop.Model
             return true;
         }
 
-        public void UpdateCoffee(Coffee cf)
+        public void UpdateDrinks(Drink drink)
         {
-            if (cf != null && inventory != null && inventory.Coffees != null)
+            if (drink != null && inventory != null && inventory.Drinks != null)
             {
-                inventory.Coffees[cf.Id] = cf;
+                inventory.Drinks[drink.Id] = drink;
             }
-        }
-
-        public void UpdateTeas(Tea tea)
-        {
-            if (tea == null)
-            {
-                return;
-            }
-
-            inventory.Teas[tea.Id] = tea;
         }
 
         public void UpdateSize(Size sz)
@@ -327,29 +233,16 @@ namespace CoffeeShop.Model
             inventory.Sweeteners[sweet.Id] = sweet;
         }
 
-        public void DeleteCoffee(string id)
+        public void DeleteDrinks(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
                 return;
             }
 
-            if (inventory.Coffees.ContainsKey(id))
+            if (inventory.Drinks.ContainsKey(id))
             {
-                inventory.Coffees.Remove(id);
-            }
-        }
-
-        public void DeleteTeas(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return;
-            }
-
-            if (inventory.Teas.ContainsKey(id))
-            {
-                inventory.Teas.Remove(id);
+                inventory.Drinks.Remove(id);
             }
         }
 
@@ -392,8 +285,8 @@ namespace CoffeeShop.Model
             }
 
             if (other.inventory == null ||
-                other.inventory.Coffees == null ||
-                other.inventory.Teas == null ||
+                other.inventory.Drinks == null ||
+                other.inventory.Food == null ||
                 other.inventory.Milks == null ||
                 other.inventory.Sizes == null ||
                 other.inventory.Sweeteners == null)
@@ -401,8 +294,8 @@ namespace CoffeeShop.Model
                 return false;
             }
 
-            if (other.inventory.Coffees.Count != inventory.Coffees.Count ||
-                other.inventory.Teas.Count != inventory.Teas.Count ||
+            if (other.inventory.Drinks.Count != inventory.Drinks.Count ||
+                other.inventory.Food.Count != inventory.Food.Count ||
                 other.inventory.Milks.Count != inventory.Milks.Count ||
                 other.inventory.Sizes.Count != inventory.Sizes.Count ||
                 other.inventory.Sweeteners.Count != inventory.Sweeteners.Count)

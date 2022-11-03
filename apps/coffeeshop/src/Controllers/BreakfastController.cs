@@ -13,7 +13,7 @@ namespace CoffeeShop.Controllers
     /// <summary>
     /// Handle Breakfast requests
     /// </summary>
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/foods/[controller]")]
     [Produces("application/json")]
     public class BreakfastController : Controller
     {
@@ -36,7 +36,17 @@ namespace CoffeeShop.Controllers
 
             Database db = new();
 
-            return Ok(db.Breakfast.Values);
+            List<FoodItem> list = new();
+
+            foreach (var f in db.Foods.Values)
+            {
+                if (f.Category == "Breakfast")
+                {
+                    list.Add(f);
+                }
+            }
+
+            return Ok(list);
         }
     }
 }

@@ -1,4 +1,4 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System.Collections.Generic;
@@ -11,28 +11,28 @@ using CoffeeShop.Model;
 namespace CoffeeShop.Controllers
 {
     /// <summary>
-    /// Handle Lunch requests
+    /// Handle Snacks requests
     /// </summary>
     [Route("api/v1/foods/[controller]")]
     [Produces("application/json")]
-    public class LunchController : Controller
+    public class SnackController : Controller
     {
         private static readonly CseLog Logger = new ()
         {
-            Name = typeof(LunchController).FullName,
-            ErrorMessage = "LunchControllerException",
+            Name = typeof(SnackController).FullName,
+            ErrorMessage = "SnackControllerException",
         };
 
         /// <summary>
-        /// Get all Lunch Items
+        /// Get all Snacks Items
         /// </summary>
         /// <returns>IActionResult</returns>
-        [HttpGet(Name = "GetLunch")]
+        [HttpGet(Name = "GetSnacks")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<FoodItem>))]
-        [SwaggerOperation(Summary = "Get all Lunch Items", Description = "Get all Lunch Items")]
-        public IActionResult GetLunch()
+        [SwaggerOperation(Summary = "Get all Snacks Items", Description = "Get all Snacks Items")]
+        public IActionResult GetSnacks()
         {
-            Logger.LogInformation("get", "GetLunch");
+            Logger.LogInformation("get", "GetSnacks");
 
             Database db = new();
 
@@ -40,7 +40,7 @@ namespace CoffeeShop.Controllers
 
             foreach (var f in db.Foods.Values)
             {
-                if (f.Category == "Lunch")
+                if (f.Category == "Snack")
                 {
                     list.Add(f);
                 }

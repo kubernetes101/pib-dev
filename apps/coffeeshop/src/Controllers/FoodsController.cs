@@ -1,4 +1,4 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System.Collections.Generic;
@@ -11,32 +11,32 @@ using CoffeeShop.Model;
 namespace CoffeeShop.Controllers
 {
     /// <summary>
-    /// Handle Snacks requests
+    /// Handle Breakfast requests
     /// </summary>
     [Route("api/v1/[controller]")]
     [Produces("application/json")]
-    public class SnacksController : Controller
+    public class FoodsController : Controller
     {
         private static readonly CseLog Logger = new ()
         {
-            Name = typeof(SnacksController).FullName,
-            ErrorMessage = "SnacksControllerException",
+            Name = typeof(FoodsController).FullName,
+            ErrorMessage = $"{typeof(FoodsController).FullName}Exception",
         };
 
         /// <summary>
-        /// Get all Snacks Items
+        /// Get all Food Items
         /// </summary>
         /// <returns>IActionResult</returns>
-        [HttpGet(Name = "GetSnacks")]
+        [HttpGet(Name = "GetFood")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<FoodItem>))]
-        [SwaggerOperation(Summary = "Get all Snacks Items", Description = "Get all Snacks Items")]
-        public IActionResult GetSnacks()
+        [SwaggerOperation(Summary = "Get all Food Items", Description = "Get all Food Items")]
+        public IActionResult GetFood()
         {
-            Logger.LogInformation("get", "GetSnacks");
+            Logger.LogInformation("get", "GetFood");
 
             Database db = new();
 
-            return Ok(db.Snacks.Values);
+            return Ok(db.Foods.Values);
         }
     }
 }
