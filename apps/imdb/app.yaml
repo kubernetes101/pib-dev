@@ -7,4 +7,4 @@ nodePort: 30080
 port: 8080
 targets:
     - all
-template: pib-service-canary
+template: pib-service
