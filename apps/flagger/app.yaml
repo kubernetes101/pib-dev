@@ -1,6 +1,5 @@
 app: flagger
 environment: dev
 namespace: projectcontour
-targets:
-    - all
+targets: []
 template: .gitops
