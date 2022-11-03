@@ -43,7 +43,7 @@ git branch --show-current
   ```bash
 
   # get az user name and validate your role assignment
-  principal_name=$(az account show --query "user.name" --output tsv | sed -r 's/[@]+/_/g')
+  principal_name=$(az account show --query "user.name" --output tsv | sed -r 's/@.*//')
   az role assignment list --query "[].{principalName:principalName, roleDefinitionName:roleDefinitionName, scope:scope} | [? contains(principalName,'$principal_name')]" -o table
 
   ```
