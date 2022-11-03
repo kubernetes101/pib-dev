@@ -1,3 +1,0 @@
-#!/bin/bash
-
-kubectl exec -it jumpbox -- http webv.skumanager.svc.cluster.local:8080/version

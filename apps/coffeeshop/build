@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+docker build . -t ghcr.io/bartr/coffeeshop:beta
+
+docker login ghcr.io -u bartr -p $PAT
+
+docker push ghcr.io/bartr/coffeeshop:beta
