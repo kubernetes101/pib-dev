@@ -59,7 +59,7 @@ git branch --show-current
 
 ## Create/Set Managed Identity
 
-- If you don't already have managed identity set in your subscription, follow [these steps](./azure-codespaces-setup.md#create-managed-identity) to create RG and MI
+- If you don't already have managed identity set in your subscription, follow [these steps](./azure-codespaces-setup.md#create-resource-group) to create RG and MI
 - Run `flt env` and make sure `PIB_MI` is set
 
 ## Create an Arc Enabled Dev Cluster
