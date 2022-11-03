@@ -242,7 +242,7 @@
       ],
       "example": {
         "skuId": "decaf",
-        "name": "Hot Decaf Coffee",
+        "name": "Decaf Coffee",
         "isHot": true
       }
     },
@@ -276,7 +276,7 @@
       ],
       "example": {
         "skuId": "greenTea",
-        "name": "Hot Green Tea",
+        "name": "Green Tea",
         "isHot": true
       }
     },
@@ -481,42 +481,42 @@
       "decaf": {
         "id": "decaf",
         "isHot": true,
-        "name": "Hot Decaf Coffee"
+        "name": "Decaf Coffee"
       },
       "coffee": {
         "id": "coffee",
         "isHot": true,
-        "name": "Hot Coffee"
+        "name": "Coffee"
       },
       "darkRoast": {
         "id": "darkRoast",
         "isHot": true,
-        "name": "Hot Dark Roast Coffee"
+        "name": "Dark Roast Coffee"
       },
       "cappucino": {
         "id": "cappucino",
         "isHot": true,
-        "name": "Hot Cappucino"
+        "name": "Cappucino"
       },
       "espresso": {
         "id": "espresso",
         "isHot": true,
-        "name": "Hot Espresso Shot"
+        "name": "Espresso Shot"
       },
       "latte": {
         "id": "latte",
         "isHot": true,
-        "name": "Hot Latte"
+        "name": "Latte"
       },
       "machiatto": {
         "id": "machiatto",
         "isHot": true,
-        "name": "Hot Machiatto"
+        "name": "Machiatto"
       },
       "mocha": {
         "id": "mocha",
         "isHot": true,
-        "name": "Hot Mocha"
+        "name": "Mocha"
       },
       "coffeeIced": {
         "id": "coffeeIced",
@@ -557,13 +557,13 @@
     "Teas": {
       "greenTea": {
         "id": "greenTea",
-        "name": "Hot Green Tea",
+        "name": "Green Tea",
         "isHot": true
       },
       "blackTea": {
         "id": "blackTea",
         "isHot": true,
-        "name": "Hot Black Tea"
+        "name": "Black Tea"
       },
       "icedTea": {
         "id": "icedTea",
