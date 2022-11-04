@@ -5,10 +5,10 @@ cd "$(dirname "${BASH_SOURCE[0]}")" || exit
 
 set -e
 
-echo "$(date +'%Y-%m-%d %H:%M:%S')  skipping arc-setup" >> "$HOME/status"
+echo "$(date +'%Y-%m-%d %H:%M:%S')  arc-setup start" >> "$HOME/status"
 
 if [ "$PIB_ARC_ENABLED" != "true" ]; then
-  echo "$(date +'%Y-%m-%d %H:%M:%S')  arc-setup complete" >> "$HOME/status"
+  echo "$(date +'%Y-%m-%d %H:%M:%S')  skipping arc-setup" >> "$HOME/status"
   exit 0
 fi
 
