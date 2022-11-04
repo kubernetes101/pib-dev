@@ -27,7 +27,7 @@ spec:
       retryOn: "5xx"
   analysis:
     # schedule interval (default 60s)
-    interval: 20s
+    interval: 15s
     # max number of failed metric checks before rollback
     threshold: 5
     # max traffic percentage routed to canary

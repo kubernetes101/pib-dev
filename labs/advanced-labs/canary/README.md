@@ -205,7 +205,7 @@ flt check app flagger-grafana
     - change-me
   - Navigate to `Envoy Canary` dashboard
 
-  ![Canary Dashboard](../../images/envoyCanaryDashboard.png)
+  ![Canary Dashboard](../../images/envoyCanaryPromotion.png)
 
 ## Observe automated rollback
 
@@ -214,14 +214,16 @@ flt check app flagger-grafana
 
     ```bash
 
+    # make sure you're in imdb dir
+    cd $PIB_BASE/apps/imdb
+
     # Update imdb app.yaml with image tag from beta to bad
-    sed -i 's,ghcr.io/cse-labs/pib-imdb:beta,ghcr.io/cse-labs/pib-imdb:bad,g' apps/imdb/app.yaml
+    sed -i 's,ghcr.io/cse-labs/pib-imdb:beta,ghcr.io/cse-labs/pib-imdb:bad,g' app.yaml
 
     # validate app.yaml
-    cat apps/imdb/app.yaml
+    cat app.yaml
 
     # deploy imdb with new image
-    cd ../imdb
     flt targets deploy
 
     ```
