@@ -239,7 +239,7 @@ flt check app flagger-grafana
 
     ```
 
-- Observe canary promotion in k9s:
+- Observe canary rollback in k9s:
 
   ```bash
 
