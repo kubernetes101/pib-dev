@@ -58,7 +58,6 @@ fi
 echo "$(date +'%Y-%m-%d %H:%M:%S')  Arc enable cluster" >> "$HOME/status"
 echo "Arc enable cluster"
 az connectedk8s connect --name "$PIB_CLUSTER" --resource-group "$PIB_RESOURCE_GROUP"
-az connectedk8s connect --name "$PIB_CLUSTER" --resource-group "$PIB_RESOURCE_GROUP" --custom-locations-oid "2827ed03-9bd8-46b7-8a42-0833f353b98f"
 
 echo "$(date +'%Y-%m-%d %H:%M:%S')  Arc enable GitOps" >> "$HOME/status"
 echo "Arc enable GitOps"
