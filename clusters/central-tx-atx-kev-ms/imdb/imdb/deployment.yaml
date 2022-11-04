@@ -19,16 +19,18 @@ spec:
     metadata:
       labels:
         app: imdb
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '8080'
     spec:
       containers:
-        - name: app
+        - name: imdb
           image: ghcr.io/cse-labs/pib-imdb:latest
           imagePullPolicy: Always
-          args: [ ]
           ports:
-            - name: http
-              containerPort: 8080
-              protocol: TCP
+          - name: http
+            containerPort: 8080
+            protocol: TCP
           livenessProbe:
             httpGet:
               path: /healthz

@@ -1,0 +1,29 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: imdb-ingress
+  namespace: imdb
+spec:
+  virtualhost:
+    fqdn: 20.125.96.197
+  includes:
+    - name: imdb
+      namespace: imdb
+      conditions:
+      - prefix: /
+    - name: flagger-grafana
+      namespace: projectcontour
+      conditions:
+      - prefix: /grafana
+---
+
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: flagger-grafana
+  namespace: projectcontour
+spec:
+  routes:
+    - services:
+        - name: flagger-grafana
+          port: 8080
