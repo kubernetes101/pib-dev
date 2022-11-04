@@ -152,14 +152,16 @@ flt check app flagger-grafana
 
     ```bash
 
+    # make sure you're in imdb dir
+    cd $PIB_BASE/apps/imdb
+
     # Update imdb app.yaml with image tag from latest to beta
-    sed -i 's,ghcr.io/cse-labs/pib-imdb:latest,ghcr.io/cse-labs/pib-imdb:beta,g' apps/imdb/app.yaml
+    sed -i 's,ghcr.io/cse-labs/pib-imdb:latest,ghcr.io/cse-labs/pib-imdb:beta,g' app.yaml
 
     # validate app.yaml
-    cat apps/imdb/app.yaml
+    cat app.yaml
 
     # deploy imdb with new image
-    cd ../imdb
     flt targets deploy
 
     ```
