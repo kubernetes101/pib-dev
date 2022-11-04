@@ -253,7 +253,7 @@ flt check app flagger-grafana
   - Observe `status` and `weight` for canary promotion
 
     > - Flagger detects the deployment version change and starts a new rollout with 20% traffic progression
-    > - When the number of failed checks reaches the canary analysis threshold casued by HTTP 500 eeors, the traffic is routed back to the primary, the canary weight is scaled to zero and the rollout is marked as `failed`
+    > - When the number of failed checks reaches the canary analysis threshold casued by HTTP 500 errors, the traffic is routed back to the primary, the canary weight is scaled to zero and the rollout is marked as `failed`
 
   - Press `enter` again and scroll to bottom to see events
   - Press `escape` to go back
