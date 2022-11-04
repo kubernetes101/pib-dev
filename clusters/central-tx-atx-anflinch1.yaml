@@ -1,0 +1,10 @@
+name: central-tx-atx-anflinch1
+environment: dev
+region: central
+zone: central-tx
+district: central-tx-atx
+store: central-tx-atx-anflinch1
+domain: 20.171.49.33
+ingressType: Http
+gitopsRepo: kubernetes101/pib-dev
+gitopsBranch: anflinch1
