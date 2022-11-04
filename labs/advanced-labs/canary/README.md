@@ -263,3 +263,19 @@ flt check app flagger-grafana
 - Observe canary analysis in Grafana:
 
   ![Canary Dashboard](../../images/envoyCanaryRollback.png)
+
+## Cleanup
+
+- Reset IMDb app.yaml to initial state
+
+  ```bash
+
+  cd $PIB_BASE
+  git checkout origin/main -- apps/imdb/app.yaml
+
+  git add .
+  git commit -am "reset imdb app.yaml"
+  git push
+
+  ```
+- Once you're finished with the workshop and experimenting, [follow these setps](../../outer-loop.md#delete-your-cluster) to delete your cluster
