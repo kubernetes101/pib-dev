@@ -96,6 +96,8 @@ flt check app flagger-grafana
 
     ```bash
 
+    cd $PIB_BASE
+
     # update imdb app.yaml with canary template
     sed -i 's,pib-service,pib-service-canary,g' apps/imdb/app.yaml
 
@@ -103,7 +105,7 @@ flt check app flagger-grafana
     cat apps/imdb/app.yaml
 
     # deploy imdb with canary template
-    cd ../imdb
+    cd apps/imdb
     flt targets deploy
 
     ```
