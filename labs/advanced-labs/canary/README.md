@@ -210,14 +210,14 @@ flt check app flagger-grafana
 ## Observe automated rollback
 
 - Trigger another canary deployment by updating the container image for IMDb:
-  > NOTE: Image tag `pib-imdb:bad` is designed generate HTTP 500 errors to test if Flagger pauses the rollout
+  > NOTE: Image tag `pib-imdb:bad` is designed to generate HTTP 500 errors to test if Flagger pauses the rollout
 
     ```bash
 
     # make sure you're in imdb dir
     cd $PIB_BASE/apps/imdb
 
-    # Update imdb app.yaml with image tag from beta to bad
+    # update imdb app.yaml with image tag from beta to bad
     sed -i 's,ghcr.io/cse-labs/pib-imdb:beta,ghcr.io/cse-labs/pib-imdb:bad,g' app.yaml
 
     # validate app.yaml
