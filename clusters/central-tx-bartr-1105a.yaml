@@ -1,0 +1,10 @@
+name: central-tx-bartr-1105a
+environment: dev
+region: central
+zone: central-tx
+district: central-tx-bartr
+store: central-tx-bartr-1105a
+domain: central-tx-bartr-1105a.cseretail.com
+ingressType: Https
+gitopsRepo: kubernetes101/pib-dev
+gitopsBranch: bartr
