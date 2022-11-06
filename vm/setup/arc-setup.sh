@@ -14,12 +14,12 @@ fi
 
 # add azure arc dependencies
 echo "$(date +'%Y-%m-%d %H:%M:%S')  install Arc dependencies" >> "$HOME/status"
-az extension add --name connectedk8s
-az extension add --name k8s-configuration
-az extension add --name  k8s-extension
-az provider register --namespace Microsoft.Kubernetes
-az provider register --namespace Microsoft.KubernetesConfiguration
-az provider register --namespace Microsoft.ExtendedLocation
+az extension add --yes --upgrade --name connectedk8s
+az extension add --yes --upgrade --name k8s-configuration
+az extension add --yes --upgrade --name  k8s-extension
+az provider register --wait --consent-to-permissions --namespace Microsoft.Kubernetes
+az provider register --wait --consent-to-permissions --namespace Microsoft.KubernetesConfiguration
+az provider register --wait --consent-to-permissions --namespace Microsoft.ExtendedLocation
 
 # make sure cluster name is set
 if [ -z "$PIB_CLUSTER" ]; then
