@@ -46,5 +46,5 @@ App As appinfo:
         Collect(sweetList, { id: "sweetLow", name: "Sweet & Low" });
         Collect(sweetList, { id: "equal", name: "Equal" });
         Collect(sweetList, { id: "stevia", name: "Stevia" });
-        Collect(orderList, { quan: 1, name: "Lemonade", price: 3.99, size: "bigGulp" });
+        Collect(orderList, { quan: 1, id: "lemonade", name: "Lemonade", price: 3.99, size: "bigGulp" });
         Clear(orderList);
