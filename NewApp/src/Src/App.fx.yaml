@@ -3,3 +3,24 @@ App As appinfo:
     OnStart: |
         =Set(currentCategory, "");
 
+        Collect(coffeeList, { id: "decaf", name: "decaf" });
+        Collect(teaList, { id: "decaf", name: "decaf" });
+        Collect(sizeList, { id: "decaf", name: "decaf" });
+        Collect(milkList, { id: "decaf", name: "decaf" });
+        Collect(breakfastList, { id: "decaf", name: "decaf" });
+        Collect(lunchList, { id: "decaf", name: "decaf" });
+        Collect(coffeeList, { id: "decaf", name: "decaf" });
+        Collect(snacksList, { id: "decaf", name: "decaf" });
+        Collect(sweetList, { id: "decaf", name: "decaf" });
+        Collect(orderList, { id: "decaf", name: "decaf" });
+
+        Clear(coffeeList);
+        Clear(teaList);
+        Clear(sizeList);
+        Clear(milkList);
+        Clear(sweetList);
+        Clear(breakfastList);
+        Clear(lunchList);
+        Clear(snacksList);
+
+        Clear(orderList);
