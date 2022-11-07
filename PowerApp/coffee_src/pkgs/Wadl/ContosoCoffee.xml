@@ -1,0 +1,147 @@
+<application xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:service="https://unitedstates-002.azure-apim.net/apim/coffeeshop-5f2493f4f1f0174a31-5f14dc5b46a16002e1" xmlns:siena="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11" siena:serviceId="ContosoCoffee" xmlns="http://wadl.dev.java.net/2009/02">
+  <doc title="Contoso Coffee" />
+  <grammars>
+    <jsonTypes targetNamespace="https://unitedstates-002.azure-apim.net/apim/coffeeshop-5f2493f4f1f0174a31-5f14dc5b46a16002e1" xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
+      <string name="Coffee_id_def" />
+      <string name="Coffee_name_def" />
+      <boolean name="Coffee_isHot_def" />
+      <object name="Coffee">
+        <property name="id" type="string" />
+        <property name="name" type="string" />
+        <property name="isHot" type="boolean" />
+      </object>
+      <string name="Tea_id_def" />
+      <string name="Tea_name_def" />
+      <boolean name="Tea_isHot_def" />
+      <object name="Tea">
+        <property name="id" type="string" />
+        <property name="name" type="string" />
+        <property name="isHot" type="boolean" />
+      </object>
+      <string name="Sweetener_id_def" />
+      <string name="Sweetener_name_def" />
+      <object name="Sweetener">
+        <property name="id" type="string" />
+        <property name="name" type="string" />
+      </object>
+      <string name="Milk_id_def" />
+      <string name="Milk_name_def" />
+      <object name="Milk">
+        <property name="id" type="string" />
+        <property name="name" type="string" />
+      </object>
+      <string name="Size_id_def" />
+      <string name="Size_name_def" />
+      <object name="Size">
+        <property name="id" type="string" />
+        <property name="name" type="string" />
+      </object>
+      <string name="FoodItem_id_def" />
+      <string name="FoodItem_name_def" />
+      <number name="FoodItem_price_def" />
+      <object name="FoodItem">
+        <property name="id" type="string" />
+        <property name="name" type="string" />
+        <property name="price" type="number" />
+      </object>
+      <array typeRef="Coffee" name="GetCoffees_responses_200_def" />
+      <array typeRef="Tea" name="GetTeas_responses_200_def" />
+      <array typeRef="Sweetener" name="GetSweeteners_responses_200_def" />
+      <array typeRef="Milk" name="GetMilks_responses_200_def" />
+      <array typeRef="Size" name="GetSizes_responses_200_def" />
+      <array typeRef="FoodItem" name="GetBreakfast_responses_200_def" />
+      <array typeRef="FoodItem" name="GetLunch_responses_200_def" />
+      <array typeRef="FoodItem" name="GetSnacks_responses_200_def" />
+    </jsonTypes>
+  </grammars>
+  <resources siena:authenticationProviderHref="#PowerAppAuth" base="https://unitedstates-002.azure-apim.net/apim/coffeeshop-5f2493f4f1f0174a31-5f14dc5b46a16002e1">
+    <resource path="/{connectionId}/api/v1/coffees">
+      <param style="template" name="connectionId" type="xs:string" required="true" />
+      <method siena:requiresAuthentication="true" name="GET" id="GetCoffees" actionName="GetCoffees" siena:isDeprecated="false">
+        <doc title="Get all Coffees&#xA;Get all Coffees" />
+        <request />
+        <response>
+          <representation mediaType="application/json" element="service:GetCoffees_responses_200_def" />
+        </response>
+      </method>
+    </resource>
+    <resource path="/{connectionId}/api/v1/teas">
+      <param style="template" name="connectionId" type="xs:string" required="true" />
+      <method siena:requiresAuthentication="true" name="GET" id="GetTeas" actionName="GetTeas" siena:isDeprecated="false">
+        <doc title="Get all Teas&#xA;Get all Teas" />
+        <request />
+        <response>
+          <representation mediaType="application/json" element="service:GetTeas_responses_200_def" />
+        </response>
+      </method>
+    </resource>
+    <resource path="/{connectionId}/api/v1/sweeteners">
+      <param style="template" name="connectionId" type="xs:string" required="true" />
+      <method siena:requiresAuthentication="true" name="GET" id="GetSweeteners" actionName="GetSweeteners" siena:isDeprecated="false">
+        <doc title="Get all Sweeteners&#xA;Get all Sweeteners" />
+        <request />
+        <response>
+          <representation mediaType="application/json" element="service:GetSweeteners_responses_200_def" />
+        </response>
+      </method>
+    </resource>
+    <resource path="/{connectionId}/api/v1/milks">
+      <param style="template" name="connectionId" type="xs:string" required="true" />
+      <method siena:requiresAuthentication="true" name="GET" id="GetMilks" actionName="GetMilks" siena:isDeprecated="false">
+        <doc title="Get all Milks&#xA;Get all Milks" />
+        <request />
+        <response>
+          <representation mediaType="application/json" element="service:GetMilks_responses_200_def" />
+        </response>
+      </method>
+    </resource>
+    <resource path="/{connectionId}/api/v1/sizes">
+      <param style="template" name="connectionId" type="xs:string" required="true" />
+      <method siena:requiresAuthentication="true" name="GET" id="GetSizes" actionName="GetSizes" siena:isDeprecated="false">
+        <doc title="Get all Sizes&#xA;Get all Sizes" />
+        <request />
+        <response>
+          <representation mediaType="application/json" element="service:GetSizes_responses_200_def" />
+        </response>
+      </method>
+    </resource>
+    <resource path="/{connectionId}/api/v1/breakfast">
+      <param style="template" name="connectionId" type="xs:string" required="true" />
+      <method siena:requiresAuthentication="true" name="GET" id="GetBreakfast" actionName="GetBreakfast" siena:isDeprecated="false">
+        <doc title="Get all Breakfast Items&#xA;Get all Breakfast Items" />
+        <request />
+        <response>
+          <representation mediaType="application/json" element="service:GetBreakfast_responses_200_def" />
+        </response>
+      </method>
+    </resource>
+    <resource path="/{connectionId}/api/v1/lunch">
+      <param style="template" name="connectionId" type="xs:string" required="true" />
+      <method siena:requiresAuthentication="true" name="GET" id="GetLunch" actionName="GetLunch" siena:isDeprecated="false">
+        <doc title="Get all Lunch Items&#xA;Get all Lunch Items" />
+        <request />
+        <response>
+          <representation mediaType="application/json" element="service:GetLunch_responses_200_def" />
+        </response>
+      </method>
+    </resource>
+    <resource path="/{connectionId}/api/v1/snacks">
+      <param style="template" name="connectionId" type="xs:string" required="true" />
+      <method siena:requiresAuthentication="true" name="GET" id="GetSnacks" actionName="GetSnacks" siena:isDeprecated="false">
+        <doc title="Get all Snacks Items&#xA;Get all Snacks Items" />
+        <request />
+        <response>
+          <representation mediaType="application/json" element="service:GetSnacks_responses_200_def" />
+        </response>
+      </method>
+    </resource>
+  </resources>
+  <authenticationProviders xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
+    <connectionProvider id="PowerAppAuth" siena:connectionProviderId="shared_coffeeshop-5f2493f4f1f0174a31-5f14dc5b46a16002e1" />
+  </authenticationProviders>
+  <template xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
+    <variable name="connectionId">
+      <modifyParams style="template" name="connectionId" attribute="fixed" />
+    </variable>
+  </template>
+</application>

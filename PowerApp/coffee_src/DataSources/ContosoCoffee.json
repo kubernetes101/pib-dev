@@ -1,0 +1,8 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_coffeeshop-5f2493f4f1f0174a31-5f14dc5b46a16002e1",
+    "Name": "ContosoCoffee",
+    "ServiceKind": "ConnectedWadl",
+    "Type": "ServiceInfo"
+  }
+]

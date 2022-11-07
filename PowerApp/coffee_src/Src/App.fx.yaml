@@ -1,0 +1,16 @@
+App As appinfo:
+    BackEnabled: =false
+    OnStart: |
+        =Set(currentCategory, "");
+        ClearCollect(coffeeList, ContosoCoffee.GetCoffees());
+        ClearCollect(teaList, ContosoCoffee.GetTeas());
+        ClearCollect(sizeList, ContosoCoffee.GetSizes());
+        ClearCollect(milkList, ContosoCoffee.GetMilks());
+        ClearCollect(sweetList, ContosoCoffee.GetSweeteners());
+        ClearCollect(breakfastList, ContosoCoffee.GetBreakfast());
+        ClearCollect(lunchList, ContosoCoffee.GetLunch());
+        ClearCollect(snacksList, ContosoCoffee.GetSnacks());
+        
+        Clear(orderList);
+    StartScreen: =PosScreen
+

@@ -1,0 +1,23 @@
+{
+  "adea8b93-ac2d-4ca2-a811-4260d9954a37": {
+    "connectionParameters": {
+      "sku": "Enterprise"
+    },
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "CoffeeShop",
+      "iconUri": "https://az787822.vo.msecnd.net/defaulticons/api-dedicated.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_coffeeshop-5f2493f4f1f0174a31-5f14dc5b46a16002e1",
+      "isCustomApiConnection": true,
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {},
+    "dataSources": [
+      "ContosoCoffee"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "adea8b93-ac2d-4ca2-a811-4260d9954a37"
+  }
+}
