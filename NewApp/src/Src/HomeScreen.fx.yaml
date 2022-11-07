@@ -7,7 +7,7 @@ HomeScreen As screen:
         FontWeight: =FontWeight.Bold
         Height: =60
         Size: =24
-        Text: ="Test App"
+        Text: ="Contoso Coffee Kiosk"
         Width: =HomeScreen.Width
         ZIndex: =1
 
@@ -113,7 +113,7 @@ HomeScreen As screen:
             btnGalHotDrinks As button:
                 Height: =90
                 OnSelect: |-
-                    =Collect(orderList, { quan: 1, id: ThisItem.id, name: ThisItem.name, price: 3.49, size: "venti" });
+                    =Collect(orderList, { quan: 1, id: ThisItem.id, name: ThisItem.name, price: ThisItem.price, size: ThisItem.size });
                 Text: =Substitute(ThisItem.name, "\n", Char(10))
                 Width: =240
                 X: =0
@@ -160,7 +160,7 @@ HomeScreen As screen:
             btnGalColdDrinks As button:
                 Height: =90
                 OnSelect: |-
-                    =Collect(orderList, { quan: 1, id: ThisItem.id, name: ThisItem.name, price: 3.49, size: "venti" });
+                    =Collect(orderList, { quan: 1, id: ThisItem.id, name: ThisItem.name, price: ThisItem.price, size: ThisItem.size });
                 Text: =Substitute(ThisItem.name, "\n", Char(10))
                 Width: =240
                 X: =0
@@ -208,7 +208,7 @@ HomeScreen As screen:
             btnGalBreakfast As button:
                 Height: =90
                 OnSelect: |-
-                    =Collect(orderList, { quan: 1, id: ThisItem.id, name: ThisItem.name, price: 2.99, size: "venti" });
+                    =Collect(orderList, { quan: 1, id: ThisItem.id, name: ThisItem.name, price: ThisItem.price, size: ThisItem.size });
                 Text: =Substitute(ThisItem.name, "\n", Char(10))
                 Width: =240
                 X: =0
@@ -256,7 +256,7 @@ HomeScreen As screen:
             btnGalLunch As button:
                 Height: =90
                 OnSelect: |-
-                    =Collect(orderList, { quan: 1, id: ThisItem.id, name: ThisItem.name, price: 3.49, size: "venti" });
+                    =Collect(orderList, { quan: 1, id: ThisItem.id, name: ThisItem.name, price: ThisItem.price, size: ThisItem.size });
                 Text: =Substitute(ThisItem.name, "\n", Char(10))
                 Width: =240
                 X: =0
@@ -304,7 +304,7 @@ HomeScreen As screen:
             btnGalSnacks As button:
                 Height: =90
                 OnSelect: |-
-                    =Collect(orderList, { quan: 1, id: ThisItem.id, name: ThisItem.name, price: 3.49, size: "venti" });
+                    =Collect(orderList, { quan: 1, id: ThisItem.id, name: ThisItem.name, price: ThisItem.price, size: ThisItem.size });
                 Text: =Substitute(ThisItem.name, "\n", Char(10))
                 Width: =240
                 X: =0
@@ -349,7 +349,7 @@ HomeScreen As screen:
             ZIndex: =6
             Height: =60
             Width: =120
-            Fill: =If (currentCategory = Self.Text, ColorFade(RGBA(56, 96, 178, 1), -40%), RGBA(56, 96, 178, 1))
+            Fill: =RGBA(56, 96, 178, 1)
             OnSelect: |-
                 =Clear(orderList);
             X: =(Parent.Width - Self.Width) / 2 
