@@ -1,8 +1,7 @@
 App As appinfo:
     BackEnabled: =false
-    OnStart: |
+    OnStart: |-
         =Set(currentCategory, "");
-
         Collect(coffeeList, { id: "decaf", name: "decaf" });
         Collect(teaList, { id: "decaf", name: "decaf" });
         Collect(sizeList, { id: "decaf", name: "decaf" });
@@ -13,7 +12,6 @@ App As appinfo:
         Collect(snacksList, { id: "decaf", name: "decaf" });
         Collect(sweetList, { id: "decaf", name: "decaf" });
         Collect(orderList, { id: "decaf", name: "decaf" });
-
         Clear(coffeeList);
         Clear(teaList);
         Clear(sizeList);
@@ -22,5 +20,4 @@ App As appinfo:
         Clear(breakfastList);
         Clear(lunchList);
         Clear(snacksList);
-
         Clear(orderList);
