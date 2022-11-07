@@ -1,0 +1,77 @@
+HomeScreen As screen:
+
+    lblHeader As label:
+        Align: =Align.Center
+        Color: =RGBA(215, 223, 240, 1)
+        Fill: =RGBA(50, 86, 160, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =60
+        Size: =24
+        Text: ="Test App"
+        Width: =HomeScreen.Width
+        ZIndex: =1
+
+    contLeftNav As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(175, 191, 224, 1)
+        Height: =HomeScreen.Height - contLeftNav.Y
+        Width: =300
+        Y: =lblHeader.Height
+        ZIndex: =2
+
+        btnCoffee As button:
+            Height: =75
+            Fill: =If (currentCategory = btnCoffee.Text, ColorFade(RGBA(56, 96, 178, 1), -40%), RGBA(56, 96, 178, 1))
+            OnSelect: |-
+                =Set(currentCategory, btnCoffee.Text);
+            Text: ="Coffee"
+            X: =70
+            Y: =40
+            ZIndex: =1
+
+        btnTea As button:
+            Height: =75
+            Fill: =If (currentCategory = btnTea.Text, ColorFade(RGBA(56, 96, 178, 1), -40%), RGBA(56, 96, 178, 1))
+            OnSelect: |-
+                =Set(currentCategory, btnTea.Text);
+            Text: ="Tea"
+            X: =70
+            Y: =140
+            ZIndex: =2
+
+        btnWater As button:
+            Height: =75
+            Fill: =If (currentCategory = btnWater.Text, ColorFade(RGBA(56, 96, 178, 1), -40%), RGBA(56, 96, 178, 1))
+            OnSelect: |-
+                =Set(currentCategory, btnWater.Text);
+            Text: ="Water"
+            X: =70
+            Y: =240
+            ZIndex: =3
+
+        btnBreakfast As button:
+            Height: =75
+            Fill: =If (currentCategory = btnBreakfast.Text, ColorFade(RGBA(56, 96, 178, 1), -40%), RGBA(56, 96, 178, 1))
+            OnSelect: |-
+                =Set(currentCategory, btnBreakfast.Text);
+            Text: ="Breakfast"
+            X: =70
+            Y: =340
+            ZIndex: =4
+
+    contMain As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(215, 223, 240, 1)
+        Height: =HomeScreen.Height - contMain.Y
+        Width: =HomeScreen.Width - contMain.X
+        X: =300
+        Y: =lblHeader.Height
+        ZIndex: =3
+
+        lblCategory As label:
+            Align: =Align.Left
+            Color: =RGBA(56, 96, 178, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =60
+            Size: =14
+            Text: ="Category: " & currentCategory
+            Width: =200
+            ZIndex: =1
