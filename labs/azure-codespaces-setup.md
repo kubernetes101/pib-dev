@@ -43,10 +43,10 @@
 
 ```bash
 
-gh secret set PIB_PAT --body "YourSharedPAT"
+gh secret set PIB_PAT -u --body "YourSharedPAT"
 
 # list secrets
-gh secret list
+gh secret list -u
 
 ```
 
@@ -65,10 +65,10 @@ export rg=tld
 az group create -g $rg -l westus3
 
 # add RG secret
-gh secret set PIB_DNS_RG --body $rg
+gh secret set PIB_DNS_RG -u --body $rg
 
 # list secrets
-gh secret list
+gh secret list -u
 
 ```
 
@@ -81,11 +81,14 @@ gh secret list
 # Managed Identity name
 export mi=pib_mi
 
-# create MI and add CS secret
-gh secret set PIB_MI --body $(az identity create --name $mi --resource-group $rg --query id -o tsv)
+# create MI
+az identity create --name $mi --resource-group $rg --query id -o tsv
+
+# add CS secret
+gh secret set PIB_MI -u --body $(az identity list -g tld --query "[].id" -o tsv)
 
 # list secrets
-gh secret list
+gh secret list -u
 
 ```
 
@@ -103,11 +106,11 @@ gh secret list
 ssh-keygen -t ecdsa -b 521 -f $HOME/.ssh/id_rsa
 
 # add ssh key to Codespaces Secrets
-gh secret set ID_RSA --body $(cat $HOME/.ssh/id_rsa | base64 | tr -d '\n')
-gh secret set ID_RSA_PUB --body $(cat $HOME/.ssh/id_rsa.pub | base64 | tr -d '\n')
+gh secret set ID_RSA -u --body $(cat $HOME/.ssh/id_rsa | base64 | tr -d '\n')
+gh secret set ID_RSA_PUB -u --body $(cat $HOME/.ssh/id_rsa.pub | base64 | tr -d '\n')
 
 # list GitHub Secrets
-gh secret list
+gh secret list -u
 
 ```
 
@@ -122,10 +125,10 @@ gh secret list
 export kv=pib_kv
 
 # set Key Vault secret
-gh secret set PIB_KEYVAULT --body $kv
+gh secret set PIB_KEYVAULT -u --body $kv
 
 # list secrets
-gh secret list
+gh secret list -u
 
 ```
 
@@ -142,10 +145,10 @@ gh secret list
 export ssl=cseretail.com
 
 # add SSL secret
-gh secret set PIB_SSL --body $ssl
+gh secret set PIB_SSL -u --body $ssl
 
 # list secrets
-gh secret list
+gh secret list -u
 
 ```
 
@@ -173,11 +176,11 @@ key=$(az ad sp create-for-rbac \
         --query password)
 
 # add Azure SP login secrets
-gh secret set AZ_TENANT --body $(az account show  --output tsv --query tenantId)
-gh secret set AZ_SP_ID --body $id
-gh secret set AZ_SP_KEY --body $key
+gh secret set AZ_TENANT -u --body $(az account show  --output tsv --query tenantId)
+gh secret set AZ_SP_ID -u --body $id
+gh secret set AZ_SP_KEY -u --body $key
 
 # list secrets
-gh secret list
+gh secret list -u
 
 ```
