@@ -8,7 +8,7 @@
   "Properties": {
     "AppCreationSource": "AppFromScratch",
     "AppDescription": "Cluster Administration (App Team)",
-    "Author": "swagger-gen",
+    "Author": "matt",
     "ContainsThirdPartyPcfControls": false,
     "DefaultConnectedDataSourceMaxGetRowsCount": 500,
     "DocumentAppType": "DesktopOrTablet",
@@ -16,13 +16,13 @@
     "DocumentLayoutLockOrientation": true,
     "DocumentLayoutMaintainAspectRatio": true,
     "DocumentLayoutOrientation": "landscape",
-    "DocumentLayoutScaleToFit": false,
+    "DocumentLayoutScaleToFit": true,
     "DocumentLayoutWidth": 1366,
     "DocumentType": "App",
     "EnableInstrumentation": false,
     "Id": "b316f144-57db-4343-88da-c9b564f08c80",
     "LocalDatabaseReferences": "{}",
-    "Name": "new.msapp"
+    "Name": "ClusterAdmin.msapp"
   },
   "PublishInfo": {
     "AppName": "Cluster Administration (App Team)",
