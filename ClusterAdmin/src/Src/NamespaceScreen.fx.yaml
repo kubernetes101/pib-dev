@@ -1,0 +1,74 @@
+NamespaceScreen As screen:
+    Fill: =RGBA(215, 223, 240, 1)
+
+    lblNamespaceHeader As label:
+        Text: ="Namespace Details"
+        Align: =Align.Center
+        Color: =RGBA(215, 223, 240, 1)
+        Fill: =RGBA(50, 86, 160, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =60
+        Size: =24
+        Width: =HomeScreen.Width
+        ZIndex: =1
+
+    lblNamespaceId As Label:
+        Text: ="Id"
+        Y: =80
+        Align: =Align.Right
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =40
+        Size: =14
+        Width: =160
+        X: =0
+
+    valNamespaceId As Label:
+        Y: =80
+        Text: =thisItem.id
+        Align: =Align.Left
+        BorderColor: =RGBA(0, 18, 107, 1)
+        BorderStyle: =BorderStyle.Solid
+        BorderThickness: =2
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Semibold
+        Height: =40
+        Size: =14
+        Width: =480
+        X: =180
+
+    lblNamespaceName As Label:
+        Text: ="Name"
+        Y: =140
+        Align: =Align.Right
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =40
+        Size: =14
+        Width: =160
+        X: =0
+
+    valNamespaceName As Label:
+        Y: =140
+        Text: =thisItem.name
+        Align: =Align.Left
+        BorderColor: =RGBA(0, 18, 107, 1)
+        BorderStyle: =BorderStyle.Solid
+        BorderThickness: =2
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Semibold
+        Height: =40
+        Size: =14
+        Width: =480
+        X: =180
+
+    btnNamespaceOk As button:
+        X: =180
+        Y: =400
+        Height: =60
+        Width: =120
+        Size: =24
+        FontWeight: =FontWeight.Bold
+        Text: ="OK"
+        OnSelect: |-
+            =Navigate(HomeScreen);

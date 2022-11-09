@@ -1,0 +1,15 @@
+App As appinfo:
+    BackEnabled: =true
+    StartScreen: =HomeScreen
+    OnStart: |-
+        =Set(currentCategory, "");
+        Collect(groupList, { id: "all", name: "All Clusters" });
+        Collect(groupList, { id: "central", name: "Central Region" });
+        Collect(groupList, { id: "east", name: "East Region" });
+        Collect(groupList, { id: "west", name: "West Region" });
+        Collect(groupList, { id: "ring0", name: "Ring 0" });
+        Collect(groupList, { id: "ring1", name: "Ring 1 (includes Ring 0)" });
+        Collect(namespaceList, { id: "imdb", name: "IMDb Namespace", status: "Deployed", groups: [ "central" ] });
+        Collect(applicationList, { id: "imdb", name: "IMDb Application", status: "Deployed", groups: [ "central" ] });
+        Collect(requestList, { id: "imdb", type: "Namespace", name: "Namespace Request (imdb) ", status: "Approved" });
+        Collect(requestList, { id: "imdb", type: "Application", name: "Application Request(imdb)", status: "Approved" });

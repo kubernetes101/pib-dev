@@ -1,0 +1,43 @@
+{
+  "FormatVersion": "0.24",
+  "Header": {
+    "DocVersion": "1.326",
+    "MinVersionToLoad": "1.326",
+    "MSAppStructureVersion": "2.0"
+  },
+  "Properties": {
+    "AppCreationSource": "AppFromScratch",
+    "AppDescription": "Cluster Administration (App Team)",
+    "Author": "swagger-gen",
+    "ContainsThirdPartyPcfControls": false,
+    "DefaultConnectedDataSourceMaxGetRowsCount": 500,
+    "DocumentAppType": "DesktopOrTablet",
+    "DocumentLayoutHeight": 768,
+    "DocumentLayoutLockOrientation": true,
+    "DocumentLayoutMaintainAspectRatio": true,
+    "DocumentLayoutOrientation": "landscape",
+    "DocumentLayoutScaleToFit": false,
+    "DocumentLayoutWidth": 1366,
+    "DocumentType": "App",
+    "EnableInstrumentation": false,
+    "Id": "b316f144-57db-4343-88da-c9b564f08c80",
+    "LocalDatabaseReferences": "{}",
+    "Name": "new.msapp"
+  },
+  "PublishInfo": {
+    "AppName": "Cluster Administration (App Team)",
+    "BackgroundColor": "RGBA(0,176,240,1)",
+    "IconColor": "RGBA(255,255,255,1)",
+    "IconName": "Edit",
+    "LogoFileName": "",
+    "PublishDataLocally": false,
+    "PublishResourcesLocally": false,
+    "PublishTarget": "player",
+    "UserLocale": "en-US"
+  },
+  "ScreenOrder": [
+    "HomeScreen",
+    "ApplicationScreen",
+    "NamespaceScreen"
+  ]
+}
