@@ -1,0 +1,149 @@
+DrinkScreen As screen:
+    Fill: =RGBA(215, 223, 240, 1)
+
+    lblDrinkHeader As label:
+        Text: ="Drink Details"
+        Align: =Align.Center
+        Color: =RGBA(215, 223, 240, 1)
+        Fill: =RGBA(50, 86, 160, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =60
+        Size: =24
+        Width: =HomeScreen.Width
+        ZIndex: =1
+
+    lblDrinkId As Label:
+        Text: ="Id"
+        Y: =80
+        Align: =Align.Right
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =40
+        Size: =14
+        Width: =160
+        X: =0
+
+    valDrinkId As Label:
+        Y: =80
+        Text: =thisItem.id
+        Align: =Align.Left
+        BorderColor: =RGBA(0, 18, 107, 1)
+        BorderStyle: =BorderStyle.Solid
+        BorderThickness: =2
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Semibold
+        Height: =40
+        Size: =14
+        Width: =480
+        X: =180
+
+    lblDrinkName As Label:
+        Text: ="Name"
+        Y: =140
+        Align: =Align.Right
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =40
+        Size: =14
+        Width: =160
+        X: =0
+
+    valDrinkName As Label:
+        Y: =140
+        Text: =thisItem.name
+        Align: =Align.Left
+        BorderColor: =RGBA(0, 18, 107, 1)
+        BorderStyle: =BorderStyle.Solid
+        BorderThickness: =2
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Semibold
+        Height: =40
+        Size: =14
+        Width: =480
+        X: =180
+
+    lblDrinkSize As Label:
+        Text: ="Size"
+        Y: =200
+        Align: =Align.Right
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =40
+        Size: =14
+        Width: =160
+        X: =0
+
+    valDrinkSize As Label:
+        Y: =200
+        Text: =thisItem.size
+        Align: =Align.Left
+        BorderColor: =RGBA(0, 18, 107, 1)
+        BorderStyle: =BorderStyle.Solid
+        BorderThickness: =2
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Semibold
+        Height: =40
+        Size: =14
+        Width: =480
+        X: =180
+
+    lblDrinkPrice As Label:
+        Text: ="Price"
+        Y: =260
+        Align: =Align.Right
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =40
+        Size: =14
+        Width: =160
+        X: =0
+
+    valDrinkPrice As Label:
+        Y: =260
+        Text: =thisItem.price
+        Align: =Align.Left
+        BorderColor: =RGBA(0, 18, 107, 1)
+        BorderStyle: =BorderStyle.Solid
+        BorderThickness: =2
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Semibold
+        Height: =40
+        Size: =14
+        Width: =480
+        X: =180
+
+    lblDrinkIsHot As Label:
+        Text: ="Is Hot Drink"
+        Y: =320
+        Align: =Align.Right
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =40
+        Size: =14
+        Width: =160
+        X: =0
+
+    valDrinkIsHot As Label:
+        Y: =320
+        Text: =thisItem.isHot
+        Align: =Align.Left
+        BorderColor: =RGBA(0, 18, 107, 1)
+        BorderStyle: =BorderStyle.Solid
+        BorderThickness: =2
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Semibold
+        Height: =40
+        Size: =14
+        Width: =480
+        X: =180
+
+    btnDrinkOk As button:
+        X: =180
+        Y: =400
+        Height: =60
+        Width: =120
+        Size: =24
+        FontWeight: =FontWeight.Bold
+        Text: ="OK"
+        OnSelect: |-
+            =Navigate(HomeScreen);

@@ -7,7 +7,7 @@ HomeScreen As screen:
         FontWeight: =FontWeight.Bold
         Height: =60
         Size: =24
-        Text: ="Contoso Coffee Kiosk"
+        Text: ="Contoso Coffee Acclerator"
         Width: =HomeScreen.Width
         ZIndex: =1
 
@@ -74,36 +74,19 @@ HomeScreen As screen:
             X: =30
 
     contHotDrinks As groupContainer.manualLayoutContainer:
+        Visible: =currentCategory = "Hot Drinks"
         Fill: =RGBA(215, 223, 240, 1)
         Height: =HomeScreen.Height - Self.Y
-        Visible: =currentCategory = "Hot Drinks"
-        Width: =900
-        X: =0
+        Width: =HomeScreen.Width - Self.X
+        X: =contLeftNav.Width
         Y: =lblHeader.Height
         ZIndex: =3
 
-        icoHotDrinksCancel As icon.Cancel:
-            AccessibleLabel: =Self.Tooltip
-            Height: =80
-            Icon: =Icon.Cancel
-            OnSelect: |
-                =Set(currentCategory, "");
-            PaddingBottom: =10
-            PaddingLeft: =10
-            PaddingRight: =10
-            PaddingTop: =10
-            TabIndex: =0
-            Tooltip: ="Cancel"
-            Width: =80
-            X: =Parent.Width - Self.Width - 12
-            Y: =17
-            ZIndex: =1
-
         galHotDrinks As gallery.galleryHorizontal:
-            Items: =hotDrinkList
+            Items: =Filter(drinkList, isHot)
             ShowScrollbar: =false
             TemplateSize: =270
-            Width: =Parent.Width - 82
+            Width: =Parent.Width
             Height: =660
             X: =0
             Y: =17
@@ -113,7 +96,8 @@ HomeScreen As screen:
             btnGalHotDrinks As button:
                 Height: =90
                 OnSelect: |-
-                    =Collect(orderList, { quan: 1, id: ThisItem.id, name: ThisItem.name, price: ThisItem.price, size: ThisItem.size });
+                    =Set(thisItem, ThisItem);
+                    Navigate(DrinkScreen)
                 Text: =Substitute(ThisItem.name, "\n", Char(10))
                 Width: =240
                 X: =0
@@ -121,36 +105,19 @@ HomeScreen As screen:
                 ZIndex: =2
 
     contColdDrinks As groupContainer.manualLayoutContainer:
+        Visible: =currentCategory = "Cold Drinks"
         Fill: =RGBA(215, 223, 240, 1)
         Height: =HomeScreen.Height - Self.Y
-        Visible: =currentCategory = "Cold Drinks"
-        Width: =900
-        X: =0
+        Width: =HomeScreen.Width - Self.X
+        X: =contLeftNav.Width
         Y: =lblHeader.Height
         ZIndex: =3
 
-        icoColdDrinksCancel As icon.Cancel:
-            AccessibleLabel: =Self.Tooltip
-            Height: =80
-            Icon: =Icon.Cancel
-            OnSelect: |
-                =Set(currentCategory, "");
-            PaddingBottom: =10
-            PaddingLeft: =10
-            PaddingRight: =10
-            PaddingTop: =10
-            TabIndex: =0
-            Tooltip: ="Cancel"
-            Width: =80
-            X: =Parent.Width - Self.Width - 12
-            Y: =17
-            ZIndex: =1
-
         galColdDrinks As gallery.galleryHorizontal:
-            Items: =coldDrinkList
+            Items: =Filter(drinkList, !isHot)
             ShowScrollbar: =false
             TemplateSize: =300
-            Width: =Parent.Width - 82
+            Width: =Parent.Width
             Height: =660
             X: =0
             Y: =17
@@ -160,7 +127,8 @@ HomeScreen As screen:
             btnGalColdDrinks As button:
                 Height: =90
                 OnSelect: |-
-                    =Collect(orderList, { quan: 1, id: ThisItem.id, name: ThisItem.name, price: ThisItem.price, size: ThisItem.size });
+                    =Set(thisItem, ThisItem);
+                    Navigate(DrinkScreen)
                 Text: =Substitute(ThisItem.name, "\n", Char(10))
                 Width: =240
                 X: =0
@@ -168,37 +136,20 @@ HomeScreen As screen:
                 ZIndex: =1
 
     contBreakfast As groupContainer.manualLayoutContainer:
+        Visible: =currentCategory = "Breakfast"
         Fill: =RGBA(215, 223, 240, 1)
         Height: =HomeScreen.Height - Self.Y
-        Visible: =currentCategory = "Breakfast"
-        Width: =900
-        X: =0
+        Width: =HomeScreen.Width - Self.X
+        X: =contLeftNav.Width
         Y: =lblHeader.Height
         ZIndex: =3
-
-        icoBreakfastCancel As icon.Cancel:
-            AccessibleLabel: =Self.Tooltip
-            Height: =80
-            Icon: =Icon.Cancel
-            OnSelect: |
-                =Set(currentCategory, "");
-            PaddingBottom: =10
-            PaddingLeft: =10
-            PaddingRight: =10
-            PaddingTop: =10
-            TabIndex: =0
-            Tooltip: ="Cancel"
-            Width: =80
-            X: =Parent.Width - Self.Width - 12
-            Y: =17
-            ZIndex: =1
 
         galBreakfast As gallery.galleryHorizontal:
             Items: =breakfastList
             ShowScrollbar: =false
             TemplateSize: =300
             Visible: =currentCategory = "Breakfast"
-            Width: =Parent.Width - 82
+            Width: =Parent.Width
             Height: =660
             X: =0
             Y: =17
@@ -208,7 +159,8 @@ HomeScreen As screen:
             btnGalBreakfast As button:
                 Height: =90
                 OnSelect: |-
-                    =Collect(orderList, { quan: 1, id: ThisItem.id, name: ThisItem.name, price: ThisItem.price, size: ThisItem.size });
+                    =Set(thisItem, ThisItem);
+                    Navigate(DrinkScreen)
                 Text: =Substitute(ThisItem.name, "\n", Char(10))
                 Width: =240
                 X: =0
@@ -216,37 +168,20 @@ HomeScreen As screen:
                 ZIndex: =1
 
     contLunch As groupContainer.manualLayoutContainer:
+        Visible: =currentCategory = "Lunch"
         Fill: =RGBA(215, 223, 240, 1)
         Height: =HomeScreen.Height - Self.Y
-        Visible: =currentCategory = "Lunch"
-        Width: =900
-        X: =0
+        Width: =HomeScreen.Width - Self.X
+        X: =contLeftNav.Width
         Y: =lblHeader.Height
         ZIndex: =4
-
-        icoLuncCancel As icon.Cancel:
-            AccessibleLabel: =Self.Tooltip
-            Height: =80
-            Icon: =Icon.Cancel
-            OnSelect: |
-                =Set(currentCategory, "");
-            PaddingBottom: =10
-            PaddingLeft: =10
-            PaddingRight: =10
-            PaddingTop: =10
-            TabIndex: =0
-            Tooltip: ="Cancel"
-            Width: =80
-            X: =Parent.Width - Self.Width - 12
-            Y: =17
-            ZIndex: =1
 
         galLunch As gallery.galleryHorizontal:
             Items: =lunchList
             ShowScrollbar: =false
             TemplateSize: =300
             Visible: =currentCategory = "Lunch"
-            Width: =Parent.Width - 82
+            Width: =Parent.Width
             Height: =660
             X: =0
             Y: =17
@@ -256,7 +191,8 @@ HomeScreen As screen:
             btnGalLunch As button:
                 Height: =90
                 OnSelect: |-
-                    =Collect(orderList, { quan: 1, id: ThisItem.id, name: ThisItem.name, price: ThisItem.price, size: ThisItem.size });
+                    =Set(thisItem, ThisItem);
+                    Navigate(DrinkScreen)
                 Text: =Substitute(ThisItem.name, "\n", Char(10))
                 Width: =240
                 X: =0
@@ -264,37 +200,20 @@ HomeScreen As screen:
                 ZIndex: =1
 
     contSnacks As groupContainer.manualLayoutContainer:
+        Visible: =currentCategory = "Snacks"
         Fill: =RGBA(215, 223, 240, 1)
         Height: =HomeScreen.Height - Self.Y
-        Visible: =currentCategory = "Snacks"
-        Width: =900
-        X: =0
+        Width: =HomeScreen.Width - Self.X
+        X: =contLeftNav.Width
         Y: =lblHeader.Height
         ZIndex: =5
-
-        icoSnacksCancel As icon.Cancel:
-            AccessibleLabel: =Self.Tooltip
-            Height: =80
-            Icon: =Icon.Cancel
-            OnSelect: |
-                =Set(currentCategory, "");
-            PaddingBottom: =10
-            PaddingLeft: =10
-            PaddingRight: =10
-            PaddingTop: =10
-            TabIndex: =0
-            Tooltip: ="Cancel"
-            Width: =80
-            X: =Parent.Width - Self.Width - 12
-            Y: =17
-            ZIndex: =1
 
         galSnacks As gallery.galleryHorizontal:
             Items: =snacksList
             ShowScrollbar: =false
             TemplateSize: =300
             Visible: =currentCategory = "Snacks"
-            Width: =Parent.Width - 82
+            Width: =Parent.Width
             Height: =660
             X: =0
             Y: =17
@@ -304,52 +223,10 @@ HomeScreen As screen:
             btnGalSnacks As button:
                 Height: =90
                 OnSelect: |-
-                    =Collect(orderList, { quan: 1, id: ThisItem.id, name: ThisItem.name, price: ThisItem.price, size: ThisItem.size });
+                    =Set(thisItem, ThisItem);
+                    Navigate(DrinkScreen)
                 Text: =Substitute(ThisItem.name, "\n", Char(10))
                 Width: =240
                 X: =0
                 Y: =0
                 ZIndex: =1
-
-    contReceipt As groupContainer.manualLayoutContainer:
-        Fill: =RGBA(175, 191, 224, 1)
-        Height: =HomeScreen.Height - Self.Y
-        Visible: =!IsEmpty(orderList)
-        Width: =300
-        X: =Parent.Width - Self.Width
-        Y: =lblHeader.Height
-        ZIndex: =2
-
-        "galReceipt As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
-            Items: =orderList
-            Layout: =Layout.Vertical
-            ShowScrollbar: =true
-            TemplateSize: =40
-            Width: =Parent.Width - 24
-            Height: =600
-            X: =0
-            Y: =17
-            WrapCount: =1
-            ZIndex: =1
-
-            lblReceipt As label:
-                Align: =Align.Left
-                Color: =RGBA(215, 223, 240, 1)
-                Fill: =RGBA(50, 86, 160, 1)
-                FontWeight: =FontWeight.Semibold
-                Height: =20
-                Size: =14
-                Text: =ThisItem.id & Char(9) & ThisItem.price
-                Width: =Parent.Width - 12
-                ZIndex: =1
-
-        btnReceiptReset As button:
-            Text: ="Reset"
-            Y: =Parent.Height - Self.Height - 12
-            ZIndex: =6
-            Height: =60
-            Width: =120
-            Fill: =RGBA(56, 96, 178, 1)
-            OnSelect: |-
-                =Clear(orderList);
-            X: =(Parent.Width - Self.Width) / 2 

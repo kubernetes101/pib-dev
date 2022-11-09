@@ -36,6 +36,7 @@
     "UserLocale": "en-US"
   },
   "ScreenOrder": [
-    "HomeScreen"
+    "HomeScreen",
+    "DrinkScreen"
   ]
 }
