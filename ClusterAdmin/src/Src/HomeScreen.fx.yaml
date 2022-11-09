@@ -91,7 +91,7 @@ HomeScreen As screen:
                 Height: =30
                 Icon: =Icon.Cancel
                 OnSelect: |
-                    =Remove(NamespaceList, ThisItem);
+                    =Remove(namespaceList, ThisItem);
                 PaddingBottom: =2
                 PaddingLeft: =2
                 PaddingRight: =2
@@ -147,7 +147,7 @@ HomeScreen As screen:
                 Height: =30
                 Icon: =Icon.Cancel
                 OnSelect: |
-                    =Remove(ApplicationList, ThisItem);
+                    =Remove(applicationList, ThisItem);
                 PaddingBottom: =2
                 PaddingLeft: =2
                 PaddingRight: =2
