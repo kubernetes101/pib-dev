@@ -2,21 +2,24 @@
 
 ## Introduction
 
-- To monitor a multi-cluster fleet, we deploy a central monitoring cluster with Fluent Bit and Prometheus configured to send logs and metrics to Grafana Cloud.
-- The monitoring cluster runs WebValidate (WebV) to send requests to apps running on the other clusters in the fleet. - The current design has one deployment of WebV for each app.
-  - The webv-heartbeat deployment sends requests to all of the heartbeat apps running on the fleet clusters.
+- To monitor a multi-cluster fleet, we deploy a central monitoring cluster with Fluent Bit and
+Prometheus configured to send logs and metrics to Grafana Cloud
+- The monitoring cluster runs WebValidate (WebV) to send requests to apps running on the other clusters
+in the fleet. - The current design has one deployment of WebV for each app
+  - The webv-heartbeat deployment sends requests to all of the heartbeat apps running on the fleet clusters
 - Fluent Bit is configured to forward WebV logs to Grafana Loki
-- Prometheus is configured to scrape WebV metrics.
-- These logs and metrics are used to power a Grafana Cloud dashboard and provide insight into cluster and app availability and latency.
+- Prometheus is configured to scrape WebV metrics
+- These logs and metrics are used to power a Grafana Cloud dashboard and provide insight into cluster
+and app availability and latency
 
 ## Lab Prerequisites
 
-- Complete the 4 [outer-loop labs](/README.md#outer-loop-labs) before this one.
+- Complete the 4 [outer-loop labs](/README.md#outer-loop-labs) before this one
 
 ## Fleet Configuration Prerequisites
 
 - Grafana Cloud Account
-  - You can set up a free trial Grafana Cloud Account [here](https://grafana.com/).
+  - You can set up a free trial Grafana Cloud Account [here](https://grafana.com/)
 - Azure subscription
 - Managed Identity (MI) for the fleet
 - Key Vault
@@ -24,22 +27,27 @@
 
 ## Key Vault Secrets
 
-- A PAT is required to forward logs and metrics to Grafana Cloud.
-- The PAT is stored as a k8s secret on the fleet clusters.
-- Before creating the secrets, a Key Vault and MI (with access to the Key Vault) must be configured. See [setup docs](/labs/azure-codespaces-setup.md) for instructions.
+- A PAT is required to forward logs and metrics to Grafana Cloud
+- The PAT is stored as a K8s secret on the fleet clusters
+- Before creating the secrets, a Key Vault and MI (with access to the Key Vault) must be configured
+See [setup docs](/labs/azure-codespaces-setup.md) for instructions
 
 ### Fluent Bit Secret
 
-Follow instructions [here](./fluent-bit/README.md#create-fluent-bit-secret) to create the required Fluent Bit secret in the Key Vault.
+Follow instructions [here](./fluent-bit/README.md#create-fluent-bit-secret) to create the required
+Fluent Bit secret in the Key Vault.
 
 ### Prometheus Secret
 
-Follow instructions [here](./prometheus/README.md#create-prometheus-secret) to create the required Prometheus secret in the Key Vault.
+Follow instructions [here](./prometheus/README.md#create-prometheus-secret) to create the required
+Prometheus secret in the Key Vault.
 
 ### Execution
 
-- The Key Vault secret values are retrieved (via MI) during fleet creation and stored as kubernetes secrets on each cluster in the fleet (in [azure.sh](/vm/setup/azure.sh#L36) and [pre-flux.sh](/vm/setup/pre-flux.sh#L29)).
-- The logging (fluent-bit) and metrics (prometheus) namespaces are bootstrapped on each of the clusters, prior to secret creation.
+- The Key Vault secret values are retrieved (via MI) during fleet creation and stored as kubernetes
+secrets on each cluster in the fleet (in [azure.sh](/vm/setup/azure.sh#L36) and [pre-flux.sh](/vm/setup/pre-flux.sh#L29))
+- The logging (fluent-bit) and metrics (prometheus) namespaces are bootstrapped on each of the clusters,
+prior to secret creation
 
 ## Validate working branch
 
@@ -50,6 +58,7 @@ Follow instructions [here](./prometheus/README.md#create-prometheus-secret) to c
 git branch --show-current
 
 ```
+
 ## Deploy a Central Monitoring Cluster
 
 > This assumes you have an existing [multi-cluster fleet](/labs/outer-loop-multi-cluster.md).
@@ -73,8 +82,8 @@ flt create -g $FLT_NAME-fleet -c monitoring-$FLT_NAME
 
 ### Create apps/webv Directory
 
-- Add webv to the apps/ directory
-- By default, this provides you with two deployments of webv: webv-heartbeat and webv-imdb.
+Now we can add `webv` to the `apps/` directory. By default, this provides you with two deployments
+of `webv`: `webv-heartbeat` and `webv-imdb`.
 
 ```bash
 
@@ -92,13 +101,16 @@ git push
 
 ### Configure WebV
 
-- Before deploying, you need to update the arguments for the webv-heartbeat and webv-imdb deployments to target the clusters in your fleet.
-- Replace the server arguments (placeholders are <https://yourclustername.yourdomain.com>) with the fqdn for the clusters in your fleet. You can find these values in the cluster yaml metadata files in the clusters/ directory.
-  - If you are not using dns, use the cluster IP's
-  - <http://yourclusterIP>
+Before deploying, you need to update the arguments for the `webv-heartbeat` and `webv-imdb` deployments
+to target the clusters in your fleet. You'll need to replace the server placeholders like `https://yourclustername.yourdomain.com`
+with the full qualified domain name for the clusters in your fleet. You can find these values in the
+cluster `yaml` metadata files in the `clusters/` directory.
+
+If you are not using DNS, use the cluster's IP like `http://yourclusterIP`.
 
 ```yaml
 
+...
           args:
           - --sleep
           - "5000"
@@ -160,7 +172,7 @@ flt exec kic pods -f monitoring
 
 ### Create apps/fluent-bit Directory
 
-- Add fluent-bit to the apps/ directory
+Add `fluent-bit` to the `apps/` directory:
 
 ```bash
 
@@ -177,7 +189,8 @@ git push
 
 ### Configure Fluent Bit
 
-Follow the instructions [here](./fluent-bit/README.md#update-fluent-bit-config) to configure the Fluent Bit deployment.
+Follow the instructions [here](./fluent-bit/README.md#update-fluent-bit-config) to configure the Fluent
+Bit deployment.
 
 ### Deploy Fluent Bit to the Central Monitoring Cluster
 
@@ -221,7 +234,7 @@ flt exec kic pods -f monitoring
 
 ### Create apps/prometheus directory
 
-- Add prometheus to the apps/ directory
+Add `prometheus` to the `apps/` directory:
 
 ```bash
 
@@ -238,9 +251,10 @@ git push
 
 ### Configure Prometheus
 
-Follow the instructions [here](./prometheus/README.md#update-prometheus-config) to configure the Prometheus deployment.
+Follow the instructions [here](./prometheus/README.md#update-prometheus-config) to configure the Prometheus
+deployment.
 
-### Update targets and deploy Prometheus to the central monitoring cluster
+### Update Targets and Deploy Prometheus to the Central Monitoring Cluster
 
 ```bash
 
@@ -260,7 +274,7 @@ flt targets deploy
 
 ```
 
-### Verify Prometheus was Deployed
+### Verify Prometheus Was Deployed
 
 ```bash
 
@@ -303,16 +317,15 @@ sed -i "s/%%GRAFANA_NAME%%/${GRAFANA_NAME}/g" dashboard.json
 
 ```
 
-- Copy the content in dashboard.json and import as a new dashboard in Grafana Cloud.
+Copy the content in `dashboard.json` and import as a new dashboard in Grafana Cloud.
 
 ## Create Grafana Alert
 
-- Go to Grafana Cloud > Alerting > Alert Rules
-- Create a new alert (+ New Alert Rule)
-  - Rule type: Grafana managed alert
-- Query A:
-  - Select grafanacloud.yourgrafananame.prom as the source from the drop down list
-  - Replace [your $FLT_NAME] with your fleet name and copy the query below to the query field
+Go to Grafana Cloud, to `Alerting`, then `Alert Rules`. Create a new Grafana managed alert under
+`+ New Alert Rule`.
+
+For Query A, Select `grafanacloud.yourgrafananame.prom` as the source from the drop down list. Then replace
+`[your $FLT_NAME]` with your fleet name and copy the query below to the query field.
 
   ```sql
 
@@ -320,31 +333,37 @@ sed -i "s/%%GRAFANA_NAME%%/${GRAFANA_NAME}/g" dashboard.json
 
   ```
 
-- Query B:
-  - Set Operation to Reduce
-  - Set Function to Last
-  - Set Input to A
-  - Leave Mode as Strict
-- Add another Expression (+ Add expression)
-  - Name the Expression "More than 5% errors"
-  - Set Operation to Math
-  - Type in the Expression: $B > 5
-- Set alert condition to "More than 5% errors"
-- Set alert evaluation behavior
-  - Set evaluate every to 30s
-  - Set for to 1m
-- Add details for your alert
-  - Replace [your $FLT_NAME] with your fleet name
-    - Rule name: [your $FLT_NAME] App Issue
-    - Folder: Pick any folder
-    - Group: [your $FLT_NAME] - App Issue
-- Click 'Save and exit'
+For Query B, TODO: is this also a managed alert?
+Set the following:
+
+- `Operation` to `Reduce`
+- `Function` to `Last`
+- `Input` to `A` (from above/before) TODO:
+- Leave `Mode` as `Strict`
+
+Then add another Expression (`+ Add expression`) and name it "More than 5% errors". The settings you'll
+need are:
+
+- `Operation` to `Math`
+- Type in the Expression: `$B > 5`
+- Alert condition to "More than 5% errors"
+- Alert evaluation behavior to evaluate every 30 seconds
+- Set for to 1m TODO: This is a conflict to the step above
+
+You can also add these details to your alert:
+
+- Replace [your $FLT_NAME] with your fleet name
+  - Rule name: [your $FLT_NAME] App Issue
+  - Folder: Pick any folder
+  - Group: [your $FLT_NAME] - App Issue
+
+Save and exit!
 
 ## "Break" an Application Deployment
 
-- To watch the dashboard and alerts "in action", we will temporarily take down an instance of imdb
+To watch the dashboard and alerts "in action", we will temporarily take down an instance of `imdb`!
 
-### Reduce imdb Targets
+### Reduce `imdb` Targets
 
 ```bash
 
@@ -376,6 +395,5 @@ flt sync
 
 ```
 
-- Navigate to your dashboard in Grafana to see some clusters "turn red"
-  - You may need to hit refresh a few times
-  - The alert will take ~1 minute to show up
+Navigate to your dashboard in Grafana to see some clusters "turn red" - You may need to hit refresh
+a few times. The alert will take ~1 minute to show up.
