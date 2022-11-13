@@ -1,8 +1,8 @@
-DrinkScreen As screen:
+DetailScreen As screen:
     Fill: =RGBA(215, 223, 240, 1)
 
-    lblDrinkHeader As label:
-        Text: ="Drink Details"
+    lblDetailHeader As label:
+        Text: =currentItem.type & " Details"
         Align: =Align.Center
         Color: =RGBA(215, 223, 240, 1)
         Fill: =RGBA(50, 86, 160, 1)
@@ -10,9 +10,8 @@ DrinkScreen As screen:
         Height: =60
         Size: =24
         Width: =HomeScreen.Width
-        ZIndex: =1
 
-    lblDrinkId As Label:
+    lblItemId As Label:
         Text: ="Id"
         Y: =80
         Align: =Align.Right
@@ -21,9 +20,8 @@ DrinkScreen As screen:
         Height: =40
         Size: =14
         Width: =160
-        X: =0
 
-    valDrinkId As Label:
+    valItemId As Label:
         Y: =80
         Text: =thisItem.id
         Align: =Align.Left
@@ -37,7 +35,7 @@ DrinkScreen As screen:
         Width: =480
         X: =180
 
-    lblDrinkName As Label:
+    lblItemName As Label:
         Text: ="Name"
         Y: =140
         Align: =Align.Right
@@ -46,9 +44,8 @@ DrinkScreen As screen:
         Height: =40
         Size: =14
         Width: =160
-        X: =0
 
-    valDrinkName As Label:
+    valItemName As Label:
         Y: =140
         Text: =thisItem.name
         Align: =Align.Left
@@ -62,44 +59,18 @@ DrinkScreen As screen:
         Width: =480
         X: =180
 
-    lblDrinkSize As Label:
-        Text: ="Size"
-        Y: =200
-        Align: =Align.Right
-        Color: =RGBA(39, 67, 125, 1)
-        FontWeight: =FontWeight.Bold
-        Height: =40
-        Size: =14
-        Width: =160
-        X: =0
-
-    valDrinkSize As Label:
-        Y: =200
-        Text: =thisItem.size
-        Align: =Align.Left
-        BorderColor: =RGBA(0, 18, 107, 1)
-        BorderStyle: =BorderStyle.Solid
-        BorderThickness: =2
-        Color: =RGBA(39, 67, 125, 1)
-        FontWeight: =FontWeight.Semibold
-        Height: =40
-        Size: =14
-        Width: =480
-        X: =180
-
-    lblDrinkPrice As Label:
+    lblItemPrice As Label:
         Text: ="Price"
-        Y: =260
+        Y: =200
         Align: =Align.Right
         Color: =RGBA(39, 67, 125, 1)
         FontWeight: =FontWeight.Bold
         Height: =40
         Size: =14
         Width: =160
-        X: =0
 
-    valDrinkPrice As Label:
-        Y: =260
+    valItemPrice As Label:
+        Y: =200
         Text: =thisItem.price
         Align: =Align.Left
         BorderColor: =RGBA(0, 18, 107, 1)
@@ -112,6 +83,32 @@ DrinkScreen As screen:
         Width: =480
         X: =180
 
+    lblItemSize As Label:
+        Text: ="Size"
+        Y: =260
+        Align: =Align.Right
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =40
+        Size: =14
+        Width: =160
+        Visible: =currentItem.type = "Drink"
+
+    valItemSize As Label:
+        Y: =260
+        Text: =thisItem.size
+        Align: =Align.Left
+        BorderColor: =RGBA(0, 18, 107, 1)
+        BorderStyle: =BorderStyle.Solid
+        BorderThickness: =2
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Semibold
+        Height: =40
+        Size: =14
+        Width: =480
+        X: =180
+        Visible: =currentItem.type = "Drink"
+
     lblDrinkIsHot As Label:
         Text: ="Is Hot Drink"
         Y: =320
@@ -121,7 +118,7 @@ DrinkScreen As screen:
         Height: =40
         Size: =14
         Width: =160
-        X: =0
+        Visible: =currentItem.type = "Drink"
 
     valDrinkIsHot As Label:
         Y: =320
@@ -136,8 +133,9 @@ DrinkScreen As screen:
         Size: =14
         Width: =480
         X: =180
+        Visible: =currentItem.type = "Drink"
 
-    btnDrinkOk As button:
+    btnItemOk As button:
         X: =180
         Y: =400
         Height: =60

@@ -1,7 +1,13 @@
 App As appinfo:
     BackEnabled: =false
     OnStart: |-
-        =Set(currentCategory, "");
+        =Set(appTitle, "Contoso Coffee Accelerator");
+        Set(currentItem, { id: "", type: "", name: "" });
+        Collect(leftNav, { id: "hotDrinks", type: "Drink", name: "Hot Drinks" });
+        Collect(leftNav, { id: "coldDrinks", type: "Drink", name: "Cold Drinks" });
+        Collect(leftNav, { id: "breakfast", type: "Food", name: "Breakfast" });
+        Collect(leftNav, { id: "lunch", type: "Food", name: "Lunch" });
+        Collect(leftNav, { id: "snacks", type: "Food", name: "Snacks" });
         Collect(drinkList, { id: "pumpkinLatte", name: "Pumpkin Spiced Latte", price: 3.99, size: "venti", isHot: true });
         Collect(drinkList, { id: "coffee", name: "Coffee", price: 3.49, size: "venti", isHot: true });
         Collect(drinkList, { id: "coffeeMilk", name: "Cafe au Lait", price: 3.49, size: "venti", isHot: true });

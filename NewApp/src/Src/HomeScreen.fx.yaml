@@ -7,80 +7,40 @@ HomeScreen As screen:
         FontWeight: =FontWeight.Bold
         Height: =60
         Size: =24
-        Text: ="Contoso Coffee Acclerator"
+        Text: =appTitle
         Width: =HomeScreen.Width
-        ZIndex: =1
 
     contLeftNav As groupContainer.manualLayoutContainer:
         Fill: =RGBA(175, 191, 224, 1)
         Height: =HomeScreen.Height - Self.Y
         Width: =300
         Y: =lblHeader.Height
-        ZIndex: =2
 
-        btnHotDrinks As button:
-            Text: ="Hot Drinks"
-            Y: =20
-            ZIndex: =1
-            Height: =90
-            Width: =240
-            Fill: =If (currentCategory = Self.Text, ColorFade(RGBA(56, 96, 178, 1), -40%), RGBA(56, 96, 178, 1))
-            OnSelect: |-
-                =Set(currentCategory, Self.Text);
+        galLeftNav As gallery.galleryHorizontal:
+            Items: =leftNav
+            ShowScrollbar: =false
+            TemplateSize: =240
+            Width: =Parent.Width
+            Height: =Parent.Height
             X: =30
+            Y: =30
+            WrapCount: =6
 
-        btnColdDrinks As button:
-            Text: ="Cold Drinks"
-            Y: =130
-            ZIndex: =2
-            Height: =90
-            Width: =240
-            Fill: =If (currentCategory = Self.Text, ColorFade(RGBA(56, 96, 178, 1), -40%), RGBA(56, 96, 178, 1))
-            OnSelect: |-
-                =Set(currentCategory, Self.Text);
-            X: =30
-
-        btnBreakfast As button:
-            Text: ="Breakfast"
-            Y: =240
-            ZIndex: =4
-            Height: =90
-            Width: =240
-            Fill: =If (currentCategory = Self.Text, ColorFade(RGBA(56, 96, 178, 1), -40%), RGBA(56, 96, 178, 1))
-            OnSelect: |-
-                =Set(currentCategory, Self.Text);
-            X: =30
-
-        btnLunch As button:
-            Text: ="Lunch"
-            Y: =350
-            ZIndex: =5
-            Height: =90
-            Width: =240
-            Fill: =If (currentCategory = Self.Text, ColorFade(RGBA(56, 96, 178, 1), -40%), RGBA(56, 96, 178, 1))
-            OnSelect: |-
-                =Set(currentCategory, Self.Text);
-            X: =30
-
-        btnSnacks As button:
-            Text: ="Snacks"
-            Y: =460
-            ZIndex: =6
-            Height: =90
-            Width: =240
-            Fill: =If (currentCategory = Self.Text, ColorFade(RGBA(56, 96, 178, 1), -40%), RGBA(56, 96, 178, 1))
-            OnSelect: |-
-                =Set(currentCategory, Self.Text);
-            X: =30
+            btnLeftNav As button:
+                Text: =ThisItem.name
+                Height: =90
+                Width: =240
+                Fill: =If (currentItem.name = Self.Text, ColorFade(RGBA(56, 96, 178, 1), -40%), RGBA(56, 96, 178, 1))
+                OnSelect: |-
+                    =Set(currentItem, ThisItem);
 
     contHotDrinks As groupContainer.manualLayoutContainer:
-        Visible: =currentCategory = "Hot Drinks"
+        Visible: =currentItem.id = "hotDrinks"
         Fill: =RGBA(215, 223, 240, 1)
         Height: =HomeScreen.Height - Self.Y
         Width: =HomeScreen.Width - Self.X
         X: =contLeftNav.Width
         Y: =lblHeader.Height
-        ZIndex: =3
 
         galHotDrinks As gallery.galleryHorizontal:
             Items: =Filter(drinkList, isHot)
@@ -88,30 +48,24 @@ HomeScreen As screen:
             TemplateSize: =270
             Width: =Parent.Width
             Height: =660
-            X: =0
             Y: =17
             WrapCount: =6
-            ZIndex: =1
 
             btnGalHotDrinks As button:
                 Height: =90
                 OnSelect: |-
                     =Set(thisItem, ThisItem);
-                    Navigate(DrinkScreen)
+                    Navigate(DetailScreen)
                 Text: =Substitute(ThisItem.name, "\n", Char(10))
                 Width: =240
-                X: =0
-                Y: =0
-                ZIndex: =2
 
     contColdDrinks As groupContainer.manualLayoutContainer:
-        Visible: =currentCategory = "Cold Drinks"
+        Visible: =currentItem.id = "coldDrinks"
         Fill: =RGBA(215, 223, 240, 1)
         Height: =HomeScreen.Height - Self.Y
         Width: =HomeScreen.Width - Self.X
         X: =contLeftNav.Width
         Y: =lblHeader.Height
-        ZIndex: =3
 
         galColdDrinks As gallery.galleryHorizontal:
             Items: =Filter(drinkList, !isHot)
@@ -119,114 +73,88 @@ HomeScreen As screen:
             TemplateSize: =300
             Width: =Parent.Width
             Height: =660
-            X: =0
             Y: =17
             WrapCount: =6
-            ZIndex: =1
 
             btnGalColdDrinks As button:
                 Height: =90
                 OnSelect: |-
                     =Set(thisItem, ThisItem);
-                    Navigate(DrinkScreen)
+                    Navigate(DetailScreen)
                 Text: =Substitute(ThisItem.name, "\n", Char(10))
                 Width: =240
-                X: =0
-                Y: =0
-                ZIndex: =1
 
     contBreakfast As groupContainer.manualLayoutContainer:
-        Visible: =currentCategory = "Breakfast"
+        Visible: =currentItem.id = "breakfast"
         Fill: =RGBA(215, 223, 240, 1)
         Height: =HomeScreen.Height - Self.Y
         Width: =HomeScreen.Width - Self.X
         X: =contLeftNav.Width
         Y: =lblHeader.Height
-        ZIndex: =3
 
         galBreakfast As gallery.galleryHorizontal:
             Items: =breakfastList
             ShowScrollbar: =false
             TemplateSize: =300
-            Visible: =currentCategory = "Breakfast"
             Width: =Parent.Width
             Height: =660
-            X: =0
             Y: =17
             WrapCount: =6
-            ZIndex: =1
 
             btnGalBreakfast As button:
                 Height: =90
                 OnSelect: |-
                     =Set(thisItem, ThisItem);
-                    Navigate(DrinkScreen)
+                    Navigate(DetailScreen)
                 Text: =Substitute(ThisItem.name, "\n", Char(10))
                 Width: =240
-                X: =0
-                Y: =0
-                ZIndex: =1
 
     contLunch As groupContainer.manualLayoutContainer:
-        Visible: =currentCategory = "Lunch"
+        Visible: =currentItem.id = "lunch"
         Fill: =RGBA(215, 223, 240, 1)
         Height: =HomeScreen.Height - Self.Y
         Width: =HomeScreen.Width - Self.X
         X: =contLeftNav.Width
         Y: =lblHeader.Height
-        ZIndex: =4
 
         galLunch As gallery.galleryHorizontal:
             Items: =lunchList
             ShowScrollbar: =false
             TemplateSize: =300
-            Visible: =currentCategory = "Lunch"
             Width: =Parent.Width
             Height: =660
-            X: =0
             Y: =17
             WrapCount: =6
-            ZIndex: =1
 
             btnGalLunch As button:
                 Height: =90
                 OnSelect: |-
                     =Set(thisItem, ThisItem);
-                    Navigate(DrinkScreen)
+                    Navigate(DetailScreen)
                 Text: =Substitute(ThisItem.name, "\n", Char(10))
                 Width: =240
-                X: =0
-                Y: =0
-                ZIndex: =1
 
     contSnacks As groupContainer.manualLayoutContainer:
-        Visible: =currentCategory = "Snacks"
+        Visible: =currentItem.id = "snacks"
         Fill: =RGBA(215, 223, 240, 1)
         Height: =HomeScreen.Height - Self.Y
         Width: =HomeScreen.Width - Self.X
         X: =contLeftNav.Width
         Y: =lblHeader.Height
-        ZIndex: =5
 
         galSnacks As gallery.galleryHorizontal:
             Items: =snacksList
             ShowScrollbar: =false
             TemplateSize: =300
-            Visible: =currentCategory = "Snacks"
             Width: =Parent.Width
             Height: =660
-            X: =0
             Y: =17
             WrapCount: =6
-            ZIndex: =1
 
             btnGalSnacks As button:
                 Height: =90
                 OnSelect: |-
                     =Set(thisItem, ThisItem);
-                    Navigate(DrinkScreen)
+                    Navigate(DetailScreen)
                 Text: =Substitute(ThisItem.name, "\n", Char(10))
                 Width: =240
-                X: =0
-                Y: =0
-                ZIndex: =1
