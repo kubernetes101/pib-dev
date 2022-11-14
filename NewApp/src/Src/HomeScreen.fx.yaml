@@ -16,15 +16,17 @@ HomeScreen As screen:
         Width: =300
         Y: =lblHeader.Height
 
-        galLeftNav As gallery.galleryHorizontal:
+        galLeftNav As gallery.galleryVertical:
             Items: =leftNav
+            Layout: =Layout.Vertical
             ShowScrollbar: =false
-            TemplateSize: =240
+            TemplateSize: =118
+            TemplatePadding: =0
             Width: =Parent.Width
             Height: =Parent.Height
             X: =30
-            Y: =30
-            WrapCount: =6
+            Y: =19
+            WrapCount: =0
 
             btnLeftNav As button:
                 Text: =ThisItem.name
@@ -47,8 +49,8 @@ HomeScreen As screen:
             ShowScrollbar: =false
             TemplateSize: =270
             Width: =Parent.Width
-            Height: =660
-            Y: =17
+            Height: =Parent.Height
+            Y: =15
             WrapCount: =6
 
             btnGalHotDrinks As button:
@@ -72,8 +74,8 @@ HomeScreen As screen:
             ShowScrollbar: =false
             TemplateSize: =300
             Width: =Parent.Width
-            Height: =660
-            Y: =17
+            Height: =Parent.Height
+            Y: =15
             WrapCount: =6
 
             btnGalColdDrinks As button:
@@ -97,8 +99,8 @@ HomeScreen As screen:
             ShowScrollbar: =false
             TemplateSize: =300
             Width: =Parent.Width
-            Height: =660
-            Y: =17
+            Height: =Parent.Height
+            Y: =15
             WrapCount: =6
 
             btnGalBreakfast As button:
@@ -122,8 +124,8 @@ HomeScreen As screen:
             ShowScrollbar: =false
             TemplateSize: =300
             Width: =Parent.Width
-            Height: =660
-            Y: =17
+            Height: =Parent.Height
+            Y: =15
             WrapCount: =6
 
             btnGalLunch As button:
@@ -147,11 +149,36 @@ HomeScreen As screen:
             ShowScrollbar: =false
             TemplateSize: =300
             Width: =Parent.Width
-            Height: =660
-            Y: =17
+            Height: =Parent.Height
+            Y: =15
             WrapCount: =6
 
             btnGalSnacks As button:
+                Height: =90
+                OnSelect: |-
+                    =Set(thisItem, ThisItem);
+                    Navigate(DetailScreen)
+                Text: =Substitute(ThisItem.name, "\n", Char(10))
+                Width: =240
+
+    contSizes As groupContainer.manualLayoutContainer:
+        Visible: =currentItem.id = "sizes"
+        Fill: =RGBA(215, 223, 240, 1)
+        Height: =HomeScreen.Height - Self.Y
+        Width: =HomeScreen.Width - Self.X
+        X: =contLeftNav.Width
+        Y: =lblHeader.Height
+
+        galSizes As gallery.galleryHorizontal:
+            Items: =sizeList
+            ShowScrollbar: =false
+            TemplateSize: =300
+            Width: =Parent.Width
+            Height: =Parent.Height
+            Y: =15
+            WrapCount: =6
+
+            btnGalSizes As button:
                 Height: =90
                 OnSelect: |-
                     =Set(thisItem, ThisItem);

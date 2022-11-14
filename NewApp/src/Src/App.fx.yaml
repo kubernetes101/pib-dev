@@ -8,6 +8,7 @@ App As appinfo:
         Collect(leftNav, { id: "breakfast", type: "Food", name: "Breakfast" });
         Collect(leftNav, { id: "lunch", type: "Food", name: "Lunch" });
         Collect(leftNav, { id: "snacks", type: "Food", name: "Snacks" });
+        Collect(leftNav, { id: "sizes", type: "Descriptor", name: "Sizes" });
         Collect(drinkList, { id: "pumpkinLatte", name: "Pumpkin Spiced Latte", price: 3.99, size: "venti", isHot: true });
         Collect(drinkList, { id: "coffee", name: "Coffee", price: 3.49, size: "venti", isHot: true });
         Collect(drinkList, { id: "coffeeMilk", name: "Cafe au Lait", price: 3.49, size: "venti", isHot: true });
