@@ -1,0 +1,27 @@
+App As appinfo:
+    BackEnabled: =true
+    StartScreen: =HomeScreen
+    OnStart: |-
+        =Set(currentCategory, "");
+        Collect(groupList, { id: "all", name: "All Clusters" });
+        Collect(groupList, { id: "central", name: "Central Region" });
+        Collect(groupList, { id: "east", name: "East Region" });
+        Collect(groupList, { id: "west", name: "West Region" });
+        Collect(groupList, { id: "ring0", name: "Ring 0" });
+        Collect(groupList, { id: "ring1", name: "Ring 1 (includes Ring 0)" });
+        Collect(namespaceList, { id: "imdb", name: "imdb", cores: 2, memory: 4096, status: "Deployed", groups: [ "central" ] });
+        Collect(applicationList, { id: "imdb", name: "imdb", namespace: "imdb", cores: 2, memory: 4096, status: "Deployed", groups: [ "central" ] });
+        Collect(requestList, { id: "imdb", type: "Namespace", name: "Namespace Request (imdb) ", status: "Approved" });
+        Collect(requestList, { id: "imdb", type: "Application", name: "Application Request(imdb)", status: "Approved" });
+        Collect(coreList, { cores: 0.5 });
+        Collect(coreList, { cores: 1 });
+        Collect(coreList, { cores: 2 });
+        Collect(coreList, { cores: 4 });
+        Collect(coreList, { cores: 8 });
+        Collect(coreList, { cores: 16 });
+        Collect(memoryList, { mb: 512 });
+        Collect(memoryList, { mb: 1024 });
+        Collect(memoryList, { mb: 2048 });
+        Collect(memoryList, { mb: 4096 });
+        Collect(memoryList, { mb: 8192 });
+        Collect(memoryList, { mb: 16384 });

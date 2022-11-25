@@ -1,0 +1,198 @@
+NamespaceScreen As screen:
+    Fill: =RGBA(215, 223, 240, 1)
+
+    lblNamespaceHeader As label:
+        Text: ="Namespace Details"
+        Align: =Align.Center
+        Color: =RGBA(215, 223, 240, 1)
+        Fill: =RGBA(50, 86, 160, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =60
+        Size: =24
+        Width: =HomeScreen.Width
+        ZIndex: =1
+
+    lblNamespaceId As Label:
+        Text: ="Id"
+        Y: =80
+        Align: =Align.Right
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =40
+        Size: =14
+        Width: =160
+        X: =0
+
+    txtNamespaceId As text:
+        Y: =80
+        Default: =thisItem.id
+        DisplayMode: =If(newNamespace, DisplayMode.Edit, DisplayMode.Disabled)
+        Align: =Align.Left
+        BorderColor: =RGBA(0, 18, 107, 1)
+        BorderStyle: =BorderStyle.Solid
+        BorderThickness: =2
+        Color: =RGBA(39, 67, 125, 1)
+        Fill: =If(IsMatch(Self.Text, Letter & Letter & MultipleLetters), RGBA(255, 255, 255, 1), RGBA(238, 204, 204, 1))
+        FontWeight: =FontWeight.Semibold
+        Height: =40
+        Size: =14
+        Width: =480
+        X: =180
+
+    lblNamespaceName As Label:
+        Text: ="Name"
+        Y: =140
+        Align: =Align.Right
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =40
+        Size: =14
+        Width: =160
+        X: =0
+
+    txtNamespaceName As text:
+        Y: =140
+        Default: =thisItem.name
+        MaxLength: =25
+        Align: =Align.Left
+        BorderColor: =RGBA(0, 18, 107, 1)
+        BorderStyle: =BorderStyle.Solid
+        BorderThickness: =2
+        Color: =RGBA(39, 67, 125, 1)
+        Fill: =If(IsMatch(Self.Text, Letter & Letter & MultipleLetters), RGBA(255, 255, 255, 1), RGBA(238, 204, 204, 1))
+        FontWeight: =FontWeight.Semibold
+        Height: =40
+        Size: =14
+        Width: =480
+        X: =180
+
+    lblNamespaceCores As Label:
+        Text: ="Cores"
+        Y: =200
+        Align: =Align.Right
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =40
+        Size: =14
+        Width: =160
+        X: =0
+
+    txtNamespaceCores As text:
+        Y: =200
+        Default: =thisItem.cores
+        Format: =Number
+        Align: =Align.Left
+        BorderColor: =RGBA(0, 18, 107, 1)
+        BorderStyle: =BorderStyle.Solid
+        BorderThickness: =2
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Semibold
+        Height: =40
+        HintText: ="Valid Values: .5, 1, 2, 4, 8, or 16"
+        Size: =14
+        Width: =480
+        X: =180
+        Fill: |-
+            =If(Or(IsMatch(Self.Text, "0.5"),
+              IsMatch(Self.Text, ".5"),
+              IsMatch(Self.Text, "1"),
+              IsMatch(Self.Text, "2"),
+              IsMatch(Self.Text, "4"),
+              IsMatch(Self.Text, "8"),
+              IsMatch(Self.Text, "16")),
+            RGBA(255,255,255,1),
+            RGBA(238, 204, 204, 1)
+            )
+
+    lblNamespaceMemory As Label:
+        Text: ="Memory"
+        Y: =260
+        Align: =Align.Right
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =40
+        Size: =14
+        Width: =160
+        X: =0
+
+    txtNamespaceMemory As text:
+        Y: =260
+        Default: =thisItem.memory
+        Format: =Number
+        Align: =Align.Left
+        BorderColor: =RGBA(0, 18, 107, 1)
+        BorderStyle: =BorderStyle.Solid
+        BorderThickness: =2
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Semibold
+        Height: =40
+        HintText: ="Valid Values: 512, 1024, 2048, 4096, 8192, or 16384"
+        Size: =14
+        Width: =480
+        X: =180
+        Fill: |-
+            =If(Or( IsMatch(Self.Text, "512"),
+                    IsMatch(Self.Text, "1024"),
+                    IsMatch(Self.Text, "2048"),
+                    IsMatch(Self.Text, "4096"),
+                    IsMatch(Self.Text, "8192"),
+                    IsMatch(Self.Text, "16384")),
+                RGBA(255,255,255,1),
+                RGBA(238, 204, 204, 1)
+            )
+
+    lblNamespaceStatus As Label:
+        Text: ="Status"
+        Y: =400
+        Align: =Align.Right
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =40
+        Size: =14
+        Width: =160
+        X: =0
+
+    txtNamespaceStatus As text:
+        Y: =400
+        Default: =thisItem.status
+        DisplayMode: =DisplayMode.Disabled
+        MaxLength: =25
+        Align: =Align.Left
+        BorderColor: =RGBA(0, 18, 107, 1)
+        BorderStyle: =BorderStyle.Solid
+        BorderThickness: =2
+        Color: =RGBA(39, 67, 125, 1)
+        FontWeight: =FontWeight.Semibold
+        Height: =40
+        Size: =14
+        Width: =480
+        X: =180
+
+    btnNamespaceOk As button:
+        X: =180
+        Y: =600
+        Height: =60
+        Width: =120
+        Size: =24
+        FontWeight: =FontWeight.Bold
+        Text: ="OK"
+        OnSelect: |-
+            =If(newNamespace && txtNamespaceId.Text <> "" && txtNamespaceName.Text <> "",
+                Collect(requestList,
+                {
+                    id: txtNamespaceId.Text,
+                    type: "Namespace",
+                    name: $"Namespace Request ({txtNamespaceName.Text})",
+                    status: "Submitted"
+                });
+                Collect(namespaceList,
+                {
+                    id: txtNamespaceId.Text,
+                    name: txtNamespaceName.Text,
+                    cores: Value(txtNamespaceCores.Text),
+                    memory: Value(txtNamespaceMemory.Text),
+                    status: "Requested"
+                })
+            );
+            Set(newNamespace, false);
+            Navigate(HomeScreen);

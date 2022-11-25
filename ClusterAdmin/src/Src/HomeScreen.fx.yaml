@@ -1,0 +1,321 @@
+HomeScreen As screen:
+
+    lblHeader As label:
+        Align: =Align.Center
+        Color: =RGBA(215, 223, 240, 1)
+        Fill: =RGBA(50, 86, 160, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =60
+        Size: =24
+        Text: ="Cluster Administration (App Team)"
+        Width: =HomeScreen.Width
+        ZIndex: =1
+
+    contLeftNav As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(175, 191, 224, 1)
+        Height: =HomeScreen.Height - Self.Y
+        Width: =300
+        Y: =lblHeader.Height
+        ZIndex: =2
+
+        btnNamespaces As button:
+            Text: ="Namespaces"
+            Y: =20
+            ZIndex: =1
+            Height: =90
+            Width: =240
+            Fill: =If (currentCategory = Self.Text, ColorFade(RGBA(56, 96, 178, 1), -40%), RGBA(56, 96, 178, 1))
+            OnSelect: |-
+                =Set(currentCategory, Self.Text);
+            X: =30
+
+        btnApplications As button:
+            Text: ="Applications"
+            Y: =130
+            ZIndex: =1
+            Height: =90
+            Width: =240
+            Fill: =If (currentCategory = Self.Text, ColorFade(RGBA(56, 96, 178, 1), -40%), RGBA(56, 96, 178, 1))
+            OnSelect: |-
+                =Set(currentCategory, Self.Text);
+            X: =30
+
+        btnRequests As button:
+            Text: ="Requests"
+            Y: =240
+            ZIndex: =1
+            Height: =90
+            Width: =240
+            Fill: =If (currentCategory = Self.Text, ColorFade(RGBA(56, 96, 178, 1), -40%), RGBA(56, 96, 178, 1))
+            OnSelect: |-
+                =Set(currentCategory, Self.Text);
+            X: =30
+
+    contNamespaces As groupContainer.manualLayoutContainer:
+        Visible: =currentCategory = "Namespaces"
+        Fill: =RGBA(215, 223, 240, 1)
+        Height: =HomeScreen.Height - Self.Y
+        Width: =HomeScreen.Width - Self.X
+        X: =contLeftNav.Width
+        Y: =lblHeader.Height
+
+        lblNamespacesHeader As label:
+            Align: =Align.Center
+            Color: =RGBA(215, 223, 240, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =60
+            Size: =24
+            Text: ="Namespaces"
+            Width: =Parent.Width
+            Fill: =ColorFade(RGBA(56, 96, 178, 1), -40%)
+            X: =0
+            Y: =20
+
+        btnNamespacesRequest As button:
+            Text: ="Request Namespace"
+            X: =20
+            Y: =100
+            Height: =60
+            Width: =240
+            Size: =14
+            Fill: =RGBA(56, 96, 178, 1)
+            OnSelect: |-
+                =Set(newNamespace, true);
+                Set(thisItem, { id: "", name: "", cores: 1, memory: 2048, status: "Requested" });
+                Navigate(NamespaceScreen);
+
+        "galNamespaces As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+            Height: =Parent.Height
+            Items: =namespaceList
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =40
+            Visible: =CountRows(namespaceList) > 0
+            Width: =Parent.Width
+            X: =20
+            Y: =180
+
+            lblGalNamespacesName As Label:
+                Height: =Self.Size * 1.8
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =14
+                FontWeight: =FontWeight.Normal
+                Text: =ThisItem.name
+                VerticalAlign: =VerticalAlign.Top
+                Width: =300
+                X: =20
+                Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+                OnSelect: |
+                    =Set(thisItem, ThisItem);
+                    Navigate(NamespaceScreen);
+
+            lblGalNamespacesCores As Label:
+                Height: =Self.Size * 1.8
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =14
+                FontWeight: =FontWeight.Normal
+                Text: =$"cores: {ThisItem.cores}"
+                VerticalAlign: =VerticalAlign.Top
+                Width: =120
+                X: =320
+                Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+                OnSelect: |
+                    =Set(thisItem, ThisItem);
+                    Navigate(NamespaceScreen);
+
+            lblGalNamespacesMemory As Label:
+                Height: =Self.Size * 1.8
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =14
+                FontWeight: =FontWeight.Normal
+                Text: =$"memory: {ThisItem.memory}"
+                VerticalAlign: =VerticalAlign.Top
+                Width: =240
+                X: =440
+                Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+                OnSelect: |
+                    =Set(thisItem, ThisItem);
+                    Navigate(NamespaceScreen);
+
+            lblGalNamespacesStatus As Label:
+                Height: =Self.Size * 1.8
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =14
+                FontWeight: =FontWeight.Normal
+                Text: =$"status: {ThisItem.status}"
+                VerticalAlign: =VerticalAlign.Top
+                Width: =240
+                X: =680
+                Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+                OnSelect: |
+                    =Set(thisItem, ThisItem);
+                    Navigate(NamespaceScreen);
+
+            icoGalNamespaceCancel As icon.Cancel:
+                AccessibleLabel: =Self.Tooltip
+                Height: =30
+                Icon: =Icon.Cancel
+                OnSelect: |
+                    =Remove(namespaceList, ThisItem);
+                PaddingBottom: =2
+                PaddingLeft: =2
+                PaddingRight: =2
+                PaddingTop: =2
+                TabIndex: =0
+                Tooltip: ="Remove Namespace"
+                Width: =30
+                X: =Parent.TemplateWidth - 120
+                Y: =5
+
+            rectGalNamespaceSeperator As rectangle:
+                Height: =1
+                Width: =Parent.TemplateWidth
+                Y: =Parent.TemplateHeight - 1
+
+    contApplications As groupContainer.manualLayoutContainer:
+        Visible: =currentCategory = "Applications"
+        Fill: =RGBA(215, 223, 240, 1)
+        Height: =HomeScreen.Height - Self.Y
+        Width: =HomeScreen.Width - Self.X
+        X: =contLeftNav.Width
+        Y: =lblHeader.Height
+        ZIndex: =3
+
+        lblApplicationsHeader As label:
+            Align: =Align.Center
+            Color: =RGBA(215, 223, 240, 1)
+            Fill: =ColorFade(RGBA(56, 96, 178, 1), -40%)
+            X: =0
+            Y: =20
+            FontWeight: =FontWeight.Bold
+            Height: =60
+            Size: =24
+            Text: ="Applications"
+            Width: =Parent.Width
+
+        "galApplications As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+            Height: =Parent.Height
+            Items: =applicationList
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =40
+            Visible: =CountRows(applicationList) > 0
+            Width: =Parent.Width
+            X: =20
+            Y: =100
+
+            lblGalApplications As Label:
+                Height: =Self.Size * 1.8
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =14
+                FontWeight: =FontWeight.Normal
+                Text: =ThisItem.name & "   (ns: " & ThisItem.namespace & ")" & "   cores: " & ThisItem.cores & "   memory: " & ThisItem.memory
+                VerticalAlign: =VerticalAlign.Top
+                Width: =Parent.TemplateWidth - 104
+                X: =32
+                Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+
+            icoGalApplicationCancel As icon.Cancel:
+                AccessibleLabel: =Self.Tooltip
+                Height: =30
+                Icon: =Icon.Cancel
+                OnSelect: |
+                    =Remove(applicationList, ThisItem);
+                PaddingBottom: =2
+                PaddingLeft: =2
+                PaddingRight: =2
+                PaddingTop: =2
+                TabIndex: =0
+                Tooltip: ="Remove Application"
+                Width: =30
+                X: =440
+                Y: =5
+
+            rectGalApplicationSeperator As rectangle:
+                Height: =1
+                Width: =Parent.TemplateWidth
+                Y: =Parent.TemplateHeight - 1
+
+    contRequests As groupContainer.manualLayoutContainer:
+        Visible: =currentCategory = "Requests"
+        Fill: =RGBA(215, 223, 240, 1)
+        Height: =HomeScreen.Height - Self.Y
+        Width: =HomeScreen.Width - Self.X
+        X: =contLeftNav.Width
+        Y: =lblHeader.Height
+
+        lblRequestsHeader As label:
+            Align: =Align.Center
+            Color: =RGBA(215, 223, 240, 1)
+            Fill: =ColorFade(RGBA(56, 96, 178, 1), -40%)
+            X: =0
+            Y: =20
+            FontWeight: =FontWeight.Bold
+            Height: =60
+            Size: =24
+            Text: ="Requests"
+            Width: =Parent.Width
+
+        "galRequests As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+            Height: =Parent.Height
+            Items: =requestList
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =40
+            Visible: =CountRows(requestList) > 0
+            Width: =Parent.Width
+            X: =20
+            Y: =100
+
+            lblGalRequests As Label:
+                Height: =Self.Size * 1.8
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =14
+                FontWeight: =FontWeight.Semibold
+                Text: =ThisItem.name & Char(9) & Char(9) & ThisItem.status
+                VerticalAlign: =VerticalAlign.Top
+                Width: =Parent.TemplateWidth - 104
+                X: =32
+                Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+
+            icoGalRequestCancel As icon.Cancel:
+                AccessibleLabel: =Self.Tooltip
+                Height: =30
+                Icon: =Icon.Cancel
+                OnSelect: |
+                    =Patch(namespaceList, First(Filter(namespaceList, id = "myapp")), { status: "Deployed" });
+                    Remove(requestList, ThisItem);
+                PaddingBottom: =2
+                PaddingLeft: =2
+                PaddingRight: =2
+                PaddingTop: =2
+                TabIndex: =0
+                Tooltip: ="Remove request"
+                Width: =30
+                X: =440
+                Y: =5
+
+            rectGalRequestSeperator As rectangle:
+                Height: =1
+                Width: =Parent.TemplateWidth
+                Y: =Parent.TemplateHeight - 1

@@ -569,9 +569,17 @@
     "DrinkEnum": {
       "type": "string",
       "enum": [
+<<<<<<< HEAD
         "Hot",
         "Cold",
         "Bottled"
+=======
+        "HotCoffee",
+        "ColdCoffee",
+        "HotTea",
+        "ColdTea",
+        "Lemonade"
+>>>>>>> 5f7bce4926ee4e1207db0913399fdfc648051716
       ]
     },
     "FoodEnum": {
