@@ -325,10 +325,10 @@
           "title": "Name",
           "description": "Name"
         },
-        "isHot": {
-          "type": "boolean",
-          "title": "Is Hot",
-          "description": "Is Hot"
+        "drinkType": {
+          "type": "string",
+          "title": "Drink Type",
+          "description": "Drink Type"
         },
         "ice": {
           "type": "object",
@@ -368,12 +368,14 @@
       "required": [
         "id",
         "name",
-        "isHot"
+        "category",
+        "drinkType"
       ],
       "example": {
         "skuId": "greenTea",
         "name": "Green Tea",
-        "isHot": true
+        "category": "Tea",
+        "drinkType": "Hot"
       }
     },
     "FoodItem": {
@@ -567,17 +569,15 @@
     "DrinkEnum": {
       "type": "string",
       "enum": [
-        "HotCoffee",
-        "ColdCoffee",
-        "HotTea",
-        "CodeTea",
-        "Lemonade"
+        "Hot",
+        "Cold",
+        "Bottled"
       ]
     },
     "FoodEnum": {
       "type": "string",
       "enum": [
-        "Snacks",
+        "Snack",
         "Breakfast",
         "Lunch"
       ]
@@ -587,7 +587,7 @@
     "Drinks": {
       "icedTea": {
         "id": "icedTea",
-        "isHot": false,
+        "drinkType": "Cold",
         "name": "Iced Tea",
         "category": "Tea",
         "ice": "NormalIce",
@@ -633,7 +633,7 @@
       },
       "sweetTea": {
         "id": "sweetTea",
-        "isHot": false,
+        "drinkType": "Cold",
         "name": "Sweet Tea",
         "category": "Tea",
         "ice": "NormalIce",
@@ -679,7 +679,7 @@
       },
       "lemonade": {
         "id": "lemonade",
-        "isHot": false,
+        "drinkType": "Cold",
         "name": "Lemonade",
         "category": "Lemonade",
         "ice": "NormalIce",
@@ -725,7 +725,7 @@
       },
       "lemonadeStrawberry": {
         "id": "lemonadeStrawberry",
-        "isHot": false,
+        "drinkType": "Cold",
         "name": "Strawberry Lemonade",
         "category": "Lemonade",
         "ice": "NormalIce",
@@ -771,7 +771,7 @@
       },
       "decaf": {
         "id": "decaf",
-        "isHot": true,
+        "drinkType": "Hot",
         "name": "Decaf Coffee",
         "category": "Coffee",
         "sizes": {
@@ -847,7 +847,7 @@
       },
       "coffee": {
         "id": "coffee",
-        "isHot": true,
+        "drinkType": "Hot",
         "name": "Coffee",
         "category": "Coffee",
         "sizes": {
@@ -923,7 +923,7 @@
       },
       "darkroast": {
         "id": "darkroast",
-        "isHot": true,
+        "drinkType": "Hot",
         "name": "Dark Roast Coffee",
         "category": "Coffee",
         "sizes": {
@@ -999,7 +999,7 @@
       },
       "cappucino": {
         "id": "cappucino",
-        "isHot": true,
+        "drinkType": "Hot",
         "name": "Cappucino",
         "category": "Coffee",
         "foam": "NormalFoam",
@@ -1078,7 +1078,7 @@
         "id": "topo",
         "name": "Topo Chico",
         "category": "Water",
-        "isHot": false,
+        "drinkType": "Bottled",
         "sizes": {
           "20oz": {
             "id": "200z",
@@ -1096,7 +1096,7 @@
         "id": "ozarka",
         "name": "Ozarka Spring Water",
         "category": "Water",
-        "isHot": false,
+        "drinkType": "Bottled",
         "sizes": {
           "20oz": {
             "id": "200z",
@@ -1112,72 +1112,86 @@
       },
       "espresso": {
         "id": "espresso",
-        "isHot": true,
+        "category": "Coffee",
+        "drinkType": "Hot",
         "name": "Espresso Shot"
       },
       "latte": {
         "id": "latte",
-        "isHot": true,
+        "category": "Coffee",
+        "drinkType": "Hot",
         "name": "Latte"
       },
       "machiatto": {
         "id": "machiatto",
-        "isHot": true,
+        "category": "Coffee",
+        "drinkType": "Hot",
         "name": "Machiatto"
       },
       "mocha": {
         "id": "mocha",
-        "isHot": true,
+        "category": "Coffee",
+        "drinkType": "Hot",
         "name": "Mocha"
       },
       "coffeeIced": {
         "id": "coffeeIced",
-        "isHot": false,
+        "category": "Coffee",
+        "drinkType": "Cold",
         "name": "Iced Coffee"
       },
       "decafIced": {
         "id": "decafIced",
-        "isHot": false,
+        "category": "Coffee",
+        "drinkType": "Cold",
         "name": "Iced Decaf"
       },
       "espressoIced": {
         "id": "espressoIced",
-        "isHot": false,
+        "drinkType": "Cold",
+        "category": "Coffee",
         "name": "Iced Espresso"
       },
       "coffeeMilkIced": {
         "id": "coffeeMilkIced",
-        "isHot": false,
+        "drinkType": "Cold",
+        "category": "Coffee",
         "name": "Iced Coffee with Milk"
       },
       "latteIced": {
         "id": "latteIced",
-        "isHot": false,
+        "drinkType": "Cold",
+        "category": "Coffee",
         "name": "Iced Latte"
       },
       "machiattoIced": {
         "id": "machiattoIced",
-        "isHot": false,
+        "drinkType": "Cold",
+        "category": "Coffee",
         "name": "Iced Machiatto"
       },
       "mochaIced": {
         "id": "mochaIced",
-        "isHot": false,
+        "drinkType": "Cold",
+        "category": "Coffee",
         "name": "Iced Mocha"
       },
       "greenTea": {
         "id": "greenTea",
         "name": "Green Tea",
-        "isHot": true
+        "category": "Tea",
+        "drinkType": "Hot"
       },
       "blackTea": {
         "id": "blackTea",
-        "isHot": true,
+        "drinkType": "Hot",
+        "category": "Tea",
         "name": "Black Tea"
       },
       "arnoldPalmer": {
         "id": "arnoldPalmer",
-        "isHot": false,
+        "drinkType": "Cold",
+        "category": "Tea",
         "name": "Arnold Palmer"
       }
     },
