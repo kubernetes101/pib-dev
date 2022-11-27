@@ -17,6 +17,12 @@ This repo walks through the rich end-to-end developer experience in a series of 
   - A [free Azure subscription](https://azure.microsoft.com/en-in/free/) will work for exploration
   - Some advanced scenarios also require AAD permissions
 
+## Notes
+
+- The base Codespaces images recently updated to dotnet core 7
+- PiB currently uses dotnet core 6
+- Both dotnet core 6 and 7 are installed in the Codespaces image as we migrate to dotnet 7
+
 ## GitHub Codespaces
 
 > Codespaces allows you to develop in a secure, configurable, and dedicated development environment in the cloud that works how and where you want it to
