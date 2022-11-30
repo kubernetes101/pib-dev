@@ -79,6 +79,9 @@ gh completion -s zsh > ~/.oh-my-zsh/completions/_gh
 kubectl completion zsh > "$HOME/.oh-my-zsh/completions/_kubectl"
 k3d completion zsh > "$HOME/.oh-my-zsh/completions/_k3d"
 
+echo "installing dotnet 6"
+sudo apt-get install -y dotnet-sdk-6.0
+
 echo "create local registry"
 docker network create k3d
 k3d registry create registry.localhost --port 5500
