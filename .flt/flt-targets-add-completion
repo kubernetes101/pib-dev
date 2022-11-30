@@ -1,0 +1,7 @@
+all	All clusters
+region:central	Central Region
+region:east	East Region
+region:west	West Region
+ring:dev-poc	Dev PoC Ring
+ring:dev-pilot	Dev Pilot Ring
+ring:dev-all	Dev All Ring

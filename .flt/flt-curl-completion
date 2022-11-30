@@ -1,0 +1,9 @@
+/version	Application version
+/readyz	Readiness probe
+/healthz	Health probe
+/healthz/ietf	IETF detailed health check
+/heartbeat/17	Heartbeat endpoint
+/metrics	Prometheus metrics
+/api/genres	Genres REST endpoint
+/api/movies	Movies REST endpoint
+/api/actors	Actors REST endpoint
