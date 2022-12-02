@@ -1,0 +1,10 @@
+name: east-ga-andrehe001-1001
+environment: dev
+region: east
+zone: east-ga
+district: east-ga-andrehe001
+store: east-ga-andrehe001-1001
+domain: 20.163.53.133
+ingressType: Http
+gitopsRepo: ahgitenterprise/pib-dev
+gitopsBranch: andrehe001

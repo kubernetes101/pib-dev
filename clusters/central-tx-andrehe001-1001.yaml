@@ -1,0 +1,10 @@
+name: central-tx-andrehe001-1001
+environment: dev
+region: central
+zone: central-tx
+district: central-tx-andrehe001
+store: central-tx-andrehe001-1001
+domain: 20.25.155.93
+ingressType: Http
+gitopsRepo: ahgitenterprise/pib-dev
+gitopsBranch: andrehe001

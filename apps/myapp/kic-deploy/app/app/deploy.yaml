@@ -14,7 +14,7 @@ spec:
     metadata:
       labels:
         app: myapp
-        version: v-0-0-0
+        version: v-2022-12-02-07-00-41
     spec:
       containers:
         - name: app

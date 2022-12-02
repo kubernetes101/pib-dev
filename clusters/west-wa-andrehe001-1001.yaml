@@ -1,0 +1,10 @@
+name: west-wa-andrehe001-1001
+environment: dev
+region: west
+zone: west-wa
+district: west-wa-andrehe001
+store: west-wa-andrehe001-1001
+domain: 20.163.53.134
+ingressType: Http
+gitopsRepo: ahgitenterprise/pib-dev
+gitopsBranch: andrehe001
