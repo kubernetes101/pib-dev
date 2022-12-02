@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m0s
-  path: ./clusters/west-wa-andrehe001-1001/imdb
+  path: ./clusters/east-ga-andrehe001-1001/imdb
   prune: true
   sourceRef:
     kind: GitRepository

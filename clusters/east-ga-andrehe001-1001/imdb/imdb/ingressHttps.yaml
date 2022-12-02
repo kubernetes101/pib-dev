@@ -4,12 +4,19 @@ metadata:
   name: imdb
   namespace: imdb
   annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    ingress.kubernetes.io/force-ssl-redirect: "true"
     kubernetes.io/ingress.class: contour
-    ingress.kubernetes.io/force-ssl-redirect: "false"
+    kubernetes.io/tls-acme: "true"
 
 spec:
+  tls:
+  - secretName: imdb
+    hosts:
+    - 20.163.53.133
   rules:
-  - http:
+  - host: 20.163.53.133
+    http:
       paths:
       - pathType: Prefix
         path: /
