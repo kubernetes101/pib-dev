@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+  namespace: myapp
+  labels:
+    app.kubernetes.io/name: myapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+        version: v-0-0-0
+    spec:
+      containers:
+        - name: app
+          image: k3d-registry.localhost:5500/myapp:local
+          imagePullPolicy: Always
+
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+
+          readinessProbe:
+            initialDelaySeconds: 5
+            failureThreshold: 60
+            periodSeconds: 2
+            httpGet:
+              path: /readyz
+              port: 8080
+
+          livenessProbe:
+            initialDelaySeconds: 60
+            periodSeconds: 60
+            httpGet:
+              path: /healthz
+              port: 8080
+
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+            requests:
+              cpu: 500m
+              memory: 256Mi
+      #     volumeMounts:
+      #       - name: secrets
+      #         mountPath: "/app/secrets"
+      # volumes:
+      #   - name: secrets
+      #     secret:
+      #       secretName: app-secrets
+      #       defaultMode: 444
+      #       optional: true
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+  namespace: myapp
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 30080
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: myapp
