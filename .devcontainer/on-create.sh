@@ -11,6 +11,9 @@ sudo chsh --shell /bin/zsh vscode
 export PATH="$PATH:$HOME/bin"
 export GOPATH="$HOME/go"
 
+# restore the file to avoid errors
+dotnet restore labs/advanced-labs/cli/myapp/src
+
 mkdir -p "$HOME/.ssh"
 mkdir -p "$HOME/.oh-my-zsh/completions"
 

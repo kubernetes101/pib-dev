@@ -27,7 +27,7 @@ git push -u origin $MY_BRANCH-cli
 
   ```bash
 
-  /workspaces/pib-dev/labs/advanced-labs/cli
+  cd /workspaces/pib-dev/labs/advanced-labs/cli
   kic pods --show
 
   ```
