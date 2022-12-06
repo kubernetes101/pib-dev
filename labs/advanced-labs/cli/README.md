@@ -2,8 +2,6 @@
 
 PiB ships two CLIs (kic and flt) to make learning and working with Kubernetes easier. Both CLIs can be customized on an organization, team, or app level. This workshop walks through the different customization options with examples.
 
-## This document is a work in progress
-
 ## Create Working Branch
 
 ```bash
@@ -98,7 +96,7 @@ git push -u origin $MY_BRANCH-cli
   - There are 3 new commands in `myapp/.kic/commands/check`
   - Run `kic check` and you'll see 5 commands
   - `cd ..` and you'll see there is no `kic check` command (because there is no "app")
-    - running `kic check` in this directory will cause an error
+    - Running `kic check` in this directory will cause an error
 
 ## Adding Commands
 
@@ -115,7 +113,7 @@ git push -u origin $MY_BRANCH-cli
     - The commands run the script at `.kic/commands/{path}`
 
 - Edit `.kic/commands/check/app`
-  - replace the http command with `echo "kic check app"`
+  - Replace the http command with `echo "kic check app"`
   - Run `kic check myapp`
 
 - Edit `.kic/check.yaml`
