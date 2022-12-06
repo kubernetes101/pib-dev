@@ -1,0 +1,36 @@
+## My custom CLI powered by kic
+
+# hide all commands and update the description
+name: kic
+short: My Custom CLI
+long: "My Custom CLI\n\n  A dynamic CLI powered by kic!"
+hidden: true
+
+# add a top level command
+bashCommands:
+  - name: env
+    short: The CLI sets env vars
+    command: env | grep -e "PIB_" -e "CLI_" | sort
+
+commands:
+
+# add a top level command tree
+- name: myCommand
+  short: This is My Command
+
+  # add bash commands
+  bashCommands:
+    - name: pwd
+      short: Run pwd
+      command: pwd
+
+    - name: ls
+      short: Run ls -alF
+      command: ls -alF
+
+  # add script command
+  # path = .kic/commands + path value
+  scriptCommands:
+    - name: whoami
+      short: Run whoami
+      path: mycommand/whoami
