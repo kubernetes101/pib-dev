@@ -4,14 +4,6 @@ PiB ships two CLIs (kic and flt) to make learning and working with Kubernetes ea
 
 ## This document is a work in progress
 
-## Checkout the `cli-lab` branch
-
-```bash
-
-git checkout cli-lab
-
-```
-
 ## Create Working Branch
 
 ```bash
@@ -25,16 +17,19 @@ git push -u origin $MY_BRANCH-cli
 
 - There are 3 options that allow customization of the CLI
   - Overriding built-in commands using bash scripts
-  - Adding / Removing commands using "boa config" files
+  - Adding / Removing commands using `boa` files
   - Modifying the source code
 - The CLIs also support custom tab completion
+- This lab does not cover modifying the source code
 
 ## Labs
 
-- Start in the `/workspaces/pib-dev` directory
+- Start in the `/workspaces/pib-dev/labs/advanced-labs/cli` directory
+  - This is the base directory for all of the labs
 
   ```bash
 
+  /workspaces/pib-dev/labs/advanced-labs/cli
   kic pods --show
 
   ```
@@ -44,7 +39,7 @@ git push -u origin $MY_BRANCH-cli
   ```text
 
   Create this file to override command
-  /workspaces/pib-dev/.kic/commands/pods
+  /workspaces/pib-dev/labs/advanced-labs/cli/.kic/commands/pods
 
   Default Script
 
@@ -71,7 +66,9 @@ git push -u origin $MY_BRANCH-cli
 
   kic pods
 
-  code /workspaces/pib-dev/.kic/commands/pods
+  code /workspaces/pib-dev/labs/advanced-labs/cli/.kic/commands/pods
+
+  # change the file and run kic pods again
 
   ```
 
@@ -80,7 +77,7 @@ git push -u origin $MY_BRANCH-cli
     - Current tree
     - $HOME/bin/.kic
 
-- We created the `.kic` folder in this branch
+- We created the `.kic` folder in this tree
 
 ## Context Aware CLI
 
@@ -91,24 +88,21 @@ git push -u origin $MY_BRANCH-cli
   # notice the output
   kic
 
-  # same output
-  cd apps
-  kic
-
   # different output
   cd myapp
   kic
 
   ```
 
-- There is a `.kic` folder in the `apps/myapp` folder that changes the behavior
-  - There are 3 new commands in `apps/myapp/.kic/commands/check`
+- There is a `.kic` folder in the `myapp` folder that changes the behavior
+  - There are 3 new commands in `myapp/.kic/commands/check`
   - Run `kic check` and you'll see 5 commands
   - `cd ..` and you'll see there is no `kic check` command (because there is no "app")
+    - running `kic check` in this directory will cause an error
 
 ## Adding Commands
 
-- From the `apps/myapp` directory
+- From the `myapp` directory
 
   ```bash
 
@@ -139,6 +133,9 @@ git push -u origin $MY_BRANCH-cli
 ```yaml
 
 commands:
+
+// insert this below the existing commands:
+
 - name: foo
   short: Foo Command
   bashCommands:
@@ -158,7 +155,7 @@ commands:
 
 ## Hiding Commands
 
-- Start in `/workspaces/pib-dev/apps/myapp`
+- Start in `/workspaces/pib-dev/labs/advanced-labs/cli/myapp`
 - Run `kic`
 - Notice the `build command`
 - Edit `.kic/check.yaml`
@@ -166,6 +163,9 @@ commands:
 ```yaml
 
 commands:
+
+// insert below `commands:`
+
 - name: build
   hidden: true
 
@@ -177,7 +177,7 @@ commands:
 
 ## Tab Completion
 
-- Start in the `/workspaces/pib-dev` directory
+- Start in the `/workspaces/pib-dev/labs/advanced-labs/cli` directory
 - Enter the following command and then press space and tab
   - `flt curl` space tab
 - Edit the completion file
@@ -190,6 +190,6 @@ commands:
 
 ## Create Your Own CLI
 
-- Start in the `/workspaces/pib-dev/mycli` directory
+- Start in the `/workspaces/pib-dev/labs/advanced-labs/cli/mycli` directory
 - Run `kic`
 - Explore the `.kic` directory
