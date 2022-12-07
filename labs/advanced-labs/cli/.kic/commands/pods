@@ -1,4 +1,14 @@
 #!/bin/bash
 
-echo "kic pods"
+hdrsort()
+{
+    read -r
+    printf "%s\\n" "$REPLY"
+    sort
+}
 
+if [ "$1" != "--watch" ]; then
+        kubectl get pods -A | hdrsort
+else
+        kubectl get pods -A --watch
+fi
