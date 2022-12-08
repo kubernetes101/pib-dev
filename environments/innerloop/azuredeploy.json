@@ -1,0 +1,286 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_innerloop_kms_name": {
+            "defaultValue": "innerloop-kms",
+            "type": "String"
+        },
+        "virtualNetworks_innerloop_kmsVNET_name": {
+            "defaultValue": "innerloop-kmsVNET",
+            "type": "String"
+        },
+        "networkInterfaces_innerloop_kmsVMNic_name": {
+            "defaultValue": "innerloop-kmsVMNic",
+            "type": "String"
+        },
+        "networkSecurityGroups_innerloop_kmsNSG_name": {
+            "defaultValue": "innerloop-kmsNSG",
+            "type": "String"
+        },
+        "publicIPAddresses_innerloop_kmsPublicIP_name": {
+            "defaultValue": "innerloop-kmsPublicIP",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/publicIPAddresses",
+            "apiVersion": "2022-05-01",
+            "name": "[parameters('publicIPAddresses_innerloop_kmsPublicIP_name')]",
+            "location": "westus3",
+            "sku": {
+                "name": "Standard",
+                "tier": "Regional"
+            },
+            "properties": {
+                "ipAddress": "20.163.99.126",
+                "publicIPAddressVersion": "IPv4",
+                "publicIPAllocationMethod": "Static",
+                "idleTimeoutInMinutes": 4,
+                "ipTags": []
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2022-08-01",
+            "name": "[parameters('virtualMachines_innerloop_kms_name')]",
+            "location": "westus3",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_innerloop_kmsVMNic_name'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_D4as_v5"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "Canonical",
+                        "offer": "0001-com-ubuntu-server-focal",
+                        "sku": "20_04-lts-gen2",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Linux",
+                        "name": "[concat(parameters('virtualMachines_innerloop_kms_name'), '_OsDisk_1_67d1f76af01d40c293d151c5ff0f9e05')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "storageAccountType": "Premium_LRS",
+                            "id": "[resourceId('Microsoft.Compute/disks', concat(parameters('virtualMachines_innerloop_kms_name'), '_OsDisk_1_67d1f76af01d40c293d151c5ff0f9e05'))]"
+                        },
+                        "deleteOption": "Detach",
+                        "diskSizeGB": 128
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_innerloop_kms_name')]",
+                    "adminUsername": "pib",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": true,
+                        "ssh": {
+                            "publicKeys": [
+                                {
+                                    "path": "/home/pib/.ssh/authorized_keys",
+                                    "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDd0AwBkUQgYfSkuA08iseO6ir7zn3UI/bGPKF5kNcAfxvj+puUYjkwNl/uGxpxxRtwmY28gxep9gKZnorLaNWWMuwIpswF6Spev8Vi51XHXWrP3QZxlLlGurMKct2G/REJcQRvO1Nsgx2P6Wvbs1fPjsOReuTJMxI1kpfF05t0QRfm5pdwRxV7ZAvNLW/P/V7DsT6VkNl7OWPvlF+W4RklKPkWQ/nWVt99LTHg6/ur/2fuEe6IKy7iRL9tjS2vWxVzxW9joYjvohukE3x075Jycictc1djdB+KPRE60xnvLNfWZZ3ggHQqAAcpyYZLh2sht8t7I6wM050TiRhIzw25\n"
+                                }
+                            ]
+                        },
+                        "provisionVMAgent": true,
+                        "patchSettings": {
+                            "patchMode": "ImageDefault",
+                            "assessmentMode": "ImageDefault"
+                        },
+                        "enableVMAgentPlatformUpdates": false
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true,
+                    "requireGuestProvisionSignal": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_innerloop_kmsVMNic_name'))]"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2022-05-01",
+            "name": "[parameters('networkSecurityGroups_innerloop_kmsNSG_name')]",
+            "location": "westus3",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_innerloop_kmsNSG_name'), 'SSH-http')]"
+            ],
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "SSH-http",
+                        "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_innerloop_kmsNSG_name'), 'SSH-http')]",
+                        "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+                        "properties": {
+                            "description": "SSH http https",
+                            "protocol": "Tcp",
+                            "sourcePortRange": "*",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 1202,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [
+                                "2222",
+                                "80",
+                                "443",
+                                "8080",
+                                "8088",
+                                "30000",
+                                "30080",
+                                "30088",
+                                "31000",
+                                "31080",
+                                "31088",
+                                "32000",
+                                "32080",
+                                "32088"
+                            ],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+            "apiVersion": "2022-05-01",
+            "name": "[concat(parameters('networkSecurityGroups_innerloop_kmsNSG_name'), '/SSH-http')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_innerloop_kmsNSG_name'))]"
+            ],
+            "properties": {
+                "description": "SSH http https",
+                "protocol": "Tcp",
+                "sourcePortRange": "*",
+                "sourceAddressPrefix": "*",
+                "destinationAddressPrefix": "*",
+                "access": "Allow",
+                "priority": 1202,
+                "direction": "Inbound",
+                "sourcePortRanges": [],
+                "destinationPortRanges": [
+                    "2222",
+                    "80",
+                    "443",
+                    "8080",
+                    "8088",
+                    "30000",
+                    "30080",
+                    "30088",
+                    "31000",
+                    "31080",
+                    "31088",
+                    "32000",
+                    "32080",
+                    "32088"
+                ],
+                "sourceAddressPrefixes": [],
+                "destinationAddressPrefixes": []
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2022-05-01",
+            "name": "[parameters('virtualNetworks_innerloop_kmsVNET_name')]",
+            "location": "westus3",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_innerloop_kmsVNET_name'), 'innerloop-kmsSubnet')]"
+            ],
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/16"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "innerloop-kmsSubnet",
+                        "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_innerloop_kmsVNET_name'), 'innerloop-kmsSubnet')]",
+                        "properties": {
+                            "addressPrefix": "10.0.0.0/24",
+                            "delegations": [],
+                            "privateEndpointNetworkPolicies": "Disabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
+                        },
+                        "type": "Microsoft.Network/virtualNetworks/subnets"
+                    }
+                ],
+                "virtualNetworkPeerings": [],
+                "enableDdosProtection": false
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2022-05-01",
+            "name": "[concat(parameters('virtualNetworks_innerloop_kmsVNET_name'), '/innerloop-kmsSubnet')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_innerloop_kmsVNET_name'))]"
+            ],
+            "properties": {
+                "addressPrefix": "10.0.0.0/24",
+                "delegations": [],
+                "privateEndpointNetworkPolicies": "Disabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2022-05-01",
+            "name": "[parameters('networkInterfaces_innerloop_kmsVMNic_name')]",
+            "location": "westus3",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_innerloop_kmsPublicIP_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_innerloop_kmsVNET_name'), 'innerloop-kmsSubnet')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_innerloop_kmsNSG_name'))]"
+            ],
+            "kind": "Regular",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfiginnerloop-kms",
+                        "id": "[concat(resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_innerloop_kmsVMNic_name')), '/ipConfigurations/ipconfiginnerloop-kms')]",
+                        "etag": "W/\"c6226837-d5ca-4ecf-b20d-f63096f69aff\"",
+                        "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "privateIPAddress": "10.0.0.4",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_innerloop_kmsPublicIP_name'))]"
+                            },
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_innerloop_kmsVNET_name'), 'innerloop-kmsSubnet')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableAcceleratedNetworking": false,
+                "enableIPForwarding": false,
+                "disableTcpStateTracking": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_innerloop_kmsNSG_name'))]"
+                },
+                "nicType": "Standard"
+            }
+        }
+    ]
+}
