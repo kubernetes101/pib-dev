@@ -114,7 +114,7 @@
             "name": "[parameters('networkSecurityGroups_innerloop_kmsNSG_name')]",
             "location": "westus3",
             "dependsOn": [
-                "[resourceId(parameters('networkSecurityGroups_innerloop_kmsNSG_name'), 'SSH-http')]"
+                "[parameters('networkSecurityGroups_innerloop_kmsNSG_name'), 'SSH-http')]"
             ],
             "properties": {
                 "securityRules": [

@@ -3,19 +3,19 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "virtualMachines_innerloop_kms_name": {
-            "value": null
+            "value": "innerloop_kms_vm"
         },
         "virtualNetworks_innerloop_kmsVNET_name": {
-            "value": null
+            "value": "innerloop_kms_vnet"
         },
         "networkInterfaces_innerloop_kmsVMNic_name": {
-            "value": null
+            "value": "innerloop_kms_vmnic"
         },
         "networkSecurityGroups_innerloop_kmsNSG_name": {
-            "value": null
+            "value": "innerloop_kms_vmnsg"
         },
         "publicIPAddresses_innerloop_kmsPublicIP_name": {
-            "value": null
+            "value": "innerloop_kms_pip"
         }
     }
 }
