@@ -3,23 +3,23 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "virtualMachines_innerloop_kms_name": {
-            "defaultValue": "innerloop-kms",
+            "defaultValue": "innerloop-kms1",
             "type": "String"
         },
         "virtualNetworks_innerloop_kmsVNET_name": {
-            "defaultValue": "innerloop-kmsVNET",
+            "defaultValue": "innerloop-kms1VNET",
             "type": "String"
         },
         "networkInterfaces_innerloop_kmsVMNic_name": {
-            "defaultValue": "innerloop-kmsVMNic",
+            "defaultValue": "innerloop-kms1VMNic",
             "type": "String"
         },
         "networkSecurityGroups_innerloop_kmsNSG_name": {
-            "defaultValue": "innerloop-kmsNSG",
+            "defaultValue": "innerloop-kms1NSG",
             "type": "String"
         },
         "publicIPAddresses_innerloop_kmsPublicIP_name": {
-            "defaultValue": "innerloop-kmsPublicIP",
+            "defaultValue": "innerloop-kms1PublicIP",
             "type": "String"
         }
     },
