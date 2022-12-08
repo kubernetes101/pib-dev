@@ -160,7 +160,7 @@
             "apiVersion": "2022-05-01",
             "name": "[concat(parameters('networkSecurityGroups_innerloop_kmsNSG_name'), '/SSH-http')]",
             "dependsOn": [
-                "[resourceId(parameters('networkSecurityGroups_innerloop_kmsNSG_name'))]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_innerloop_kmsNSG_name'))]"
             ],
             "properties": {
                 "description": "SSH http https",
