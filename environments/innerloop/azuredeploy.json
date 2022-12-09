@@ -67,8 +67,7 @@
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
                         "managedDisk": {
-                            "storageAccountType": "Premium_LRS",
-                            "id": "[resourceId('Microsoft.Compute/disks', concat(parameters('virtualMachines_innerloop_kms_name'), '_OsDisk_1_67d1f76af01d40c293d151c5ff0f9e05'))]"
+                            "storageAccountType": "Standard_LRS"
                         },
                         "deleteOption": "Detach",
                         "diskSizeGB": 128
@@ -96,8 +95,7 @@
                         "enableVMAgentPlatformUpdates": false
                     },
                     "secrets": [],
-                    "allowExtensionOperations": true,
-                    "requireGuestProvisionSignal": true
+                    "allowExtensionOperations": true
                 },
                 "networkProfile": {
                     "networkInterfaces": [
@@ -113,9 +111,7 @@
             "apiVersion": "2022-05-01",
             "name": "[parameters('networkSecurityGroups_innerloop_kmsNSG_name')]",
             "location": "westus3",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_innerloop_kmsNSG_name'), 'SSH-http')]"
-            ],
+            "dependsOn": [],
             "properties": {
                 "securityRules": [
                     {
@@ -153,41 +149,6 @@
                         }
                     }
                 ]
-            }
-        },
-        {
-            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-            "apiVersion": "2022-05-01",
-            "name": "[concat(parameters('networkSecurityGroups_innerloop_kmsNSG_name'), '/SSH-http')]",
-            "dependsOn": [],
-            "properties": {
-                "description": "SSH http https",
-                "protocol": "Tcp",
-                "sourcePortRange": "*",
-                "sourceAddressPrefix": "*",
-                "destinationAddressPrefix": "*",
-                "access": "Allow",
-                "priority": 1202,
-                "direction": "Inbound",
-                "sourcePortRanges": [],
-                "destinationPortRanges": [
-                    "2222",
-                    "80",
-                    "443",
-                    "8080",
-                    "8088",
-                    "30000",
-                    "30080",
-                    "30088",
-                    "31000",
-                    "31080",
-                    "31088",
-                    "32000",
-                    "32080",
-                    "32088"
-                ],
-                "sourceAddressPrefixes": [],
-                "destinationAddressPrefixes": []
             }
         },
         {
