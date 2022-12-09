@@ -13,9 +13,9 @@ spec:
   tls:
   - secretName: heartbeat
     hosts:
-    - 20.38.5.136
+    - 20.125.115.60
   rules:
-  - host: 20.38.5.136
+  - host: 20.125.115.60
     http:
       paths:
       - pathType: Prefix
