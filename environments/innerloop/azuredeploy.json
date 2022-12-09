@@ -83,7 +83,7 @@
                             "publicKeys": [
                                 {
                                     "path": "/home/pib/.ssh/authorized_keys",
-                                    "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDd0AwBkUQgYfSkuA08iseO6ir7zn3UI/bGPKF5kNcAfxvj+puUYjkwNl/uGxpxxRtwmY28gxep9gKZnorLaNWWMuwIpswF6Spev8Vi51XHXWrP3QZxlLlGurMKct2G/REJcQRvO1Nsgx2P6Wvbs1fPjsOReuTJMxI1kpfF05t0QRfm5pdwRxV7ZAvNLW/P/V7DsT6VkNl7OWPvlF+W4RklKPkWQ/nWVt99LTHg6/ur/2fuEe6IKy7iRL9tjS2vWxVzxW9joYjvohukE3x075Jycictc1djdB+KPRE60xnvLNfWZZ3ggHQqAAcpyYZLh2sht8t7I6wM050TiRhIzw25"
+                                    "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDd0AwBkUQgYfSkuA08iseO6ir7zn3UI/bGPKF5kNcAfxvj+puUYjkwNl/uGxpxxRtwmY28gxep9gKZnorLaNWWMuwIpswF6Spev8Vi51XHXWrP3QZxlLlGurMKct2G/REJcQRvO1Nsgx2P6Wvbs1fPjsOReuTJMxI1kpfF05t0QRfm5pdwRxV7ZAvNLW/P/V7DsT6VkNl7OWPvlF+W4RklKPkWQ/nWVt99LTHg6/ur/2fuEe6IKy7iRL9tjS2vWxVzxW9joYjvohukE3x075Jycictc1djdB+KPRE60xnvLNfWZZ3ggHQqAAcpyYZLh2sht8t7I6wM050TiRhIzw25\n"
                                 }
                             ]
                         },
