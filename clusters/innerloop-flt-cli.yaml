@@ -1,0 +1,10 @@
+name: innerloop-flt-cli
+environment: dev
+region: innerloop
+zone: innerloop-flt
+district: innerloop-flt-cli
+store: innerloop-flt-cli
+domain: 20.150.148.164
+ingressType: Http
+gitopsRepo: kubernetes101/pib-dev
+gitopsBranch: kev-ms
