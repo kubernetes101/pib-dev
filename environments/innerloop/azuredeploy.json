@@ -195,9 +195,7 @@
             "apiVersion": "2022-05-01",
             "name": "[parameters('virtualNetworks_innerloop_kmsVNET_name')]",
             "location": "westus3",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_innerloop_kmsVNET_name'), 'innerloop-kmsSubnet')]"
-            ],
+            "dependsOn": [],
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
