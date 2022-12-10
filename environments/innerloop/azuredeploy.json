@@ -238,6 +238,27 @@
                 },
                 "nicType": "Standard"
             }
-        }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[concat(parameters('virtualMachines_innerloop_kms_name'),'/installcustomscript')]",
+            "apiVersion": "2020-12-01",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+              "[resourceId('Microsoft.Compute/virtualMachines/', parameters('virtualMachines_innerloop_kms_name'))]"
+            ],
+            "properties": {
+              "publisher": "Microsoft.Azure.Extensions",
+              "type": "CustomScript",
+              "typeHandlerVersion": "2.0",
+              "autoUpgradeMinorVersion": true,
+              "settings": {
+                "fileUris": [
+                  "https://github.com/kubernetes101/pib-dev/blob/kev-ms/environments/innerloop/cloud-init.sh"
+                ],
+                "commandToExecute": "[parameters('commandToExecute')]"
+              }
+            }
+          }
     ]
 }
