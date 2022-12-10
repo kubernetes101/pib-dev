@@ -1,0 +1,10 @@
+name: central-tx-ourtloop-cli
+environment: dev
+region: central
+zone: central-tx
+district: central-tx-ourtloop
+store: central-tx-ourtloop-cli
+domain: 20.125.121.253
+ingressType: Http
+gitopsRepo: kubernetes101/pib-dev
+gitopsBranch: kev-ms
