@@ -1,0 +1,10 @@
+name: central-tx-kev-101
+environment: dev
+region: central
+zone: central-tx
+district: central-tx-kev
+store: central-tx-kev-101
+domain: 20.25.182.24
+ingressType: Http
+gitopsRepo: kubernetes101/pib-dev
+gitopsBranch: kev-ms
