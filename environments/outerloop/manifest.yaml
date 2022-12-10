@@ -1,0 +1,6 @@
+name: innerloop
+version: 1.0.0
+summary: PiB Innerloop Environment
+description: Deploys preconfigured innerloop vm
+runner: ARM
+templatePath: azuredeploy.json
