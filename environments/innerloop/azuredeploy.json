@@ -30,7 +30,7 @@
         }
     },
     "variables": {
-        "customData": "[concat('#include\n', 'https://github.com/kubernetes101/pib-dev/blob/kev-ms/environments/innerloop/cloud-init.sh')]"
+        "customData": "[concat('#include\n', parameters('_artifactsLocation'))]"
     },
     "resources": [
         {
@@ -113,31 +113,31 @@
                         }
                     ]
                 }
-            },
-            "resources": [
-                {
-                    "apiVersion": "2017-12-01",
-                    "type": "Extensions",
-                    "name": "SetEnvironmentVar",
-                    "comments": "Sets the MyEnvironmentPrefix system env var",
-                    "location": "westus3",
-                    "dependsOn": [
-                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('innerloop_vm'))]"
-                        ],
-                    "properties": {
-                        "publisher": "Microsoft.Azure.Extensions",
-                        "type": "CustomScript",
-                        "typeHandlerVersion": "2.1",
-                        "autoUpgradeMinorVersion": true,
-                        "settings": {
-                            "fileUris": ["https://github.com/kubernetes101/pib-dev/blob/kev-ms/environments/innerloop/hello.sh"
-                            ],
-                            "commandToExecute": "source ./hello.sh"
-                        },
-                        "protectedSettings": {}
-                    }
-                }
-            ]
+            }
+            // "resources": [
+            //     {
+            //         "apiVersion": "2019-03-01",
+            //         "type": "Extensions",
+            //         "name": "SetEnvironmentVar",
+            //         "comments": "Sets the MyEnvironmentPrefix system env var",
+            //         "location": "westus3",
+            //         "dependsOn": [
+            //             "[resourceId('Microsoft.Compute/virtualMachines', parameters('innerloop_vm'))]"
+            //             ],
+            //         "properties": {
+            //             "publisher": "Microsoft.Azure.Extensions",
+            //             "type": "CustomScript",
+            //             "typeHandlerVersion": "2.1",
+            //             "autoUpgradeMinorVersion": true,
+            //             "settings": {},
+            //             "protectedSettings": {
+            //                 "fileUris": ["https://raw.githubusercontent.com/kubernetes101/pib-dev/kev-ms/environments/innerloop/hello.sh"
+            //                 ],
+            //                 "commandToExecute": "sh hello.sh"
+            //             }
+            //         }
+            //     }
+            // ]
         },
         {
             "type": "Microsoft.Network/networkSecurityGroups",

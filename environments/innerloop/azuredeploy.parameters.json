@@ -26,7 +26,7 @@
             }
         },
         "_artifactsLocation": {
-            "value": "https://github.com/kubernetes101/pib-dev/tree/kev-ms/environments/innerloop"
+            "value": "https://raw.githubusercontent.com/kubernetes101/pib-dev/kev-ms/environments/innerloop/cloud-init.sh"
         }
     }
 }
