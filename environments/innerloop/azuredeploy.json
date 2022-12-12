@@ -130,8 +130,9 @@
                         "typeHandlerVersion": "2.1",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
-                            "fileUris": ["https://github.com/kubernetes101/pib-dev/blob/kev-ms/environments/innerloop/hello.sh"],
-                            "commandToExecute": "sh hello.sh"
+                            "fileUris": ["https://github.com/kubernetes101/pib-dev/blob/kev-ms/environments/innerloop/hello.sh"
+                            ],
+                            "commandToExecute": "source ./hello.sh"
                         },
                         "protectedSettings": {}
                     }
