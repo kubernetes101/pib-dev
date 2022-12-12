@@ -2,33 +2,42 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "virtualMachines_innerloop_kms_name": {
-            "defaultValue": "innerloop-kms1",
-            "type": "String"
+        "innerloop_vm": {
+            "defaultValue": "innerloop-vm",
+            "type": "string"
         },
-        "virtualNetworks_innerloop_kmsVNET_name": {
-            "defaultValue": "innerloop-kms1VNET",
-            "type": "String"
+        "innerloop_vnet": {
+            "defaultValue": "innerloop-vnet",
+            "type": "string"
         },
-        "networkInterfaces_innerloop_kmsVMNic_name": {
-            "defaultValue": "innerloop-kms1VMNic",
-            "type": "String"
+        "innerloop_vmnic": {
+            "defaultValue": "innerloop-vmnic",
+            "type": "string"
         },
-        "networkSecurityGroups_innerloop_kmsNSG_name": {
-            "defaultValue": "innerloop-kms1NSG",
-            "type": "String"
+        "innerloop_nsg": {
+            "defaultValue": "innerloop-nsg",
+            "type": "string"
         },
-        "publicIPAddresses_innerloop_kmsPublicIP_name": {
-            "defaultValue": "innerloop-kms1PublicIP",
-            "type": "String"
+        "innerloop_pip": {
+            "defaultValue": "innerloop-PublicIP",
+            "type": "string"
+        },
+        "_artifactsLocation": {
+            "type": "string"
+        },
+        "pib_pat": {
+            "type": "securestring"
         }
+
     },
-    "variables": {},
+    "variables": {
+        "customData": "[concat('#include\n', uri(parameters('_artifactsLocation'), concat('cloud-init.sh')))]"
+    },
     "resources": [
         {
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2022-05-01",
-            "name": "[parameters('publicIPAddresses_innerloop_kmsPublicIP_name')]",
+            "name": "[parameters('innerloop_pip')]",
             "location": "westus3",
             "sku": {
                 "name": "Standard",
@@ -45,10 +54,10 @@
         {
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2022-08-01",
-            "name": "[parameters('virtualMachines_innerloop_kms_name')]",
+            "name": "[parameters('innerloop_vm')]",
             "location": "westus3",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_innerloop_kmsVMNic_name'))]"
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('innerloop_vmnic'))]"
             ],
             "properties": {
                 "hardwareProfile": {
@@ -63,7 +72,7 @@
                     },
                     "osDisk": {
                         "osType": "Linux",
-                        "name": "[concat(parameters('virtualMachines_innerloop_kms_name'), '_OsDisk_1_67d1f76af01d40c293d151c5ff0f9e05')]",
+                        "name": "[concat(parameters('innerloop_vm'), '_OsDisk_1_67d1f76af01d40c293d151c5ff0f9e05')]",
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
                         "managedDisk": {
@@ -75,7 +84,8 @@
                     "dataDisks": []
                 },
                 "osProfile": {
-                    "computerName": "[parameters('virtualMachines_innerloop_kms_name')]",
+                    "customData": "[base64(variables('customData'))]",
+                    "computerName": "[parameters('innerloop_vm')]",
                     "adminUsername": "pib",
                     "linuxConfiguration": {
                         "disablePasswordAuthentication": true,
@@ -100,7 +110,7 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_innerloop_kmsVMNic_name'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('innerloop_vmnic'))]"
                         }
                     ]
                 }
@@ -109,14 +119,14 @@
         {
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2022-05-01",
-            "name": "[parameters('networkSecurityGroups_innerloop_kmsNSG_name')]",
+            "name": "[parameters('innerloop_nsg')]",
             "location": "westus3",
             "dependsOn": [],
             "properties": {
                 "securityRules": [
                     {
                         "name": "SSH-http",
-                        "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_innerloop_kmsNSG_name'), 'SSH-http')]",
+                        "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('innerloop_nsg'), 'SSH-http')]",
                         "type": "Microsoft.Network/networkSecurityGroups/securityRules",
                         "properties": {
                             "description": "SSH http https",
@@ -154,7 +164,7 @@
         {
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2022-05-01",
-            "name": "[parameters('virtualNetworks_innerloop_kmsVNET_name')]",
+            "name": "[parameters('innerloop_vnet')]",
             "location": "westus3",
             "dependsOn": [],
             "properties": {
@@ -166,7 +176,7 @@
                 "subnets": [
                     {
                         "name": "innerloop-kmsSubnet",
-                        "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_innerloop_kmsVNET_name'), 'innerloop-kmsSubnet')]",
+                        "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('innerloop_vnet'), 'innerloop-kmsSubnet')]",
                         "properties": {
                             "addressPrefix": "10.0.0.0/24",
                             "delegations": [],
@@ -183,9 +193,9 @@
         {
             "type": "Microsoft.Network/virtualNetworks/subnets",
             "apiVersion": "2022-05-01",
-            "name": "[concat(parameters('virtualNetworks_innerloop_kmsVNET_name'), '/innerloop-kmsSubnet')]",
+            "name": "[concat(parameters('innerloop_vnet'), '/innerloop-kmsSubnet')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_innerloop_kmsVNET_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('innerloop_vnet'))]"
             ],
             "properties": {
                 "addressPrefix": "10.0.0.0/24",
@@ -197,19 +207,19 @@
         {
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2022-05-01",
-            "name": "[parameters('networkInterfaces_innerloop_kmsVMNic_name')]",
+            "name": "[parameters('innerloop_vmnic')]",
             "location": "westus3",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_innerloop_kmsPublicIP_name'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_innerloop_kmsVNET_name'), 'innerloop-kmsSubnet')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_innerloop_kmsNSG_name'))]"
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('innerloop_pip'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('innerloop_vnet'), 'innerloop-kmsSubnet')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('innerloop_nsg'))]"
             ],
             "kind": "Regular",
             "properties": {
                 "ipConfigurations": [
                     {
                         "name": "ipconfiginnerloop-kms",
-                        "id": "[concat(resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_innerloop_kmsVMNic_name')), '/ipConfigurations/ipconfiginnerloop-kms')]",
+                        "id": "[concat(resourceId('Microsoft.Network/networkInterfaces', parameters('innerloop_vmnic')), '/ipConfigurations/ipconfiginnerloop-kms')]",
                         "etag": "W/\"c6226837-d5ca-4ecf-b20d-f63096f69aff\"",
                         "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
                         "properties": {
@@ -217,10 +227,10 @@
                             "privateIPAddress": "10.0.0.4",
                             "privateIPAllocationMethod": "Dynamic",
                             "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_innerloop_kmsPublicIP_name'))]"
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('innerloop_pip'))]"
                             },
                             "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_innerloop_kmsVNET_name'), 'innerloop-kmsSubnet')]"
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('innerloop_vnet'), 'innerloop-kmsSubnet')]"
                             },
                             "primary": true,
                             "privateIPAddressVersion": "IPv4"
@@ -234,18 +244,18 @@
                 "enableIPForwarding": false,
                 "disableTcpStateTracking": false,
                 "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_innerloop_kmsNSG_name'))]"
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('innerloop_nsg'))]"
                 },
                 "nicType": "Standard"
             }
         },
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(parameters('virtualMachines_innerloop_kms_name'),'/installcustomscript')]",
+            "name": "[concat(parameters('innerloop_vm'),'/installcustomscript')]",
             "apiVersion": "2020-12-01",
             "location": "westus3",
             "dependsOn": [
-              "[resourceId('Microsoft.Compute/virtualMachines/', parameters('virtualMachines_innerloop_kms_name'))]"
+              "[resourceId('Microsoft.Compute/virtualMachines/', parameters('innerloop_vm'))]"
             ],
             "properties": {
               "publisher": "Microsoft.Azure.Extensions",

@@ -2,20 +2,31 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "virtualMachines_innerloop_kms_name": {
+        "innerloop_vm": {
             "value": "innerloop_kms_vm"
         },
-        "virtualNetworks_innerloop_kmsVNET_name": {
+        "innerloop_vnet": {
             "value": "innerloop_kms_vnet"
         },
-        "networkInterfaces_innerloop_kmsVMNic_name": {
+        "innerloop_vmnic": {
             "value": "innerloop_kms_vmnic"
         },
-        "networkSecurityGroups_innerloop_kmsNSG_name": {
+        "innerloop_nsg": {
             "value": "innerloop_kms_vmnsg"
         },
-        "publicIPAddresses_innerloop_kmsPublicIP_name": {
+        "innerloop_pip": {
             "value": "innerloop_kms_pip"
+        },
+        "pib_pat": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/8bec903d-0c37-4366-8604-70055f04b4cf/resourceGroups/TLD/providers/Microsoft.KeyVault/vaults/kv-pib"
+                },
+                "secretName": "pat"
+            }
+        },
+        "_artifactsLocation": {
+            "value": "https://github.com/kubernetes101/pib-dev/tree/kev-ms/environments/innerloop"
         }
     }
 }
