@@ -7,7 +7,6 @@ export HOME="/home/$PIB_ME"
 {
 ####### do not change these values #######
   echo 'export PIB_BASE="/workspaces/pib-dev"'
-  # echo 'export PIB_PAT="PAT_VALUE"'
   echo 'export PIB_REPO="kubernetes101/pib-dev"'
   echo 'export PIB_FULL_REPO="https://github.com/kubernetes101/pib-dev"'
   echo 'export PIB_BRANCH="kev-ms"'

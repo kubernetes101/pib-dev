@@ -3,19 +3,19 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "innerloop_vm": {
-            "value": "innerloop_kms_vm"
+            "value": "innerloop-vm"
         },
         "innerloop_vnet": {
-            "value": "innerloop_kms_vnet"
+            "value": "innerloop-vnet"
         },
         "innerloop_vmnic": {
-            "value": "innerloop_kms_vmnic"
+            "value": "innerloop-vmnic"
         },
         "innerloop_nsg": {
-            "value": "innerloop_kms_vmnsg"
+            "value": "innerloop-vmnsg"
         },
         "innerloop_pip": {
-            "value": "innerloop_kms_pip"
+            "value": "innerloop-pip"
         },
         "pib_pat": {
             "reference": {
