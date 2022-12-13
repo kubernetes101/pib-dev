@@ -1,6 +1,6 @@
-name: innerloop
+name: iouterloop
 version: 1.0.0
-summary: PiB Innerloop Environment
-description: Deploys preconfigured innerloop vm
+summary: PiB Outerloop Environment
+description: Deploys preconfigured outerloop vm
 runner: ARM
 templatePath: azuredeploy.json
