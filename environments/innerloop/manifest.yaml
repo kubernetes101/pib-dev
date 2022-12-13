@@ -4,3 +4,16 @@ summary: PiB Innerloop Environment
 description: Deploys preconfigured innerloop vm
 runner: ARM
 templatePath: azuredeploy.json
+parameters:
+- id: "innerloop_vm"
+  name: "innerloop_vm"
+  description: "Name of the App Config"
+  default: "innerloop-vm"
+  type: "string"
+  required: false
+- id: "innerloop_vnet"
+  name: "innerloop_vnet"
+  description: "Location to deploy the environment resources"
+  default: "innerloop-vnet"
+  type: "string"
+  required: false
