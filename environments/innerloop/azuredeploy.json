@@ -113,31 +113,30 @@
                         }
                     ]
                 }
-            }
-            // "resources": [
-            //     {
-            //         "apiVersion": "2019-03-01",
-            //         "type": "Extensions",
-            //         "name": "SetEnvironmentVar",
-            //         "comments": "Sets the MyEnvironmentPrefix system env var",
-            //         "location": "westus3",
-            //         "dependsOn": [
-            //             "[resourceId('Microsoft.Compute/virtualMachines', parameters('innerloop_vm'))]"
-            //             ],
-            //         "properties": {
-            //             "publisher": "Microsoft.Azure.Extensions",
-            //             "type": "CustomScript",
-            //             "typeHandlerVersion": "2.1",
-            //             "autoUpgradeMinorVersion": true,
-            //             "settings": {},
-            //             "protectedSettings": {
-            //                 "fileUris": ["https://raw.githubusercontent.com/kubernetes101/pib-dev/kev-ms/environments/innerloop/hello.sh"
-            //                 ],
-            //                 "commandToExecute": "sh hello.sh"
-            //             }
-            //         }
-            //     }
-            // ]
+            },
+            "resources": [
+                {
+                    "apiVersion": "2019-03-01",
+                    "type": "Extensions",
+                    "name": "SetEnvironmentVar",
+                    "comments": "Sets the MyEnvironmentPrefix system env var",
+                    "location": "westus3",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('innerloop_vm'))]"
+                        ],
+                    "properties": {
+                        "publisher": "Microsoft.Azure.Extensions",
+                        "type": "CustomScript",
+                        "typeHandlerVersion": "2.1",
+                        "autoUpgradeMinorVersion": true,
+                        "settings": {},
+                        "protectedSettings": {
+                            "fileUris": [],
+                            "commandToExecute": "[concat('export PIB_PAT=', parameters('pib_pat'))]"
+                        }
+                    }
+                }
+            ]
         },
         {
             "type": "Microsoft.Network/networkSecurityGroups",
@@ -272,7 +271,6 @@
                 "nicType": "Standard"
             }
         }
-        // },
         // {
         //     "type": "Microsoft.Compute/virtualMachines/extensions",
         //     "name": "[concat(parameters('innerloop_vm'),'/installcustomscript')]",
@@ -286,11 +284,12 @@
         //       "type": "CustomScript",
         //       "typeHandlerVersion": "2.0",
         //       "autoUpgradeMinorVersion": true,
+        //       "protectedSettings": {
+        //         "fileUris": [],
+        //         "commandToExecute": "[concat('export PIB_PAT=', parameters('pib_pat'))]",
+        //       },
         //       "settings": {
-        //         "fileUris": [
-        //           "https://github.com/kubernetes101/pib-dev/blob/kev-ms/environments/innerloop/cloud-init.sh"
-        //         ],
-        //         "commandToExecute": "sh cloud-init.sh"
+        //         "fileUris": []
         //       }
         //     }
         //   }
