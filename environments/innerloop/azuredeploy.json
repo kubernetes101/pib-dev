@@ -23,10 +23,8 @@
             "type": "string"
         },
         "_artifactsLocation": {
+            "defaultValue": "https://raw.githubusercontent.com/kubernetes101/pib-dev/kev-ms/environments/innerloop/cloud-init.sh",
             "type": "string"
-        },
-        "pib_pat": {
-            "type": "securestring"
         }
     },
     "variables": {
