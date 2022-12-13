@@ -2,20 +2,23 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "virtualMachines_innerloop_kms_name": {
+        "outerloop_vm": {
             "value": "innerloop_kms_vm"
         },
-        "virtualNetworks_innerloop_kmsVNET_name": {
+        "outerloop_vnet": {
             "value": "innerloop_kms_vnet"
         },
-        "networkInterfaces_innerloop_kmsVMNic_name": {
+        "outerloop_vmnic": {
             "value": "innerloop_kms_vmnic"
         },
-        "networkSecurityGroups_innerloop_kmsNSG_name": {
+        "outerloop_nsg": {
             "value": "innerloop_kms_vmnsg"
         },
-        "publicIPAddresses_innerloop_kmsPublicIP_name": {
+        "outerloop_pip": {
             "value": "innerloop_kms_pip"
+        },
+        "_artifactsLocation": {
+            "value": "https://raw.githubusercontent.com/kubernetes101/pib-dev/kev-ms/environments/outerloop/cloud-init.sh"
         }
     }
 }
