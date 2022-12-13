@@ -129,11 +129,11 @@
                         "type": "CustomScript",
                         "typeHandlerVersion": "2.1",
                         "autoUpgradeMinorVersion": true,
-                        "settings": {},
-                        "protectedSettings": {
-                            "fileUris": [],
-                            "commandToExecute": "[concat('export PIB_PAT=', parameters('pib_pat'))]"
-                        }
+                        "settings": {
+                            "commandToExecute": "export PIB_TEST=test"
+                            // "commandToExecute": "[concat('export PIB_PAT=', parameters('pib_pat'))]"
+                        },
+                        "protectedSettings": {}
                     }
                 }
             ]

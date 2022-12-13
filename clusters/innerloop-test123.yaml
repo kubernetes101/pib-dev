@@ -1,0 +1,10 @@
+name: innerloop-test123
+environment: dev
+region: innerloop
+zone: innerloop-test123
+district: innerloop-test123
+store: innerloop-test123
+domain: 20.38.7.107
+ingressType: Http
+gitopsRepo: kubernetes101/pib-dev
+gitopsBranch: kev-ms
