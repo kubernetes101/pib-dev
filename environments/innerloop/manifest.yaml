@@ -14,6 +14,6 @@ parameters:
 - id: "pib_pat"
   name: "pib_pat"
   description: "PAT for PIB Github"
-  default: ""
+  default: "123"
   type: "securestring"
   required: false
