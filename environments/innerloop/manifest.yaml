@@ -5,15 +5,15 @@ description: Deploys preconfigured innerloop vm
 runner: ARM
 templatePath: azuredeploy.json
 parameters:
-- id: "innerloop_vm"
-  name: "innerloop_vm"
-  description: "Name of the App Config"
-  default: "innerloop-vm"
+- id: "outerloop_vm"
+  name: "outerloop_vm_vm"
+  description: "Outerloop VM Name"
+  default: "outerloop-vm"
   type: "string"
-  required: false
-- id: "innerloop_vnet"
-  name: "innerloop_vnet"
-  description: "Location to deploy the environment resources"
-  default: "innerloop-vnet"
-  type: "string"
-  required: false
+  required: true
+- id: "pib_pat"
+  name: "pib_pat"
+  description: "Github PAT"
+  default: ""
+  type: "securestring"
+  required: true

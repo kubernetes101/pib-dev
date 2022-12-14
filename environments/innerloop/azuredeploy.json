@@ -25,6 +25,9 @@
         "_artifactsLocation": {
             "defaultValue": "https://raw.githubusercontent.com/kubernetes101/pib-dev/kev-ms/environments/innerloop/cloud-init.sh",
             "type": "string"
+        },
+        "pib_pat": {
+            "type": "securestring"
         }
     },
     "variables": {
@@ -128,8 +131,7 @@
                         "typeHandlerVersion": "2.1",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
-                            "commandToExecute": "export PIB_TEST=test"
-                            // "commandToExecute": "[concat('export PIB_PAT=', parameters('pib_pat'))]"
+                            "commandToExecute": "[concat('export PIB_PAT=', parameters('pib_pat'))]"
                         },
                         "protectedSettings": {}
                     }

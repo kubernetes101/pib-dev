@@ -3,10 +3,12 @@
 # temporarily set $HOME
 export PIB_ME=pib
 export HOME="/home/$PIB_ME"
+export PIB_PAT=$1
 
 {
 ####### do not change these values #######
   echo 'export PIB_BASE="/workspaces/pib-dev"'
+  echo "export PIB_PAT=$1"
   echo 'export PIB_REPO="kubernetes101/pib-dev"'
   echo 'export PIB_FULL_REPO="https://github.com/kubernetes101/pib-dev"'
   echo 'export PIB_BRANCH="kev-ms"'
