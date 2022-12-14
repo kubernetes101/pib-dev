@@ -11,9 +11,3 @@ parameters:
   default: "innerloop-vm"
   type: "string"
   required: false
-- id: "pib_pat"
-  name: "pib_pat"
-  description: "PAT for PIB Github"
-  default: ""
-  type: "securestring"
-  required: true
