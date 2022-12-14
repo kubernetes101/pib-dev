@@ -10,10 +10,10 @@ parameters:
   description: "Innerloop VM Name"
   default: "innerloop-vm"
   type: "string"
-  required: true
+  required: false
 - id: "pib_pat"
   name: "pib_pat"
-  description: "Github PAT"
+  description: "PAT for PIB Github"
   default: ""
   type: "securestring"
   required: true

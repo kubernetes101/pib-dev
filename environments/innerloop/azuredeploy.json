@@ -271,27 +271,5 @@
                 "nicType": "Standard"
             }
         }
-        // {
-        //     "type": "Microsoft.Compute/virtualMachines/extensions",
-        //     "name": "[concat(parameters('innerloop_vm'),'/installcustomscript')]",
-        //     "apiVersion": "2020-12-01",
-        //     "location": "westus3",
-        //     "dependsOn": [
-        //       "[resourceId('Microsoft.Compute/virtualMachines/', parameters('innerloop_vm'))]"
-        //     ],
-        //     "properties": {
-        //       "publisher": "Microsoft.Azure.Extensions",
-        //       "type": "CustomScript",
-        //       "typeHandlerVersion": "2.0",
-        //       "autoUpgradeMinorVersion": true,
-        //       "protectedSettings": {
-        //         "fileUris": [],
-        //         "commandToExecute": "[concat('export PIB_PAT=', parameters('pib_pat'))]",
-        //       },
-        //       "settings": {
-        //         "fileUris": []
-        //       }
-        //     }
-        //   }
     ]
 }
