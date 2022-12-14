@@ -11,9 +11,3 @@ parameters:
   default: "outerloop-vm"
   type: "string"
   required: true
-- id: "pib_pat"
-  name: "pib_pat"
-  description: "Github PAT"
-  default: ""
-  type: "securestring"
-  required: true
