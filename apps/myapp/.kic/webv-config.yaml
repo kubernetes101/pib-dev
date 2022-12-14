@@ -1,0 +1,27 @@
+###
+# webv config
+###
+
+image: k3d-registry.localhost:5500/webv-myapp:local
+server:  http://localhost:30080
+logformat: TsvMin
+verbose: false
+verboseerrors: false
+timeout: 30
+region: ""
+zone: ""
+tag: ""
+urlprefix: ""
+
+integration:
+  files: integration.json
+  sleep: 0
+  maxerrors: 10
+  summary: Tsv
+
+load:
+  files: load.json
+  sleep: 10
+  duration: 30
+  random: false
+  port: 8080
