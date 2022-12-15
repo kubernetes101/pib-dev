@@ -1,0 +1,10 @@
+name: ist
+environment: dev
+region: ist
+zone: ist
+district: ist
+store: ist
+domain: ist.k8s-edge.com
+ingressType: Https
+gitopsRepo: kubernetes101/pib-dev
+gitopsBranch: bartr
