@@ -5,5 +5,6 @@ image: ghcr.io/cse-labs/pib-imdb:latest
 namespace: imdb
 nodePort: 30080
 port: 8080
-targets: []
+targets:
+    - region:central
 template: pib-service
