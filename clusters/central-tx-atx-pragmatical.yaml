@@ -1,0 +1,10 @@
+name: central-tx-atx-pragmatical
+environment: dev
+region: central
+zone: central-tx
+district: central-tx-atx
+store: central-tx-atx-pragmatical
+domain: 20.25.146.237
+ingressType: Http
+gitopsRepo: kubernetes101/pib-dev
+gitopsBranch: pragmatical
