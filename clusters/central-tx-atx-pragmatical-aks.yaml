@@ -1,0 +1,10 @@
+name: central-tx-atx-pragmatical-aks
+environment: dev
+region: central
+zone: central-tx
+district: central-tx-atx
+store: central-tx-atx-pragmatical-aks
+domain: central-tx-atx-pragmatical-aks
+ingressType: Http
+gitopsRepo: kubernetes101/pib-dev
+gitopsBranch: pragmatical
