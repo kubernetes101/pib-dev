@@ -102,9 +102,9 @@ curl -s https://fluxcd.io/install.sh | sudo bash
 
 echo "$(date +'%Y-%m-%d %H:%M:%S')  installing k9s" >> "$HOME/status"
 VERSION=$(curl -i https://github.com/derailed/k9s/releases/latest | grep "location: https://github.com/" | rev | cut -f 1 -d / | rev | sed 's/\r//')
-wget "https://github.com/derailed/k9s/releases/download/${VERSION}/k9s_Linux_x86_64.tar.gz"
-sudo tar -zxvf k9s_Linux_x86_64.tar.gz -C /usr/local/bin
-rm -f k9s_Linux_x86_64.tar.gz
+wget "https://github.com/derailed/k9s/releases/download/${VERSION}/k9s_Linux_amd64.tar.gz"
+sudo tar -zxvf k9s_Linux_amd64.tar.gz -C /usr/local/bin
+rm -f k9s_Linux_amd64.tar.gz
 
 mkdir -p "$HOME/.oh-my-zsh/completions"
 flux completion zsh > "$HOME/.oh-my-zsh/completions/_flux"
