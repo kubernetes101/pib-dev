@@ -1,0 +1,3 @@
+#!/bin/bash
+
+kubectl exec -it jumpbox -- http webv.testing.svc.cluster.local:8080/version
