@@ -8,15 +8,7 @@
 	"overrideCommand": false,
 
 	// some base images require a specific user name
-	"remoteUser": "vscode",
-
-	// Set container specific settings
-	"settings": {
-		"terminal.integrated.defaultProfile.linux": "zsh",
-		"files.trimTrailingWhitespace": true,
-		"files.trimFinalNewlines": true,
-		"files.insertFinalNewline": true
-	},
+	"remoteUser": "vscode",,
 
 	"hostRequirements": {
 		"cpus": 4
@@ -42,17 +34,6 @@
 	},
 
 	// Install extensions
-	"extensions": [
-		"ms-dotnettools.csharp",
-		"ms-azuretools.vscode-docker",
-		"ms-kubernetes-tools.vscode-kubernetes-tools",
-		"davidanson.vscode-markdownlint",
-		"gruntfuggly.todo-tree",
-		"mutantdino.resourcemonitor",
-		"humao.rest-client",
-		"timonwong.shellcheck",
-		"golang.go"
-	],
 
 	"waitFor": "postCreateCommand",
 

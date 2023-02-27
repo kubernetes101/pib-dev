@@ -1,0 +1,91 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-config
+  namespace: monitoring
+data:
+  grafana.ini:  |
+    [security]
+    admin_user = $__file{/etc/config/secrets/username}
+    admin_password = $__file{/etc/config/secrets/password}
+    csrf_trusted_origins = aflinchb-organic-waffle-rpgxjqg696h9p4-32000.preview.app.github.dev
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-secrets
+  namespace: monitoring
+type: Opaque
+data:
+  username: YWRtaW4=
+  password: Y3NlLWxhYnM=
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      name: grafana
+      labels:
+        app: grafana
+    spec:
+      containers:
+      - name: grafana
+        image: k3d-registry.localhost:5500/grafana:local-ubuntu
+        ports:
+        - name: grafana
+          containerPort: 3000
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+        volumeMounts:
+          - name: grafana-secrets
+            mountPath: /etc/config/secrets
+          - name: grafana-storage
+            mountPath: /var/lib/grafana
+          - name: grafana-config
+            mountPath: /etc/grafana/grafana.ini
+            subPath: grafana.ini
+      volumes:
+        - name: grafana-secrets
+          secret:
+            secretName: grafana-secrets
+        - name: grafana-storage
+          hostPath:
+            path: /grafana
+        - name: grafana-config
+          configMap:
+            name: grafana-config
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: monitoring
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/port:   '3000'
+spec:
+  selector:
+    app: grafana
+  type: NodePort
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 32000
