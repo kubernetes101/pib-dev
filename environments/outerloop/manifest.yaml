@@ -1,0 +1,13 @@
+name: outerloop
+version: 1.0.0
+summary: PiB Outerloop Environment
+description: Deploys preconfigured outerloop vm
+runner: ARM
+templatePath: azuredeploy.json
+parameters:
+- id: "outerloop_vm"
+  name: "outerloop_vm"
+  description: "Outerloop VM Name"
+  default: "outerloop-vm"
+  type: "string"
+  required: true

@@ -1,0 +1,275 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "innerloop_vm": {
+            "defaultValue": "innerloop-vm",
+            "type": "string"
+        },
+        "innerloop_vnet": {
+            "defaultValue": "innerloop-vnet",
+            "type": "string"
+        },
+        "innerloop_vmnic": {
+            "defaultValue": "innerloop-vmnic",
+            "type": "string"
+        },
+        "innerloop_nsg": {
+            "defaultValue": "innerloop-nsg",
+            "type": "string"
+        },
+        "innerloop_pip": {
+            "defaultValue": "innerloop-PublicIP",
+            "type": "string"
+        },
+        "_artifactsLocation": {
+            "defaultValue": "https://raw.githubusercontent.com/kubernetes101/pib-dev/kev-ms/environments/innerloop/cloud-init.sh",
+            "type": "string"
+        },
+        "pib_pat": {
+            "type": "securestring"
+        }
+    },
+    "variables": {
+        "customData": "[concat('#include\n', parameters('_artifactsLocation'))]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/publicIPAddresses",
+            "apiVersion": "2022-05-01",
+            "name": "[parameters('innerloop_pip')]",
+            "location": "westus3",
+            "sku": {
+                "name": "Standard",
+                "tier": "Regional"
+            },
+            "properties": {
+                "ipAddress": "20.163.99.126",
+                "publicIPAddressVersion": "IPv4",
+                "publicIPAllocationMethod": "Static",
+                "idleTimeoutInMinutes": 4,
+                "ipTags": []
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2022-08-01",
+            "name": "[parameters('innerloop_vm')]",
+            "location": "westus3",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('innerloop_vmnic'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_D4as_v5"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "Canonical",
+                        "offer": "0001-com-ubuntu-server-focal",
+                        "sku": "20_04-lts-gen2",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Linux",
+                        "name": "[concat(parameters('innerloop_vm'), '_OsDisk_1_67d1f76af01d40c293d151c5ff0f9e05')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "storageAccountType": "Standard_LRS"
+                        },
+                        "deleteOption": "Detach",
+                        "diskSizeGB": 128
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "customData": "[base64(variables('customData'))]",
+                    "computerName": "[parameters('innerloop_vm')]",
+                    "adminUsername": "pib",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": true,
+                        "ssh": {
+                            "publicKeys": [
+                                {
+                                    "path": "/home/pib/.ssh/authorized_keys",
+                                    "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDd0AwBkUQgYfSkuA08iseO6ir7zn3UI/bGPKF5kNcAfxvj+puUYjkwNl/uGxpxxRtwmY28gxep9gKZnorLaNWWMuwIpswF6Spev8Vi51XHXWrP3QZxlLlGurMKct2G/REJcQRvO1Nsgx2P6Wvbs1fPjsOReuTJMxI1kpfF05t0QRfm5pdwRxV7ZAvNLW/P/V7DsT6VkNl7OWPvlF+W4RklKPkWQ/nWVt99LTHg6/ur/2fuEe6IKy7iRL9tjS2vWxVzxW9joYjvohukE3x075Jycictc1djdB+KPRE60xnvLNfWZZ3ggHQqAAcpyYZLh2sht8t7I6wM050TiRhIzw25\n"
+                                }
+                            ]
+                        },
+                        "provisionVMAgent": true,
+                        "patchSettings": {
+                            "patchMode": "ImageDefault",
+                            "assessmentMode": "ImageDefault"
+                        },
+                        "enableVMAgentPlatformUpdates": false
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('innerloop_vmnic'))]"
+                        }
+                    ]
+                }
+            },
+            "resources": [
+                {
+                    "apiVersion": "2019-03-01",
+                    "type": "Extensions",
+                    "name": "SetEnvironmentVar",
+                    "comments": "Sets the MyEnvironmentPrefix system env var",
+                    "location": "westus3",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('innerloop_vm'))]"
+                        ],
+                    "properties": {
+                        "publisher": "Microsoft.Azure.Extensions",
+                        "type": "CustomScript",
+                        "typeHandlerVersion": "2.1",
+                        "autoUpgradeMinorVersion": true,
+                        "settings": {
+                            "commandToExecute": "[concat('export PIB_PAT=', parameters('pib_pat'))]"
+                        },
+                        "protectedSettings": {}
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2022-05-01",
+            "name": "[parameters('innerloop_nsg')]",
+            "location": "westus3",
+            "dependsOn": [],
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "SSH-http",
+                        "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('innerloop_nsg'), 'SSH-http')]",
+                        "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+                        "properties": {
+                            "description": "SSH http https",
+                            "protocol": "Tcp",
+                            "sourcePortRange": "*",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 1202,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [
+                                "2222",
+                                "80",
+                                "443",
+                                "8080",
+                                "8088",
+                                "30000",
+                                "30080",
+                                "30088",
+                                "31000",
+                                "31080",
+                                "31088",
+                                "32000",
+                                "32080",
+                                "32088"
+                            ],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2022-05-01",
+            "name": "[parameters('innerloop_vnet')]",
+            "location": "westus3",
+            "dependsOn": [],
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/16"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "innerloop-kmsSubnet",
+                        "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('innerloop_vnet'), 'innerloop-kmsSubnet')]",
+                        "properties": {
+                            "addressPrefix": "10.0.0.0/24",
+                            "delegations": [],
+                            "privateEndpointNetworkPolicies": "Disabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
+                        },
+                        "type": "Microsoft.Network/virtualNetworks/subnets"
+                    }
+                ],
+                "virtualNetworkPeerings": [],
+                "enableDdosProtection": false
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2022-05-01",
+            "name": "[concat(parameters('innerloop_vnet'), '/innerloop-kmsSubnet')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('innerloop_vnet'))]"
+            ],
+            "properties": {
+                "addressPrefix": "10.0.0.0/24",
+                "delegations": [],
+                "privateEndpointNetworkPolicies": "Disabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2022-05-01",
+            "name": "[parameters('innerloop_vmnic')]",
+            "location": "westus3",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('innerloop_pip'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('innerloop_vnet'), 'innerloop-kmsSubnet')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('innerloop_nsg'))]"
+            ],
+            "kind": "Regular",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfiginnerloop-kms",
+                        "id": "[concat(resourceId('Microsoft.Network/networkInterfaces', parameters('innerloop_vmnic')), '/ipConfigurations/ipconfiginnerloop-kms')]",
+                        "etag": "W/\"c6226837-d5ca-4ecf-b20d-f63096f69aff\"",
+                        "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "privateIPAddress": "10.0.0.4",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('innerloop_pip'))]"
+                            },
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('innerloop_vnet'), 'innerloop-kmsSubnet')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableAcceleratedNetworking": false,
+                "enableIPForwarding": false,
+                "disableTcpStateTracking": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('innerloop_nsg'))]"
+                },
+                "nicType": "Standard"
+            }
+        }
+    ]
+}
